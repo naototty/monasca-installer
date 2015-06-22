@@ -1,0 +1,63 @@
+---
+- name: Install Monasca Devstack components
+  hosts: devstack
+  sudo: yes
+  vars:
+    offline_host: 192.168.12.100
+    devstack_host: 192.168.10.5
+    monasca_api_host: 192.168.12.102
+    install_epel: False
+    offline_mode: True
+    remove_network_manager: False
+    monasca_group: monasca
+    balls_repo_url: "http://{{ offline_host }}:8888"
+    world_repo_url: "{{ balls_repo_url }}/world"
+    epel_download_url: "{{ world_repo_url }}"
+    monasca_agent:
+      user: monasca-agent
+      password: password
+      project: mini-mon
+    monasca_agent_check_frequency: 15
+    minimon:
+      user: mini-mon
+      password: password
+    monasca_api_url: "http://{{ monasca_api_host }}:8080/v2.0"
+    monasca_checks:
+      host_alive:
+        init_config:
+          ssh_port: 22
+          ssh_timeout: 0.5
+          ping_timeout: 1
+        instances:
+          - name: mini-mon
+            host_name: "{{ monasca_api_host }}"
+            alive_test: ssh
+    keystone_url: "http://{{ devstack_host }}:35357/v3"
+    keystone_admin_token: ADMIN
+    keystone_users:
+      - username: mini-mon
+        project: mini-mon
+        password: password
+        role: monasca-user
+      - username: monasca-agent
+        password: password
+        project: mini-mon
+        role: monasca-agent
+  tasks:
+    - name: Setup the monasca cli credentials in the default environment
+      copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
+      tags:
+        - cli
+    - name: Update cli
+      pip: name=python-monascaclient state=latest
+      tags:
+        - cli
+  roles:
+    - {role: monasca-devstack, tags: [devstack]}
+    - {role: monasca-ui,
+       grafana_tarball_url: "{{ world_repo_url }}",
+       grafana_tarball_file: "/hpcloud-mon-grafana-v1.5.4-903-gbbe7c09.tar.gz",
+       monasca_ui_name: "monasca-ui",
+       tags: [ui]}
+    - {role: monasca-keystone, tags: [devstack, keystone]}
+    - {role: monasca-agent, tags: [agent]}
