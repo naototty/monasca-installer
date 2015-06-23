@@ -48,11 +48,6 @@
     elasticsearch_download: "{{ world_repo_url }}"
     persister_tarball_base_url: "{{ world_repo_url }}"
     logstash_agent_download_url: "{{ world_repo_url }}"
-    # monasca agent
-    #monasca_agent:
-    #  user: monasca-agent
-    #  password: password
-    #  project: mini-mon
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
@@ -114,10 +109,8 @@
        database_password: password,
        thresh_tarball_base_url: "{{ world_repo_url }}",
        tags: [thresh]}
-    #- {role: monasca-agent, tags: [agent]}
     - {role: monasca-elkstack,
        elasticsearch_download: "{{ world_repo_url }}",
        logstash_download: "{{ world_repo_url }}",
        kibana_download: "{{ world_repo_url }}",
        tags: [elkstack]}
-    #- {role: monasca-log-agent, tags: [elkstack]}

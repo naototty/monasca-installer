@@ -55,3 +55,6 @@
 [submodule "roles/monasca-log-agent"]
 	path = roles/monasca-log-agent
 	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-agent.git
+[submodule "roles/pip"]
+	path = roles/pip
+	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-pip.git

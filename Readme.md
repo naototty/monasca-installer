@@ -4,6 +4,16 @@ Detailed Ansible installation/configuration information on
 * [CodeBeamer - Installation helper ansible](http://wwwi.est.fujitsu.com/cb/wiki/35690)
 * [Ansible Official documentation](http://docs.ansible.com/intro.html)
 
+# Requirements
+* Vagrant installed
+* Virtualbox installed
+* Git installed
+
+## Tested with:
+* Vagrant 1.7.2
+* Virtualbox 4.3.26
+* Git 1.9.1
+
 # Clone
 ```bash
 git clone git@estscm1.intern.est.fujitsu.com:teammonitoring/monasca-installer.git
@@ -52,6 +62,13 @@ vagrant ssh master
 
 ```bash
 ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/vagrant/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/vagrant/.ssh/id_rsa.
+Your public key has been saved in /home/vagrant/.ssh/id_rsa.pub.
+The key fingerprint is:
 ```
 
 # Install Offline part
@@ -151,6 +168,12 @@ If succesful, you should see something like this:
 PLAY RECAP ******************************************************************** 
 192.168.10.5               : ok=31   changed=5    unreachable=0    failed=0
 ```
+
+# Install Agents
+
+## Install Monasca Metric Agent
+
+## Install Monasca Log Agent
 
 # TODO
 * Split Elkstack
