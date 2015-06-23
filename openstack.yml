@@ -1,38 +1,23 @@
 ---
 - name: Install Monasca Devstack components
-  hosts: devstack
+  hosts: openstack
   sudo: yes
   vars:
-    offline_host: 192.168.12.100
+    # hosts
+    offline_host: 192.168.12.102
     devstack_host: 192.168.10.5
     monasca_api_host: 192.168.12.102
-    install_epel: False
+    # urls
+    monasca_api_url: "http://{{ monasca_api_host }}:8080/v2.0"
+    keystone_url: "http://{{ devstack_host }}:35357/v3"
+    # offline mode information
     offline_mode: True
-    remove_network_manager: False
-    monasca_group: monasca
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"
     epel_download_url: "{{ world_repo_url }}"
-    monasca_agent:
-      user: monasca-agent
-      password: password
-      project: mini-mon
-    monasca_agent_check_frequency: 15
-    minimon:
-      user: mini-mon
-      password: password
-    monasca_api_url: "http://{{ monasca_api_host }}:8080/v2.0"
-    monasca_checks:
-      host_alive:
-        init_config:
-          ssh_port: 22
-          ssh_timeout: 0.5
-          ping_timeout: 1
-        instances:
-          - name: mini-mon
-            host_name: "{{ monasca_api_host }}"
-            alive_test: ssh
-    keystone_url: "http://{{ devstack_host }}:35357/v3"
+    install_epel: False
+    remove_network_manager: False
+    # keystone
     keystone_admin_token: ADMIN
     keystone_users:
       - username: mini-mon
@@ -43,6 +28,11 @@
         password: password
         project: mini-mon
         role: monasca-agent
+    # monasca agent
+    monasca_agent:
+      user: monasca-agent
+      password: password
+      project: mini-mon
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644

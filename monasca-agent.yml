@@ -1,0 +1,7 @@
+---
+- name: Install Monasca Agents
+  hosts: monasca-agent
+  sudo: yes
+  roles:
+    - {role: monasca-agent, tags: [agent, metric-agent]}
+    - {role: monasca-log-agent, tags: [agent, log-agent]}

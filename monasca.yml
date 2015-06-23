@@ -1,89 +1,58 @@
-- name: Installs DBs, kafka and other core dependencies.
+- name: Monasca Installation
   hosts: monasca
   sudo: yes
   vars:
     offline_mode: True
+    # hosts
+    mini_mon_host: 192.168.12.102
+    offline_host: 127.0.0.1
+    # urls
+    zookeeper_hosts: "{{mini_mon_host}}:2181"
+    balls_repo_url: "http://{{ offline_host }}:8888"
+    world_repo_url: "{{ balls_repo_url }}/world"
+    kafka_apache_mirror: "{{ world_repo_url }}"
+    influxdb_deb_src_url: "{{ world_repo_url }}"
+    get_pip_download_url: "{{ world_repo_url }}"
+    # monasca information
+    monasca_group: monasca
+    # influxDB
     influxdb:
       raft_port: 8086
-      seed_servers: []
-      replication_factor: 1
-    influxdb_version: 0.9.0-rc22  # Also set in the next play
-    mini_mon_host: 192.168.10.4
-    zookeeper_hosts: "{{mini_mon_host}}:2181"
-    monasca_download_dir: "/opt/monasca/"
-    monasca_group: monasca
-    balls_repo_url: "http://127.0.0.1:8888"
-    world_repo_url: "{{ balls_repo_url }}/world"
-    kafka_apache_mirror: "{{world_repo_url}}"
-    influxdb_deb_src_url: "{{world_repo_url}}"
-    zookeeper_version: "3.4.6"
-    get_pip_download_url: "{{world_repo_url}}"
-    zookeeper_url: "{{world_repo_url}}/zookeeper-{{zookeeper_version}}.tar.gz"
-  pre_tasks:
-    - include: tasks/pre_main.yml
-  roles:
-    - {role: monasca-resources, tags: [storage, offline, resources]}
-    - {role: static_http, tags: [static_http, offline, resources],
-       pip_index_url: "{{balls_repo_url}}/local-pip-cache/simple",
-       pip_extra_index_url: "{{balls_repo_url}}/pip-cache/simple"
-      }
-    - {role: zookeeper, tags: [zookeeper]}
-    - {role: kafka, kafka_listen_address: "{{mini_mon_host}}", tags: [kafka]}
-    - {role: influxdb, tags: [influxdb]}
-    #- {role: percona, mysql_root_password: password, percona_package: percona-xtradb-cluster-56, tags: [mysql, percona]}
-
-- name: Sets up schema and Installs Monasca apps
-  hosts: monasca
-  sudo: yes
-  vars:
-    offline_mode: True
-    monasca_group: monasca
-    balls_repo_url: "http://127.0.0.1:8888"
-    world_repo_url: "{{ balls_repo_url }}/world"
-    get_pip_download_url: "{{world_repo_url}}"
-    mini_mon_host: 192.168.10.4
-    influxdb_url: "http://{{mini_mon_host}}:8086"
+    # zookeeper
+    zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
+    openstack_host: 192.168.10.5
+    monasca_api_url: "http://{{ mini_mon_host }}:8080/v2.0"
+    # influxDB
+    influxdb_url: "http://{{ mini_mon_host }}:8086"
     influxdb_users:
       mon_api: password
       mon_persister: password
-    influxdb_version: 0.9.0-rc22  # Also set in the previous play
-    influxdb_version_RH: 0.9.0-rc22  # Also set in the previous play
+    # kafka
     kafka_events_partitions: 4
     kafka_metrics_partitions: 4
     kafka_replicas: 1
-    kafka_hosts: "{{mini_mon_host}}:9092"
-    keystone_url: http://192.168.10.5:35357/v3
-    monasca_agent:
-      user: monasca-agent
-      password: password
-      project: mini-mon
-      service: monitoring
-    monasca_agent_check_frequency: 15
-    monasca_api_url: http://192.168.10.4:8080/v2.0
-    monasca_checks:
-      host_alive:
-        init_config:
-          ssh_port: 22
-          ssh_timeout: 0.5
-          ping_timeout: 1
-        instances:
-          - name: devstack
-            host_name: 192.168.10.5
-            alive_test: ssh
-    database_host: "{{mini_mon_host}}"
+    kafka_hosts: "{{ mini_mon_host }}:9092"
+    # keystone
+    keystone_host: "{{ openstack_host }}"
+    keystone_url: "http://{{ keystone_host }}:35357/v3"
+    # database
+    database_host: "{{ mini_mon_host }}"
     database_users:
       notification: password
       monapi: password
       thresh: password
     storm_worker_ports: [6701, 6702]
-    zookeeper_hosts: "{{mini_mon_host}}:2181"
-    zookeeper_version: "3.4.6"
-    zookeeper_url: "{{world_repo_url}}/zookeeper-{{zookeeper_version}}.tar.gz"
-    apache_mirror: "{{world_repo_url}}"
+    zookeeper_hosts: "{{ mini_mon_host }}:2181"
+    apache_mirror: "{{ world_repo_url }}"
     elasticsearch_version: "1.5.2"
-    elasticsearch_download: "{{world_repo_url}}"
-    persister_tarball_base_url: "{{world_repo_url}}"
-    logstash_agent_download_url: "{{world_repo_url}}"
+    elasticsearch_download: "{{ world_repo_url }}"
+    persister_tarball_base_url: "{{ world_repo_url }}"
+    logstash_agent_download_url: "{{ world_repo_url }}"
+    # monasca agent
+    #monasca_agent:
+    #  user: monasca-agent
+    #  password: password
+    #  project: mini-mon
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
@@ -94,35 +63,37 @@
       tags:
         - cli
   roles:
+    - {role: zookeeper, tags: [zookeeper]}
+    - {role: kafka, kafka_listen_address: "{{ mini_mon_host }}", tags: [kafka]}
+    - {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat, when: ansible_os_family == 'RedHat', postgresql_repo: "/opt/monasca/storage/balls/postgresql", tags: [postgresql]}
-    - {role: postgresql-debian, when: ansible_os_family == 'Debian', tags: [postgresql]}
     - {role: monasca-schema, database_admin_password: password, tags: [schema]}
     - {role: monasca-log-schema, tags: [elkstack]}
     - {role: monasca-api,
        api_region: useast,
        influxdb_user: mon_api,
        influxdb_password: password,
-       keystone_host: 192.168.10.5,
+       keystone_host: "{{ keystone_host }}",
        keystone_auth_method: token,
        keystone_admin: admin,
        keystone_admin_password: "",
        keystone_admin_token: ADMIN,
        database_user: monapi,
        database_password: password,
-       monasca_api_tarball_base_url: "{{world_repo_url}}",
+       monasca_api_tarball_base_url: "{{ world_repo_url }}",
        tags: [api]}
     - {role: monasca-log-api,
        api_region: useast,
        influxdb_user: mon_api,
        influxdb_password: password,
-       keystone_host: 192.168.10.5,
+       keystone_host: "{{ keystone_host }}",
        keystone_auth_method: token,
        keystone_admin: admin,
        keystone_admin_password: "",
        keystone_admin_token: ADMIN,
        database_user: monapi,
        database_password: password,
-       monasca_log_api_tarball_base_url: "{{world_repo_url}}",
+       monasca_log_api_tarball_base_url: "{{ world_repo_url }}",
        tags: [api]}
     - {role: monasca-persister,
        influxdb_user: mon_persister,
@@ -133,30 +104,20 @@
        database_password: password,
        smtp_host: localhost,
        tags: [notification]}
-    - {role: storm, nimbus_host: "{{mini_mon_host}}", storm_nimbus_enabled: true, storm_supervisor_enabled: true, tags: [storm]}
+    - {role: storm, 
+       nimbus_host: "{{ mini_mon_host }}", 
+       storm_nimbus_enabled: true, 
+       storm_supervisor_enabled: true, 
+       tags: [storm]}
     - {role: monasca-thresh,
        database_user: thresh,
        database_password: password,
-       thresh_tarball_base_url: "{{world_repo_url}}",
+       thresh_tarball_base_url: "{{ world_repo_url }}",
        tags: [thresh]}
-    - {role: monasca-agent, tags: [agent]}
+    #- {role: monasca-agent, tags: [agent]}
     - {role: monasca-elkstack,
        elasticsearch_download: "{{ world_repo_url }}",
        logstash_download: "{{ world_repo_url }}",
        kibana_download: "{{ world_repo_url }}",
        tags: [elkstack]}
-    - {role: monasca-log-agent, tags: [elkstack]}
-  post_tasks:
-    - include: tasks/post_main.yml
-
-- name: Define default alarms
-  hosts: monasca
-  gather_facts: no
-  vars:
-    offline_mode: True
-    monasca_group: monasca
-    keystone_url: http://192.168.10.5:35357/v3/
-    keystone_user: mini-mon
-    keystone_password: password
-  roles:
-    - {role: monasca-default-alarms, tags: [alarms]}
+    #- {role: monasca-log-agent, tags: [elkstack]}

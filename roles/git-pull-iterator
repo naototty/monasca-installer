@@ -2,7 +2,7 @@ for dir in ./*; do
   if [ -d "$dir" ]; then
     cd "$dir"
     if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
-      (echo "Git pull changes from $dir" && git pull origin master);
+      (echo "Git pull changes from $dir" && git status);
       cd -;
     fi;
   fi;
