@@ -4,7 +4,7 @@
   sudo: yes
   vars:
     # hosts
-    offline_host: 127.0.0.1
+    offline_host: 192.168.10.4
     # url
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"

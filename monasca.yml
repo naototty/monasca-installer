@@ -5,7 +5,7 @@
     offline_mode: True
     # hosts
     mini_mon_host: 192.168.10.4
-    offline_host: 127.0.0.1
+    offline_host: 192.168.10.4
     # urls
     zookeeper_hosts: "{{mini_mon_host}}:2181"
     balls_repo_url: "http://{{ offline_host }}:8888"
