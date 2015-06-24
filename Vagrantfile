@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
       config.proxy.https = ENV["https_proxy"]
     end
     if ENV["no_proxy"]
-      config.proxy.no_proxy = ENV["no_proxy"] + ",192.168.12.90,192.168.12.100,192.168.12.101,192.168.12.102,192.168.10.5"
+      config.proxy.no_proxy = ENV["no_proxy"] + ",192.168.12.90,192.168.10.4,192.168.10.5"
     end
   end
   
@@ -36,7 +36,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "monasca" do |monasca|
     monasca.vm.hostname = "monasca"
     monasca.vm.box = "clear-centos7"
-    monasca.vm.network :private_network, ip: "192.168.12.102"
+    monasca.vm.network :private_network, ip: "192.168.10.4"
     monasca.vm.provider "virtualbox" do |vb|
       vb.memory = 6192
       vb.cpus = 2

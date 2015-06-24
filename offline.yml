@@ -9,24 +9,24 @@
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"
     get_pip_download_url: "{{ world_repo_url }}"
+    pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
+    pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
   roles:
     - {role: monasca-resources, tags: [storage, resources]}
     - {role: static-http, tags: [static-http, resources]}
-    - {role: pip, tags: [pip, resources],
-       pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple",
-       pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"}
+    - {role: pip, tags: [pip, resources]}
 
 - name: Install and configure pip
   hosts: openstack
   sudo: yes
   vars:
     # hosts
-    offline_host: 192.168.12.102
+    offline_host: 192.168.10.4
     # url
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"
     get_pip_download_url: "{{ world_repo_url }}"
+    pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
+    pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
   roles:
-    - {role: pip, tags: [pip, resources],
-       pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple",
-       pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"}
+    - {role: pip, tags: [pip, resources]}

@@ -4,9 +4,9 @@
   sudo: yes
   vars:
     # hosts
-    offline_host: 192.168.12.102
+    offline_host: 192.168.10.4
     devstack_host: 192.168.10.5
-    monasca_api_host: 192.168.12.102
+    monasca_api_host: 192.168.10.4
     # urls
     monasca_api_url: "http://{{ monasca_api_host }}:8080/v2.0"
     keystone_url: "http://{{ devstack_host }}:35357/v3"
@@ -50,4 +50,4 @@
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: monasca-keystone, tags: [devstack, keystone]}
-    - {role: monasca-agent, tags: [agent]}
+    #- {role: monasca-agent, tags: [agent]}

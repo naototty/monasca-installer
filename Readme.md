@@ -71,22 +71,61 @@ Your public key has been saved in /home/vagrant/.ssh/id_rsa.pub.
 The key fingerprint is:
 ```
 
+## Configure /etc/ansible/hosts
+```bash
+sudo vim /etc/ansible/hosts
+```
+
+Add this content:
+```bash
+[offline]
+192.168.10.4
+
+[openstack]
+192.168.10.5
+
+[monasca]
+192.168.10.4
+```
+
 # Install Offline part
 
 ## Copy ssh key to monasca VM
 ```bash
-[vagrant@master ~]$ ssh-copy-id vagrant@192.168.12.102
+ssh-copy-id vagrant@192.168.10.4
+```
+
+Response:
+```bash
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
 vagrant@192.168.12.102's password: 
 
 Number of key(s) added: 1
 
-Now try logging into the machine, with:   "ssh 'vagrant@192.168.12.102'"
+Now try logging into the machine, with:   "ssh 'vagrant@192.168.10.4'"
+and check to make sure that only the key(s) you wanted were added.
+```
+
+## Copy ssh key to openstack VM
+```bash
+ssh-copy-id vagrant@192.168.10.5
+```
+
+```bash
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+vagrant@192.168.10.5's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'vagrant@192.168.10.5'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
 ## Run offline.yml
+
+Connect to Ansible Master and go to cloned monasca-installer directory (In vagrant go to /vagrant)
 
 ```bash
 vagrant ssh master
@@ -103,20 +142,9 @@ PLAY RECAP ********************************************************************
 
 # Install Openstack part
 
-## Copy ssh key to openstack VM
-```bash
-[vagrant@master ~]$ ssh-copy-id vagrant@192.168.10.5
-/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
-/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-vagrant@192.168.10.5's password: 
-
-Number of key(s) added: 1
-
-Now try logging into the machine, with:   "ssh 'vagrant@192.168.10.5'"
-and check to make sure that only the key(s) you wanted were added.
-```
-
 ## Run openstack.yml
+
+Connect to Ansible Master and go to cloned monasca-installer directory (In vagrant go to /vagrant)
 
 ```bash
 vagrant ssh master
@@ -155,6 +183,8 @@ Saving to: ‘pgdg-centos94-9.4-1.noarch.rpm’
 ```
 
 ## Run monasca.yml
+
+Connect to Ansible Master and go to cloned monasca-installer directory (In vagrant go to /vagrant)
 
 ```bash
 vagrant ssh master
