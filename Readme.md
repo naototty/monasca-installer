@@ -132,14 +132,12 @@ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo rpm -i epel-release-latest-7.noarch.rpm
 ```
 
-```bash
 ### Install ansible
 ```bash
 sudo yum install ansible
 ```
 
 ### Configure Ansible Master
-
 ```bash
 cd monasca-installer
 ```
