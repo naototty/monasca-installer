@@ -11,6 +11,10 @@ Vagrant.configure(2) do |config|
     if ENV["no_proxy"]
       config.proxy.no_proxy = ENV["no_proxy"] + ",192.168.12.90,192.168.10.4,192.168.10.5"
     end
+
+    #config.proxy.http = "http://proxy.intern.est.fujitsu.com:8080"
+    #config.proxy.https = "https://proxy.intern.est.fujitsu.com:8080"
+    #config.proxy.no_proxy = "127.0.0.1,localhost,192.168.12.90,192.168.10.4,192.168.10.5"
   end
   
   config.vm.define "master" do |master|
