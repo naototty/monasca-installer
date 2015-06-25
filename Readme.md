@@ -5,19 +5,19 @@ Detailed Ansible installation/configuration information on
 * [Ansible Official documentation](http://docs.ansible.com/intro.html)
 
 # Content
-├── .git
-├── .gitignore
-├── .gitmodules
-├── main.yml
-├── monasca-agent.yml
-├── monasca.yml
-├── offline.yml
-├── openstack.yml
-├── Readme.md
-├── requirements.yml
-├── roles
-├── tests
-└── Vagrantfile
+* .git
+* .gitignore
+* .gitmodules
+* main.yml
+* monasca-agent.yml
+* monasca.yml
+* offline.yml
+* openstack.yml
+* Readme.md
+* requirements.yml
+* roles
+* tests
+* Vagrantfile
 
 # Requirements
 * Vagrant installed
