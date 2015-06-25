@@ -117,7 +117,26 @@ vagrant up
 __Important:__ If password is prompted, type 'vagrant'
 
 ## Install Ansible Master
-How-To: [Install Ansible](http://wwwi.est.fujitsu.com/cb/wiki/35690#section-Installation)
+Origin source: [http://docs.ansible.com/intro_installation.html#installing-the-control-machine]
+### Install EPEL rpm from http://fedoraproject.org/wiki/EPEL
+
+* Download EL7 for RH7 or CentOS7
+
+```bash
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+
+* Install EPEL rpm with
+
+```bash
+sudo rpm -i epel-release-latest-7.noarch.rpm
+```
+
+```bash
+### Install ansible
+```bash
+sudo yum install ansible
+```
 
 ### Configure Ansible Master
 
