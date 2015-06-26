@@ -1,24 +1,26 @@
 ---
-- name: Install Monasca Metrics Agent
-  hosts: monasca-metrics-agent
+- name: Install Monasca Log Agent
+  hosts: monasca-log-agent
   sudo: yes
   vars:
     offline_mode: True
     # hosts
     offline_host: 192.168.10.4
+    monasca_log_api_host: 192.168.10.4
     openstack_host: 192.168.10.5
+    keystone_host: 192.168.10.5
     # urls
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"
     get_pip_download_url: "{{ world_repo_url }}"
     pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
     pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
-    # monasca-agent
-    keystone_url: "http://{{ openstack_host }}:35357/v3"
-    monasca_agent:
-      user: mini-mon
-      password: password
-      project: mini-mon
+    logstash_agent_download_url: "{{ world_repo_url }}"
   roles:
     - {role: pip, skip_install: True, tags: [pip, resources]}
-    - {role: monasca-agent, tags: [agent, metric-agent]}
+    - {role: monasca-log-agent,
+       project_name: admin,
+       username: admin,
+       password: admin,
+       domain_id: default,
+       tags: [agent, log-agent]}

@@ -180,7 +180,11 @@ Add this content:
 [monasca]
 192.168.10.4
 
-[monasca-agent]
+[monasca-metrics-agent]
+192.168.10.4
+192.168.10.5
+
+[monasca-log-agent]
 192.168.10.4
 192.168.10.5
 ```
