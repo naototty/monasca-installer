@@ -283,4 +283,3 @@ ansible-playbook main.yml
 # TODO
 * Split Elkstack
 * minify variables
-* remove monasca-agent dependency in openstack part

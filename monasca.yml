@@ -35,6 +35,8 @@
     # keystone
     keystone_host: "{{ openstack_host }}"
     keystone_url: "http://{{ keystone_host }}:35357/v3"
+    keystone_port: 5000
+    keystone_host_full: "{{ openstack_host }}:{{ keystone_port }}"
     # database
     database_host: "{{ mini_mon_host }}"
     database_users:
@@ -48,6 +50,8 @@
     elasticsearch_download: "{{ world_repo_url }}"
     persister_tarball_base_url: "{{ world_repo_url }}"
     logstash_agent_download_url: "{{ world_repo_url }}"
+
+    elasticsearch_url: "http://{{ mini_mon_host }}:9200"
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
