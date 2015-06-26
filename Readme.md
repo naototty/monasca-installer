@@ -174,6 +174,10 @@ Add this content:
 
 [monasca]
 192.168.10.4
+
+[monasca-agent]
+192.168.10.4
+192.168.10.5
 ```
 
 ## Prepare VM's

@@ -1,3 +1,4 @@
 - include: offline.yml
 - include: openstack.yml
 - include: monasca.yml
+- include: monasca-agent.yml
