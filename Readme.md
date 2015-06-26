@@ -276,7 +276,55 @@ ansible-playbook main.yml
 
 # Install Agents
 
-## Install Monasca Metric Agent
+## Install Monasca Metrics Agent
+
+The following description assumes that the agents will be installed on OpenStack and Monasca VMs.
+If you want to install the agents on different machines, pls. refer to chapter  "Install Monasca Metrics Agent On Other Machines"
+
+### Install Monasca Metrics Agent for OpenStack and Monasca
+ 
+#### Login  Ansible Master
+
+```bash
+vagrant ssh master
+```
+
+#### Configure /etc/ansible/hosts
+```bash
+sudo vim /etc/ansible/hosts
+```
+
+Add this content:
+```bash
+.....
+[metricsagent]
+TODO: "IP adress of server/VM where agent shall be installed"
+```
+
+### Install Monasca Metrics Agent On Other Machines"
+
+#### Login  Ansible Master
+
+```bash
+vagrant ssh master
+```
+
+#### Configure /etc/ansible/hosts
+```bash
+sudo vim /etc/ansible/hosts
+```
+
+Add this content:
+```bash
+.....
+[metricsagent]
+"IP adress of server/VM where agent shall be installed"
+```
+#### Copy ssh key to server/VM where agent shall be installed
+```bash
+ssh-copy-id vagrant@"IP adress of VM where agent shall be installed"
+```
+
 
 ## Install Monasca Log Agent
 
