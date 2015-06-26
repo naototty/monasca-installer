@@ -118,6 +118,11 @@ __Important:__ If password is prompted, type 'vagrant'
 
 ## Install Ansible Master
 Origin source: [http://docs.ansible.com/intro_installation.html#installing-the-control-machine]
+
+```bash
+vagrant ssh master
+```
+
 ### Install EPEL rpm from http://fedoraproject.org/wiki/EPEL
 
 * Download EL7 for RH7 or CentOS7
@@ -217,7 +222,7 @@ and check to make sure that only the key(s) you wanted were added.
 ```
 
 ## Install PostgreSQL Dependency
-Ansible installer assumes that all necessary yum packages are available in the yum repository. Because of, we need to copy the PostgreSQL package information into the yum repository.
+Ansible installer assumes that all necessary yum packages are available in the yum repository. Therefore, we need to copy the PostgreSQL package information into the yum repository.
 
 Make postgresql 9.4 available for your Operating System
 
