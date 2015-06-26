@@ -6,9 +6,9 @@
     # hosts
     offline_host: 192.168.10.4
     devstack_host: 192.168.10.5
-    monasca_api_host: 192.168.10.4
+    monasca_host: 192.168.10.4
     # urls
-    monasca_api_url: "http://{{ monasca_api_host }}:8080/v2.0"
+    monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
     keystone_url: "http://{{ devstack_host }}:35357/v3"
     # offline mode information
     offline_mode: True
@@ -33,6 +33,7 @@
       user: monasca-agent
       password: password
       project: mini-mon
+    kibana_host: "http://{{ monasca_host }}:5601/"
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
