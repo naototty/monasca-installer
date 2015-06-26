@@ -19,8 +19,8 @@
   roles:
     - {role: pip, skip_install: True, tags: [pip, resources]}
     - {role: monasca-log-agent,
-       project_name: admin,
-       username: admin,
-       password: admin,
+       project_name: mini-mon,
+       username: mini-mon,
+       password: password,
        domain_id: default,
        tags: [agent, log-agent]}
