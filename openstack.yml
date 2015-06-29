@@ -10,6 +10,7 @@
     # urls
     monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
     keystone_url: "http://{{ devstack_host }}:35357/v3"
+    kibana_url: "http://{{ monasca_host }}:5601/"
     # offline mode information
     offline_mode: True
     balls_repo_url: "http://{{ offline_host }}:8888"
