@@ -12,6 +12,7 @@
     # offline-resources
     balls_repo_url: "http://{{ offline_host }}:8888"
     logstash_agent_download_url: "{{ world_repo_url }}"
+    log_files: ["/var/log/messages","/var/log/yum.log","/var/log/boot.log"]
   roles:
     - {role: pip, skip_install: True, tags: [pip, resources]}
     - {role: monasca-log-agent,

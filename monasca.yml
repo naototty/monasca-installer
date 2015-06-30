@@ -4,11 +4,12 @@
   vars:
     offline_mode: True
     # hosts
-    mini_mon_host: 192.168.10.4
+    monasca_host: 192.168.10.4
     offline_host: 192.168.10.4
     openstack_host: 192.168.10.5
+    keystone_host: 192.168.10.5
     # urls
-    zookeeper_hosts: "{{mini_mon_host}}:2181"
+    zookeeper_hosts: "{{ monasca_host }}:2181"
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"
     kafka_apache_mirror: "{{ world_repo_url }}"
@@ -22,9 +23,9 @@
       raft_port: 8086
     # zookeeper
     zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
-    monasca_api_url: "http://{{ mini_mon_host }}:8080/v2.0"
+    monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
     # influxDB
-    influxdb_url: "http://{{ mini_mon_host }}:8086"
+    influxdb_url: "http://{{ monasca_host }}:8086"
     influxdb_users:
       mon_api: password
       mon_persister: password
@@ -32,27 +33,27 @@
     kafka_events_partitions: 4
     kafka_metrics_partitions: 4
     kafka_replicas: 1
-    kafka_hosts: "{{ mini_mon_host }}:9092"
+    kafka_hosts: "{{ monasca_host }}:9092"
     # keystone
-    keystone_host: "{{ openstack_host }}"
     keystone_url: "http://{{ keystone_host }}:35357/v3"
     keystone_port: 5000
     keystone_host_full: "{{ openstack_host }}:{{ keystone_port }}"
     # database
-    database_host: "{{ mini_mon_host }}"
+    database_host: "{{ monasca_host }}"
     database_users:
       notification: password
       monapi: password
       thresh: password
     storm_worker_ports: [6701, 6702]
-    zookeeper_hosts: "{{ mini_mon_host }}:2181"
+    zookeeper_hosts: "{{ monasca_host }}:2181"
     apache_mirror: "{{ world_repo_url }}"
     elasticsearch_version: "1.5.2"
     elasticsearch_download: "{{ world_repo_url }}"
     persister_tarball_base_url: "{{ world_repo_url }}"
     logstash_agent_download_url: "{{ world_repo_url }}"
-    monasca_log_api_host: "192.168.10.4"
-    elasticsearch_url: "http://{{ mini_mon_host }}:9200"
+    monasca_log_api_host: "{{ monasca_host }}"
+    elasticsearch_url: "http://{{ monasca_host }}:9200"
+    # Monasca-agent
     monasca_agent:
       user: mini-mon
       password: password
@@ -79,7 +80,7 @@
         - cli
   roles:
     - {role: zookeeper, tags: [zookeeper]}
-    - {role: kafka, kafka_listen_address: "{{ mini_mon_host }}", tags: [kafka]}
+    - {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
     - {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat, when: ansible_os_family == 'RedHat', postgresql_repo: "/opt/monasca/storage/balls/postgresql", tags: [postgresql]}
     - {role: monasca-schema, database_admin_password: password, tags: [schema]}
@@ -120,7 +121,7 @@
        smtp_host: localhost,
        tags: [notification]}
     - {role: storm, 
-       nimbus_host: "{{ mini_mon_host }}", 
+       nimbus_host: "{{ monasca_host }}", 
        storm_nimbus_enabled: true, 
        storm_supervisor_enabled: true, 
        tags: [storm]}
@@ -134,3 +135,10 @@
        logstash_download: "{{ world_repo_url }}",
        kibana_download: "{{ world_repo_url }}",
        tags: [elkstack]}
+    - {role: monasca-agent, tags: [metric-agent, agents]}
+    - {role: monasca-log-agent,
+       project_name: mini-mon,
+       username: mini-mon,
+       password: password,
+       domain_id: default,
+       tags: [log-agent, agents]}
