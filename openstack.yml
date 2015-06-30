@@ -7,10 +7,12 @@
     offline_host: 192.168.10.4
     devstack_host: 192.168.10.5
     monasca_host: 192.168.10.4
+    keystone_host: 192.168.10.5
     # urls
     monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
     keystone_url: "http://{{ devstack_host }}:35357/v3"
     kibana_url: "http://{{ monasca_host }}:5601/"
+    logstash_agent_download_url: "{{ world_repo_url }}"
     # offline mode information
     offline_mode: True
     balls_repo_url: "http://{{ offline_host }}:8888"
@@ -34,7 +36,19 @@
       user: monasca-agent
       password: password
       project: mini-mon
+    monasca_checks:
+      host_alive:
+        init_config:
+          ssh_port: 22
+          ssh_timeout: 0.5
+          ping_timeout: 1
+        instances:
+          - name: mini-mon
+            host_name: "{{ monasca_host }}"
+            alive_test: ssh
     kibana_host: "http://{{ monasca_host }}:5601/"
+    monasca_log_api_host: "192.168.10.4"
+    # urls
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
@@ -52,4 +66,10 @@
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: monasca-keystone, tags: [devstack, keystone]}
-    #- {role: monasca-agent, tags: [agent]}
+    - {role: monasca-agent, tags: [metric-agent, agents]}
+    - {role: monasca-log-agent,
+       project_name: mini-mon,
+       username: mini-mon,
+       password: password,
+       domain_id: default,
+       tags: [log-agent, agents]}

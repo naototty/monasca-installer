@@ -6,15 +6,11 @@
     offline_mode: True
     # hosts
     offline_host: 192.168.10.4
-    monasca_log_api_host: 192.168.10.4
     openstack_host: 192.168.10.5
-    keystone_host: 192.168.10.5
-    # urls
+    monasca_log_api_host: "{{ openstack_host }}"
+    keystone_host: "{{ offline_host }}"
+    # offline-resources
     balls_repo_url: "http://{{ offline_host }}:8888"
-    world_repo_url: "{{ balls_repo_url }}/world"
-    get_pip_download_url: "{{ world_repo_url }}"
-    pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
-    pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
     logstash_agent_download_url: "{{ world_repo_url }}"
   roles:
     - {role: pip, skip_install: True, tags: [pip, resources]}

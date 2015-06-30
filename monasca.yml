@@ -6,12 +6,14 @@
     # hosts
     mini_mon_host: 192.168.10.4
     offline_host: 192.168.10.4
+    openstack_host: 192.168.10.5
     # urls
     zookeeper_hosts: "{{mini_mon_host}}:2181"
     balls_repo_url: "http://{{ offline_host }}:8888"
     world_repo_url: "{{ balls_repo_url }}/world"
     kafka_apache_mirror: "{{ world_repo_url }}"
     influxdb_deb_src_url: "{{ world_repo_url }}"
+    logstash_agent_download_url: "{{ world_repo_url }}"
     get_pip_download_url: "{{ world_repo_url }}"
     # monasca information
     monasca_group: monasca
@@ -20,7 +22,6 @@
       raft_port: 8086
     # zookeeper
     zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
-    openstack_host: 192.168.10.5
     monasca_api_url: "http://{{ mini_mon_host }}:8080/v2.0"
     # influxDB
     influxdb_url: "http://{{ mini_mon_host }}:8086"
@@ -50,8 +51,23 @@
     elasticsearch_download: "{{ world_repo_url }}"
     persister_tarball_base_url: "{{ world_repo_url }}"
     logstash_agent_download_url: "{{ world_repo_url }}"
-
+    monasca_log_api_host: "192.168.10.4"
     elasticsearch_url: "http://{{ mini_mon_host }}:9200"
+    monasca_agent:
+      user: mini-mon
+      password: password
+      project: mini-mon
+    monasca_agent_service: monitoring
+    monasca_checks:
+      host_alive:
+        init_config:
+          ssh_port: 22
+          ssh_timeout: 0.5
+          ping_timeout: 1
+        instances:
+          - name: openstack
+            host_name: "{{ openstack_host }}"
+            alive_test: ssh
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
