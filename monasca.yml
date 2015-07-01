@@ -55,9 +55,9 @@
     elasticsearch_url: "http://{{ monasca_host }}:9200"
     # Monasca-agent
     monasca_agent:
-      user: mini-mon
+      user: csi-agent
       password: password
-      project: mini-mon
+      project: csi
     monasca_agent_service: monitoring
     monasca_checks:
       host_alive:
@@ -69,6 +69,8 @@
           - name: openstack
             host_name: "{{ openstack_host }}"
             alive_test: ssh
+    defaultAuthorizedRoles: "[user, domainuser, domainadmin, csi-user]"
+    agentAuthorizedRoles: "[csi-agent]"
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
@@ -137,8 +139,14 @@
        tags: [elkstack]}
     - {role: monasca-agent, tags: [metric-agent, agents]}
     - {role: monasca-log-agent,
-       project_name: mini-mon,
-       username: mini-mon,
+       project_name: csi,
+       username: csi-agent,
        password: password,
        domain_id: default,
+       log_files: ['/var/log/monasca/agent/*.log', 
+                   '/var/log/monasca/api/*.log', 
+                   '/var/log/monasca/log-api/*.log', 
+                   '/var/log/monasca/monasca-log-agent/*.log', 
+                   '/var/log/monasca/notification/*.log', 
+                   '/var/log/monasca/persister/*.log'],
        tags: [log-agent, agents]}

@@ -7,10 +7,10 @@
     offline_host: 192.168.10.4
     openstack_host: 192.168.10.5
     # Agent credentials
-    monasca_agent:
-      user: mini-mon
-      password: password
-      project: mini-mon
+    #monasca_agent:
+    #  user: csi-agent
+    #  password: password
+    #  project: csi
     # offline-resources
     balls_repo_url: "http://{{ offline_host }}:8888"
     # monasca-agent
