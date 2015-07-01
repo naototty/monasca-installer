@@ -7,8 +7,8 @@
     # hosts
     offline_host: 192.168.10.4
     openstack_host: 192.168.10.5
-    monasca_log_api_host: "{{ openstack_host }}"
-    keystone_host: "{{ offline_host }}"
+    monasca_log_api_host: 192.168.10.4
+    keystone_host: "{{ openstack_host }}"
     # offline-resources
     balls_repo_url: "http://{{ offline_host }}:8888"
     logstash_agent_download_url: "{{ world_repo_url }}"
