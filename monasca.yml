@@ -38,6 +38,10 @@
     keystone_url: "http://{{ keystone_host }}:35357/v3"
     keystone_port: 5000
     keystone_host_full: "{{ openstack_host }}:{{ keystone_port }}"
+    keystone_auth_method: token
+    keystone_admin: admin
+    keystone_admin_password: ""
+    keystone_admin_token: ADMIN
     # database
     database_host: "{{ monasca_host }}"
     database_users:
@@ -91,11 +95,6 @@
        api_region: useast,
        influxdb_user: mon_api,
        influxdb_password: password,
-       keystone_host: "{{ keystone_host }}",
-       keystone_auth_method: token,
-       keystone_admin: admin,
-       keystone_admin_password: "",
-       keystone_admin_token: ADMIN,
        database_user: monapi,
        database_password: password,
        monasca_api_tarball_base_url: "{{ world_repo_url }}",
@@ -104,11 +103,6 @@
        api_region: useast,
        influxdb_user: mon_api,
        influxdb_password: password,
-       keystone_host: "{{ keystone_host }}",
-       keystone_auth_method: token,
-       keystone_admin: admin,
-       keystone_admin_password: "",
-       keystone_admin_token: ADMIN,
        database_user: monapi,
        database_password: password,
        monasca_log_api_tarball_base_url: "{{ world_repo_url }}",
