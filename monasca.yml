@@ -37,7 +37,7 @@
     # keystone
     keystone_url: "http://{{ keystone_host }}:35357/v3"
     keystone_port: 5000
-    keystone_host_full: "{{ openstack_host }}:{{ keystone_port }}"
+    keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
     keystone_auth_method: token
     keystone_admin: admin
     keystone_admin_password: ""

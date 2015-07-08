@@ -5,7 +5,7 @@
   vars:
     # hosts
     offline_host: 192.168.10.4
-    openstack_host: 192.168.10.5
+    keystone_host: 192.168.10.5
     # Agent credentials
     #monasca_agent:
     #  user: csi-agent
@@ -14,7 +14,7 @@
     # offline-resources
     balls_repo_url: "http://{{ offline_host }}:8888"
     # monasca-agent
-    keystone_url: "http://{{ openstack_host }}:35357/v3"
+    keystone_url: "http://{{ keystone_host }}:35357/v3"
     offline_mode: True
   roles:
     - {role: pip, skip_install: True, tags: [pip, resources]}
