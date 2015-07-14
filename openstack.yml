@@ -69,7 +69,7 @@
       tags:
         - cli
     - name: Update cli
-      pip: name=python-monascaclient state=latest
+      pip: name=python-monascaclient state=present extra_args='--pre'
       tags:
         - cli
   roles:
