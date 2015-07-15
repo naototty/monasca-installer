@@ -84,9 +84,9 @@
       tags:
         - cli
   roles:
-    #- {role: zookeeper, tags: [zookeeper]}
-    #- {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
-    #- {role: influxdb, tags: [influxdb]}
+    - {role: zookeeper, tags: [zookeeper]}
+    - {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
+    - {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat,
        when: ansible_os_family == 'RedHat',
        postgresql_repo: "/opt/monasca/storage/balls/postgresql",
