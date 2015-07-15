@@ -64,10 +64,10 @@
     monasca_log_api_host: "192.168.10.4"
     # urls
   tasks:
-    - name: Setup the monasca cli credentials in the default environment
-      copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
-      tags:
-        - cli
+    # - name: Setup the monasca cli credentials in the default environment
+    #   copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
+    #   tags:
+    #     - cli
     - name: Update cli
       pip: name=python-monascaclient state=present extra_args='--pre'
       tags:
