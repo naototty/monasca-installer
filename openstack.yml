@@ -76,7 +76,7 @@
     - {role: monasca-devstack, tags: [devstack]}
     - {role: monasca-ui,
        grafana_tarball_url: "{{ world_repo_url }}",
-       grafana_tarball_file: "/hpcloud-mon-grafana-v1.5.4-903-gbbe7c09.tar.gz",
+       grafana_tarball_file: "/fujitsu-mon-grafana-fbdf1a7.tar.gz",
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: monasca-keystone, tags: [devstack, keystone]}
