@@ -88,8 +88,16 @@
     - {role: zookeeper, tags: [zookeeper]}
     - {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
     - {role: influxdb, tags: [influxdb]}
-    - {role: postgresql-redhat, when: ansible_os_family == 'RedHat', postgresql_repo: "/opt/monasca/storage/balls/postgresql", tags: [postgresql]}
     - {role: monasca-schema, database_admin_password: password, tags: [schema]}
+    - {role: postgresql-redhat,
+       when: ansible_os_family == 'RedHat',
+       postgresql_repo: "/opt/monasca/storage/balls/postgresql",
+       postgresql_dir: "/opt/postgresql_91",
+       postgresql_data_dir: "{{ postgresql_dir }}/data",
+       postgresql_service_name: "postgres_fuji",
+       postgresql_tar_filename: "/opt/monasca/storage/balls/world/postgresql/FJSVpgs91_64.tar.gz",
+       postgres_install_from_tar: True,
+       tags: [postgresql]}
     - {role: monasca-log-schema, tags: [elkstack]}
     - {role: monasca-api,
        api_region: useast,
@@ -116,10 +124,10 @@
        database_password: password,
        smtp_host: localhost,
        tags: [notification]}
-    - {role: storm, 
-       nimbus_host: "{{ monasca_host }}", 
-       storm_nimbus_enabled: true, 
-       storm_supervisor_enabled: true, 
+    - {role: storm,
+       nimbus_host: "{{ monasca_host }}",
+       storm_nimbus_enabled: true,
+       storm_supervisor_enabled: true,
        tags: [storm]}
     - {role: monasca-thresh,
        database_user: thresh,
@@ -137,10 +145,10 @@
        username: csi-agent,
        password: password,
        domain_id: default,
-       log_files: ['/var/log/monasca/agent/*.log', 
-                   '/var/log/monasca/api/*.log', 
-                   '/var/log/monasca/log-api/*.log', 
-                   '/var/log/monasca/monasca-log-agent/*.log', 
-                   '/var/log/monasca/notification/*.log', 
+       log_files: ['/var/log/monasca/agent/*.log',
+                   '/var/log/monasca/api/*.log',
+                   '/var/log/monasca/log-api/*.log',
+                   '/var/log/monasca/monasca-log-agent/*.log',
+                   '/var/log/monasca/notification/*.log',
                    '/var/log/monasca/persister/*.log'],
        tags: [log-agent, agents]}

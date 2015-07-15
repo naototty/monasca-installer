@@ -5,15 +5,16 @@
   vars:
     # hosts
     offline_host: 192.168.10.4
+    offline_port: 8888
     # url
-    balls_repo_url: "http://{{ offline_host }}:8888"
+    balls_repo_url: "http://{{ offline_host }}:{{ offline_port }}"
     world_repo_url: "{{ balls_repo_url }}/world"
     get_pip_download_url: "{{ world_repo_url }}"
     pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
     pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
   roles:
     - {role: monasca-resources, tags: [storage, resources]}
-    - {role: static-http, tags: [static-http, resources]}
+    - {role: static-http, tags: [static-http, resources], pip_trusted_host: "{{ offline_host }}" } 
     - {role: pip, tags: [pip, resources]}
 
 - name: Install and configure pip
@@ -22,8 +23,9 @@
   vars:
     # hosts
     offline_host: 192.168.10.4
+    offline_port: 8888
     # url
-    balls_repo_url: "http://{{ offline_host }}:8888"
+    balls_repo_url: "http://{{ offline_host }}:{{ offline_port }}"
     world_repo_url: "{{ balls_repo_url }}/world"
     get_pip_download_url: "{{ world_repo_url }}"
     pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
