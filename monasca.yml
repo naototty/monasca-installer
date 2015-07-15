@@ -38,10 +38,9 @@
     keystone_url: "http://{{ keystone_host }}:35357/v3"
     keystone_port: 5000
     keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
-    keystone_auth_method: token
-    keystone_admin: admin
-    keystone_admin_password: ""
-    keystone_admin_token: ADMIN
+    keystone_auth_method: password
+    keystone_admin: csi-operator
+    keystone_admin_password: password
     # database
     database_host: "{{ monasca_host }}"
     database_users:
