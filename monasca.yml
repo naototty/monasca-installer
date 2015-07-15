@@ -85,10 +85,9 @@
       tags:
         - cli
   roles:
-    - {role: zookeeper, tags: [zookeeper]}
-    - {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
-    - {role: influxdb, tags: [influxdb]}
-    - {role: monasca-schema, database_admin_password: password, tags: [schema]}
+    #- {role: zookeeper, tags: [zookeeper]}
+    #- {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
+    #- {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat,
        when: ansible_os_family == 'RedHat',
        postgresql_repo: "/opt/monasca/storage/balls/postgresql",
@@ -98,6 +97,7 @@
        postgresql_tar_filename: "/opt/monasca/storage/balls/world/postgresql/FJSVpgs91_64.tar.gz",
        postgres_install_from_tar: True,
        tags: [postgresql]}
+    - {role: monasca-schema, database_admin_password: password, tags: [schema]}
     - {role: monasca-log-schema, tags: [elkstack]}
     - {role: monasca-api,
        api_region: useast,
