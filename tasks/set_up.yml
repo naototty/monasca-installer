@@ -1,0 +1,3 @@
+- name: Create download temporary directory
+  file: path="{{ download_tmp_dir }}" state=directory force=true
+  when: download_tmp_dir is defined

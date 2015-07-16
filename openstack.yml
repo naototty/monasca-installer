@@ -63,6 +63,8 @@
     kibana_host: "http://{{ monasca_host }}:5601/"
     monasca_log_api_host: "192.168.10.4"
     # urls
+  pre_tasks:
+    - include: tasks/set_up.yml
   tasks:
     # - name: Setup the monasca cli credentials in the default environment
     #   copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
@@ -87,3 +89,5 @@
        password: admin,
        domain_id: default,
        tags: [log-agent, agents]}
+  post_tasks:
+    - include: tasks/clean_up.yml

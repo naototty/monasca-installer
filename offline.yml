@@ -12,9 +12,11 @@
     get_pip_download_url: "{{ world_repo_url }}"
     pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
     pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
+  pre_tasks:
+    - include: tasks/set_up.yml
   roles:
     - {role: monasca-resources, tags: [storage, resources]}
-    - {role: static-http, tags: [static-http, resources], pip_trusted_host: "{{ offline_host }}" } 
+    - {role: static-http, tags: [static-http, resources], pip_trusted_host: "{{ offline_host }}" }
     - {role: pip, tags: [pip, resources]}
 
 - name: Install and configure pip
@@ -30,5 +32,7 @@
     get_pip_download_url: "{{ world_repo_url }}"
     pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
     pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
+  pre_tasks:
+    - include: tasks/set_up.yml
   roles:
     - {role: pip, tags: [pip, resources]}

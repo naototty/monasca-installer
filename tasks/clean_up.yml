@@ -1,0 +1,8 @@
+---
+# file: tasks/clean_up_openstack.yml
+- name: "Clean up temporary directories"
+  file: path="{{ item }}" state=absent force=yes
+  with_items:
+    - "{{ clean_up_dirs }}"
+  tags:
+    - clean_up

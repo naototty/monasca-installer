@@ -74,6 +74,8 @@
             alive_test: ssh
     defaultAuthorizedRoles: "[user, domainuser, domainadmin, csi-user]"
     agentAuthorizedRoles: "[csi-agent]"
+  pre_tasks:
+    - include: tasks/set_up.yml
   tasks:
     - name: Setup the monasca cli credentials in the default environment
       copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
@@ -151,3 +153,5 @@
                    '/var/log/monasca/notification/*.log',
                    '/var/log/monasca/persister/*.log'],
        tags: [log-agent, agents]}
+  post_tasks:
+    - include: tasks/clean_up.yml

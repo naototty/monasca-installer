@@ -1,0 +1,27 @@
+---
+# file: group_vars/openstack.yml
+opt_dir: "/opt"
+download_tmp_dir: "{{ opt_dir }}/.download_dir"
+
+horizon_path: "/usr/share/openstack-dashboard/"
+dashboard_path: "{{ horizon_path }}openstack_dashboard/"
+panel_dest_path: "{{ horizon_path }}monitoring"
+panel_static_dest_path: "{{ horizon_path }}static/monitoring"
+monasca_ui: "monasca-ui"
+monasca_conf_dir: /etc/monasca
+grafana_base_dir: /usr/share
+grafana_dest: "{{ horizon_path }}static/grafana"
+ui_py_file: _50_admin_add_monitoring_panel.py
+ui_dest_path: "{{ dashboard_path }}local/enabled/"
+
+# should it be rather available at hosts ?
+services:
+  - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}"] }
+  - { name: "monasca-log-agent", configuration: ["{{ monasca_conf_dir }}"] }
+
+packages:
+  RedHat:
+   - { dir: "{{ opt_dir }}/monasca" }
+
+clean_up_dirs:
+  - "{{ download_tmp_dir }}"

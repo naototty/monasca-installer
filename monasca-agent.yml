@@ -16,6 +16,8 @@
     # monasca-agent
     keystone_url: "http://{{ keystone_host }}:35357/v3"
     offline_mode: True
+  pre_tasks:
+    - include: tasks/set_up.yml
   roles:
     - {role: pip, skip_install: True, tags: [pip, resources]}
     - {role: monasca-agent, tags: [agent, metric-agent]}
