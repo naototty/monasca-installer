@@ -58,3 +58,6 @@
 [submodule "roles/pip"]
 	path = roles/pip
 	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-pip.git
+[submodule "roles/cli-credentials"]
+	path = roles/cli-credentials
+	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-cli-credentials.git

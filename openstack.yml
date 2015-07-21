@@ -62,19 +62,14 @@
             alive_test: ssh
     kibana_host: "http://{{ monasca_host }}:5601/"
     monasca_log_api_host: "192.168.10.4"
-    # urls
+    monasca_user:
+      user: csi-operator
+      password: password
+      project: csi
   pre_tasks:
     - include: tasks/set_up.yml
-  tasks:
-    # - name: Setup the monasca cli credentials in the default environment
-    #   copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
-    #   tags:
-    #     - cli
-    - name: Update cli
-      pip: name=python-monascaclient state=present extra_args='--pre'
-      tags:
-        - cli
   roles:
+    - {role: cli-credentials, is_openstack: true, tags: [cli]}
     - {role: monasca-devstack, tags: [devstack]}
     - {role: monasca-ui,
        grafana_tarball_url: "{{ world_repo_url }}",

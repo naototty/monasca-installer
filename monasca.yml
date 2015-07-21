@@ -74,18 +74,14 @@
             alive_test: ssh
     defaultAuthorizedRoles: "[user, domainuser, domainadmin, csi-user]"
     agentAuthorizedRoles: "[csi-agent]"
+    monasca_user:
+      user: csi-operator
+      password: password
+      project: csi
   pre_tasks:
     - include: tasks/set_up.yml
-  tasks:
-    - name: Setup the monasca cli credentials in the default environment
-      copy: src=tests/env.sh dest=/etc/profile.d/monasca_cli.sh owner=root group=root mode=0644
-      tags:
-        - cli
-    - name: Update cli
-      pip: name=python-monascaclient state=latest
-      tags:
-        - cli
   roles:
+    - {role: cli-credentials, is_openstack: false, tags: [cli]}
     - {role: zookeeper, tags: [zookeeper]}
     - {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
     - {role: influxdb, tags: [influxdb]}
