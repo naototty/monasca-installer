@@ -61,7 +61,7 @@
             host_name: "{{ monasca_host }}"
             alive_test: ssh
     kibana_host: "http://{{ monasca_host }}:5601/"
-    monasca_log_api_host: "192.168.10.4"
+    monasca_log_api_host: "{{ monasca_host }}"
     monasca_user:
       user: csi-operator
       password: password
