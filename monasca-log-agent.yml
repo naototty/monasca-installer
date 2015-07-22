@@ -1,11 +1,26 @@
 ---
-- name: Prepare/Configure host
+
+- include: offline.yml
+
+- name: Install Monasca Log Agent
   hosts: monasca_log_agent_group
   sudo: yes
+  vars:
+    offline_mode: True
+    # hosts
+    offline_host: 192.168.10.4
+    monasca_log_api_host: 192.168.10.4
+    keystone_host: 192.168.10.5
+    # offline-resources
+    balls_repo_url: "http://{{ offline_host }}:8888"
+    logstash_agent_download_url: "{{ world_repo_url }}"
+    log_files: ["/var/log/messages","/var/log/yum.log","/var/log/boot.log"]
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
   roles:
     - {role: pip, tags: [pip, resources]}
+
+- include: offline.yml
 
 - name: Install Monasca-Log-Agent on CSI
   hosts: monasca_log_agent_group

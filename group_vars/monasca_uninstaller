@@ -1,9 +1,6 @@
 ---
 # file: group_vars/monasca.yml
 
-opt_dir: "/opt"
-download_tmp_dir: "{{ opt_dir }}/.download_dir"
-
 # versions
 zookeeper_version: 3.4.6
 postgresql_version: 9.1

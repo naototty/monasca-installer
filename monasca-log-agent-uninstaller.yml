@@ -1,0 +1,10 @@
+---
+- name: Uninstall Monasca Log Agent
+  hosts: monasca_log_agent_group
+  sudo: yes
+  tasks:
+    - include: tasks/uninstall_services.yml
+
+    - name: Remove log files
+      file: path="{{ item }}" state=absent force=true
+      with_items: "{{ log_files }}"

@@ -1,12 +1,11 @@
 ---
-# file: group_vars/openstack.yml
-opt_dir: "/opt"
-download_tmp_dir: "{{ opt_dir }}/.download_dir"
+# file: group_vars/openstack_uninstaller
+
 
 horizon_path: "/usr/share/openstack-dashboard/"
 dashboard_path: "{{ horizon_path }}openstack_dashboard/"
 panel_dest_path: "{{ horizon_path }}monitoring"
-panel_static_dest_path: "{{ horizon_path }}static/monitoring"
+
 monasca_ui: "monasca-ui"
 monasca_conf_dir: /etc/monasca
 grafana_base_dir: /usr/share

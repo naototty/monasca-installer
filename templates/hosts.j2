@@ -3,7 +3,11 @@
 offline-resources-host           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Openstack Hosts
-[openstack_group]
+[openstack_installer_group]
+horizon-host                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+keystone-host                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+[openstack_uninstaller_group]
 horizon-host                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 keystone-host                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
@@ -27,3 +31,7 @@ openstack_group
 monasca_group
 monasca_agent_group
 monasca_log_agent_group
+
+[openstack_group:children]
+openstack_installer_group
+openstack_uninstaller_group

@@ -2,6 +2,70 @@
 - name: Prepare/Configure Horizon host
   hosts: horizon-host
   sudo: yes
+  vars:
+    # hosts
+    offline_host: 192.168.10.4
+    monasca_host: 192.168.10.4
+    keystone_host: 192.168.10.5
+    # urls
+    monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
+    keystone_url: "http://{{ keystone_host }}:35357/v3"
+    kibana_url: "http://{{ monasca_host }}:5601/"
+    logstash_agent_download_url: "{{ world_repo_url }}"
+    # offline mode information
+    offline_mode: True
+    balls_repo_url: "http://{{ offline_host }}:8888"
+    world_repo_url: "{{ balls_repo_url }}/world"
+    epel_download_url: "{{ world_repo_url }}"
+    install_epel: False
+    remove_network_manager: False
+    # keystone
+    keystone_admin_token: ADMIN
+    keystone_admin: 'admin'
+    keystone_admin_password: 'admin'
+    keystone_admin_project: 'admin'
+    keystone_users:
+      - username: csi-operator
+        project: csi
+        password: password
+        role: csi-user
+      - username: csi-operator
+        project: csi
+        password: password
+        role: admin
+      - username: csi-agent
+        project: csi
+        password: password
+        role: csi-agent
+      - username: admin
+        project: admin
+        password: admin
+        role: csi-user
+      - username: admin-agent
+        project: admin
+        password: admin
+        role: csi-agent
+    # monasca agent
+    monasca_agent:
+      user: admin-agent
+      password: admin
+      project: admin
+    monasca_checks:
+      host_alive:
+        init_config:
+          ssh_port: 22
+          ssh_timeout: 0.5
+          ping_timeout: 1
+        instances:
+          - name: monasca
+            host_name: "{{ monasca_host }}"
+            alive_test: ssh
+    kibana_host: "http://{{ monasca_host }}:5601/"
+    monasca_log_api_host: "{{ monasca_host }}"
+    monasca_user:
+      user: csi-operator
+      password: password
+      project: csi
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
   roles:

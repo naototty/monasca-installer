@@ -1,0 +1,32 @@
+---
+# file: tasks/uninstall_services.yml
+# generic tasks disabling services, removing start/stop scripts and configuration
+# expected format of services location in an array
+# each item in array supposed to be a dictionary with two keys name, configuration
+# name must be a service name
+# configuration must be an array of strings
+- name: "Disabling services"
+  service: name={{ item.name }} state=stopped enabled=no
+  with_items: "{{ services }}"
+
+- name: Delete start/stop scripts [retrieve service file path][SourcePath]
+  shell: "systemctl show {{ item.name }} | grep SourcePath | cut -d= -f 2"
+  with_items: "{{ services }}"
+  register: services_location_sp
+
+- name: Delete start/stop scripts [retrieve service file path][FragmentPath]
+  shell: "systemctl show {{ item.name }} | grep FragmentPath | cut -d= -f 2"
+  with_items: "{{ services }}"
+  register: services_location_fp
+
+- name: Delete start/stop scripts [delete service file]
+  file: path="{{ item.stdout }}" state=absent force=yes
+  with_items:
+    - "{{ services_location_sp.results }}"
+    - "{{ services_location_fp.results }}"
+
+- name: Delete configuration files
+  file: path={{ item[1] }} state=absent force=yes
+  with_subelements:
+    - services
+    - configuration

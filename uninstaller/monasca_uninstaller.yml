@@ -2,9 +2,7 @@
   hosts: monasca-host
   sudo: yes
   tasks:
-    - name: "Disabling services"
-      service: name={{ item.name }} state=stopped enabled=no
-      with_items: "{{ services }}"
+    - include: ../tasks/uninstall_services.yml
 
     - name: Removing installed packages [rpm]
       yum: name="{{ item.rpm }}" state=absent
@@ -19,26 +17,3 @@
       file: path={{ item.symlink }} state=absent force=yes
       when: item.symlink is defined
       with_items: "{{packages[ansible_os_family]}}"
-
-      # TODO try to replace two steps below with one
-    - name: Delete start/stop scripts [retrieve service file path][SourcePath]
-      shell: "systemctl show {{ item.name }} | grep SourcePath | cut -d= -f 2"
-      with_items: "{{ services }}"
-      register: services_location_sp
-
-    - name: Delete start/stop scripts [retrieve service file path][FragmentPath]
-      shell: "systemctl show {{ item.name }} | grep FragmentPath | cut -d= -f 2"
-      with_items: "{{ services }}"
-      register: services_location_fp
-
-    - name: Delete start/stop scripts [delete service file]
-      file: path="{{ item.stdout }}" state=absent force=yes
-      with_items:
-        - "{{ services_location_sp.results }}"
-        - "{{ services_location_fp.results }}"
-
-    - name: Delete configuration files
-      file: path={{ item[1] }} state=absent force=yes
-      with_subelements:
-        - services
-        - configuration

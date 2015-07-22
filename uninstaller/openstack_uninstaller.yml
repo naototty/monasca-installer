@@ -2,15 +2,7 @@
   hosts: openstack-host
   sudo: yes
   tasks:
-    - name: "Disabling services"
-      service: name={{ item.name }} state=stopped enabled=no
-      with_items: "{{ services }}"
-
-    - name: Delete configuration files
-      file: path={{ item[1] }} state=absent force=yes
-      with_subelements:
-        - services
-        - configuration
+    - include: ../tasks/uninstall_services.yml
 
     - name: Remove monasca-ui
       pip: name="{{ monasca_ui }}" state=absent

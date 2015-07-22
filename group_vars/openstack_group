@@ -1,5 +1,5 @@
 ---
-# file: group_vars/openstack.yml
+# file: group_vars/openstack_group
 
 is_openstack: true
 
@@ -10,6 +10,7 @@ kibana_url: "http://{{ monasca_host }}:5601/"
 epel_download_url: "{{ world_repo_url }}"
 install_epel: False
 remove_network_manager: False
+panel_static_dest_path: "{{ horizon_path }}static/monitoring"
 
 # keystone
 keystone_users:

@@ -1,7 +1,24 @@
 ---
+
+- include: offline.yml
+
 - name: Prepare/Configure host
   hosts: monasca_agent_group
   sudo: yes
+  vars:
+    # hosts
+    offline_host: 192.168.10.4
+    keystone_host: 192.168.10.5
+    # Agent credentials
+    #monasca_agent:
+    #  user: csi-agent
+    #  password: password
+    #  project: csi
+    # offline-resources
+    balls_repo_url: "http://{{ offline_host }}:8888"
+    # monasca-agent
+    keystone_url: "http://{{ keystone_host }}:35357/v3"
+    offline_mode: True
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
   roles:
