@@ -1,0 +1,16 @@
+# This ansible file is only for development usage. It prepares the ansible-master environment to install monasca
+---
+- name: Prepare Ansible Master Environment
+  hosts: all
+  sudo: yes
+  tasks:
+    - name: Install epel repository
+      yum: name=http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+    - name: Import EPEL GPG key
+      rpm_key: key="/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7" state=present
+    - name: Install Ansible
+      yum: name=ansible state=present
+    - name: Generate SSH key
+      user: name=vagrant generate_ssh_key=yes
+    - name: Create ansible-hosts file
+      template: src=templates/hosts.j2 dest=/etc/ansible/hosts owner=root group=root mode=0644

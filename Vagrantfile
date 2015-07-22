@@ -25,6 +25,9 @@ Vagrant.configure(2) do |config|
       vb.memory = 2048
       vb.cpus = 2
     end
+    master.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible-master.yml"
+    end
   end
  
   config.vm.define "openstack" do |openstack|
