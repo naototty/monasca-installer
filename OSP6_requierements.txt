@@ -1,4 +1,4 @@
-# List of all libraries after installing on OSP6, RH7.1
+# List of supported libraries on OSP6, RH7.1
 alembic==0.6.5
 amqp==1.4.6
 amqplib==1.0.2
