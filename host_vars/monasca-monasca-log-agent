@@ -8,7 +8,7 @@ logstash_agent_download_url: "{{ balls_repo_url }}/world"
 project_name: csi
 username: csi-agent
 password: password
-domain_id: default,
+domain_id: default
 log_files: ['/var/log/monasca/agent/*.log',
             '/var/log/monasca/api/monasca-api.log',
             '/var/log/monasca/log-api/monasca-log-api.log',
