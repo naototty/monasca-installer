@@ -6,3 +6,4 @@
     - "{{ clean_up_dirs }}"
   tags:
     - clean_up
+  ignore_errors: True

@@ -1,8 +1,17 @@
-[offline]
-192.168.10.4
+[offline_group]
+offline-resources-host           ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
 
-[openstack]
-192.168.10.5
+[openstack_group]
+openstack-host                   ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
+openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
+openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
 
-[monasca]
-192.168.10.4
+[monasca_group]
+monasca-host                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
+monasca-monasca-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
+monasca-monasca-log-agent        ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
+
+[all_group:children]
+offline_group
+openstack_group
+monasca_group

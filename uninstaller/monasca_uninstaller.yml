@@ -1,5 +1,5 @@
 - name: CSI Uninstall [monasca]
-  hosts: monasca
+  hosts: monasca-host
   sudo: yes
   tasks:
     - name: "Disabling services"

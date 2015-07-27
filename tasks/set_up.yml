@@ -1,3 +1,7 @@
+- name: Check if temporary directory already exists
+  stat: path={{ download_tmp_dir }}
+  register: st
+
 - name: Create download temporary directory
   file: path="{{ download_tmp_dir }}" state=directory force=true
-  when: download_tmp_dir is defined
+  when: download_tmp_dir is defined and not st.stat.exists

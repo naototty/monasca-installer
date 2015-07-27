@@ -1,2 +1,2 @@
-- include: uninstaller/monasca.yml
-- include: uninstaller/openstack.yml
+- include: uninstaller/monasca_uninstaller.yml
+- include: uninstaller/openstack_uninstaller.yml

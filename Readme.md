@@ -96,11 +96,24 @@ vagrant box add clear-centos7 /path/to/the/clear_centos7.box
 __Important:__ 
 The vagrant box 'monasca-devstack-centos' works only fine with the ip 192.168.10.5. Otherwise the installation may fail
 
-If you are using different IPs then default:
-monasca-vm: 192.168.10.4
-openstack-vm: 192.168.10.5
+If you are using different IPs, then you have to change the ips in ansible-master.yml
 
-then you have to change the ips in templates/hosts.j2
+```bash
+vars:
+    monasca-host: 192.168.10.4
+    openstack-host: 192.168.10.5
+```
+
+and in group_vars/all_group
+
+```bash
+# hosts
+offline_host: 192.168.10.4
+monasca_host: 192.168.10.4
+keystone_host: 192.168.10.5
+monasca_log_api_host: 192.168.10.4
+openstack_host: 192.168.10.5
+```
 
 #### Start VM's
 

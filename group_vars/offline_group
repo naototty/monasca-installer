@@ -1,0 +1,11 @@
+---
+# file: group_vars/offline
+# Resource urls
+world_repo_url: "{{ balls_repo_url }}/world"
+get_pip_download_url: "{{ world_repo_url }}"
+pip_index_url: "{{ balls_repo_url }}/local-pip-cache/simple"
+pip_extra_index_url: "{{ balls_repo_url }}/pip-cache/simple"
+
+# uninstaller configuration
+opt_dir: "/opt"
+download_tmp_dir: "{{ opt_dir }}/.download_dir"

@@ -3,6 +3,9 @@
 - name: Prepare Ansible Master Environment
   hosts: all
   sudo: yes
+  vars:
+    monasca_host: 192.168.10.4
+    openstack_host: 192.168.10.5
   tasks:
     - name: Install epel repository
       yum: name=http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present

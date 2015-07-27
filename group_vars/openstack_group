@@ -1,0 +1,35 @@
+---
+# file: group_vars/openstack.yml
+
+# urls
+kibana_url: "http://{{ monasca_host }}:5601/"
+
+# offline mode information
+epel_download_url: "{{ world_repo_url }}"
+install_epel: False
+remove_network_manager: False
+
+# keystone
+keystone_users:
+  - username: csi-operator
+    project: csi
+    password: password
+    role: csi-user
+  - username: csi-operator
+    project: csi
+    password: password
+    role: admin
+  - username: csi-agent
+    project: csi
+    password: password
+    role: csi-agent
+  - username: admin
+    project: admin
+    password: admin
+    role: csi-user
+  - username: admin-agent
+    project: admin
+    password: admin
+    role: csi-agent
+
+kibana_host: "http://{{ monasca_host }}:5601/"

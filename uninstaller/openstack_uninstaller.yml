@@ -1,5 +1,5 @@
 - name: CSI Uninstall [openstack]
-  hosts: openstack
+  hosts: openstack-host
   sudo: yes
   tasks:
     - name: "Disabling services"
