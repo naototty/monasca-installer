@@ -1,6 +1,8 @@
 ---
 # file: group_vars/monasca.yml
 
+is_openstack: false
+
 # urls
 zookeeper_hosts: "{{ monasca_host }}:2181"
 kafka_apache_mirror: "{{ world_repo_url }}"

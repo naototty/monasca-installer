@@ -1,6 +1,8 @@
 ---
 # file: group_vars/openstack.yml
 
+is_openstack: true
+
 # urls
 kibana_url: "http://{{ monasca_host }}:5601/"
 

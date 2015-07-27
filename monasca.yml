@@ -6,7 +6,7 @@
     - include: tasks/set_up.yml tags=pre_tasks
   roles:
     - {role: pip, tags: [pip, resources]}
-    - {role: cli-credentials, is_openstack: true, tags: [cli]}
+    - {role: cli-credentials, tags: [cli]}
 
 - name: Monasca Installation
   hosts: monasca-host
