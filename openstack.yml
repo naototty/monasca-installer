@@ -19,6 +19,7 @@
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: monasca-keystone, tags: [devstack, keystone]}
+    - {role: fujitsu-branding, tags: [branding]}
 
 - name: Install Monasca-Agent on openstack
   hosts: openstack-monasca-agent

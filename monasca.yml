@@ -66,6 +66,7 @@
        logstash_download: "{{ world_repo_url }}",
        kibana_download: "{{ world_repo_url }}",
        tags: [elkstack]}
+    - {role: fujitsu-branding, tags: [branding]}
 
 - name: Install Monasca-Agent on CSI
   hosts: monasca-monasca-agent

@@ -61,3 +61,6 @@
 [submodule "roles/cli-credentials"]
 	path = roles/cli-credentials
 	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-cli-credentials.git
+[submodule "roles/fujitsu-branding"]
+	path = roles/fujitsu-branding
+	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-fujitsu-branding.git
