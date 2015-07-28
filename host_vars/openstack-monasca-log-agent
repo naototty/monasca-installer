@@ -1,9 +1,6 @@
 ---
 # file: host_vars/monasca-log-agent-openstack-host
 
-# logstash agent download url
-logstash_agent_download_url: "{{ balls_repo_url }}/world"
-
 # logstash monasca user credentials
 project_name: admin
 username: admin-agent

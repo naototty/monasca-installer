@@ -3,15 +3,21 @@ offline-resources-host           ansible_ssh_host={{ monasca_host }} ansible_ssh
 
 [openstack_group]
 openstack-host                   ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
-openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
-openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
 
 [monasca_group]
 monasca-host                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
+
+[monasca_agent_group]
 monasca-monasca-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
+openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
+
+[monasca_log_agent_group]
 monasca-monasca-log-agent        ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
+openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
 
 [all_group:children]
 offline_group
 openstack_group
 monasca_group
+monasca_agent_group
+monasca_log_agent_group

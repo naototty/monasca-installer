@@ -1,0 +1,5 @@
+---
+# file: group_vars/monasca_log_agent_group
+
+# logstash agent download url
+logstash_agent_download_url: "{{ balls_repo_url }}/world"

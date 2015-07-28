@@ -7,6 +7,8 @@ Code-changes may require the adaptation of User-Documentation at [CodeBeamer - I
 
 This project contains installation scripts (written in Ansible) to install 
 * Monasca
+* Plugins, components and configuration on Openstack
+* Monasca-Agent and Monasca-Log-Agent installation on Monasca and Openstack host
 
 ## Installation Guide for Developer
 
@@ -196,6 +198,15 @@ and run main.yml
 ```bash
 ansible-playbook main.yml
 ```
+
+### Test your installation
+Open http://192.168.10.5 in your browser.
+Login credentials are:
+
+| user | password |
+| -------- | -------- |
+| admin | admin |
+| csi-operator | password |
 
 ### Work with vagrant-sandbox
 Sahara allows vagrant to operate in sandbox mode

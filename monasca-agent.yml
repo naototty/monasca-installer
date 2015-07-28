@@ -1,23 +1,20 @@
 ---
-- name: Install Monasca Metrics Agent
-  hosts: monasca-metrics-agent
+- name: Prepare/Configure host
+  hosts: monasca_agent_group
   sudo: yes
-  vars:
-    # hosts
-    offline_host: 192.168.10.4
-    keystone_host: 192.168.10.5
-    # Agent credentials
-    #monasca_agent:
-    #  user: csi-agent
-    #  password: password
-    #  project: csi
-    # offline-resources
-    balls_repo_url: "http://{{ offline_host }}:8888"
-    # monasca-agent
-    keystone_url: "http://{{ keystone_host }}:35357/v3"
-    offline_mode: True
   pre_tasks:
-    - include: tasks/set_up.yml
+    - include: tasks/set_up.yml tags=pre_tasks
   roles:
-    - {role: pip, skip_install: True, tags: [pip, resources]}
-    - {role: monasca-agent, tags: [agent, metric-agent]}
+    - {role: pip, tags: [pip, resources]}
+
+- name: Install Monasca-Agent on host
+  hosts: monasca_agent_group
+  sudo: yes
+  roles:
+    - {role: monasca-agent, tags: [metric-agent, agents]}
+
+- name: Clean-Up host
+  hosts: monasca_agent_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=post_tasks

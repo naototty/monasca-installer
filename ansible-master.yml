@@ -17,3 +17,5 @@
       user: name=vagrant generate_ssh_key=yes
     - name: Create ansible-hosts file
       template: src=templates/hosts.j2 dest=/etc/ansible/hosts owner=root group=root mode=0644
+    - name: Install vim to prevent manual installation step
+      yum: name=vim state=present
