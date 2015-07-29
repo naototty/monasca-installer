@@ -1,16 +1,22 @@
+# Offline Hosts
 [offline_group]
 offline-resources-host           ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
 
+# Openstack Hosts
 [openstack_group]
-openstack-host                   ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
+horizon-host                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
+keystone-host                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
 
+# Monasca Hosts
 [monasca_group]
 monasca-host                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
 
+# Monasca Agent Hosts
 [monasca_agent_group]
 monasca-monasca-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
 openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant
 
+# Monasca Log Agent Hosts
 [monasca_log_agent_group]
 monasca-monasca-log-agent        ansible_ssh_host={{ monasca_host }} ansible_ssh_user=vagrant
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user=vagrant

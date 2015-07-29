@@ -1,6 +1,6 @@
 ---
-- name: Prepare/Configure Openstack host
-  hosts: openstack-host
+- name: Prepare/Configure Horizon host
+  hosts: horizon-host
   sudo: yes
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
@@ -8,8 +8,17 @@
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
 
-- name: Install Monasca Openstack components
-  hosts: openstack-host
+- name: Prepare/Configure Keystone host
+  hosts: keystone-host
+  sudo: yes
+  pre_tasks:
+    - include: tasks/set_up.yml tags=pre_tasks
+  roles:
+    - {role: pip, tags: [pip, resources]}
+    - {role: cli-credentials, tags: [cli]}
+
+- name: Install Horizon components
+  hosts: horizon-host
   sudo: yes
   roles:
     - {role: monasca-devstack, tags: [devstack]}
@@ -18,23 +27,22 @@
        grafana_tarball_file: "/fujitsu-mon-grafana-fbdf1a7.tar.gz",
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
-    - {role: monasca-keystone, tags: [devstack, keystone]}
     - {role: fujitsu-branding, tags: [branding]}
 
-- name: Install Monasca-Agent on openstack
-  hosts: openstack-monasca-agent
+- name: Configure Keystone
+  hosts: keystone-host
   sudo: yes
   roles:
-    - {role: monasca-agent, tags: [metric-agent, agents]}
+    - {role: monasca-keystone, tags: [keystone]}
 
-- name: Install Monasca-Log-Agent on openstack
-  hosts: openstack-monasca-log-agent
+- name: Clean-Up Openstack hosts
+  hosts: horizon-host
   sudo: yes
-  roles:
-    - {role: monasca-log-agent, tags: [log-agent, agents]}
+  post_tasks:
+    - include: tasks/clean_up.yml tags=post_tasks
 
-- name: Clean-Up Openstack host
-  hosts: openstack-host
+- name: Clean-Up Openstack hosts
+  hosts: keystone-host
   sudo: yes
   post_tasks:
     - include: tasks/clean_up.yml tags=post_tasks

@@ -68,18 +68,6 @@
        tags: [elkstack]}
     - {role: fujitsu-branding, tags: [branding]}
 
-- name: Install Monasca-Agent on CSI
-  hosts: monasca-monasca-agent
-  sudo: yes
-  roles:
-    - {role: monasca-agent, tags: [metric-agent, agents]}
-
-- name: Install Monasca-Log-Agent on CSI
-  hosts: monasca-monasca-log-agent
-  sudo: yes
-  roles:
-    - {role: monasca-log-agent, tags: [log-agent, agents]}
-
 - name: Clean-Up CSI host
   hosts: monasca-host
   sudo: yes

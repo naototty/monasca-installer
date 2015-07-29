@@ -3,6 +3,21 @@
 __Important:__ 
 Code-changes may require the adaptation of User-Documentation at [CodeBeamer - Installation helper ansible](http://wwwi.est.fujitsu.com/cb/wiki/35690)
 
+* [Introduction](#introduction)
+* [Installation Guide for Developer](#installation-guide-for-developer)
+  * [Requirements](#requirements)
+  * [Clone](#clone)
+  * [Proxy settings](#proxy-settings)
+  * [Run monasca-installer against VMs](#run-monasca-installer-against-vms)
+    * [Install CentOS7 and Openstack boxes](#install-centos7-and-openstack-boxes)
+    * [Prepare hosts template file](#prepare-hosts-template-file)
+    * [Start VMs](#start-vms)
+    * [Prepare Ansible Master](#prepare-ansible-master)
+    * [Prepare VMs](#prepare-vms)
+    * [Install Monasca](#install-monasca)
+  * [Test your installation](#test-your-installation)
+  * [Work with vagrant-sandbox](#work-with-vagrant-sandbox)
+
 ## Introduction
 
 This project contains installation scripts (written in Ansible) to install 
@@ -27,14 +42,14 @@ This project contains installation scripts (written in Ansible) to install
 git clone git@estscm1.intern.est.fujitsu.com:teammonitoring/monasca-installer.git
 ```
 
-### Init submodules
+#### Init submodules
 Run this command to install all submodules before:
 
 ```bash 
 git submodule update --init
 ```
 
-### Do you use a Proxy?
+### Proxy settings
 If you are behind a proxy, you will need to install the vagrant proxy plugin. Run this command:
 ```bash
 vagrant plugin install vagrant-proxyconf
@@ -78,7 +93,7 @@ if Vagrant.has_plugin?("vagrant-proxyconf")
 end
 ```
 
-### Run monasca-installer against VM's
+### Run monasca-installer against VMs
 
 #### Install CentOS7 and Openstack boxes
 
@@ -96,9 +111,13 @@ vagrant box add clear-centos7 /path/to/the/clear_centos7.box
 
 #### Prepare hosts template file
 __Important:__ 
-The vagrant box 'monasca-devstack-centos' works only fine with the ip 192.168.10.5. Otherwise the installation may fail
+The vagrant box 'monasca-devstack-centos' works only with ip 192.168.10.5. Otherwise the installation may fail
 
 If you are using different IPs, then you have to change the ips in ansible-master.yml
+
+```bash
+vim ansible-master.yml
+```
 
 ```bash
 vars:
@@ -109,6 +128,10 @@ vars:
 and in group_vars/all_group
 
 ```bash
+vim group_vars/all_group
+```
+
+```bash
 # hosts
 offline_host: 192.168.10.4
 monasca_host: 192.168.10.4
@@ -117,7 +140,7 @@ monasca_log_api_host: 192.168.10.4
 openstack_host: 192.168.10.5
 ```
 
-#### Start VM's
+#### Start VMs
 
 ```bash
 cd monasca-installer
@@ -139,7 +162,7 @@ If you want to trigger the automated installation again, run this command:
 vagrant provision master
 ```
 
-#### Prepare VM's
+#### Prepare VMs
 
 We need to make sure, that all hosts can be reached via ssh from ansible-master host.
 
