@@ -1,0 +1,54 @@
+- hosts: monasca-host
+  vars:
+      services:
+        - zookeeper
+        - storm-nimbus
+        - storm-supervisor
+        - storm-logviewer
+        - storm-ui
+        - postgresql
+        - kafka
+        - influxdb
+        - elasticsearch
+        - monasca-notification
+        - monasca-thresh
+        - monasca-log-transformer
+        - monasca-log-api
+        - monasca-persister
+        - monasca-api
+        - kibana
+        - monasca-log-persister
+        - monasca-log-agent
+  sudo: yes
+  remote_user: vagrant
+  tasks:
+    - name: Start services
+      service: name="{{item}}" state="started"
+      with_items: "{{ services }}"
+      when: command == "start"
+
+    - name: Stop services
+      service: name="{{item}}" state="stopped"
+      with_items: "{{ services[::-1] }}"
+      when: command == "stop"
+
+    - name: Status services
+      shell: "systemctl status {{ item }} -n 0 | grep 'Active: ' | awk -F' ' '{if($2 == \"active\") print \"active\";}'"
+      register: status
+      with_items: "{{ services }}"
+      when: command == "status" and ansible_os_family == "RedHat"
+
+    - debug: msg="{{item.item}};{{item.stdout}}"
+      with_items: "{{ status.results }}"
+      when: command == "status" and ansible_os_family == "RedHat"
+
+    - name: Status services
+      shell: "initctl status {{ item }} 2>&1 | awk -F' ' '{ if($2 ~ /running/) print \"active\" }'"
+      register: status
+      with_items: "{{ services }}"
+      when: command == "status" and ansible_os_family == "Debian"
+
+    - debug: msg="{{item.item}};item.stdout}}"
+      with_items: "{{ status.results }}"
+      when: command == "status" and ansible_os_family == "Debian"
+

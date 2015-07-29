@@ -17,6 +17,10 @@ Code-changes may require the adaptation of User-Documentation at [CodeBeamer - I
     * [Install Monasca](#install-monasca)
   * [Test your installation](#test-your-installation)
   * [Work with vagrant-sandbox](#work-with-vagrant-sandbox)
+* [Start Stop Script](#start-stop-script)
+  * [How to use](#how-to-use)
+  * [Get help](#get-help)
+  * [Start/Stop/Status](#startstopstatus)
 
 ## Introduction
 
@@ -269,4 +273,50 @@ vagrant sandbox off
 Check sandbox status:
 ```bash
 vagrant sandbox status
+```
+
+## Start Stop Script
+
+The installer contains a script to maintain running monasca services from one point. The script is written in bash and uses ansible. To be checked services and hosts can be changed in services.yml
+
+```bash
+vim services.yml
+```
+
+### How to use
+
+```bash
+./services.sh start|stop|status -i inventory-file
+```
+
+### Get help
+
+```bash
+./services.sh --help
+```
+
+### Start/Stop/Status
+
+```bash
+vagrant ssh master
+```
+
+```bash
+cd /vagrant
+```
+
+```bash
+./services.sh start -i /etc/ansible/hosts
+```
+
+or
+
+```bash
+./services.sh stop -i /etc/ansible/hosts
+```
+
+or
+
+```bash
+./services.sh status -i /etc/ansible/hosts
 ```
