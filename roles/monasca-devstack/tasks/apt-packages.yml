@@ -1,2 +1,0 @@
-- name: install python-mysqldb package
-  apt: name=python-mysqldb state=present

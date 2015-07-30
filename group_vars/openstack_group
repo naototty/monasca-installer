@@ -35,3 +35,6 @@ keystone_users:
     role: csi-agent
 
 kibana_host: "http://{{ monasca_host }}:5601/"
+
+horizon_path: "/usr/share/openstack-dashboard/"
+panel_static_dest_path: "{{ horizon_path }}static/monitoring"

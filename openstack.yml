@@ -21,7 +21,6 @@
   hosts: horizon-host
   sudo: yes
   roles:
-    - {role: monasca-devstack, tags: [devstack]}
     - {role: monasca-ui,
        grafana_tarball_url: "{{ balls_repo_url }}/world",
        grafana_tarball_file: "/fujitsu-mon-grafana-fbdf1a7.tar.gz",
