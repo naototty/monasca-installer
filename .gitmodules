@@ -1,66 +1,66 @@
 [submodule "roles/monasca-resources"]
 	path = roles/monasca-resources
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-resources.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-resources.git
 [submodule "roles/static-http"]
 	path = roles/static-http
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-static_http.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-static_http.git
 [submodule "roles/monasca-ui"]
 	path = roles/monasca-ui
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-ui.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-ui.git
 [submodule "roles/monasca-keystone"]
 	path = roles/monasca-keystone
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-keystone.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-keystone.git
 [submodule "roles/monasca-agent"]
 	path = roles/monasca-agent
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-agent.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-agent.git
 [submodule "roles/zookeeper"]
 	path = roles/zookeeper
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-zookeeper.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-zookeeper.git
 [submodule "roles/kafka"]
 	path = roles/kafka
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-kafka.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-kafka.git
 [submodule "roles/influxdb"]
 	path = roles/influxdb
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-influxdb.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb.git
 [submodule "roles/postgresql-redhat"]
 	path = roles/postgresql-redhat
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-postgresql-redhat.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-postgresql-redhat.git
 [submodule "roles/monasca-schema"]
 	path = roles/monasca-schema
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-schema.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-schema.git
 [submodule "roles/monasca-log-schema"]
 	path = roles/monasca-log-schema
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-schema.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-schema.git
 [submodule "roles/monasca-api"]
 	path = roles/monasca-api
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-api.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-api.git
 [submodule "roles/monasca-log-api"]
 	path = roles/monasca-log-api
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-api.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-api.git
 [submodule "roles/monasca-persister"]
 	path = roles/monasca-persister
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-persister.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-persister.git
 [submodule "roles/monasca-notification"]
 	path = roles/monasca-notification
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-notification.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-notification.git
 [submodule "roles/storm"]
 	path = roles/storm
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-storm.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-storm.git
 [submodule "roles/monasca-thresh"]
 	path = roles/monasca-thresh
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-thresh.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-thresh.git
 [submodule "roles/monasca-elkstack"]
 	path = roles/monasca-elkstack
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-elkstack.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-elkstack.git
 [submodule "roles/monasca-log-agent"]
 	path = roles/monasca-log-agent
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-agent.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-agent.git
 [submodule "roles/pip"]
 	path = roles/pip
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-pip.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-pip.git
 [submodule "roles/cli-credentials"]
 	path = roles/cli-credentials
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-cli-credentials.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-cli-credentials.git
 [submodule "roles/fujitsu-branding"]
 	path = roles/fujitsu-branding
-	url = git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-fujitsu-branding.git
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-fujitsu-branding.git
