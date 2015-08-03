@@ -1,48 +1,48 @@
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-api.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-api.git
   name: monasca-api
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-kafka.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-kafka.git
   name: kafka
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-keystone.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-keystone.git
   name: monasca-keystone
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-notification.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-notification.git
   name: monasca-notification
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-persister.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-persister.git
   name: monasca-persister
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-percona.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-percona.git
   name: percona
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-agent.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-agent.git
   name: monasca-agent
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-postgresql-debian.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-postgresql-debian.git
   name: postgresql-debian
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-devpi.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-devpi.git
   name: devpi
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-ui.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-ui.git
   name: monasca-ui
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-agent.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-agent.git
   name: monasca-log-agent
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-api.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-api.git
   name: monasca-log-api
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-influxdb.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb.git
   name: influxdb
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-default-alarms.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-default-alarms.git
   name: monasca-default-alarms
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-storm.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-storm.git
   name: storm
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-thresh.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-thresh.git
   name: monasca-thresh
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-schema.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-schema.git
   name: monasca-schema
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-zookeeper.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-zookeeper.git
   name: zookeeper
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-postgresql-redhat.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-postgresql-redhat.git
   name: postgresql-redhat
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-elkstack.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-elkstack.git
   name: monasca-elkstack
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-resources.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-resources.git
   name: monasca-resources
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-static_http.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-static_http.git
   name: static_http
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-monasca-log-schema.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-schema.git
   name: monasca-log-schema
-- src: git+git@estscm1.intern.est.fujitsu.com:teammonitoring/ansible-local_packager_repo.git
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-local_packager_repo.git
   name: local_packager_repo
