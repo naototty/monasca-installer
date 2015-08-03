@@ -43,7 +43,7 @@ This project contains installation scripts (written in Ansible) to install
 
 ### Clone
 ```bash
-git clone git@estscm1.intern.est.fujitsu.com:teammonitoring/monasca-installer.git
+git clone git@estscm1.intern.est.fujitsu.com:csi-installer/monasca-installer.git
 ```
 
 #### Init submodules
