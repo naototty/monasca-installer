@@ -13,7 +13,7 @@
   sudo: yes
   roles:
     - {role: zookeeper, tags: [zookeeper]}
-    - {role: kafka, kafka_listen_address: "{{ monasca_host }}", tags: [kafka]}
+    - {role: kafka, kafka_listen_address: "{{kafka_host}}", tags: [kafka]}
     - {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat,
        when: ansible_os_family == 'RedHat',
@@ -23,6 +23,7 @@
        postgresql_service_name: "postgresql",
        postgresql_tar_filename: "FJSVpgs91_64.tar.gz",
        postgres_install_from_tar: True,
+       postgresql_conf_default_guc: [{regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '127.0.0.1'" }],
        tags: [postgresql]}
     - {role: monasca-schema, database_admin_password: password, tags: [schema]}
     - {role: monasca-log-schema, tags: [elkstack]}
@@ -52,7 +53,6 @@
        smtp_host: localhost,
        tags: [notification]}
     - {role: storm,
-       nimbus_host: "{{ monasca_host }}",
        storm_nimbus_enabled: true,
        storm_supervisor_enabled: true,
        tags: [storm]}

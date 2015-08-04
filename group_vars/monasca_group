@@ -4,7 +4,6 @@
 is_openstack: false
 
 # urls
-zookeeper_hosts: "{{ monasca_host }}:2181"
 kafka_apache_mirror: "{{ world_repo_url }}"
 influxdb_deb_src_url: "{{ world_repo_url }}"
 get_pip_download_url: "{{ world_repo_url }}"
@@ -14,9 +13,12 @@ monasca_group: monasca
 influxdb:
   raft_port: 8086
 # zookeeper
+zookeeper_hosts: "127.0.0.1:2181"
 zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
 # influxDB
-influxdb_url: "http://{{ monasca_host }}:8086"
+influxdb_hostname: 127.0.0.1
+influxdb_bind_address: "{{ influxdb_hostname }}"
+influxdb_url: "http://{{ influxdb_bind_address }}:8086"
 influxdb_users:
   mon_api: password
   mon_persister: password
@@ -24,25 +26,34 @@ influxdb_users:
 kafka_events_partitions: 4
 kafka_metrics_partitions: 4
 kafka_replicas: 1
-kafka_hosts: "{{ monasca_host }}:9092"
+kafka_host: "127.0.0.1"
+kafka_hosts: "{{kafka_host}}:9092"
 # keystone
 keystone_port: 5000
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
 keystone_auth_method: password
 # database
-database_host: "{{ monasca_host }}"
+database_host: "127.0.0.1"
 database_users:
   notification: password
   monapi: password
   thresh: password
 storm_worker_ports: [6701, 6702]
-zookeeper_hosts: "{{ monasca_host }}:2181"
 apache_mirror: "{{ world_repo_url }}"
 elasticsearch_version: "1.5.2"
 elasticsearch_download: "{{ world_repo_url }}"
 persister_tarball_base_url: "{{ world_repo_url }}"
 logstash_agent_download_url: "{{ world_repo_url }}"
-elasticsearch_url: "http://{{ monasca_host }}:9200"
+elasticsearch_host: "127.0.0.1"
+elasticsearch_hosts: ["{{elasticsearch_host}}"]
+elasticsearch_url: "http://127.0.0.1:9200"
+
+nimbus_host: 127.0.0.1
+
+log_persister_host: 127.0.0.1
 
 defaultAuthorizedRoles: "[user, domainuser, domainadmin, csi-user]"
 agentAuthorizedRoles: "[csi-agent]"
+
+postgresql_conf_default_guc:
+  - { regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '127.0.0.1'" }
