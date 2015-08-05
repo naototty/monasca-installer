@@ -26,3 +26,11 @@ monasca_checks:
     init_config:
     instances:
       - url: "{{ elasticsearch_url }}"
+  http_check:
+    init_config:
+    instances:
+      - name: Kibana
+        url: "{{ kibana_url }}"
+        timeout: 1
+        dimensions:
+          service: kibana
