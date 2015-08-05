@@ -13,16 +13,16 @@ keystone-host                    ansible_ssh_host={{ openstack_host }} ansible_s
 
 # Monasca Hosts
 [monasca_group]
-monasca-host                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+csi-host                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Monasca Agent Hosts
 [monasca_agent_group]
-monasca-monasca-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+csi-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
 [monasca_log_agent_group]
-monasca-monasca-log-agent        ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+csi-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 [all_group:children]

@@ -1,4 +1,4 @@
-- hosts: monasca-host
+- hosts: csi-host
   vars:
       services:
         - zookeeper

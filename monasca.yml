@@ -1,6 +1,6 @@
 ---
 - name: Prepare/Configure CSI host
-  hosts: monasca-host
+  hosts: csi-host
   sudo: yes
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
@@ -9,7 +9,7 @@
     - {role: cli-credentials, tags: [cli]}
 
 - name: Monasca Installation
-  hosts: monasca-host
+  hosts: csi-host
   sudo: yes
   roles:
     - {role: zookeeper, tags: [zookeeper]}
@@ -69,7 +69,7 @@
     - {role: fujitsu-branding, tags: [branding]}
 
 - name: Clean-Up CSI host
-  hosts: monasca-host
+  hosts: csi-host
   sudo: yes
   post_tasks:
     - include: tasks/clean_up.yml tags=post_tasks
