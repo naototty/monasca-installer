@@ -1,5 +1,5 @@
 ---
-# file: host_vars/monasca-log-agent-openstack-host
+# file: host_vars/csi-monasca-log-agent
 
 # logstash monasca user credentials
 project_name: csi

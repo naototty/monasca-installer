@@ -1,4 +1,6 @@
 ---
+# file: group_vars/monasca_agent_group
+
 # directories
 base_dir_agent: /opt/monasca
 logstash_agent_dest: "{{ base_dir_agent }}/monasca-log-agent"

@@ -1,5 +1,5 @@
 ---
-# file: group_vars/monasca.yml
+# file: group_vars/monasca_group
 
 is_openstack: false
 

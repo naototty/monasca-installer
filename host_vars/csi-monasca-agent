@@ -1,5 +1,5 @@
 ---
-# file: host_vars/monasca-agent-openstack
+# file: host_vars/csi-monasca-agent
 
 # Monasca Agent user credentials
 monasca_agent:

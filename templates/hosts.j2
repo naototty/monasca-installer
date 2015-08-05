@@ -1,19 +1,15 @@
 # Offline Hosts
 [offline_group]
-offline-resources-host           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Openstack Hosts
-[openstack_installer_group]
-horizon-host                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-keystone-host                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-
-[openstack_uninstaller_group]
-horizon-host                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-keystone-host                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+[openstack_group]
+horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Hosts
 [monasca_group]
-csi-host                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+csi-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Monasca Agent Hosts
 [monasca_agent_group]
@@ -32,6 +28,10 @@ monasca_group
 monasca_agent_group
 monasca_log_agent_group
 
+# Uninstaller
+[openstack_uninstaller_group]
+horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
 [openstack_group:children]
-openstack_installer_group
 openstack_uninstaller_group

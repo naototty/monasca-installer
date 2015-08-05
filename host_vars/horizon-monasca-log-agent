@@ -1,5 +1,5 @@
 ---
-# file: host_vars/openstack-monasca-log-agent
+# file: host_vars/horizon-monasca-log-agent
 
 # logstash monasca user credentials
 project_name: admin

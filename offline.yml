@@ -1,6 +1,6 @@
 ---
 - name: Install Offline resources
-  hosts: offline-resources-host
+  hosts: offline-resources-node
   sudo: yes
   pre_tasks:
     - include: tasks/set_up.yml

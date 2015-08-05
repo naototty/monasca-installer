@@ -1,5 +1,5 @@
 ---
-# file: host_vars/openstack-monasca-agent
+# file: host_vars/horizon-monasca-agent
 
 # Monasca Agent Configuration
 monasca_agent:

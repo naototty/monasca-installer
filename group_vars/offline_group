@@ -1,5 +1,5 @@
 ---
-# file: group_vars/offline
+# file: group_vars/offline_group
 # Resource urls
 world_repo_url: "{{ balls_repo_url }}/world"
 get_pip_download_url: "{{ world_repo_url }}"
