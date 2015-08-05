@@ -13,5 +13,7 @@ monasca_virtualenv_dir: "{{ monasca_agent_venv_dir }}"
 monasca_conf_dir: /etc/monasca
 monasca_usr_lib_dir: /usr/lib/monasca/agent
 
+elasticsearch_url: "http://localhost:9200"
+
 services:
   - { name: "monasca-log-agent", configuration: [ "{{ logstash_agent_conf_dir }}", "{{ logstash_agent_dest }}", "{{ base_dir_agent }}" ] }

@@ -9,6 +9,9 @@ monasca_agent:
 
 # Monasca Agent Configuration
 monasca_agent_service: monitoring
+
+# Additionally you can specify any number of name:value pairs in 'init_config'
+# which will be available on every run in 'self.init_config'
 monasca_checks:
   host_alive:
     init_config:
@@ -19,3 +22,7 @@ monasca_checks:
       - name: openstack
         host_name: "{{ openstack_host }}"
         alive_test: ssh
+  elastic:
+    init_config:
+    instances:
+      - url: "{{ elasticsearch_url }}"
