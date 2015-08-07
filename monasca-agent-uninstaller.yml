@@ -8,6 +8,6 @@
     - name: Uninstall monasca-agent
       pip: name=monasca-agent state=absent virtualenv="{{ monasca_agent_venv_dir }}"
       ignore_errors: True
-
+    
     - name: Remove virtualenv
       file: path="{{ monasca_agent_venv_dir }}" state=absent force=true

@@ -25,7 +25,7 @@ monasca_user:
 
 # Installation and Download directories
 opt_dir: "/opt"
-venvs_dir: "{{ opt_dir }}/venvs"
+venvs_dir: "{{ opt_dir }}"
 download_tmp_dir: "{{ opt_dir }}/.download_dir"
 monasca_download_dir: /opt/monasca-downloads
 clean_up_dirs:
