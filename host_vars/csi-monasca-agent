@@ -34,3 +34,10 @@ monasca_checks:
         timeout: 1
         dimensions:
           service: kibana
+  postgres:
+    init_config:
+    instances:
+      - host: localhost
+        port: 5432
+        username: "{{ monasca_agent_database_user }}"
+        password: "{{ monasca_agent_database_password }}"
