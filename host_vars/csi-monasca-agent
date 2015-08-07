@@ -34,6 +34,11 @@ monasca_checks:
         timeout: 1
         dimensions:
           service: kibana
+      - name: Monasca Log Api
+        url: "http://{{ monasca_host }}:{{ monsasca_log_api_admin_port }}/healthcheck"
+        timeout: 1
+        dimensions:
+          service: monasca-log-api
   postgres:
     init_config:
     instances:

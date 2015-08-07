@@ -1,6 +1,8 @@
 ---
 # file: group_vars/monasca_agent_group
 
+monsasca_log_api_admin_port: 8071
+
 # directories
 base_dir_agent: /opt/monasca
 logstash_agent_dest: "{{ base_dir_agent }}/monasca-log-agent"
