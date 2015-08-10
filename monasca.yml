@@ -17,6 +17,7 @@
     - {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat,
        when: ansible_os_family == 'RedHat',
+       postgresql_dir: /opt/postgresql_91,
        postgresql_repo: "{{ world_repo_url }}/postgresql/",
        postgresql_data_dir: "{{ postgresql_dir }}/data",
        postgresql_service_name: "postgresql",
