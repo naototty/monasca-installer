@@ -1,4 +1,4 @@
-- hosts: csi-host
+- hosts: csi-node
   vars:
       services:
         - zookeeper
