@@ -68,7 +68,7 @@ Custom inventory file:
 
 (file:services-inventory.ini)
 [services-hosts]
-mini-mon-online ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 ansible_ssh_private_key_file=~/.ssh/private_key
+monasca ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 ansible_ssh_private_key_file=~/.ssh/private_key
 EOF
 }
 
