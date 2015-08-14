@@ -20,7 +20,7 @@ monasca_checks:
       ping_timeout: 1
     instances:
       - name: openstack
-        host_name: "{{ openstack_host }}"
+        host_name: "{{ keystone_host }}"
         alive_test: ssh
   elastic:
     init_config:
