@@ -142,7 +142,6 @@ vim group_vars/all_group
 offline_host: 192.168.10.4
 monasca_host: 192.168.10.4
 keystone_host: 192.168.10.5
-monasca_log_api_host: 192.168.10.4
 openstack_host: 192.168.10.5
 ```
 
