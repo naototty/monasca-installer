@@ -10,6 +10,11 @@ monasca_agent:
 # Monasca Agent Configuration
 monasca_agent_service: monitoring
 
+# Variables for installing Python bindings for postgresql check
+# TODO: remove hardcoding
+postgresql_dir: "/opt/postgresql/9.1"
+postgresql_bin_dir: "{{ postgresql_dir }}/bin"
+
 # Additionally you can specify any number of name:value pairs in 'init_config'
 # which will be available on every run in 'self.init_config'
 monasca_checks:
