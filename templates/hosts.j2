@@ -21,6 +21,12 @@ openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_s
 csi-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
+[csi_monasca_agent_group]
+csi-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+[monasca_group:children]
+csi_monasca_agent_group
+
 [all_group:children]
 offline_group
 openstack_group
