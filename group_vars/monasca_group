@@ -15,6 +15,7 @@ influxdb:
 # zookeeper
 zookeeper_hosts: "127.0.0.1:2181"
 zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
+zookeeper_log_dir: "{{ log_dir }}/zookeeper"
 # influxDB
 influxdb_hostname: 127.0.0.1
 influxdb_bind_address: "{{ influxdb_hostname }}"
@@ -28,6 +29,7 @@ kafka_metrics_partitions: 4
 kafka_replicas: 1
 kafka_host: "127.0.0.1"
 kafka_hosts: "{{kafka_host}}:9092"
+kafka_log_dir: "{{ log_dir }}/kafka"
 # keystone
 keystone_port: 5000
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
@@ -52,20 +54,37 @@ postgresql_conf_default_guc:
   - { regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '127.0.0.1'" }
   - { regexp: "^#?logging_collector = .*$", guc: "logging_collector = on" }
   - { regexp: "^#?log_directory = .*$", guc: "log_directory = '{{ postgresql_log_directory | default('pg_log') }}'" }
-
+postgresql_log_directory: "{{ log_dir }}/postgresql"
+# storm
 storm_worker_ports: [6701, 6702]
+storm_log_dir: "{{ log_dir }}/storm"
+
+# apache
 apache_mirror: "{{ world_repo_url }}"
+# elasticsearch
 elasticsearch_version: "1.5.2"
 elasticsearch_download: "{{ world_repo_url }}"
-persister_tarball_base_url: "{{ world_repo_url }}"
-logstash_agent_download_url: "{{ world_repo_url }}"
 elasticsearch_host: "127.0.0.1"
 elasticsearch_hosts: ["{{elasticsearch_host}}"]
 elasticsearch_url: "http://127.0.0.1:9200"
+elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
+
+persister_tarball_base_url: "{{ world_repo_url }}"
+logstash_agent_download_url: "{{ world_repo_url }}"
 
 nimbus_host: 127.0.0.1
 
+# log persister
 log_persister_host: 127.0.0.1
+monasca_log_dir: "{{ log_dir }}/monasca"
+monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
+monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
 
 defaultAuthorizedRoles: "[user, domainuser, domainadmin, csi-user]"
 agentAuthorizedRoles: "[csi-agent]"
+
+# kibana
+kibana_log_dir: "{{ log_dir }}/kibana"
+
+# log directories to be monitored
+logstash_agent_log_dir: "{{ log_dir }}/monasca/monasca-log-agent"

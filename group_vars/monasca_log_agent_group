@@ -6,15 +6,15 @@ logstash_agent_download_url: "{{ balls_repo_url }}/world"
 
 # directories
 base_dir_agent: /opt/monasca
+log_dir: /var/log
 logstash_agent_dest: "{{ base_dir_agent }}/monasca-log-agent"
 logstash_agent_conf_dir: /etc/monasca/monasca-log-agent
 logstash_agent_log_dir: /var/log/monasca/monasca-log-agent
-log_base_dir: /var/log
 log_files:
   - "{{ logstash_agent_log_dir }}"
-  - "{{ log_base_dir }}/messages"
-  - "{{ log_base_dir }}/yum.log"
-  - "{{ log_base_dir }}/boot.log"
+  - "{{ log_dir }}/messages"
+  - "{{ log_dir }}/yum.log"
+  - "{{ log_dir }}/boot.log"
 
 # services
 services:

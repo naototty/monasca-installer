@@ -41,3 +41,6 @@ keystone_admin_token: ADMIN
 keystone_admin: 'admin'
 keystone_admin_password: 'admin'
 keystone_admin_project: 'admin'
+
+# Logging
+log_dir: /var/log
