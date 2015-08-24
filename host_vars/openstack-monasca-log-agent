@@ -6,4 +6,6 @@ project_name: admin
 username: admin-agent
 password: admin
 domain_id: default
+
+log_agent_trg: openstack
 log_files: ['/var/log/messages']
