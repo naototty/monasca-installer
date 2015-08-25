@@ -23,6 +23,7 @@ influxdb_url: "http://{{ influxdb_bind_address }}:8086"
 influxdb_users:
   mon_api: password
   mon_persister: password
+influxdb_raft_port: 8085
 # kafka
 kafka_events_partitions: 4
 kafka_metrics_partitions: 4
@@ -30,11 +31,15 @@ kafka_replicas: 1
 kafka_host: "127.0.0.1"
 kafka_hosts: "{{kafka_host}}:9092"
 kafka_log_dir: "{{ log_dir }}/kafka"
+kafka_id: 0
+
 # keystone
 keystone_port: 5000
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
 keystone_auth_method: password
 # database
+mysql_schema_enabled: false
+postgres_schema_enabled: true
 database_host: "127.0.0.1"
 database_users:
   notification: password

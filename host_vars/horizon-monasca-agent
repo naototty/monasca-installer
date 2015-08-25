@@ -2,11 +2,10 @@
 # file: host_vars/horizon-monasca-agent
 
 # Monasca Agent Configuration
-monasca_agent:
-  user: admin-agent
-  password: admin
-  project: admin
-  
+monasca_agent_user: admin-agent
+monasca_agent_password: admin
+monasca_agent_project: admin
+
 monasca_checks:
   host_alive:
     init_config:
