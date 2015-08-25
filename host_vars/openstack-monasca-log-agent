@@ -8,4 +8,5 @@ password: admin
 domain_id: default
 
 log_agent_trg: openstack
-log_files: ['/var/log/messages']
+log_files:
+  - { type: openstack, path: '{{ log_dir }}/messages' }

@@ -6,4 +6,5 @@ project_name: admin
 username: admin-agent
 password: admin
 domain_id: default
-log_files: ['/var/log/messages']
+log_files:
+  - { type: openstack, path: '{{ log_dir }}/messages' }
