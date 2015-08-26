@@ -7,14 +7,16 @@ username: csi-agent
 password: password
 domain_id: default
 log_files:
-  - { type: java, path: '{{ api_log_dir }}/*.log' }
-  - { type: java, path: '{{ log_api_log_dir }}/monasca-log-api.log' }
+  - { type: monasca_java, path: '{{ api_log_dir }}/*.log' }
+  - { type: monasca_java, path: '{{ log_api_log_dir }}/monasca-log-api.log' }
   - { type: python, path: '{{ notification_log_dir }}/*.log' }
-  - '{{ monasca_agent_log_dir }}/*.log'
-  - '{{ persister_log_dir }}/*.log'
+  - { type: python, path: '{{ monasca_agent_log_dir }}/*.log' }
+  - { type: monasca_persister, path: '{{ persister_log_dir }}/*.log' }
   - '{{ logstash_agent_log_dir }}/*.log'
   - '{{ monasca_log_persister_log_dir }}/*.log'
   - '{{ monasca_log_transformer_log_dir }}/*.log'
   - '{{ kibana_log_dir }}/*.log'
-  - '{{ elasticsearch_log_dir }}/*.log'
-  - '{{ kafka_log_dir }}/*.log'
+  - { type: timestamped, path: '{{ elasticsearch_log_dir }}/*.log' }
+  - { type: timestamped, path: '{{ kafka_log_dir }}/*.log' }
+  - { type: timestamped, path: '{{ zookeeper_log_dir }}/*.log' }
+  - { type: go, path: '{{ influxdb_log_dir }}/*.log' }

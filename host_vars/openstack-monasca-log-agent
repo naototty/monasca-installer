@@ -9,4 +9,13 @@ domain_id: default
 
 log_agent_trg: openstack
 log_files:
-  - { type: openstack, path: '{{ log_dir }}/messages' }
+  - { type: syslog, path: '{{ log_dir }}/messages' }
+  - { type: openstack, path: '{{ log_dir }}/keystone' }
+  - { type: openstack, path: '{{ log_dir }}/glance' }
+  - { type: openstack, path: '{{ log_dir }}/cinder' }
+  - { type: openstack, path: '{{ log_dir }}/ceilometer' }
+  - { type: openstack, path: '{{ log_dir }}/nova' }
+  - { type: openstack, path: '{{ log_dir }}/neutron' }
+  - { type: openstack, path: '{{ log_dir }}/openvswitch' }
+  - { type: syslog, path: '{{ log_dir }}/swift' }
+  - "{{ log_dir }}/mongodb"
