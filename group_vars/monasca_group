@@ -24,6 +24,7 @@ influxdb_users:
   mon_api: password
   mon_persister: password
 influxdb_raft_port: 8085
+influxdb_log_dir: "{{ log_dir }}/influxdb"
 # kafka
 kafka_events_partitions: 4
 kafka_metrics_partitions: 4
