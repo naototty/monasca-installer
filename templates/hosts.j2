@@ -43,5 +43,8 @@ monasca_log_agent_group
 horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
+[monasca_uninstaller]
+csi-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 [openstack_group:children]
 openstack_uninstaller_group

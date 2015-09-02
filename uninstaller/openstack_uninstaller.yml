@@ -1,5 +1,5 @@
 - name: CSI Uninstall [openstack]
-  hosts: openstack-host
+  hosts: openstack-node
   sudo: yes
   tasks:
     - include: ../tasks/uninstall_services.yml
