@@ -7,4 +7,4 @@ username: admin-agent
 password: admin
 domain_id: default
 log_files:
-  - { type: openstack, path: '{{ log_dir }}/messages' }
+  - { tags: '["openstack"]', type: '"keystone"', path: '"{{ log_dir }}/messages"' }

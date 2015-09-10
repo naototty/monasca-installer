@@ -33,7 +33,7 @@
        database_user: monapi,
        database_password: password,
        monasca_log_api_tarball_base_url: "{{ world_repo_url }}",
-       tags: [api]}
+       tags: [api, log_api]}
     - {role: monasca-persister,
        influxdb_user: mon_persister,
        influxdb_password: password,

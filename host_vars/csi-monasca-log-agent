@@ -7,16 +7,16 @@ username: csi-agent
 password: password
 domain_id: default
 log_files:
-  - { type: monasca_java, path: '{{ api_log_dir }}/*.log' }
-  - { type: monasca_java, path: '{{ log_api_log_dir }}/monasca-log-api.log' }
-  - { type: python, path: '{{ notification_log_dir }}/*.log' }
-  - { type: python, path: '{{ monasca_agent_log_dir }}/*.log' }
-  - { type: monasca_persister, path: '{{ persister_log_dir }}/*.log' }
-  - '{{ logstash_agent_log_dir }}/*.log'
-  - '{{ monasca_log_persister_log_dir }}/*.log'
-  - '{{ monasca_log_transformer_log_dir }}/*.log'
-  - '{{ kibana_log_dir }}/*.log'
-  - { type: timestamped, path: '{{ elasticsearch_log_dir }}/*.log' }
-  - { type: timestamped, path: '{{ kafka_log_dir }}/*.log' }
-  - { type: timestamped, path: '{{ zookeeper_log_dir }}/*.log' }
-  - { type: go, path: '{{ influxdb_log_dir }}/*.log' }
+  - { tags: '["monasca_java"]', type: '"monasca-api"', path: '"{{ api_log_dir }}/*.log"' }
+  - { tags: '["monasca_java"]', type: '"monasca-log-api"', path: '"{{ log_api_log_dir }}/monasca-log-api.log"' }
+  - { tags: '["python"]', type: '"monasca-notification"', path: '"{{ notification_log_dir }}/*.log"' }
+  - { tags: '["python"]', type: '"monasca-agent"', path: '"{{ monasca_agent_log_dir }}/*.log"' }
+  - { tags: '["monasca_persister"]', type: '"monasca-persister"', path: '"{{ persister_log_dir }}/*.log"' }
+  - { type: '"monasca-logstash-agent"', path: '"{{ logstash_agent_log_dir }}/*.log"' }
+  - { type: '"monasca-log-persister"', path: '"{{ monasca_log_persister_log_dir }}/*.log"' }
+  - { type: '"monasca-log-transformer"', path: '"{{ monasca_log_transformer_log_dir }}/*.log"' }
+  - { type: '"kibana"', path: '"{{ kibana_log_dir }}/*.log"' }
+  - { tags: '["timestamped"]', type: '"elasticsearch"', path: '"{{ elasticsearch_log_dir }}/*.log"' }
+  - { tags: '["timestamped"]', type: '"kafka"', path: '"{{ kafka_log_dir }}/*.log"' }
+  - { tags: '["timestamped"]', type: '"zookeeper"', path: '"{{ zookeeper_log_dir }}/*.log"' }
+  - { tags: '["go"]', type: '"influxdb"', path: '"{{ influxdb_log_dir }}/*.log"' }
