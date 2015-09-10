@@ -4,7 +4,7 @@
 # logstash monasca user credentials
 project_name: admin
 username: admin-agent
-password: admin
+password: {{ horizon_log_agent_keystone_password }}
 domain_id: default
 log_files:
   - { tags: '["openstack"]', type: '"horizon"', path: '"{{ log_dir }}/messages"' }

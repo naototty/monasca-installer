@@ -1,15 +1,20 @@
 ---
 - name: Prepare/Configure host
   hosts: monasca_log_agent_group
-  sudo: yes
+  sudo: yes  
+  vars_files:
+    - credentials.yml
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/verify_credentials.yml tags=agents,log-agent
   roles:
     - {role: pip, tags: [pip, resources]}
 
 - name: Install Monasca-Log-Agent on CSI
   hosts: monasca_log_agent_group
   sudo: yes
+  vars_files:
+    - credentials.yml
   roles:
     - {role: monasca-log-agent, tags: [log-agent, agents]}
 

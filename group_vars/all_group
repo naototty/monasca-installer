@@ -18,7 +18,7 @@ monasca_log_api_url: "http://{{ monasca_host }}:8070"
 # Monasca Api CLI - Credentials
 monasca_user:
   user: csi-operator
-  password: password
+  password: "{{ keystone_csi_operator_user_password }}"
   project: csi
 
 # Installation and Download directories
@@ -38,7 +38,6 @@ logstash_agent_download_url: "{{ world_repo_url }}"
 # Keystone Admin credentials
 keystone_admin_token: ADMIN
 keystone_admin: 'admin'
-keystone_admin_password: 'admin'
 keystone_admin_project: 'admin'
 
 # Logging

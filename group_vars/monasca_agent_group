@@ -16,7 +16,7 @@ monasca_conf_dir: /etc/monasca
 monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
-monasca_agent_database_password: password
+monasca_agent_database_password: "{{ csi_monasca_agent_database_password }}"
 monasca_agent_version: 1.1.13.dev4
 
 monasca_agent_overwrite_config: False
@@ -25,3 +25,11 @@ elasticsearch_url: "http://localhost:9200"
 
 services:
   - { name: "monasca-log-agent", configuration: [ "{{ logstash_agent_conf_dir }}", "{{ logstash_agent_dest }}", "{{ base_dir_agent }}" ] }
+
+# List of passwords/credentials for verification
+credential_keys_list:
+  - csi_monasca_agent_keystone_password
+  - horizon_monasca_agent_keystone_password
+  - keystone_monasca_agent_keystone_password
+  - openstack_monasca_agent_keystone_password
+  - csi_monasca_agent_database_password

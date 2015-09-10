@@ -1,6 +1,7 @@
 # Offline Hosts
 [offline_group]
 offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+localhost                        ansible_connection=local
 
 # Openstack Hosts
 [openstack_group]

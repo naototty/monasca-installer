@@ -4,6 +4,9 @@
   sudo: yes
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
+  vars_files:
+    - credentials.yml
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
@@ -11,8 +14,11 @@
 - name: Prepare/Configure Keystone host
   hosts: keystone-node
   sudo: yes
+  vars_files:
+    - credentials.yml
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
@@ -31,6 +37,10 @@
 - name: Configure Keystone
   hosts: keystone-node
   sudo: yes
+  pre_tasks:
+    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,keystone
+  vars_files:
+    - credentials.yml
   roles:
     - {role: monasca-keystone, tags: [keystone]}
 

@@ -6,7 +6,7 @@ monasca_agent_system_only: True
 
 # Monasca Agent user credentials
 monasca_agent_user: csi-agent
-monasca_agent_password: password
+monasca_agent_password: "{{ csi_monasca_agent_keystone_password }}"
 monasca_agent_project: csi
 
 monasca_agent_version: 1.1.13.dev4

@@ -1,6 +1,6 @@
 # Monasca Installer
 
-__Important:__ 
+__Important:__
 Code-changes may require the adaptation of User-Documentation at [CodeBeamer - Installation helper ansible](http://wwwi.est.fujitsu.com/cb/wiki/35690)
 
 * [Introduction](#introduction)
@@ -24,7 +24,7 @@ Code-changes may require the adaptation of User-Documentation at [CodeBeamer - I
 
 ## Introduction
 
-This project contains installation scripts (written in Ansible) to install 
+This project contains installation scripts (written in Ansible) to install
 * Monasca
 * Plugins, components and configuration on Openstack
 * Monasca-Agent and Monasca-Log-Agent installation on Monasca and Openstack host
@@ -49,7 +49,7 @@ git clone git@estscm1.intern.est.fujitsu.com:csi-installer/monasca-installer.git
 #### Init submodules
 Run this command to install all submodules before:
 
-```bash 
+```bash
 git submodule update --init
 ```
 
@@ -114,7 +114,7 @@ vagrant box add clear-centos7 /path/to/the/clear_centos7.box
 ```
 
 #### Prepare hosts template file
-__Important:__ 
+__Important:__
 The vagrant box 'monasca-devstack-centos' works only with ip 192.168.10.5. Otherwise the installation may fail
 
 If you are using different IPs, then you have to change the ips in ansible-master.yml. Adapt usernames if neccessary.
@@ -191,7 +191,7 @@ Response:
 ```bash
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-vagrant@192.168.12.102's password: 
+vagrant@192.168.12.102's password:
 
 Number of key(s) added: 1
 
@@ -207,7 +207,7 @@ ssh-copy-id vagrant@192.168.10.5
 ```bash
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-vagrant@192.168.10.5's password: 
+vagrant@192.168.10.5's password:
 
 Number of key(s) added: 1
 
@@ -229,7 +229,13 @@ Goto vagrant folder
 cd /vagrant
 ```
 
-and run main.yml
+Installation requires all password to be set. They are stored in credentials.yml file in the main installator directory. Some of them you have to know beforehand (like keystone admin passwords) and others would be set with values you provide in `credentials.yml`
+
+```
+vim credentials.yml
+```
+
+Now you can run main.yml playbook
 
 ```bash
 ansible-playbook main.yml
@@ -261,7 +267,7 @@ vagrant sandbox on
 
 Do some stuff:
 ```bash
-vagrant ssh 
+vagrant ssh
 ```
 
 If satisfied, apply the changes permanently:

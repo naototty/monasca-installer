@@ -19,3 +19,10 @@ log_files:
 # services
 services:
   - { name: "monasca-log-agent", configuration: [ "{{ logstash_agent_conf_dir }}", "{{ logstash_agent_dest }}", "{{ base_dir_agent }}" ] }
+
+# List of passwords/credentials for verification
+credential_keys_list:
+  - csi_monasca_log_agent_keystone_password
+  - horizon_monasca_log_agent_keystone_password
+  - keystone_monasca_log_agent_keystone_password
+  - openstack_monasca_log_agent_keystone_password

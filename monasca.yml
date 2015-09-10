@@ -2,28 +2,33 @@
 - name: Prepare/Configure CSI host
   hosts: csi-node
   sudo: yes
+  vars_files:
+    - credentials.yml
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/verify_credentials.yml tags=schema,postgresql,api,persister,notification,thresh
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
 
 - name: Monasca Installation
   hosts: csi-node
+  vars_files:
+    - credentials.yml
   sudo: yes
   roles:
     - {role: zookeeper, tags: [zookeeper]}
     - {role: kafka, kafka_listen_address: "{{kafka_host}}", tags: [kafka]}
     - {role: influxdb, tags: [influxdb]}
     - {role: postgresql-redhat, when: ansible_os_family == 'RedHat', tags: [postgresql]}
-    - {role: monasca-schema, database_admin_password: password, tags: [schema]}
+    - {role: monasca-schema, database_admin_password: password, tags: [schema]} # FIXME:
     - {role: monasca-log-schema, tags: [elkstack]}
     - {role: monasca-api,
        api_region: useast,
        influxdb_user: mon_api,
        influxdb_password: password,
        database_user: monapi,
-       database_password: password,
+       database_password: "{{ database_monapi_password }}",
        monasca_api_tarball_base_url: "{{ world_repo_url }}",
        tags: [api]}
     - {role: monasca-log-api,
@@ -31,7 +36,7 @@
        influxdb_user: mon_api,
        influxdb_password: password,
        database_user: monapi,
-       database_password: password,
+       database_password: "{{ database_logapi_password }}",
        monasca_log_api_tarball_base_url: "{{ world_repo_url }}",
        tags: [api, log_api]}
     - {role: monasca-persister,
@@ -40,7 +45,7 @@
        tags: [persister]}
     - {role: monasca-notification,
        database_user: notification,
-       database_password: password,
+       database_password: "{{ database_notification_password }}",
        smtp_host: localhost,
        tags: [notification]}
     - {role: storm,
@@ -49,7 +54,7 @@
        tags: [storm]}
     - {role: monasca-thresh,
        database_user: thresh,
-       database_password: password,
+       database_password: "{{ database_thresh_password }}",
        thresh_tarball_base_url: "{{ world_repo_url }}",
        tags: [thresh]}
     - {role: monasca-elkstack,

@@ -4,7 +4,7 @@
 # logstash monasca user credentials
 project_name: csi
 username: csi-agent
-password: password
+password: "{{ csi_monasca_log_agent_keystone_password }}"
 domain_id: default
 log_files:
   - { tags: '["monasca_java"]', type: '"monasca-api"', path: '"{{ api_log_dir }}/*.log"' }

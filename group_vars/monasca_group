@@ -21,8 +21,8 @@ influxdb_hostname: 127.0.0.1
 influxdb_bind_address: "{{ influxdb_hostname }}"
 influxdb_url: "http://{{ influxdb_bind_address }}:8086"
 influxdb_users:
-  mon_api: password
-  mon_persister: password
+  mon_api: "{{ influxdb_mon_api_password }}"
+  mon_persister: "{{ influxdb_mon_persister_password }}"
 influxdb_raft_port: 8085
 influxdb_log_dir: "{{ log_dir }}/influxdb"
 # kafka
@@ -42,10 +42,11 @@ keystone_auth_method: password
 mysql_schema_enabled: false
 postgres_schema_enabled: true
 database_host: "127.0.0.1"
+
 database_users:
-  notification: password
-  monapi: password
-  thresh: password
+  notification: "{{ database_notification_password }}"
+  monapi: "{{ database_monapi_password }}"
+  thresh: "{{ database_thresh_password }}"
 
 # postgresql
 postgresql_version: 9.1
@@ -109,3 +110,12 @@ kibana_log_dir: "{{ log_dir }}/kibana"
 
 # log directories to be monitored
 logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
+
+# List of passwords/credentials for verification
+credential_keys_list:
+  - influxdb_mon_api_password
+  - influxdb_mon_persister_password
+  - database_notification_password
+  - database_monapi_password
+  - database_logapi_password
+  - database_thresh_password

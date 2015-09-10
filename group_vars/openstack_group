@@ -16,23 +16,23 @@ panel_static_dest_path: "{{ horizon_path }}static/monitoring"
 keystone_users:
   - username: csi-operator
     project: csi
-    password: password
+    password: "{{ keystone_csi_operator_user_password }}"
     role: csi-user
   - username: csi-operator
     project: csi
-    password: password
+    password: "{{ keystone_csi_operator_admin_password }}"
     role: admin
   - username: csi-agent
     project: csi
-    password: password
+    password: "{{ keystone_csi_agent_password }}"
     role: csi-agent
   - username: admin
     project: admin
-    password: admin
+    password: "{{ keystone_admin_password }}"
     role: csi-user
   - username: admin-agent
     project: admin
-    password: admin
+    password: "{{ keystone_admin_agent_password }}"
     role: csi-agent
 
 kibana_host: "http://{{ monasca_host }}:5601/"
@@ -45,3 +45,11 @@ keystone_service_endpoints:
 
 horizon_path: "/usr/share/openstack-dashboard/"
 panel_static_dest_path: "{{ horizon_path }}static/monitoring"
+
+# List of passwords/credentials for verification
+credential_keys_list:
+  - keystone_csi_operator_user_password
+  - keystone_csi_operator_admin_password
+  - keystone_csi_agent_password
+  - keystone_admin_password
+  - keystone_admin_agent_password
