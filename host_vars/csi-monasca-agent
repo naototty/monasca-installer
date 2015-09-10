@@ -12,6 +12,7 @@ monasca_agent_version: 1.1.12.post1
 monasca_agent_service: monitoring
 
 # Variables for installing Python bindings for postgresql check
+postgresql_version: 9.1
 postgresql_dir: "{{ opt_dir }}/postgresql/{{ postgresql_version }}"
 postgresql_bin_dir: "{{ postgresql_dir }}/bin"
 
