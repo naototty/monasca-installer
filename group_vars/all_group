@@ -13,7 +13,7 @@ monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
 keystone_url: "http://{{ keystone_host }}:35357/v3"
 kibana_url: "http://{{ monasca_host }}:5601"
 zookeeper_hosts: "{{ monasca_host }}:2181"
-monasca_log_api_url: "{{ monasca_host }}:8070"
+monasca_log_api_url: "http://{{ monasca_host }}:8070"
 keystone_user_url: "{{ keystone_host }}:5000"
 
 # Monasca Api CLI - Credentials
