@@ -9,7 +9,7 @@ monasca_agent_user: admin-agent
 monasca_agent_password: admin
 monasca_agent_project: admin
 
-monasca_agent_version: 1.1.12.post1
+monasca_agent_version: 1.1.13.dev2
   
 monasca_checks:
   host_alive:
