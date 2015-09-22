@@ -37,5 +37,11 @@ keystone_users:
 
 kibana_host: "http://{{ monasca_host }}:5601/"
 
+# keystone endpoint for monasca-keystone
+keystone_service_endpoints:
+  - {name: "monasca", description: "Monasca monitoring service", type: "monitoring", url: "{{ monasca_api_url }}"}
+  - {name: "logs", description: "Monasca log service", type: "logs", url: "{{ monasca_log_api_url }}"}
+  - {name: "logs-search", description: "Monasca log search service", type: "logs-search", url: "{{ kibana_host }}"}
+
 horizon_path: "/usr/share/openstack-dashboard/"
 panel_static_dest_path: "{{ horizon_path }}static/monitoring"
