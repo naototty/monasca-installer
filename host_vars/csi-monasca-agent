@@ -57,21 +57,23 @@ monasca_checks:
         password: "{{ monasca_agent_database_password }}"
   # this one's different because concatenated with default file
   process:
-    - name: monasca.log.agent
-      search_string: ['monasca-log-agent']
-      exact_match: False
-      dimensions:
-        component: monasca-log-agent
+    init_config:
+    instances:
+      - name: monasca.log.agent
+        search_string: ['monasca-log-agent']
+        exact_match: False
+        dimensions:
+          component: monasca-log-agent
         service: logs-monitoring
-    - name: monasca.log.transformer
-      search_string: ['transformer.conf']
-      exact_match: False
-      dimensions:
-        component: monasca-log-transformer
+      - name: monasca.log.transformer
+        search_string: ['transformer.conf']
+        exact_match: False
+        dimensions:
+          component: monasca-log-transformer
         service: logs-monitoring
-    - name: monasca.log.persister
-      search_string: ['persister.conf']
-      exact_match: False
-      dimensions:
-        component: monasca-log-persister
+      - name: monasca.log.persister
+        search_string: ['persister.conf']
+        exact_match: False
+        dimensions:
+          component: monasca-log-persister
         service: logs-monitoring
