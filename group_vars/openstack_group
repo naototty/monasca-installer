@@ -10,7 +10,10 @@ kibana_url: "http://{{ monasca_host }}:5601/"
 epel_download_url: "{{ world_repo_url }}"
 install_epel: False
 remove_network_manager: False
+
+# Horizon
 panel_static_dest_path: "{{ horizon_path }}static/monitoring"
+horizon_static_url: '/dashboard/static'
 
 # keystone
 keystone_users:
