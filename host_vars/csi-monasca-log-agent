@@ -6,6 +6,23 @@ project_name: csi
 username: csi-agent
 password: "{{ csi_monasca_log_agent_keystone_password }}"
 domain_id: default
+
+monasca_log_dir: "{{ log_dir }}/monasca"
+
+api_log_dir: "{{ monasca_log_dir }}/api"
+log_api_log_dir: "{{ monasca_log_dir }}/log-api"
+notification_log_dir: "{{ monasca_log_dir }}/notification"
+monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"
+persister_log_dir: "{{ monasca_log_dir }}/persister"
+logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
+monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
+monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
+kibana_log_dir: "{{ log_dir }}/kibana"
+elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
+kafka_log_dir: "{{ log_dir }}/kafka"
+zookeeper_log_dir: "{{ log_dir }}/zookeeper"
+influxdb_log_dir: "{{ log_dir }}/influxdb"
+
 log_files:
   - { tags: '["monasca_java"]', type: '"monasca-api"', path: '"{{ api_log_dir }}/*.log"' }
   - { tags: '["monasca_java"]', type: '"monasca-log-api"', path: '"{{ log_api_log_dir }}/monasca-log-api.log"' }

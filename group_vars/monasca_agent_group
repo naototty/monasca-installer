@@ -29,7 +29,5 @@ services:
 # List of passwords/credentials for verification
 credential_keys_list:
   - csi_monasca_agent_keystone_password
-  - horizon_monasca_agent_keystone_password
-  - keystone_monasca_agent_keystone_password
   - openstack_monasca_agent_keystone_password
   - csi_monasca_agent_database_password

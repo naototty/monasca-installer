@@ -14,6 +14,7 @@ keystone_url: "http://{{ keystone_host }}:35357/v3"
 kibana_url: "http://{{ monasca_host }}:5601"
 zookeeper_hosts: "{{ monasca_host }}:2181"
 monasca_log_api_url: "http://{{ monasca_host }}:8070"
+elasticsearch_url: "http://127.0.0.1:9200"
 
 # Monasca Api CLI - Credentials
 monasca_user:

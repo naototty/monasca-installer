@@ -4,7 +4,7 @@
 # logstash monasca user credentials
 project_name: admin
 username: admin-agent
-password: {{ keystone_monasca_log_agent_keystone_password }}
+password: {{ openstack_monasca_log_agent_keystone_password }}
 domain_id: default
 log_files:
   - { tags: '["openstack"]', type: '"keystone"', path: '"{{ log_dir }}/messages"' }
