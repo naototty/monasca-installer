@@ -1,5 +1,5 @@
-- name: CSI Uninstall [openstack]
-  hosts: openstack-node
+- name: CSI Uninstall [openstack][horizon-node]
+  hosts: horizon-node
   sudo: yes
   tasks:
     - include: ../tasks/uninstall_services.yml
@@ -26,3 +26,12 @@
 
     - name: Remove grafana [symlink]
       file: path={{ grafana_dest }} state=absent force=yes
+
+    - name: Restart httpd server
+      service: name=httpd state=restarted
+
+- name: CSI Uninstall [openstack][keystone-node]
+  hosts: keystone-node
+  sudo: yes
+  tasks:
+    - include: ../tasks/uninstall_services.yml
