@@ -1,9 +1,6 @@
 ---
 # file: host_vars/csi-monasca-agent
 
-#Use only supported metrics
-monasca_agent_system_only: True
-
 # Monasca Agent user credentials
 monasca_agent_user: csi-agent
 monasca_agent_password: "{{ csi_monasca_agent_keystone_password }}"
