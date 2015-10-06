@@ -16,6 +16,7 @@
   vars_files:
     - credentials.yml
   roles:
+    - {role: logrotate, tags: [logrotate]}
     - {role: monasca-log-agent, tags: [log-agent, agents]}
 
 - name: Clean-Up host

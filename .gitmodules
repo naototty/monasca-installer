@@ -64,3 +64,6 @@
 [submodule "roles/fujitsu-branding"]
 	path = roles/fujitsu-branding
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-fujitsu-branding.git
+[submodule "roles/logrotate"]
+	path = roles/logrotate
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-logrotate.git

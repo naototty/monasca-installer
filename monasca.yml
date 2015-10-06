@@ -62,6 +62,7 @@
        logstash_download: "{{ world_repo_url }}",
        kibana_download: "{{ world_repo_url }}",
        tags: [elkstack]}
+    - {role: logrotate, tags: [logrotate]}
     - {role: fujitsu-branding, tags: [branding]}
 
 - name: Clean-Up host
