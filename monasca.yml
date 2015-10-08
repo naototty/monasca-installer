@@ -1,6 +1,6 @@
 ---
-- name: Prepare/Configure CSI host
-  hosts: csi-node
+- name: Prepare/Configure host
+  hosts: cmm-node
   sudo: yes
   vars_files:
     - credentials.yml
@@ -12,7 +12,7 @@
     - {role: cli-credentials, tags: [cli]}
 
 - name: Monasca Installation
-  hosts: csi-node
+  hosts: cmm-node
   vars_files:
     - credentials.yml
   sudo: yes
@@ -64,8 +64,8 @@
        tags: [elkstack]}
     - {role: fujitsu-branding, tags: [branding]}
 
-- name: Clean-Up CSI host
-  hosts: csi-node
+- name: Clean-Up host
+  hosts: cmm-node
   sudo: yes
   post_tasks:
     - include: tasks/clean_up.yml tags=post_tasks

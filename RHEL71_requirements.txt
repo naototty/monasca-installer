@@ -1,4 +1,4 @@
-# List of supported python libraries on CSI-server
+# List of supported python libraries
 # Red Hat Enterprise Linux Server release 7.1 (Maipo)
 ansible==1.9.1
 Babel==1.3

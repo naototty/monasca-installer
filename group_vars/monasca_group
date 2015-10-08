@@ -101,8 +101,8 @@ monasca_log_dir: "{{ log_dir }}/monasca"
 monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
 monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
 
-defaultAuthorizedRoles: "[user, domainuser, domainadmin, csi-user]"
-agentAuthorizedRoles: "[csi-agent]"
+defaultAuthorizedRoles: "[user, domainuser, domainadmin, cmm-user]"
+agentAuthorizedRoles: "[cmm-agent]"
 
 # kibana
 kibana_log_dir: "{{ log_dir }}/kibana"
@@ -118,5 +118,5 @@ credential_keys_list:
   - database_monapi_password
   - database_logapi_password
   - database_thresh_password
-  - keystone_csi_operator_user_password
+  - keystone_cmm_operator_user_password
   - keystone_admin_password

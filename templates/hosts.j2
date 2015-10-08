@@ -10,16 +10,16 @@ keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_s
 
 # Monasca Hosts
 [monasca_group]
-csi-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Monasca Agent Hosts
 [monasca_agent_group]
-csi-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
 [monasca_log_agent_group]
-csi-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 [all_group:children]
@@ -35,7 +35,7 @@ horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_s
 keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 [monasca_uninstaller]
-csi-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 [openstack_group:children]
 openstack_uninstaller_group

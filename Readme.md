@@ -248,7 +248,7 @@ Login credentials are:
 | user | password |
 | -------- | -------- |
 | admin | admin |
-| csi-operator | password |
+| cmm-operator | password |
 
 ### Work with vagrant-sandbox
 Sahara allows vagrant to operate in sandbox mode

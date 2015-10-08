@@ -18,9 +18,9 @@ elasticsearch_url: "http://127.0.0.1:9200"
 
 # Monasca Api CLI - Credentials
 monasca_user:
-  user: csi-operator
-  password: "{{ keystone_csi_operator_user_password }}"
-  project: csi
+  user: cmm-operator
+  password: "{{ keystone_cmm_operator_user_password }}"
+  project: cmm
 
 # Installation and Download directories
 opt_dir: "/opt"

@@ -1,4 +1,4 @@
-- name: CSI Uninstall [openstack][horizon-node]
+- name: Uninstall [openstack][horizon-node]
   hosts: horizon-node
   sudo: yes
   tasks:
@@ -30,7 +30,7 @@
     - name: Restart httpd server
       service: name=httpd state=restarted
 
-- name: CSI Uninstall [openstack][keystone-node]
+- name: Uninstall [openstack][keystone-node]
   hosts: keystone-node
   sudo: yes
   tasks:

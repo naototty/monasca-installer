@@ -1,5 +1,5 @@
-- name: CSI Uninstall [monasca]
-  hosts: csi-node
+- name: Uninstall [monasca]
+  hosts: cmm-node
   sudo: yes
   tasks:
     - include: ../tasks/uninstall_services.yml

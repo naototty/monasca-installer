@@ -17,26 +17,26 @@ horizon_static_url: '/dashboard/static'
 
 # keystone
 keystone_users:
-  - username: csi-operator
-    project: csi
-    password: "{{ keystone_csi_operator_user_password }}"
-    role: csi-user
-  - username: csi-operator
-    project: csi
-    password: "{{ keystone_csi_operator_user_password }}"
+  - username: cmm-operator
+    project: cmm
+    password: "{{ keystone_cmm_operator_user_password }}"
+    role: cmm-user
+  - username: cmm-operator
+    project: cmm
+    password: "{{ keystone_cmm_operator_user_password }}"
     role: admin
-  - username: csi-agent
-    project: csi
-    password: "{{ keystone_csi_agent_password }}"
-    role: csi-agent
+  - username: cmm-agent
+    project: cmm
+    password: "{{ keystone_cmm_agent_password }}"
+    role: cmm-agent
   - username: admin
     project: admin
     password: "{{ keystone_admin_password }}"
-    role: csi-user
+    role: cmm-user
   - username: admin-agent
     project: admin
     password: "{{ keystone_admin_agent_password }}"
-    role: csi-agent
+    role: cmm-agent
 
 kibana_host: "http://{{ monasca_host }}:5601/"
 
@@ -51,7 +51,7 @@ panel_static_dest_path: "{{ horizon_path }}static/monitoring"
 
 # List of passwords/credentials for verification
 credential_keys_list:
-  - keystone_csi_operator_user_password
-  - keystone_csi_agent_password
+  - keystone_cmm_operator_user_password
+  - keystone_cmm_agent_password
   - keystone_admin_password
   - keystone_admin_agent_password

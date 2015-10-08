@@ -1,10 +1,10 @@
 ---
-# file: host_vars/csi-monasca-log-agent
+# file: host_vars/cmm-monasca-log-agent
 
 # logstash monasca user credentials
-project_name: csi
-username: csi-agent
-password: "{{ csi_monasca_log_agent_keystone_password }}"
+project_name: cmm
+username: cmm-agent
+password: "{{ cmm_monasca_log_agent_keystone_password }}"
 domain_id: default
 
 monasca_log_dir: "{{ log_dir }}/monasca"

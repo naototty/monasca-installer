@@ -14,7 +14,7 @@ monasca_agent_conf_dir: "{{ monasca_conf_dir }}/agent"
 monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
-monasca_agent_database_password: "{{ csi_monasca_agent_database_password }}"
+monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
 monasca_agent_version: 1.1.18.dev1
 
 monasca_agent_overwrite_config: False
@@ -26,6 +26,6 @@ services:
 
 # List of passwords/credentials for verification
 credential_keys_list:
-  - csi_monasca_agent_keystone_password
+  - cmm_monasca_agent_keystone_password
   - openstack_monasca_agent_keystone_password
-  - csi_monasca_agent_database_password
+  - cmm_monasca_agent_database_password
