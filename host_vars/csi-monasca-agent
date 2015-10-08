@@ -6,7 +6,7 @@ monasca_agent_user: csi-agent
 monasca_agent_password: "{{ csi_monasca_agent_keystone_password }}"
 monasca_agent_project: csi
 
-monasca_agent_version: 1.1.13.dev4
+monasca_agent_version: 1.1.18.dev1
 
 # Monasca Agent Configuration
 monasca_agent_service: monitoring
