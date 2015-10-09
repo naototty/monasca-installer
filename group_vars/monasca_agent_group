@@ -22,7 +22,7 @@ monasca_agent_overwrite_config: False
 elasticsearch_url: "http://localhost:9200"
 
 services:
-  - { name: "monasca-agent", configuration: [ "{{monasca_agent_conf_dir}}" ] }
+  - { name: "monasca-agent", configuration: [ "{{monasca_agent_conf_dir}}", "{{ monasca_agent_venv_dir }}" ] }
 
 # List of passwords/credentials for verification
 credential_keys_list:

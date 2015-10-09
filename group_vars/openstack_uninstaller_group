@@ -15,8 +15,8 @@ ui_dest_path: "{{ dashboard_path }}local/enabled/"
 
 # should it be rather available at hosts ?
 services:
-  - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-log-agent", configuration: ["{{ monasca_conf_dir }}"] }
+  - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}/agent"] }
+  - { name: "monasca-log-agent", configuration: ["{{ monasca_conf_dir }}/monasca-log-agent"] }
 
 packages:
   RedHat:

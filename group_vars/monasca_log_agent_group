@@ -18,7 +18,7 @@ log_files:
 
 # services
 services:
-  - { name: "monasca-log-agent", configuration: [ "{{ logstash_agent_conf_dir }}", "{{ logstash_agent_dest }}", "{{ base_dir_agent }}" ] }
+  - { name: "monasca-log-agent", configuration: [ "{{ logstash_agent_conf_dir }}", "{{ logstash_agent_dest }}" ] }
 
 # List of passwords/credentials for verification
 credential_keys_list:

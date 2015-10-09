@@ -26,15 +26,15 @@ services:
   - { name: "kafka", configuration: ["{{ kafka_conf_dir }}", "/etc/init/kafka.conf"] }
   - { name: "influxdb", configuration: ["/etc/opt/influxdb/", "/opt/influxdb/shared/"] }
   - { name: "kibana", configuration: [] }
-  - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-notification", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-persister", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-thresh", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-log-agent", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-log-transformer", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-log-persister", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-log-api", configuration: ["{{ monasca_conf_dir }}"] }
-  - { name: "monasca-api", configuration: ["{{ monasca_conf_dir }}", "/etc/init/monasca-api.conf"] }
+  - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}/agent"] }
+  - { name: "monasca-notification", configuration: ["{{ monasca_conf_dir }}/notification.yaml"] }
+  - { name: "monasca-persister", configuration: ["{{ monasca_conf_dir }}/persister-config.yml"] }
+  - { name: "monasca-thresh", configuration: ["{{ monasca_conf_dir }}/thresh-config.yml"] }
+  - { name: "monasca-log-agent", configuration: ["{{ monasca_conf_dir }}/monasca-log-agent"] }
+  - { name: "monasca-log-transformer", configuration: ["{{ monasca_conf_dir }}/log/transformer.conf"] }
+  - { name: "monasca-log-persister", configuration: ["{{ monasca_conf_dir }}/log/persister.conf"] }
+  - { name: "monasca-log-api", configuration: ["{{ monasca_conf_dir }}/log-api-config.yml"] }
+  - { name: "monasca-api", configuration: ["{{ monasca_conf_dir }}/api-config.yml", "/etc/init/monasca-api.conf"] }
   - { name: "postgres_fuji", configuration: [] }
   - { name: "static_httpd", configuration: ["/etc/init/static_httpd.conf", "/etc/systemd/system/static_httpd.service"] }
   - { name: "zookeeper", configuration: [] }
