@@ -18,6 +18,7 @@ monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
 monasca_agent_version: 1.1.18.dev1
 
 monasca_agent_overwrite_config: False
+monasca_agent_check_frequency: 30
 
 elasticsearch_url: "http://localhost:9200"
 
