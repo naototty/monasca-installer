@@ -30,3 +30,6 @@
   with_subelements:
     - services
     - configuration
+
+- name: Reload systemctl deamon
+  shell: "systemctl daemon-reload"
