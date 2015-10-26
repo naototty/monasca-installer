@@ -76,6 +76,7 @@ log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 
 # monasca-notification
 notification_log_dir: "{{ monasca_log_dir }}/notification"
+monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
 # monasca-agent
 monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"

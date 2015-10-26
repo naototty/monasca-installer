@@ -4,6 +4,8 @@
   sudo: yes
   vars_files:
     - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
     - include: tasks/verify_credentials.yml tags=schema,postgresql,api,persister,notification,thresh
@@ -16,6 +18,8 @@
   vars_files:
     - credentials.yml
   sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: zookeeper, tags: [zookeeper]}
     - {role: kafka, kafka_listen_address: "{{kafka_host}}", tags: [kafka]}

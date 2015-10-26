@@ -1,13 +1,17 @@
 ---
+
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
   sudo: yes
   tasks:
-    - include: tasks/uninstall_services.yml
-
     - name: Uninstall monasca-agent
       pip: name=monasca-agent state=absent virtualenv="{{ monasca_agent_venv_dir }}"
       ignore_errors: True
-    
-    - name: Remove virtualenv
-      file: path="{{ monasca_agent_venv_dir }}" state=absent force=true
+
+- name: Uninstall Monasca Metrics Agent
+  hosts: monasca_agent_group
+  sudo: yes
+  roles:
+    - {role: uninstaller,
+      uninstall_skip_pip: True,
+      tags: [uninstaller, uninstaller_monasca_agent ]}

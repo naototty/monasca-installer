@@ -16,6 +16,8 @@ panel_static_dest_path: "{{ horizon_path }}static/monitoring"
 horizon_static_url: '/dashboard/static'
 
 # keystone
+keystone_service_script: "/usr/local/bin/create_monasca_service.py"
+keystone_virtualenv_dir: "{{ venvs_dir }}/monasca-keystone"
 keystone_users:
   - username: cmm-operator
     project: cmm

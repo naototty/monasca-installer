@@ -6,6 +6,10 @@ offline_host: 192.168.10.4
 monasca_host: 192.168.10.4
 keystone_host: 192.168.10.5
 
+# monsaca settings
+monasca_conf_dir: "{{ etc_dir }}/monasca"
+monasca_work_dir: "{{ opt_dir }}/monasca"
+
 # URL service definition
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
@@ -22,8 +26,9 @@ monasca_user:
   password: "{{ keystone_cmm_operator_user_password }}"
   project: cmm
 
-# Installation and Download directories
+# Installation / Download directories
 opt_dir: "/opt"
+etc_dir: "/etc"
 venvs_dir: "{{ opt_dir }}"
 download_tmp_dir: "{{ opt_dir }}/.download_dir"
 monasca_download_dir: /opt/monasca-downloads
@@ -43,3 +48,7 @@ keystone_admin_project: 'admin'
 
 # Logging
 log_dir: /var/log
+
+# pip configuration
+pip_base_dir: "{{ ansible_env.HOME }}/.pip"
+pip_config_file: "{{ pip_base_dir }}/.cmm_pip.conf"

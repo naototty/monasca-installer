@@ -4,6 +4,8 @@
   sudo: yes
   vars_files:
     - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
     - include: tasks/verify_credentials.yml tags=agents,log-agent
@@ -15,6 +17,8 @@
   sudo: yes
   vars_files:
     - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: logrotate, tags: [logrotate]}
     - {role: monasca-log-agent, tags: [log-agent, agents]}

@@ -7,6 +7,8 @@
     - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
   vars_files:
     - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
@@ -16,6 +18,8 @@
   sudo: yes
   vars_files:
     - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
     - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
@@ -26,6 +30,8 @@
 - name: Install Horizon components
   hosts: horizon-node
   sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: monasca-ui,
        grafana_tarball_url: "{{ balls_repo_url }}/world",
@@ -37,6 +43,8 @@
 - name: Configure Keystone
   hosts: keystone-node
   sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,keystone
   vars_files:

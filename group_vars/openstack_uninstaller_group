@@ -13,14 +13,17 @@ grafana_dest: "{{ horizon_path }}static/grafana"
 ui_py_file: _50_admin_add_monitoring_panel.py
 ui_dest_path: "{{ dashboard_path }}local/enabled/"
 
-# should it be rather available at hosts ?
-services:
-  - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}/agent"] }
-  - { name: "monasca-log-agent", configuration: ["{{ monasca_conf_dir }}/monasca-log-agent"] }
-
-packages:
+uninstall_services:
+  - { name: "monasca-agent", assets: ["{{ monasca_conf_dir }}/agent"] }
+  - { name: "monasca-log-agent", assets: ["{{ monasca_conf_dir }}/monasca-log-agent"] }
+uninstall_packages:
   RedHat:
-   - { dir: "{{ opt_dir }}/monasca" }
+   - { assets: [ "{{ keystone_virtualenv_dir }}", "{{ keystone_service_script }}" ]}
+   - { pip: "python-monascaclient", assets: []}
+# post uninstallation directories that should be removed
+# force: If True, remove even if folder not empty
+uninstall_directories:
+  - { dir: "{{ opt_dir }}/monasca", force: False}
 
 clean_up_dirs:
   - "{{ download_tmp_dir }}"

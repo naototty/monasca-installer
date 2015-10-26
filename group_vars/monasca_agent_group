@@ -4,8 +4,6 @@
 monsasca_log_api_admin_port: 8071
 
 # directories
-base_dir_agent: /opt/monasca
-
 monasca_agent_venv_dir: "{{ venvs_dir }}/monasca-agent"
 # that one deprecated use one above
 monasca_virtualenv_dir: "{{ monasca_agent_venv_dir }}"
@@ -22,8 +20,13 @@ monasca_agent_check_frequency: 30
 
 elasticsearch_url: "http://localhost:9200"
 
-services:
-  - { name: "monasca-agent", configuration: [ "{{monasca_agent_conf_dir}}", "{{ monasca_agent_venv_dir }}" ] }
+uninstall_services:
+  - { name: "monasca-agent", assets: [
+      "{{monasca_agent_conf_dir}}",
+      "{{ monasca_agent_venv_dir }}" ]}
+
+uninstall_directories:
+  - { dir: "{{ monasca_agent_venv_dir }}", force: True }
 
 # List of passwords/credentials for verification
 credential_keys_list:

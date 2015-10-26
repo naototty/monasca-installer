@@ -67,3 +67,6 @@
 [submodule "roles/logrotate"]
 	path = roles/logrotate
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-logrotate.git
+[submodule "roles/uninstaller"]
+	path = roles/uninstaller
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-uninstaller.git
