@@ -18,13 +18,7 @@ monasca_conf_dir: /etc/monasca
 kafka_conf_dir: /etc/kafka
 
 services:
-  - { name: "storm-nimbus", configuration: ["{{ nimbus_upstart_conf }}"] }
-  - { name: "storm-supervisor", configuration: ["{{ supervisor_upstart_conf }}"] }
-  - { name: "storm-logviewer", configuration: ["{{ logviewer_upstart_conf }}"] }
-  - { name: "storm-ui", configuration: ["{{ stormui_upstart_conf }}"] }
   - { name: "elasticsearch", configuration: [] }
-  - { name: "kafka", configuration: ["{{ kafka_conf_dir }}", "/etc/init/kafka.conf"] }
-  - { name: "influxdb", configuration: ["/etc/opt/influxdb/", "/opt/influxdb/shared/"] }
   - { name: "kibana", configuration: [] }
   - { name: "monasca-agent", configuration: ["{{ monasca_conf_dir }}/agent"] }
   - { name: "monasca-notification", configuration: ["{{ monasca_conf_dir }}/notification.yaml"] }
@@ -35,20 +29,16 @@ services:
   - { name: "monasca-log-persister", configuration: ["{{ monasca_conf_dir }}/log/persister.conf"] }
   - { name: "monasca-log-api", configuration: ["{{ monasca_conf_dir }}/log-api-config.yml"] }
   - { name: "monasca-api", configuration: ["{{ monasca_conf_dir }}/api-config.yml", "/etc/init/monasca-api.conf"] }
-  - { name: "postgres_fuji", configuration: [] }
   - { name: "static_httpd", configuration: ["/etc/init/static_httpd.conf", "/etc/systemd/system/static_httpd.service"] }
   - { name: "zookeeper", configuration: [] }
 packages:
    RedHat:
      - { dir: "{{ opt_dir }}/elasticsearch-{{ elasticsearch_version }}", symlink: "{{ opt_dir }}/elasticsearch" }
-     - { dir: "{{ opt_dir }}/kafka_2.9.2-{{ kafka_version }}", symlink: "{{ opt_dir }}/kafka" }
      - { dir: "{{ opt_dir }}/kibana-{{ kibana_version }}", symlink: "{{ opt_dir }}/kibana" }
      - { dir: "{{ opt_dir }}/logstash-{{ logstash_version }}", symlink: "{{ opt_dir }}/logstash" }
      - { dir: "{{ opt_dir }}/monasca" }
-     - { rpm: "influxdb", dir: "{{ opt_dir }}/influxdb" }
-     - { dir: "{{ opt_dir }}/storm" }
-     - { dir: "{{ opt_dir }}/postgresql_{{ postgresql_version | regex_replace('\\.','') }}" }
      - { dir: "{{ opt_dir }}/zookeeper-{{ zookeeper_version }}" }
+     - { pip: "python-monascaclient", dir: [], symlink: [] }
 
 # clean up expression for post_task
 clean_up_dirs:

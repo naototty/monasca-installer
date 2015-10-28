@@ -30,6 +30,10 @@
     - name: Restart httpd server
       service: name=httpd state=restarted
 
+    - name: Remove monasca-client [pip]
+      pip: name="python-monascaclient" state="absent"
+      ignore_errors: yes
+
 - name: Uninstall [openstack][keystone-node]
   hosts: keystone-node
   sudo: yes
