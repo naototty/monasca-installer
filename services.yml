@@ -4,8 +4,6 @@
         - zookeeper
         - storm-nimbus
         - storm-supervisor
-        - storm-logviewer
-        - storm-ui
         - postgresql
         - kafka
         - influxdb
@@ -16,6 +14,7 @@
         - monasca-log-api
         - monasca-persister
         - monasca-api
+        - monasca-agent
         - kibana
         - monasca-log-persister
         - monasca-log-agent
@@ -51,4 +50,3 @@
     - debug: msg="{{item.item}};item.stdout}}"
       with_items: "{{ status.results }}"
       when: command == "status" and ansible_os_family == "Debian"
-
