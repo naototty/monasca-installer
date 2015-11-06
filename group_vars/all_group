@@ -10,11 +10,16 @@ keystone_host: 192.168.10.5
 monasca_conf_dir: "{{ etc_dir }}/monasca"
 monasca_work_dir: "{{ opt_dir }}/monasca"
 
+# keystone
+keystone_port: 5000
+keystone_user_port: 35357
+keystone_version: 3
+keystone_url: "http://{{ keystone_host }}:{{ keystone_user_port }}/v{{ keystone_version }}"
+
 # URL service definition
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
 monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
-keystone_url: "http://{{ keystone_host }}:35357/v3"
 kibana_url: "http://{{ monasca_host }}:5601"
 zookeeper_hosts: "{{ monasca_host }}:2181"
 monasca_log_api_url: "http://{{ monasca_host }}:8070"
