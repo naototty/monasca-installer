@@ -2,9 +2,9 @@
 # file: host_vars/keystone-monasca-log-agent
 
 # logstash monasca user credentials
-project_name: admin
-username: admin-agent
-password: {{ openstack_monasca_log_agent_keystone_password }}
+monasca_log_agent_project: admin
+monasca_log_agent_user: admin-agent
+monasca_log_agent_password: "{{ openstack_monasca_log_agent_keystone_password }}"
 domain_id: default
 log_files:
   - { tags: '["openstack"]', type: '"keystone"', path: '"{{ log_dir }}/messages"' }
