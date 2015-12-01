@@ -1,12 +1,15 @@
 ---
-
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
   sudo: yes
   tasks:
+    - name: Check if path exists
+      stat: path="{{ monasca_agent_venv_dir }}"
+      register: monasca_agent_dir
     - name: Uninstall monasca-agent
       pip: name=monasca-agent state=absent virtualenv="{{ monasca_agent_venv_dir }}"
       ignore_errors: True
+      when: monasca_agent_dir.stat.exists
 
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
