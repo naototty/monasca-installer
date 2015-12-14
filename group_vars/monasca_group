@@ -70,7 +70,7 @@ storm_log_dir: "{{ log_dir }}/storm"
 
 # monasca-api
 api_log_dir: "{{ monasca_log_dir }}/api"
-monasca_api_client_port: 8080
+monasca_api_client_port: 8070
 monasca_api_admin_port: 8081
 
 # monasca-log-api
