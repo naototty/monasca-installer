@@ -42,6 +42,7 @@ keystone_auth_method: password
 # database
 mysql_schema_enabled: false
 postgres_schema_enabled: true
+hibernate_support_enabled: true
 database_host: "127.0.0.1"
 
 database_users:
@@ -69,6 +70,8 @@ storm_log_dir: "{{ log_dir }}/storm"
 
 # monasca-api
 api_log_dir: "{{ monasca_log_dir }}/api"
+monasca_api_client_port: 8080
+monasca_api_admin_port: 8081
 
 # monasca-log-api
 log_api_log_dir: "{{ monasca_log_dir }}/log-api"
@@ -104,8 +107,8 @@ monasca_log_dir: "{{ log_dir }}/monasca"
 monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
 monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
 
-defaultAuthorizedRoles: "[user, domainuser, domainadmin, cmm-user]"
-agentAuthorizedRoles: "[cmm-agent]"
+defaultAuthorizedRoles: "user,domainuser,domainadmin,cmm-user"
+agentAuthorizedRoles: "cmm-agent"
 
 # kibana
 kibana_log_dir: "{{ log_dir }}/kibana"
