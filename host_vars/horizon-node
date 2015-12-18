@@ -1,0 +1,15 @@
+---
+is_horizon_node: true
+monasca_ui_name: monasca-ui
+
+horizon_path: "/usr/share/openstack-dashboard/"
+panel_dest_path: "{{ horizon_path }}monitoring"
+panel_static_dest_path: "{{ horizon_path }}static/monitoring"
+horizon_static_url: '/dashboard/static'
+
+dashboard_path: "{{ horizon_path }}openstack_dashboard/"
+ui_dest_path: "{{ dashboard_path }}local/enabled/"
+ui_py_file: _50_admin_add_monitoring_panel.py
+
+grafana_base_dir: /usr/share
+grafana_dest: "{{ apache_document_root }}grafana"
