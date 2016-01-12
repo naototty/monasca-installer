@@ -54,6 +54,7 @@ uninstall_directories:
   - { dir: "{{ monasca_work_dir }}", force: False}
   - { dir: "{{ monasca_conf_dir }}", force: True}
   - { dir: "{{ monasca_download_dir }}", force: True}
+  - { dir: "/var/lib/zookeeper", force: True}
 
 # post installation directories that should be removed
 clean_up_dirs:
