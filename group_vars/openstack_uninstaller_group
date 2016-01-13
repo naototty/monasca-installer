@@ -1,7 +1,17 @@
 ---
 # file: group_vars/openstack_uninstaller
 
+
+horizon_path: "/usr/share/openstack-dashboard/"
+dashboard_path: "{{ horizon_path }}openstack_dashboard/"
+panel_dest_path: "{{ horizon_path }}monitoring"
+
+monasca_ui: "monasca-ui"
 monasca_conf_dir: /etc/monasca
+grafana_base_dir: /usr/share
+grafana_dest: "{{ horizon_path }}static/grafana"
+ui_py_file: _50_admin_add_monitoring_panel.py
+ui_dest_path: "{{ dashboard_path }}local/enabled/"
 
 uninstall_services:
   - { name: "monasca-agent", assets: ["{{ monasca_conf_dir }}/agent"] }

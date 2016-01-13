@@ -11,6 +11,10 @@ epel_download_url: "{{ world_repo_url }}"
 install_epel: False
 remove_network_manager: False
 
+# Horizon
+panel_static_dest_path: "{{ horizon_path }}static/monitoring"
+horizon_static_url: '/dashboard/static'
+
 # keystone
 keystone_service_script: "/usr/local/bin/create_monasca_service.py"
 keystone_virtualenv_dir: "{{ venvs_dir }}/monasca-keystone"
@@ -43,6 +47,9 @@ keystone_service_endpoints:
   - {name: "monasca", description: "Monasca monitoring service", type: "monitoring", url: "{{ monasca_api_url }}"}
   - {name: "logs", description: "Monasca log service", type: "logs", url: "{{ monasca_log_api_url }}"}
   - {name: "logs-search", description: "Monasca log search service", type: "logs-search", url: "{{ kibana_host }}"}
+
+horizon_path: "/usr/share/openstack-dashboard/"
+panel_static_dest_path: "{{ horizon_path }}static/monitoring"
 
 # List of passwords/credentials for verification
 credential_keys_list:
