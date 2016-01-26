@@ -35,6 +35,7 @@ monasca_user:
 opt_dir: "/opt"
 etc_dir: "/etc"
 venvs_dir: "{{ opt_dir }}"
+elk_base_dir: "{{ opt_dir }}"
 download_tmp_dir: "{{ opt_dir }}/.download_dir"
 monasca_download_dir: /opt/monasca-downloads
 clean_up_dirs:

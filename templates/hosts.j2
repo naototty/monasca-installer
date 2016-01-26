@@ -36,6 +36,18 @@ openstack-monasca-agent
 cmm-monasca-log-agent
 openstack-monasca-log-agent
 
+[monasca_log_persister_group]
+cmm-node
+
+[monasca_log_transformer_group]
+cmm-node
+
+[elasticsearch_group]
+cmm-node
+
+[kibana_group]
+cmm-node
+
 [openstack_uninstaller_group]
 horizon-node
 keystone-node
@@ -49,6 +61,13 @@ openstack_group
 monasca_group
 monasca_agent_group
 monasca_log_agent_group
+monasca_log_persister_group
+monasca_log_transformer_group
+elasticsearch_group
+kibana_group
 
 [openstack_group:children]
 openstack_uninstaller_group
+
+[elasticsearch_group:children]
+kibana_group

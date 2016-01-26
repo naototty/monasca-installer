@@ -61,11 +61,20 @@
        database_password: "{{ database_thresh_password }}",
        thresh_tarball_base_url: "{{ world_repo_url }}",
        tags: [thresh]}
-    - {role: monasca-elkstack,
-       elasticsearch_download: "{{ world_repo_url }}",
-       logstash_download: "{{ world_repo_url }}",
-       kibana_download: "{{ world_repo_url }}",
-       tags: [elkstack]}
+    # elkstack
+    - {role: monasca-elasticsearch,
+      elasticsearch_download: "{{ world_repo_url }}",
+      tags: [elkstack, elasticsearch]}
+    - {role: monasca-kibana,
+      kibana_download: "{{ world_repo_url }}",
+      tags: [elkstack, kibana]}
+    - {role: monasca-log-persister,
+      logstash_download: "{{ world_repo_url }}",
+      tags: [elkstack, log_persister]}
+    - {role: monasca-log-transformer,
+      logstash_download: "{{ world_repo_url }}",
+      tags: [elkstack, log_transformer]}
+    # elkstack
     - {role: logrotate, tags: [logrotate]}
     - {role: fujitsu-branding, tags: [branding]}
 

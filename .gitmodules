@@ -49,9 +49,6 @@
 [submodule "roles/monasca-thresh"]
 	path = roles/monasca-thresh
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-thresh.git
-[submodule "roles/monasca-elkstack"]
-	path = roles/monasca-elkstack
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-elkstack.git
 [submodule "roles/monasca-log-agent"]
 	path = roles/monasca-log-agent
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-agent.git
@@ -70,3 +67,15 @@
 [submodule "roles/uninstaller"]
 	path = roles/uninstaller
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-uninstaller.git
+[submodule "roles/monasca-log-persister"]
+	path = roles/monasca-log-persister
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-persister.git
+[submodule "roles/monasca-log-transformer"]
+	path = roles/monasca-log-transformer
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-transformer.git
+[submodule "roles/monasca-elasticsearch"]
+	path = roles/monasca-elasticsearch
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-elasticsearch.git
+[submodule "roles/monasca-kibana"]
+	path = roles/monasca-kibana
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-kibana.git

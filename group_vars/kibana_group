@@ -1,0 +1,7 @@
+---
+# Copyright 2015 FUJITSU LIMITED
+
+kibana_dest: "{{ elk_base_dir }}/kibana"
+kibana_uncompress_dest: "{{ elk_base_dir }}"
+elasticsearch_url: "http://{{elasticsearch_host}}:{{elasticsearch_port}}"
+elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
