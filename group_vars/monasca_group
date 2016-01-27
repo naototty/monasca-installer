@@ -92,6 +92,7 @@ elasticsearch_download: "{{ world_repo_url }}"
 elasticsearch_host: "127.0.0.1"
 elasticsearch_hosts: ["{{elasticsearch_host}}"]
 elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
+elasticsearch_data_dir: "{{ data_dir }}/elasticsearch"
 
 persister_tarball_base_url: "{{ world_repo_url }}"
 logstash_agent_download_url: "{{ world_repo_url }}"

@@ -44,6 +44,15 @@ uninstall_services:
 uninstall_packages:
    RedHat:
      - { assets: ["{{ opt_dir }}/elasticsearch-{{ elasticsearch_version }}", "{{ opt_dir }}/elasticsearch"] }
+     - { assets: "{% if elasticsearch_data_dir is defined -%}
+                    {% if elasticsearch_data_dir is string -%}
+                      {{ elasticsearch_data_dir.split(',') }}
+                    {%- elif elasticsearch_data_dir is iterable -%}
+                      {{ elasticsearch_data_dir }}
+                    {%- endif %}
+                  {% else -%}
+                    []
+                  {%- endif -%}" }
      - { assets: ["{{ opt_dir }}/kibana-{{ kibana_version }}", "{{ opt_dir }}/kibana"] }
      - { assets: ["{{ opt_dir }}/logstash-{{ logstash_version }}", "{{ opt_dir }}/logstash"] }
      - { assets: ["{{ opt_dir }}/zookeeper-{{ zookeeper_version }}"] }

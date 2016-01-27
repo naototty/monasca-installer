@@ -54,6 +54,9 @@ keystone_admin_project: 'admin'
 # Logging
 log_dir: /var/log
 
+# Data directories
+data_dir: /var/data
+
 # pip configuration
 pip_base_dir: "{{ ansible_env.HOME }}/.pip"
 pip_config_file: "{{ pip_base_dir }}/.cmm_pip.conf"
