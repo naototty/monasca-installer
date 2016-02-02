@@ -6,3 +6,14 @@ kibana_uncompress_dest: "{{ elk_base_dir }}"
 kibana_server_base_path: "/dashboard/monitoring/logs_proxy"
 elasticsearch_url: "http://{{elasticsearch_host}}:{{elasticsearch_port}}"
 elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
+
+kibana_plugins:
+  - {
+      name: 'fts-keystone',
+      url: '{{ world_repo_url }}/fts-keystone-0.0.1.tar.gz',
+      configuration: {
+          'fts-keystone.enabled': true,
+          'fts-keystone.url': 'http://{{ keystone_host }}',
+          'fts-keystone.port': "{{ keystone_user_port|int }}"
+      }
+    }
