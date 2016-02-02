@@ -87,7 +87,7 @@ monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"
 # apache
 apache_mirror: "{{ world_repo_url }}"
 # elasticsearch
-elasticsearch_version: "1.5.2"
+elasticsearch_version: "2.2.0"
 elasticsearch_download: "{{ world_repo_url }}"
 elasticsearch_host: "127.0.0.1"
 elasticsearch_hosts: ["{{elasticsearch_host}}"]
@@ -114,7 +114,7 @@ agentAuthorizedRoles: "cmm-agent"
 
 # kibana
 kibana_log_dir: "{{ log_dir }}/kibana"
-kibana_log_level: "info"
+kibana_log_level: "verbose"
 
 # log directories to be monitored
 logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
