@@ -76,6 +76,8 @@ monasca_api_admin_port: 8081
 # monasca-log-api
 log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 monasca_log_api_bind_host: 0.0.0.0
+monasca_log_api_client_port: 5607
+monasca_log_api_admin_port: 5608
 
 # monasca-notification
 notification_log_dir: "{{ monasca_log_dir }}/notification"
@@ -118,6 +120,9 @@ kibana_log_level: "verbose"
 
 # log directories to be monitored
 logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
+
+# logstash
+logstash_version: 2.2.0
 
 # List of passwords/credentials for verification
 credential_keys_list:
