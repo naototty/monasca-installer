@@ -19,10 +19,10 @@ keystone_url: "http://{{ keystone_host }}:{{ keystone_user_port }}/v{{ keystone_
 # URL service definition
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
-monasca_api_url: "http://{{ monasca_host }}:8080/v2.0"
+monasca_api_url: "http://{{ monasca_host }}:8070/v2.0"
 kibana_url: "http://{{ monasca_host }}:5601"
 zookeeper_hosts: "{{ monasca_host }}:2181"
-monasca_log_api_url: "http://{{ monasca_host }}:8070"
+monasca_log_api_url: "http://{{ monasca_host }}:5607"
 elasticsearch_url: "http://127.0.0.1:9200"
 
 # Monasca Api CLI - Credentials
