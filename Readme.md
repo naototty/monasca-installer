@@ -321,17 +321,43 @@ cd /vagrant
 ```
 
 ```bash
-./services.sh start -i /etc/ansible/hosts
+./services.sh start -i /etc/ansible/hosts-{single,cluster}
 ```
 
 or
 
 ```bash
-./services.sh stop -i /etc/ansible/hosts
+./services.sh stop -i /etc/ansible/hosts-{single,cluster}
 ```
 
 or
 
 ```bash
-./services.sh status -i /etc/ansible/hosts
+./services.sh status -i /etc/ansible/hosts-{single,cluster}
+```
+
+## Cluster remark
+
+Installer has capability to run in cluster mode.
+One important variable to keep in mind is environment entry ```ENABLE_CLUSTER```.
+That if set will influence following components:
+
+* Vagrantfile
+* ansible-master.yml
+
+### Examples
+
+Turning on VMs
+```sh
+ENABLE_CLUSTER=1 vagrant up
+```
+
+Checking VMs status
+```sh
+ENABLE_CLUSTER=1 vagrant status
+```
+
+Running ansible-master for cluster setup
+```sh
+ENABLE_CLUSTER=1 ansible-playbook -i hosts ansible-master.yml -vvvv
 ```

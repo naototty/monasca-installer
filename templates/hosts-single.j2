@@ -1,0 +1,73 @@
+# Offline Hosts
+offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+localhost                        ansible_connection=local
+
+# Openstack Hosts
+horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+# Monasca Hosts
+cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca Agent Hosts
+cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+# Monasca Log Agent Hosts
+cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+[offline_group]
+offline-resources-node
+localhost
+
+[openstack_group]
+horizon-node
+keystone-node
+
+[monasca_group]
+cmm-node
+
+[monasca_agent_group]
+cmm-monasca-agent
+openstack-monasca-agent
+
+[monasca_log_agent_group]
+cmm-monasca-log-agent
+openstack-monasca-log-agent
+
+[elkstack_group:children]
+elasticsearch_group
+kibana_group
+monasca_log_agent_group
+monasca_log_persister_group
+monasca_log_transformer_group
+
+[monasca_log_persister_group]
+cmm-node
+
+[monasca_log_transformer_group]
+cmm-node
+
+[elasticsearch_group]
+cmm-node
+
+[kibana_group]
+cmm-node
+
+[openstack_uninstaller_group]
+horizon-node
+keystone-node
+
+[monasca_uninstaller]
+cmm-node
+
+[all_group:children]
+offline_group
+openstack_group
+monasca_group
+monasca_agent_group
+elkstack_group
+
+[openstack_group:children]
+openstack_uninstaller_group

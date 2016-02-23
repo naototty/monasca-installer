@@ -1,0 +1,17 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "ElasticSearch: Prepare/Configure hosts"
+  hosts: elasticsearch_group
+  sudo: yes
+  tasks:
+    - name: Enable broadcasting
+      command: "sh -c 'echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts'"
+
+- name: "ElasticSearch: Install on hosts"
+  hosts: elasticsearch_group
+  sudo: yes
+  roles:
+    - {role: monasca-elasticsearch,
+      elasticsearch_download: "{{ world_repo_url }}",
+      tags: [elkstack, elasticsearch]}

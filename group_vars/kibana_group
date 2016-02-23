@@ -4,7 +4,9 @@
 kibana_dest: "{{ elk_base_dir }}/kibana"
 kibana_uncompress_dest: "{{ elk_base_dir }}"
 kibana_server_base_path: "/dashboard/monitoring/logs_proxy"
-elasticsearch_url: "http://{{elasticsearch_host}}:{{elasticsearch_port}}"
+# pick first node from cluster list
+# ideally that should be client node
+elasticsearch_url: "http://{{ elasticsearch_cluster_nodes|first }}:{{ elasticsearch_port }}"
 elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 
 kibana_plugins:

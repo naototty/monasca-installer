@@ -1,6 +1,16 @@
 ---
 # file: group_vars/all_group
 
+# ports
+monasca_api_client_port: 8070
+monasca_api_admin_port: 8081
+monasca_log_api_client_port: 5607
+monasca_log_api_admin_port: 5608
+keystone_port: 5000
+keystone_user_port: 35357
+kibana_port: 5601
+elasticsearch_port: 9200
+
 # hosts
 offline_host: 192.168.10.4
 monasca_host: 192.168.10.4
@@ -11,19 +21,16 @@ monasca_conf_dir: "{{ etc_dir }}/monasca"
 monasca_work_dir: "{{ opt_dir }}/monasca"
 
 # keystone
-keystone_port: 5000
-keystone_user_port: 35357
 keystone_version: 3
 keystone_url: "http://{{ keystone_host }}:{{ keystone_user_port }}/v{{ keystone_version }}"
 
 # URL service definition
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
-monasca_api_url: "http://{{ monasca_host }}:8070/v2.0"
-kibana_url: "http://{{ monasca_host }}:5601"
+monasca_api_url: "http://{{ monasca_host }}:{{ monasca_api_client_port|int }}/v2.0"
+monasca_log_api_url: "http://{{ monasca_host }}:{{ monasca_log_api_client_port|int }}"
+kibana_url: "http://{{ monasca_host }}:{{ kibana_port }}"
 zookeeper_hosts: "{{ monasca_host }}:2181"
-monasca_log_api_url: "http://{{ monasca_host }}:5607"
-elasticsearch_url: "http://127.0.0.1:9200"
 
 # Monasca Api CLI - Credentials
 monasca_user:
@@ -61,3 +68,6 @@ data_dir: /var/data
 # pip configuration
 pip_base_dir: "{{ ansible_env.HOME }}/.pip"
 pip_config_file: "{{ pip_base_dir }}/.cmm_pip.conf"
+
+# try to use this variable for each wait_for like task
+monasca_wait_for_period: 180

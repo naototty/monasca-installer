@@ -1,0 +1,74 @@
+---
+- name: Prepare/Configure host
+  hosts: cmm-node
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/verify_credentials.yml tags=schema,postgresql,api,persister,notification,thresh
+  roles:
+    - {role: pip, tags: [pip, resources]}
+    - {role: cli-credentials, tags: [cli]}
+
+- name: Monasca Installation
+  hosts: cmm-node
+  vars_files:
+    - credentials.yml
+  sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: influxdb, tags: [influxdb]}
+    - {role: postgresql-redhat, when: ansible_os_family == 'RedHat', tags: [postgresql]}
+    - {role: monasca-schema,
+       kafka_topics_enabled: False,
+       tags: [schema]}
+    - {role: monasca-api,
+       api_region: useast,
+       influxdb_user: mon_api,
+       influxdb_password: password,
+       database_user: monapi,
+       database_password: "{{ database_monapi_password }}",
+       monasca_api_tarball_base_url: "{{ world_repo_url }}",
+       tags: [api]}
+    - {role: monasca-log-api,
+       api_region: useast,
+       influxdb_user: mon_api,
+       influxdb_password: password,
+       database_user: monapi,
+       database_password: "{{ database_logapi_password }}",
+       monasca_log_api_tarball_base_url: "{{ world_repo_url }}",
+       tags: [api, log_api]}
+    - {role: monasca-persister,
+       influxdb_user: mon_persister,
+       influxdb_password: password,
+       tags: [persister]}
+    - {role: monasca-notification,
+       database_user: notification,
+       database_password: "{{ database_notification_password }}",
+       smtp_host: localhost,
+       tags: [notification]}
+    - {role: storm,
+       storm_nimbus_enabled: true,
+       storm_supervisor_enabled: true,
+       tags: [storm]}
+    - {role: monasca-thresh,
+       database_user: thresh,
+       database_password: "{{ database_thresh_password }}",
+       thresh_tarball_base_url: "{{ world_repo_url }}",
+       tags: [thresh]}
+    # elkstack
+    - {role: monasca-kibana, tags: [elkstack, kibana]}
+    - {role: monasca-log-transformer, tags: [elkstack, log_transformer]}
+    # elkstack
+    - {role: logrotate, tags: [logrotate]}
+    # - {role: fujitsu-branding, tags: [branding]} #TODO(trebskit) branding wont work with new kibana
+
+- name: Clean-Up host
+  hosts: cmm-node
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=post_tasks

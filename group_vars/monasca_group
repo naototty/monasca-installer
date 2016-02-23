@@ -70,8 +70,6 @@ storm_log_dir: "{{ log_dir }}/storm"
 
 # monasca-api
 api_log_dir: "{{ monasca_log_dir }}/api"
-monasca_api_client_port: 8070
-monasca_api_admin_port: 8081
 
 # monasca-log-api
 log_api_log_dir: "{{ monasca_log_dir }}/log-api"
@@ -91,8 +89,6 @@ apache_mirror: "{{ world_repo_url }}"
 # elasticsearch
 elasticsearch_version: "2.2.0"
 elasticsearch_download: "{{ world_repo_url }}"
-elasticsearch_host: "127.0.0.1"
-elasticsearch_hosts: ["{{elasticsearch_host}}"]
 elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
 elasticsearch_data_dir:
   - "{{ data_dir }}/elasticsearch"

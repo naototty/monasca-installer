@@ -5,9 +5,16 @@
   sudo: yes
   vars:
     monasca_host: 192.168.10.4
-    ssh_user_monasca: vagrant
     openstack_host: 192.168.10.5
+    ex_node_1_host: 192.168.10.6
+    ex_node_2_host: 192.168.10.7
+    ex_node_3_host: 192.168.10.8
+    ssh_user_monasca: vagrant
     ssh_user_openstack: vagrant
+    ssh_user_ex_node_1: vagrant
+    ssh_user_ex_node_2: vagrant
+    ssh_user_ex_node_3: vagrant
+    cluster_enabled: "{{ lookup('env', 'ENABLE_CLUSTER') == '1' }}"
   tasks:
     - name: Install epel repository
       yum: name=http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
@@ -17,7 +24,21 @@
       yum: name=ansible state=present
     - name: Generate SSH key
       user: name=vagrant generate_ssh_key=yes
-    - name: Create ansible-hosts file
-      template: src=templates/hosts.j2 dest=/etc/ansible/hosts owner=root group=root mode=0644
+    - name: Create ansible-hosts file [single]
+      template:
+        src="templates/hosts-single.j2"
+        dest="/etc/ansible/hosts-single"
+        owner=root
+        group=root
+        mode=0644
+      when: not cluster_enabled|bool
+    - name: Create ansible-hosts file [cluster]
+      template:
+        src="templates/hosts-cluster.j2"
+        dest="/etc/ansible/hosts-cluster"
+        owner=root
+        group=root
+        mode=0644
+      when: cluster_enabled|bool
     - name: Install vim to prevent manual installation step
       yum: name=vim state=present
