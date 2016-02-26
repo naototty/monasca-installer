@@ -4,7 +4,6 @@
 is_openstack: false
 
 # urls
-kafka_apache_mirror: "{{ world_repo_url }}"
 influxdb_deb_src_url: "{{ world_repo_url }}"
 get_pip_download_url: "{{ world_repo_url }}"
 # monasca information
@@ -12,10 +11,6 @@ monasca_group: monasca
 # influxDB
 influxdb:
   raft_port: 8086
-# zookeeper
-zookeeper_hosts: "127.0.0.1:2181"
-zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
-zookeeper_log_dir: "{{ log_dir }}/zookeeper"
 # influxDB
 influx_db_user: "influxdb"
 influx_db_group: "influxdb"
@@ -27,18 +22,23 @@ influxdb_users:
   mon_persister: "{{ influxdb_mon_persister_password }}"
 influxdb_raft_port: 8085
 influxdb_log_dir: "{{ log_dir }}/influxdb"
+
 # kafka
-kafka_events_partitions: 4
-kafka_metrics_partitions: 4
-kafka_replicas: 1
-kafka_host: "127.0.0.1"
-kafka_hosts: "{{kafka_host}}:9092"
-kafka_log_dir: "{{ log_dir }}/kafka"
-kafka_id: 0
+kafka_hosts: "{% for item in groups['kafka_group'] -%}
+                {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ kafka_port|int }}
+              {%- endfor %}"
+kafka_replicas: "{{ kafka_hosts.split(',')|length }}"
+kafka_log_topic_replicas: "{{ kafka_replicas }}"
+
+# zookeeper
+zookeeper_hosts: "{% for item in groups['zookeeper_group'] -%}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ zookeeper_port|int }}
+                  {%- endfor %}"
 
 # keystone
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
 keystone_auth_method: password
+
 # database
 mysql_schema_enabled: false
 postgres_schema_enabled: true
@@ -74,8 +74,6 @@ api_log_dir: "{{ monasca_log_dir }}/api"
 # monasca-log-api
 log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 monasca_log_api_bind_host: 0.0.0.0
-monasca_log_api_client_port: 5607
-monasca_log_api_admin_port: 5608
 
 # monasca-notification
 notification_log_dir: "{{ monasca_log_dir }}/notification"

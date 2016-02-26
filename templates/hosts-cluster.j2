@@ -17,10 +17,20 @@ openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_s
 cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
-# Extra nodes for cluster
+# ElasticSearch nodes for cluster
 elastic-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
 elastic-node-2                   ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 elastic-node-3                   ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# Kafka nodes for cluster
+kafka-node-1                     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+kafka-node-2                     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+kafka-node-3                     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# Zookeeper nodes for cluster
+zookeeper-node-1                 ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+zookeeper-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+zookeeper-node-3                 ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 [offline_group]
 offline-resources-node
@@ -32,6 +42,16 @@ keystone-node
 
 [monasca_group]
 cmm-node
+
+[kafka_group]
+kafka-node-1
+kafka-node-2
+kafka-node-3
+
+[zookeeper_group]
+zookeeper-node-1
+zookeeper-node-2
+zookeeper-node-3
 
 [monasca_agent_group]
 cmm-monasca-agent
@@ -74,7 +94,11 @@ offline_group
 openstack_group
 monasca_group
 monasca_agent_group
-elkstack_group
 
 [openstack_group:children]
 openstack_uninstaller_group
+
+[monasca_group:children]
+elkstack_group
+kafka_group
+zookeeper_group

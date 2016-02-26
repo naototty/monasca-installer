@@ -1,0 +1,33 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Kafka: Prepare/Configure hosts"
+  hosts: kafka_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml tags=[kafka]
+
+- name: "Kafka: Install on hosts"
+  hosts: kafka_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml tags=[kafka]
+  roles:
+    - {role: kafka,
+       tags: [kafka]}
+    - {role: monasca-schema,
+       # kafka nodes should take care only of setting up kafka_schema
+       # turn off everything else from monasca-schema
+       kafka_topics_enabled: True,
+       mysql_schema_enabled: False,
+       winchester_schema_enabled: False,
+       vertica_schema_enabled: False,
+       postgres_schema_enabled: False,
+       influxdb_schema_enabled: False,
+       tags: [kafka,schema]}
+    - {role: monasca-log-schema,
+       tags: [kafka,schema,log_schema]}

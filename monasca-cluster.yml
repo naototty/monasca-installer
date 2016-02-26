@@ -1,4 +1,6 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
+- include: zookeeper.yml
+- include: kafka.yml
 - include: elasticsearch.yml

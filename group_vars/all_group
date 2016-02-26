@@ -10,6 +10,8 @@ keystone_port: 5000
 keystone_user_port: 35357
 kibana_port: 5601
 elasticsearch_port: 9200
+kafka_port: 9092
+zookeeper_port: 2181
 
 # hosts
 offline_host: 192.168.10.4
@@ -30,7 +32,6 @@ world_repo_url: "{{ balls_repo_url }}/world"
 monasca_api_url: "http://{{ monasca_host }}:{{ monasca_api_client_port|int }}/v2.0"
 monasca_log_api_url: "http://{{ monasca_host }}:{{ monasca_log_api_client_port|int }}"
 kibana_url: "http://{{ monasca_host }}:{{ kibana_port }}"
-zookeeper_hosts: "{{ monasca_host }}:2181"
 
 # Monasca Api CLI - Credentials
 monasca_user:

@@ -1,0 +1,16 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Zookeeper: Prepare/Configure hosts"
+  hosts: zookeeper_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml tags=[zookeeper]
+
+- name: "Zookeeper: Install on hosts"
+  hosts: zookeeper_group
+  sudo: yes
+  roles:
+    - {role: zookeeper, tags: [zookeeper]}

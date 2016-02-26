@@ -25,6 +25,12 @@ localhost
 horizon-node
 keystone-node
 
+[kafka_group]
+cmm-node
+
+[zookeeper_group]
+cmm-node
+
 [monasca_group]
 cmm-node
 
@@ -67,7 +73,11 @@ offline_group
 openstack_group
 monasca_group
 monasca_agent_group
-elkstack_group
 
 [openstack_group:children]
 openstack_uninstaller_group
+
+[monasca_group:children]
+elkstack_group
+kafka_group
+zookeeper_group
