@@ -37,6 +37,11 @@ log-perister-node-1              ansible_ssh_host={{ ex_node_1_host }} ansible_s
 log-perister-node-2              ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 log-perister-node-3              ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# log transformer nodes for cluster
+log-transformer-node-1           ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+log-transformer-node-2           ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+log-transformer-node-3           ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 [offline_group]
 offline-resources-node
 localhost
@@ -79,7 +84,9 @@ log-perister-node-2
 log-perister-node-3
 
 [monasca_log_transformer_group]
-cmm-node
+log-transformer-node-1
+log-transformer-node-2
+log-transformer-node-3
 
 [elasticsearch_group]
 elastic-node-1

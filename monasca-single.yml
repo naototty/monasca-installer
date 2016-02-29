@@ -62,7 +62,6 @@
        tags: [thresh]}
     # elkstack
     - {role: monasca-kibana, tags: [elkstack, kibana]}
-    - {role: monasca-log-transformer, tags: [elkstack, log_transformer]}
     # elkstack
     - {role: logrotate, tags: [logrotate]}
     # - {role: fujitsu-branding, tags: [branding]} #TODO(trebskit) branding wont work with new kibana

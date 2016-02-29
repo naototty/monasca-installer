@@ -1,4 +1,6 @@
 ---
-# Copyright 2015 FUJITSU LIMITED
+# Copyright 2016 FUJITSU LIMITED
 
 log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
+
+credential_keys_list: []
