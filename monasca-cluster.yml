@@ -4,3 +4,4 @@
 - include: zookeeper.yml
 - include: kafka.yml
 - include: elasticsearch.yml
+- include: monasca-log-persister.yml

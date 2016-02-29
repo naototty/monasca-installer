@@ -32,6 +32,11 @@ zookeeper-node-1                 ansible_ssh_host={{ ex_node_1_host }} ansible_s
 zookeeper-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 zookeeper-node-3                 ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# log persister nodes for cluster
+log-perister-node-1              ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+log-perister-node-2              ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+log-perister-node-3              ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 [offline_group]
 offline-resources-node
 localhost
@@ -69,7 +74,9 @@ monasca_log_persister_group
 monasca_log_transformer_group
 
 [monasca_log_persister_group]
-cmm-node
+log-perister-node-1
+log-perister-node-2
+log-perister-node-3
 
 [monasca_log_transformer_group]
 cmm-node

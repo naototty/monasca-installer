@@ -8,7 +8,7 @@ elasticsearch_hosts: "{% for item in groups['elasticsearch_group'] -%}
 
 elasticsearch_cluster_nodes: "{{ elasticsearch_hosts.split(',') }}"
 
-	# information about from where to get elkstack components
+# information about from where to get elkstack components
 logstash_download: "{{ world_repo_url }}"
 elasticsearch_download: "{{ world_repo_url }}"
 kibana_download: "{{ world_repo_url }}"

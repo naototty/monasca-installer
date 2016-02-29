@@ -1,0 +1,23 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Log Persister: Prepare/Configure hosts"
+  hosts: monasca_log_persister_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/set_up.yml tags=elkstack,log_persister
+    - include: tasks/verify_credentials.yml tags=elkstack,log_persister
+
+- name: "Log Persister: Install on hosts"
+  hosts: monasca_log_persister_group
+  sudo: yes
+  roles:
+    - {role: monasca-log-persister, tags: [elkstack, log_persister]}
+
+- name: "Log Persister: Clean-Up hosts"
+  hosts: monasca_log_persister_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=elkstack,log_persister
