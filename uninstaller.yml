@@ -9,32 +9,6 @@
   sudo: yes
   roles:
     - {role: uninstaller, tags: [uninstaller, uninstaller_openstack, uninstaller_horizon]}
-  tasks:
-    - name: Remove monasca-ui
-      pip: name="{{ monasca_ui }}" state=absent
-
-    - name: Remove monasca-ui [symlink]
-      file: path="{{ item }}" state=absent force=yes
-      with_items:
-        - "{{ panel_dest_path }}"
-        - "{{ ui_dest_path }}{{ ui_py_file }}"
-        - "{{ ui_dest_path }}{{ ui_py_file }}c" # compiled file, necessary ??
-
-    - name: Remove monasca-ui [statics]
-      file: path={{ panel_static_dest_path }} state=absent force=yes
-
-    - name: Remove grafana [locate grafana directory]
-      shell: "find {{grafana_base_dir}} -maxdepth 1 -name '*grafana*'"
-      register: grafana_location
-
-    - name: Remove grafana
-      file: path="{{ grafana_location.stdout }}" state=absent force=yes
-
-    - name: Remove grafana [symlink]
-      file: path={{ grafana_dest }} state=absent force=yes
-
-    - name: Restart httpd server
-      service: name=httpd state=restarted
 
 - name: Uninstall [openstack][keystone-node]
   hosts: keystone-node
