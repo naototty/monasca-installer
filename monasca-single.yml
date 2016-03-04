@@ -1,4 +1,6 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Prepare/Configure host
   hosts: cmm-node
   sudo: yes
@@ -36,11 +38,6 @@
        tags: [api]}
     - {role: monasca-log-api,
        api_region: useast,
-       influxdb_user: mon_api,
-       influxdb_password: password,
-       database_user: monapi,
-       database_password: "{{ database_logapi_password }}",
-       monasca_log_api_tarball_base_url: "{{ world_repo_url }}",
        tags: [api, log_api]}
     - {role: monasca-persister,
        influxdb_user: mon_persister,

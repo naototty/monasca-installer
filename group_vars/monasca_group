@@ -77,7 +77,7 @@ storm_log_dir: "{{ log_dir }}/storm"
 api_log_dir: "{{ monasca_log_dir }}/api"
 
 # monasca-log-api
-log_api_log_dir: "{{ monasca_log_dir }}/log-api"
+monasca_log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 monasca_log_api_bind_host: 0.0.0.0
 
 # monasca-notification

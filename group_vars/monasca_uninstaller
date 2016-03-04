@@ -30,8 +30,8 @@ uninstall_services:
       "{{ monasca_conf_dir }}/thresh-config.yml",
       "{{ monasca_work_dir }}/monasca-thresh.jar"]}
   - { name: "monasca-log-api", assets: [
-      "{{ monasca_conf_dir }}/log-api-config.yml",
-      "{{ monasca_work_dir }}/monasca-log-api.jar"]}
+      "{{ monasca_conf_dir }}/log-api-config.conf",
+      "{{ monasca_conf_dir }}/log-api-config.ini"]}
   - { name: "monasca-api", assets: [
       "{{ monasca_conf_dir }}/api-config.yml",
       "/etc/init/monasca-api.conf",
