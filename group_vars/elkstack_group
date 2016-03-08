@@ -8,6 +8,12 @@ elasticsearch_hosts: "{% for item in groups['elasticsearch_group'] -%}
 
 elasticsearch_cluster_nodes: "{{ elasticsearch_hosts.split(',') }}"
 
+# cluster nodes for kibana
+kibana_hosts: "{% for item in groups['kibana_group'] -%}
+                        {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
+                      {%- endfor %}"
+kibana_cluster_nodes: "{{ kibana_hosts.split(',') }}"
+
 # information about from where to get elkstack components
 logstash_download: "{{ world_repo_url }}"
 elasticsearch_download: "{{ world_repo_url }}"

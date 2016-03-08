@@ -1,0 +1,26 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Kibana: Prepare/Configure hosts"
+  hosts: kibana_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/set_up.yml tags=elkstack,kibana
+    - include: tasks/verify_credentials.yml tags=elkstack,kibana
+
+- name: "Kibana: Install on hosts"
+  hosts: kibana_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  roles:
+    - {role: monasca-kibana, tags: [elkstack, kibana]}
+    - {role: logrotate, tags: [elkstack, kibana, logrotate]}
+
+- name: "Kibana: Clean-Up hosts"
+  hosts: kibana_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=elkstack,kibana

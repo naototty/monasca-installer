@@ -1,12 +1,17 @@
 ---
 # Copyright 2015 FUJITSU LIMITED
 
+# host and port
+kibana_host: "{{ ansible_ssh_host }}"
+kibana_port: 5601
+
 kibana_dest: "{{ elk_base_dir }}/kibana"
 kibana_uncompress_dest: "{{ elk_base_dir }}"
 kibana_server_base_path: "/dashboard/monitoring/logs_proxy"
-# pick first node from cluster list
-# ideally that should be client node
-elasticsearch_url: "http://{{ elasticsearch_cluster_nodes|first }}:{{ elasticsearch_port }}"
+
+# es_node_for_kibana is defined in inventory and points
+# to node where elasticsearch lies
+elasticsearch_url: "http://{{ hostvars[es_node_for_kibana]['ansible_ssh_host'] }}:{{ elasticsearch_port }}"
 elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 
 kibana_plugins:
@@ -19,3 +24,19 @@ kibana_plugins:
           'fts-keystone.port': "{{ keystone_user_port|int }}"
       }
     }
+
+credential_keys_list: []
+
+logrotate_scripts:
+  - name: kibana
+    path: "{{ kibana_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 root root
+      - copytruncate
+      - noemail

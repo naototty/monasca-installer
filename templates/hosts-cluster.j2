@@ -42,6 +42,11 @@ log-transformer-node-1           ansible_ssh_host={{ ex_node_1_host }} ansible_s
 log-transformer-node-2           ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 log-transformer-node-3           ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# kibana nodes for cluster
+kibana-node-1                    ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+kibana-node-2                    ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+kibana-node-3                    ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # log api nodes for cluster
 log-api-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
 log-api-node-2                   ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
@@ -100,6 +105,7 @@ kibana_group
 monasca_log_agent_group
 monasca_log_persister_group
 monasca_log_transformer_group
+balancer_group
 
 [monasca_log_persister_group]
 log-perister-node-1
@@ -116,8 +122,11 @@ elastic-node-1
 elastic-node-2
 elastic-node-3
 
+# specify host which kibana should use to connect to elasticsearch
 [kibana_group]
-cmm-node
+kibana-node-1 es_node_for_kibana=elastic-node-1
+kibana-node-2 es_node_for_kibana=elastic-node-2
+kibana-node-3 es_node_for_kibana=elastic-node-3
 
 [balancer_group]
 balancer-node
@@ -134,7 +143,6 @@ offline_group
 openstack_group
 monasca_group
 monasca_agent_group
-balancer_group
 
 [openstack_group:children]
 openstack_uninstaller_group
@@ -145,3 +153,4 @@ memcached_group
 kafka_group
 zookeeper_group
 monasca_log_api_group
+balancer_group

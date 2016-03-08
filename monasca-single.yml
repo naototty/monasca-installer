@@ -54,9 +54,6 @@
        database_password: "{{ database_thresh_password }}",
        thresh_tarball_base_url: "{{ world_repo_url }}",
        tags: [thresh]}
-    # elkstack
-    - {role: monasca-kibana, tags: [elkstack, kibana]}
-    # elkstack
     - {role: logrotate, tags: [logrotate]}
     # - {role: fujitsu-branding, tags: [branding]} #TODO(trebskit) branding wont work with new kibana
 
