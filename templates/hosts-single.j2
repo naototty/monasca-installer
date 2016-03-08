@@ -25,6 +25,9 @@ localhost
 horizon-node
 keystone-node
 
+[memcached_group]
+cmm-node
+
 [kafka_group]
 cmm-node
 
@@ -79,5 +82,6 @@ openstack_uninstaller_group
 
 [monasca_group:children]
 elkstack_group
+memcached_group
 kafka_group
 zookeeper_group
