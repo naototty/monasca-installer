@@ -7,7 +7,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags=[kafka]
+    - include: tasks/set_up.yml tags=kafka
+    - include: tasks/verify_credentials.yml tags==kafka
 
 - name: "Kafka: Install on hosts"
   hosts: kafka_group
@@ -17,8 +18,7 @@
   pre_tasks:
     - include: tasks/verify_credentials.yml tags=[kafka]
   roles:
-    - {role: kafka,
-       tags: [kafka]}
+    - {role: kafka, tags: [kafka]}
     - {role: monasca-schema,
        # kafka nodes should take care only of setting up kafka_schema
        # turn off everything else from monasca-schema
@@ -31,3 +31,9 @@
        tags: [kafka,schema]}
     - {role: monasca-log-schema,
        tags: [kafka,schema,log_schema]}
+
+- name: "Kafka: Clean-Up hosts"
+  hosts: kafka_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=kafka

@@ -4,6 +4,11 @@
 - name: "ElasticSearch: Prepare/Configure hosts"
   hosts: elasticsearch_group
   sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/set_up.yml tags=elkstack,elasticsearch
+    - include: tasks/verify_credentials.yml tags=elkstack,elasticsearch
   tasks:
     - name: Enable broadcasting
       command: "sh -c 'echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts'"
@@ -15,3 +20,9 @@
     - {role: monasca-elasticsearch,
       elasticsearch_download: "{{ world_repo_url }}",
       tags: [elkstack, elasticsearch]}
+
+- name: "ElasticSearch: Clean-Up hosts"
+  hosts: elasticsearch_group
+  sudo: yes
+  post_tasks:
+   - include: tasks/clean_up.yml tags=elkstack,elasticsearch
