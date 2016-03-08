@@ -1,0 +1,8 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Load Balancer: Install on host"
+  hosts: balancer_group
+  sudo: yes
+  roles:
+    - {role: load-balancer, tags: [balancer]}

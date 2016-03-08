@@ -47,6 +47,9 @@ memcached-node-1                 ansible_ssh_host={{ ex_node_1_host }} ansible_s
 memcached-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 memcached-node-3                 ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# Load balancer node
+balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
+
 [offline_group]
 offline-resources-node
 localhost
@@ -106,6 +109,9 @@ elastic-node-3
 [kibana_group]
 cmm-node
 
+[balancer_group]
+balancer-node
+
 [openstack_uninstaller_group]
 horizon-node
 keystone-node
@@ -118,6 +124,7 @@ offline_group
 openstack_group
 monasca_group
 monasca_agent_group
+balancer_group
 
 [openstack_group:children]
 openstack_uninstaller_group

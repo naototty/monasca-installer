@@ -82,3 +82,6 @@
 [submodule "roles/memcached"]
 	path = roles/memcached
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-memcached.git
+[submodule "roles/load-balancer"]
+	path = roles/load-balancer
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-load-balancer
