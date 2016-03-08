@@ -10,11 +10,11 @@ balancers:
     load_balancer_port: "{{ monasca_log_api_port }}"
     nodes:
       node1:
-        url: 192.168.10.6
-        port: "{{ monasca_log_api_port }}"
+        url: "{{ monasca_log_api_nodes[0] }}"
+        port: "{{ monasca_log_api_port|int }}"
       node2:
-        url: 192.168.10.7
-        port: "{{ monasca_log_api_port }}"
+        url: "{{ monasca_log_api_nodes[1] }}"
+        port: "{{ monasca_log_api_port|int }}"
       node3:
-        url: 192.168.10.8
-        port: "{{ monasca_log_api_port }}"
+        url: "{{ monasca_log_api_nodes[2] }}"
+        port: "{{ monasca_log_api_port|int }}"

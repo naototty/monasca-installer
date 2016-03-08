@@ -45,6 +45,9 @@ openstack-monasca-agent
 cmm-monasca-log-agent
 openstack-monasca-log-agent
 
+[monasca_log_api_group]
+cmm-node
+
 [elkstack_group:children]
 elasticsearch_group
 kibana_group
@@ -85,3 +88,4 @@ elkstack_group
 memcached_group
 kafka_group
 zookeeper_group
+monasca_log_api_group

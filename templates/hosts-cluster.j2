@@ -42,6 +42,11 @@ log-transformer-node-1           ansible_ssh_host={{ ex_node_1_host }} ansible_s
 log-transformer-node-2           ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 log-transformer-node-3           ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# log api nodes for cluster
+log-api-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+log-api-node-2                   ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+log-api-node-3                   ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # memcached nodes for cluster
 memcached-node-1                 ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
 memcached-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
@@ -83,6 +88,11 @@ openstack-monasca-agent
 [monasca_log_agent_group]
 cmm-monasca-log-agent
 openstack-monasca-log-agent
+
+[monasca_log_api_group]
+log-api-node-1
+log-api-node-2
+log-api-node-3
 
 [elkstack_group:children]
 elasticsearch_group
@@ -134,3 +144,4 @@ elkstack_group
 memcached_group
 kafka_group
 zookeeper_group
+monasca_log_api_group
