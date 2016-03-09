@@ -79,3 +79,6 @@
 [submodule "roles/monasca-kibana"]
 	path = roles/monasca-kibana
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-kibana.git
+[submodule "roles/memcached"]
+	path = roles/memcached
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-memcached.git

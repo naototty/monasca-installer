@@ -35,6 +35,11 @@ zookeeper_hosts: "{% for item in groups['zookeeper_group'] -%}
                     {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ zookeeper_port|int }}
                   {%- endfor %}"
 
+# memcached
+memcached_hosts: "{% for item in groups['memcached_group'] -%}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ memcached_port|int }}
+                  {%- endfor %}"
+
 # keystone
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
 keystone_auth_method: password

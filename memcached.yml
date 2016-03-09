@@ -1,0 +1,23 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Memcached: Prepare/ Configure hosts"
+  hosts: memcached_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/set_up.yml tags=memcached
+    - include: tasks/verify_credentials.yml tags=memcached
+
+- name: "Memcached: Install on host"
+  hosts: memcached_group
+  sudo: yes
+  roles:
+    - {role: memcached, tags: [memcached]}
+
+- name: "Memcached: Clean-Up host"
+  hosts: memcached_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=memcached
