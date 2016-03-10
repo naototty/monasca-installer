@@ -45,6 +45,7 @@ monasca_log_api_nodes: "{{ monasca_log_api_hosts.split(',') }}"
 memcached_hosts: "{% for item in groups['memcached_group'] -%}
                     {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ memcached_port|int }}
                   {%- endfor %}"
+memcached_nodes: "{{ memcached_hosts.split(',') }}"
 
 # keystone
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
