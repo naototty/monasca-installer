@@ -1,0 +1,32 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Monasca-api: Prepare/ Configure hosts"
+  hosts: monasca_api_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/set_up.yml tags=api
+    - include: tasks/verify_credentials.yml tags=api
+  roles:
+    - {role: pip, tags: [pip, resources, api]}
+
+- name: "Monasca-api: Install on hosts"
+  hosts: monasca_api_group
+  vars_files:
+    - credentials.yml
+  sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: cli-credentials, tags: [cli]}
+    - {role: monasca-api, tags: [api]}
+
+- name: "Monasca-api: Clean-Up hosts"
+  hosts: monasca_api_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=api

@@ -1,5 +1,13 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
-
-- include: monasca-cluster.yml
+- include: verify_credentials.yml
+- include: memcached.yml
+- include: zookeeper.yml
+- include: kafka.yml
+- include: elasticsearch.yml
+- include: kibana.yml
+- include: monasca-log-api.yml
+- include: monasca-log-transformer.yml
+- include: monasca-log-persister.yml
 - include: monasca-single.yml
+- include: monasca-api.yml

@@ -31,3 +31,16 @@ balancers:
       node3:
         url: "{{ kibana_cluster_nodes[2] }}"
         port: "{{ kibana_port|int }}"
+  monasca-api:
+    load_balancer_proxy_request: "off"
+    load_balancer_port: "{{ monasca_api_client_port|int }}"
+    nodes:
+      node1:
+        url: "{{ monasca_api_nodes[0] }}"
+        port: "{{ monasca_api_client_port|int }}"
+      node2:
+        url: "{{ monasca_api_nodes[1] }}"
+        port: "{{ monasca_api_client_port|int }}"
+      node3:
+        url: "{{ monasca_api_nodes[2] }}"
+        port: "{{ monasca_api_client_port|int }}"

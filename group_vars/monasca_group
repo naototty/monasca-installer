@@ -14,14 +14,17 @@ influxdb:
 # influxDB
 influx_db_user: "influxdb"
 influx_db_group: "influxdb"
-influxdb_hostname: 127.0.0.1
+influxdb_hostname: "{{ monasca_host }}"
 influxdb_bind_address: "{{ influxdb_hostname }}"
+# After clustering monasca-persister this variable can be removed
+# because location of influxdb will be specified from inventory level
 influxdb_url: "http://{{ influxdb_bind_address }}:8086"
 influxdb_users:
   mon_api: "{{ influxdb_mon_api_password }}"
   mon_persister: "{{ influxdb_mon_persister_password }}"
 influxdb_raft_port: 8085
 influxdb_log_dir: "{{ log_dir }}/influxdb"
+influxdb_version: 0.9.1-1
 
 # kafka
 kafka_hosts: "{% for item in groups['kafka_group'] -%}
@@ -47,6 +50,12 @@ memcached_hosts: "{% for item in groups['memcached_group'] -%}
                   {%- endfor %}"
 memcached_nodes: "{{ memcached_hosts.split(',') }}"
 
+# monasca-api
+monasca_api_hosts: "{% for item in groups['monasca_api_group'] -%}
+                          {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
+                        {%- endfor %}"
+monasca_api_nodes: "{{ monasca_api_hosts.split(',') }}"
+
 # keystone
 keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
 keystone_auth_method: password
@@ -55,7 +64,8 @@ keystone_auth_method: password
 mysql_schema_enabled: false
 postgres_schema_enabled: true
 hibernate_support_enabled: true
-database_host: "127.0.0.1"
+database_host: "{{ monasca_host }}"
+database_port: 5432
 
 database_users:
   notification: "{{ database_notification_password }}"
@@ -72,10 +82,12 @@ postgresql_service_name: "postgresql"
 postgresql_tar_filename: "FJSVpgs91_64.tar.gz"
 postgres_install_from_tar: True
 postgresql_conf_default_guc:
-  - { regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '127.0.0.1'" }
+  - { regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '{{ database_host | default('127.0.0.1') }}'" }
   - { regexp: "^#?logging_collector = .*$", guc: "logging_collector = on" }
   - { regexp: "^#?log_directory = .*$", guc: "log_directory = '{{ postgresql_log_directory | default('pg_log') }}'" }
 postgresql_log_directory: "{{ log_dir }}/postgresql"
+postgresql_host: "{{ monasca_host }}"
+
 # storm
 storm_worker_ports: [6701, 6702]
 storm_log_dir: "{{ log_dir }}/storm"

@@ -28,14 +28,6 @@
     - {role: monasca-schema,
        kafka_topics_enabled: False,
        tags: [schema]}
-    - {role: monasca-api,
-       api_region: useast,
-       influxdb_user: mon_api,
-       influxdb_password: password,
-       database_user: monapi,
-       database_password: "{{ database_monapi_password }}",
-       monasca_api_tarball_base_url: "{{ world_repo_url }}",
-       tags: [api]}
     - {role: monasca-persister,
        influxdb_user: mon_persister,
        influxdb_password: password,
