@@ -4,19 +4,20 @@
 - name: "Kafka: Prepare/Configure hosts"
   hosts: kafka_group
   sudo: yes
+  vars:
+    credential_keys_list:
+      - influxdb_mon_api_password
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/set_up.yml tags=kafka
     - include: tasks/verify_credentials.yml tags==kafka
+    - include: tasks/set_up.yml tags=kafka
 
 - name: "Kafka: Install on hosts"
   hosts: kafka_group
   sudo: yes
   vars_files:
     - credentials.yml
-  pre_tasks:
-    - include: tasks/verify_credentials.yml tags=[kafka]
   roles:
     - {role: kafka, tags: [kafka]}
     - {role: monasca-schema,

@@ -4,13 +4,17 @@
 - name: "Monasca-api: Prepare/ Configure hosts"
   hosts: monasca_api_group
   sudo: yes
+  vars:
+    credential_keys_list:
+      - influxdb_mon_api_password
+      - database_monapi_password
   vars_files:
     - credentials.yml
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
-    - include: tasks/set_up.yml tags=api
     - include: tasks/verify_credentials.yml tags=api
+    - include: tasks/set_up.yml tags=api
   roles:
     - {role: pip, tags: [pip, resources, api]}
 

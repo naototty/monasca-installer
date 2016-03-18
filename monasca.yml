@@ -1,6 +1,24 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
-- include: verify_credentials.yml
+
+- name: "Monasca Group: Verify credentials"
+  hosts: monasca_group
+  sudo: yes
+  vars:
+    credential_keys_list:
+      - influxdb_mon_api_password
+      - influxdb_mon_persister_password
+      - database_notification_password
+      - database_monapi_password
+      - database_logapi_password
+      - database_thresh_password
+      - keystone_cmm_operator_user_password
+      - keystone_admin_password
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml tags=notification,monasca,memcached,zookeeper,kafka,elkstack,elasticsearch,kibana,log_api,log_transformer,log_persister,api
+
 - include: memcached.yml
 - include: zookeeper.yml
 - include: kafka.yml

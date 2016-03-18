@@ -2,11 +2,17 @@
 - name: Prepare/Configure Horizon host
   hosts: horizon-node
   sudo: yes
-  pre_tasks:
-    - include: tasks/set_up.yml tags=pre_tasks
-    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
+  vars:
+    credential_keys_list:
+      - keystone_cmm_operator_user_password
+      - keystone_cmm_agent_password
+      - keystone_admin_password
+      - keystone_admin_agent_password
   vars_files:
     - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
+    - include: tasks/set_up.yml tags=pre_tasks
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -22,7 +28,6 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/set_up.yml tags=pre_tasks
-    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
@@ -45,6 +50,12 @@
   sudo: yes
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  vars:
+    credential_keys_list:
+      - keystone_cmm_operator_user_password
+      - keystone_cmm_agent_password
+      - keystone_admin_password
+      - keystone_admin_agent_password
   pre_tasks:
     - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,keystone
   vars_files:

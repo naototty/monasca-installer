@@ -7,8 +7,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/set_up.yml tags=zookeeper
     - include: tasks/verify_credentials.yml tags=zookeeper
+    - include: tasks/set_up.yml tags=zookeeper
 
 - name: "Zookeeper: Install on hosts"
   hosts: zookeeper_group

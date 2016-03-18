@@ -2,13 +2,18 @@
 - name: Prepare/Configure host
   hosts: monasca_agent_group
   sudo: yes
+  vars:
+    credential_keys_list:
+      - cmm_monasca_agent_keystone_password
+      - openstack_monasca_agent_keystone_password
+      - cmm_monasca_agent_database_password
   vars_files:
     - credentials.yml
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
-    - include: tasks/set_up.yml tags=pre_tasks
     - include: tasks/verify_credentials.yml tags=agents,metric-agent
+    - include: tasks/set_up.yml tags=pre_tasks
   roles:
     - {role: pip, tags: [pip, resources]}
 

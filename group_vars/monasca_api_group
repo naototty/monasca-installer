@@ -8,7 +8,3 @@ monasca_api_tarball_base_url: "{{ world_repo_url }}"
 api_region: useast
 influxdb_user: mon_api
 influxdb_password: password
-
-credential_keys_list:
-  - influxdb_mon_api_password
-  - database_monapi_password

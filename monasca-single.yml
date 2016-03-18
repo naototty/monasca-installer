@@ -4,13 +4,19 @@
 - name: Prepare/Configure host
   hosts: cmm-node
   sudo: yes
+  vars:
+    credential_keys_list:
+      - database_notification_password
+      - database_thresh_password
+      - influxdb_mon_api_password
+      - influxdb_mon_persister_password
   vars_files:
     - credentials.yml
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
-    - include: tasks/set_up.yml tags=pre_tasks
     - include: tasks/verify_credentials.yml tags=schema,postgresql,api,persister,notification,thresh
+    - include: tasks/set_up.yml tags=pre_tasks
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}

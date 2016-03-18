@@ -27,9 +27,3 @@ uninstall_services:
 
 uninstall_directories:
   - { dir: "{{ monasca_agent_venv_dir }}", force: True }
-
-# List of passwords/credentials for verification
-credential_keys_list:
-  - cmm_monasca_agent_keystone_password
-  - openstack_monasca_agent_keystone_password
-  - cmm_monasca_agent_database_password

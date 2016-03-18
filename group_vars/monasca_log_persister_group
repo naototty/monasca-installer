@@ -3,5 +3,3 @@
 
 log_persister_flush_size: 200
 log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
-
-credential_keys_list: []

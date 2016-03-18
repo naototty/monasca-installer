@@ -142,17 +142,6 @@ logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
 # logstash
 logstash_version: 2.2.0
 
-# List of passwords/credentials for verification
-credential_keys_list:
-  - influxdb_mon_api_password
-  - influxdb_mon_persister_password
-  - database_notification_password
-  - database_monapi_password
-  - database_logapi_password
-  - database_thresh_password
-  - keystone_cmm_operator_user_password
-  - keystone_admin_password
-
 # logrotate configuration
 logrotate_scripts:
   - name: influxdb

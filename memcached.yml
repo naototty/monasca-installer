@@ -7,12 +7,14 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/set_up.yml tags=memcached
     - include: tasks/verify_credentials.yml tags=memcached
+    - include: tasks/set_up.yml tags=memcached
 
 - name: "Memcached: Install on host"
   hosts: memcached_group
   sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: memcached, tags: [memcached]}
 

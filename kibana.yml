@@ -7,8 +7,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/set_up.yml tags=elkstack,kibana
     - include: tasks/verify_credentials.yml tags=elkstack,kibana
+    - include: tasks/set_up.yml tags=elkstack,kibana
 
 - name: "Kibana: Install on hosts"
   hosts: kibana_group

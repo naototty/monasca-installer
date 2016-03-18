@@ -30,11 +30,6 @@ uninstall_directories:
   - { dir: "{{ monasca_work_dir }}", force: False}
   - { dir: "{{ monasca_conf_dir }}", force: False}
 
-# List of passwords/credentials for verification
-credential_keys_list:
-  - cmm_monasca_log_agent_keystone_password
-  - openstack_monasca_log_agent_keystone_password
-
 logrotate_scripts:
   - name: monasca_log_agent
     path: "{{ logstash_agent_log_dir }}/*.log"
