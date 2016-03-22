@@ -36,7 +36,7 @@
        tags: [schema]}
     - {role: monasca-persister,
        influxdb_user: mon_persister,
-       influxdb_password: password,
+       influxdb_password: "{{ influxdb_mon_persister_password }}",
        tags: [persister]}
     - {role: monasca-notification,
        database_user: notification,
