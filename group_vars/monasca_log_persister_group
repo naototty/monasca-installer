@@ -1,5 +1,22 @@
 ---
 # Copyright 2015 FUJITSU LIMITED
 
+log_persister_user: mon-persister
+log_persister_group: "{{ monasca_group }}"
+
 log_persister_flush_size: 200
 log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
+
+logrotate_scripts:
+  - name: monasca_log_persister
+    path: "{{ monasca_log_persister_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 {{ log_persister_user }} {{ log_persister_group }}
+      - copytruncate
+      - noemail

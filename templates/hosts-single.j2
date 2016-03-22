@@ -17,6 +17,33 @@ openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_s
 cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
+# monasca-log-transfomer
+log-transformer-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# monasca-log-persister
+log-persister-node               ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# kibana
+kibana-node                      ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# kibana
+elasticsearch-node               ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# memcached
+memcached-node                   ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# kafka
+kafka-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# zookeeper
+zookeeper-node                   ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# monasca-api
+monasca-api-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# monasca-log-api
+monasca-log-api-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 [offline_group]
 offline-resources-node
 localhost
@@ -26,19 +53,19 @@ horizon-node
 keystone-node
 
 [memcached_group]
-cmm-node
+memcached-node
 
 [kafka_group]
-cmm-node
+kafka-node
 
 [zookeeper_group]
-cmm-node
+zookeeper-node
 
 [monasca_group]
 cmm-node
 
 [monasca_api_group]
-cmm-node
+monasca-api-node
 
 [monasca_agent_group]
 cmm-monasca-agent
@@ -49,7 +76,7 @@ cmm-monasca-log-agent
 openstack-monasca-log-agent
 
 [monasca_log_api_group]
-cmm-node
+monasca-log-api-node
 
 [elkstack_group:children]
 elasticsearch_group
@@ -59,16 +86,16 @@ monasca_log_persister_group
 monasca_log_transformer_group
 
 [monasca_log_persister_group]
-cmm-node
+log-persister-node
 
 [monasca_log_transformer_group]
-cmm-node
+log-transformer-node
 
 [elasticsearch_group]
-cmm-node
+elasticsearch-node
 
 [kibana_group]
-cmm-node es_node_for_kibana=cmm-node
+kibana-node es_node_for_kibana=elasticsearch-node
 
 [openstack_uninstaller_group]
 horizon-node

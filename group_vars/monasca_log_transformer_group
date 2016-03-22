@@ -1,4 +1,21 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
+log_transformer_user: mon-transformer
+log_transformer_group: "{{ monasca_group }}"
+
 log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
+
+logrotate_scripts:
+  - name: monasca_log_transformer
+    path: "{{ monasca_log_transformer_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 {{ log_transformer_user }} {{ log_transformer_group }}
+      - copytruncate
+      - noemail
