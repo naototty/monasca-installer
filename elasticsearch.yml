@@ -10,7 +10,8 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
       tags: always
-    - include: tasks/set_up.yml tags=elkstack,elasticsearch
+    - include: tasks/set_up.yml
+      tags: [elkstack,elasticsearch]
   tasks:
     - name: Enable broadcasting
       command: "sh -c 'echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts'"
@@ -25,4 +26,5 @@
   hosts: elasticsearch_group
   sudo: yes
   post_tasks:
-   - include: tasks/clean_up.yml tags=elkstack,elasticsearch
+   - include: tasks/clean_up.yml
+     tags: [elkstack,elasticsearch]

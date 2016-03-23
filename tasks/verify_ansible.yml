@@ -2,12 +2,11 @@
 # Copyright 2016 FUJITSU LIMITED
 
 - name: Get installed Ansible version
-  shell: ansible --version 2>&1 | head -1 | awk '{print $2}'
-  register: ansible_version
+  shell: ansible --version | head -1 | awk '{print $2}'
+  register: ansible_installed_version
   run_once: true
   delegate_to: 127.0.0.1
 
 - name: Verify if installed Ansible version is supported
-  fail: msg="Ansible is in the wrong version - {{ ansible_version.stdout }}. Supported version should be {{ ansible_version_min.constraint }} {{ ansible_version_min.ver }} and {{ ansible_version_max.constraint }} {{ ansible_version_max.ver }}"
-  when: not (ansible_version.stdout | version_compare(ansible_version_min.ver, ansible_version_min.constraint) and
-             ansible_version.stdout | version_compare(ansible_version_max.ver, ansible_version_max.constraint))
+  fail: msg="Ansible is in the wrong version - {{ ansible_installed_version.stdout_lines[0] }}. Supported version should be {{ ansible_version_min.constraint }} {{ ansible_version_min.ver }} and {{ ansible_version_max.constraint }} {{ ansible_version_max.ver }}"
+  when: "not ( '{{ ansible_installed_version.stdout }}' | version_compare('{{ ansible_version_min.ver }}', '{{ ansible_version_min.constraint }}') and  '{{ ansible_installed_version.stdout }}' | version_compare('{{ ansible_version_max.ver }}', '{{ ansible_version_max.constraint }}'))"

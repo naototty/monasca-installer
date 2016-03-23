@@ -10,7 +10,8 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
       tags: always
-    - include: tasks/set_up.yml tags=elkstack,kibana
+    - include: tasks/set_up.yml
+      tags: [elkstack,kibana]
 
 - name: "Kibana: Install on hosts"
   hosts: kibana_group
@@ -26,4 +27,5 @@
   hosts: kibana_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=elkstack,kibana
+    - include: tasks/clean_up.yml
+      tags: [elkstack,kibana]

@@ -12,8 +12,9 @@
   pre_tasks:
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=persister
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [persister]
 
 - name: "monasca-persister: Install on hosts"
   hosts: monasca_persister_group
@@ -27,7 +28,8 @@
   hosts: monasca_persister_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=persister
+    - include: tasks/clean_up.yml
+      tags: [persister]
 
 # TODO(trebskit) if monasca-persister would be used in python implementation
 # this playbook should install pip as well

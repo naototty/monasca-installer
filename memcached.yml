@@ -10,7 +10,8 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
       tags: always
-    - include: tasks/set_up.yml tags=memcached
+    - include: tasks/set_up.yml
+      tags: [memcached]
 
 - name: "Memcached: Install on host"
   hosts: memcached_group
@@ -24,4 +25,5 @@
   hosts: memcached_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=memcached
+    - include: tasks/clean_up.yml
+      tags: [memcached]

@@ -16,8 +16,9 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_pip.yml
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=pre_tasks
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [pre_tasks]
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
@@ -46,4 +47,5 @@
   hosts: cmm-node
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=post_tasks
+    - include: tasks/clean_up.yml
+      tags: [post_tasks]

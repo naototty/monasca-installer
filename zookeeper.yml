@@ -1,7 +1,7 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
-- name: "Zookeeper: Prepare/Configure hosts"
+- name: Prepare/Configure hosts
   hosts: zookeeper_group
   sudo: yes
   vars_files:
@@ -10,16 +10,18 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
       tags: always
-    - include: tasks/set_up.yml tags=zookeeper
+    - include: tasks/set_up.yml
+      tags: [zookeeper]
 
-- name: "Zookeeper: Install on hosts"
+- name: Install on hosts
   hosts: zookeeper_group
   sudo: yes
   roles:
     - {role: zookeeper, tags: [zookeeper]}
 
-- name: "Zookeeper: Clean-Up hosts"
+- name: Clean-Up hosts
   hosts: zookeeper_group
   sudo: yes
   post_tasks:
-   - include: tasks/clean_up.yml tags=zookeeper
+   - include: tasks/clean_up.yml
+     tags: [zookeeper]

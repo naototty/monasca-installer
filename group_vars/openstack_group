@@ -7,6 +7,10 @@ is_openstack: true
 # urls
 kibana_url: "http://{{ monasca_host }}:5601/"
 
+grafana_tarball_url: "{{ balls_repo_url }}/world"
+grafana_tarball_file: "/fujitsu-monasca-grafana.tar.gz"
+
+
 # offline mode information
 epel_download_url: "{{ world_repo_url }}"
 install_epel: False

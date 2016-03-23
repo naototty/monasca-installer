@@ -13,8 +13,9 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_pip.yml
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=notification
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [notification]
   roles:
     - {role: pip, tags: [pip, resources, notification]}
 
@@ -32,4 +33,5 @@
   hosts: monasca_notification_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=notification
+    - include: tasks/clean_up.yml
+      tags: [notification]

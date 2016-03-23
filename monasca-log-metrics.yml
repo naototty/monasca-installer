@@ -10,7 +10,8 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
       tags: always
-    - include: tasks/set_up.yml tags=log_metrics
+    - include: tasks/set_up.yml
+      tags: [log_metrics]
 
 - name: "Monasca Log Metrics: Install on hosts"
   hosts: monasca_log_metrics_group
@@ -23,4 +24,5 @@
   hosts: monasca_log_metrics_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=log_metrics
+    - include: tasks/clean_up.yml
+      tags: [log_metrics]

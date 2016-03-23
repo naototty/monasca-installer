@@ -12,8 +12,9 @@
   pre_tasks:
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=kafka
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [kafka]
 
 - name: "Kafka: Install on hosts"
   hosts: kafka_group
@@ -39,4 +40,5 @@
   hosts: kafka_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=kafka
+    - include: tasks/clean_up.yml
+      tags: [kafka]

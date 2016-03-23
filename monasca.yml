@@ -19,7 +19,7 @@
   pre_tasks:
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
-      tags: always
+      tags: [always]
 
 - include: memcached.yml
 - include: zookeeper.yml

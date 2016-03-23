@@ -15,8 +15,9 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_pip.yml
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=log_api
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [log_api]
   roles:
     - {role: pip, tags: [pip, resources, log_api]}
 
@@ -34,4 +35,5 @@
   hosts: monasca_log_api_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=log_api
+    - include: tasks/clean_up.yml
+      tags: [log_api]

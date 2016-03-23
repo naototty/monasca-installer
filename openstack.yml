@@ -16,8 +16,9 @@
     - include: tasks/verify_ansible.yml
     - include: tasks/verify_pip.yml
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=always
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -33,7 +34,8 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/verify_pip.yml
-    - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/set_up.yml
+      tags: [pre_tasks]
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
@@ -45,8 +47,6 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: monasca-ui,
-       grafana_tarball_url: "{{ balls_repo_url }}/world",
-       grafana_tarball_file: "/fujitsu-monasca-grafana.tar.gz",
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: fujitsu-branding, tags: [branding]}
@@ -75,10 +75,12 @@
   hosts: horizon-node
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=post_tasks
+    - include: tasks/clean_up.yml
+      tags: [post_tasks]
 
 - name: Clean-Up Openstack hosts
   hosts: keystone-node
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=post_tasks
+    - include: tasks/clean_up.yml
+      tags: [always]

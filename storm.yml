@@ -8,8 +8,9 @@
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_credentials.yml
-      tags: always
-    - include: tasks/set_up.yml tags=pre_tasks
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [pre_tasks]
 
 - name: "Storm: Install on host"
   hosts: storm_group
@@ -24,4 +25,5 @@
   hosts: storm_group
   sudo: yes
   post_tasks:
-    - include: tasks/clean_up.yml tags=post_tasks
+    - include: tasks/clean_up.yml
+      tags: [post_tasks]
