@@ -66,6 +66,7 @@ postgres_schema_enabled: true
 hibernate_support_enabled: true
 database_host: "{{ monasca_host }}"
 database_port: 5432
+database_name: mon
 
 database_users:
   notification: "{{ database_notification_password }}"
@@ -98,10 +99,6 @@ api_log_dir: "{{ monasca_log_dir }}/api"
 # monasca-log-api
 monasca_log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 monasca_log_api_bind_host: 0.0.0.0
-
-# monasca-notification
-notification_log_dir: "{{ monasca_log_dir }}/notification"
-monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
 # monasca-agent
 monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"

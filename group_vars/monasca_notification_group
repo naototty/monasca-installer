@@ -1,0 +1,24 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+email_from_address: cmm@fujitsu.ts.com
+
+notification_enable_email: true
+notification_enable_webhook: false
+notification_enable_pagerduty: false
+
+notification_log_dir: "{{ monasca_log_dir }}/notification"
+monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
+
+database_backend: "{% if mysql_schema_enabled -%}
+                    mysql
+                   {%- elif postgres_schema_enabled -%}
+                    postgresql
+                   {%- endif %}"
+database_user: notification
+database_password: "{{ database_notification_password }}"
+database_host: "{{ hostvars[database_node_for_notification]['ansible_ssh_host'] }}"
+
+smtp_host: "localhost"
+
+pip_conf_dir: "{{ pip_base_dir }}"
