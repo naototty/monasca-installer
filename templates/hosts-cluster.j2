@@ -67,6 +67,11 @@ monasca-notification-node-1      ansible_ssh_host={{ ex_node_1_host }} ansible_s
 monasca-notification-node-2      ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 monasca-notification-node-3      ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# monasca-persister nodes
+monasca-persister-node-1         ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-persister-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-persister-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # Load balancer node
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
@@ -84,6 +89,11 @@ cmm-node
 # following code needs to be removed after mariadb is added
 [monasca_group:vars]
 postgresql_max_connections=300
+
+[monasca_persister_group]
+monasca-persister-node-1
+monasca-persister-node-2
+monasca-persister-node-3
 
 [monasca_api_group]
 monasca-api-node-1
@@ -180,3 +190,4 @@ monasca_log_api_group
 balancer_group
 monasca_api_group
 monasca_notification_group
+monasca_persister_group

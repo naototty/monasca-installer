@@ -47,6 +47,9 @@ monasca-log-api-node             ansible_ssh_host={{ monasca_host }} ansible_ssh
 # monasca-notification
 monasca-notification-node        ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# monasca-persister node
+monasca-persister-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 [offline_group]
 offline-resources-node
 localhost
@@ -76,6 +79,9 @@ monasca-api-node
 
 [monasca_notification_group]
 monasca-notification-node database_node_for_notification=cmm-node
+
+[monasca_persister_group]
+monasca-persister-node
 
 [monasca_agent_group]
 cmm-monasca-agent
@@ -131,3 +137,4 @@ zookeeper_group
 monasca_log_api_group
 monasca_api_group
 monasca_notification_group
+monasca_persister_group

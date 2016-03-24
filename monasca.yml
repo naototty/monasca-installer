@@ -30,4 +30,5 @@
 - include: monasca-log-persister.yml
 - include: monasca-single.yml
 - include: monasca-notification.yml
+- include: monasca-persister.yml
 - include: monasca-api.yml

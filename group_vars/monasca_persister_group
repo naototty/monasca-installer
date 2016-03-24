@@ -1,0 +1,12 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+# user settings
+influxdb_user: mon_persister
+influxdb_password: "{{ influxdb_mon_persister_password }}"
+
+# log settings
+persister_log_dir: "{{ monasca_log_dir }}/persister"
+
+# download settings
+persister_tarball_base_url: "{{ world_repo_url }}"

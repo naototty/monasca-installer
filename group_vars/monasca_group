@@ -113,13 +113,9 @@ elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
 elasticsearch_data_dir:
   - "{{ data_dir }}/elasticsearch"
 
-persister_tarball_base_url: "{{ world_repo_url }}"
 logstash_agent_download_url: "{{ world_repo_url }}"
 
 nimbus_host: 127.0.0.1
-
-# persister
-persister_log_dir: "{{ monasca_log_dir }}/persister"
 
 # log persister
 log_persister_host: 127.0.0.1

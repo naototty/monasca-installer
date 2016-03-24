@@ -8,8 +8,6 @@
     credential_keys_list:
       - database_notification_password
       - database_thresh_password
-      - influxdb_mon_api_password
-      - influxdb_mon_persister_password
   vars_files:
     - credentials.yml
   environment:
@@ -35,10 +33,6 @@
     - {role: monasca-schema,
        kafka_topics_enabled: False,
        tags: [schema]}
-    - {role: monasca-persister,
-       influxdb_user: mon_persister,
-       influxdb_password: "{{ influxdb_mon_persister_password }}",
-       tags: [persister]}
     - {role: storm,
        storm_nimbus_enabled: true,
        storm_supervisor_enabled: true,
