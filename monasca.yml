@@ -17,7 +17,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags=notification,monasca,memcached,zookeeper,kafka,elkstack,elasticsearch,kibana,log_api,log_transformer,log_persister,api
+    - include: tasks/verify_credentials.yml
+      tags: always
 
 - include: memcached.yml
 - include: zookeeper.yml

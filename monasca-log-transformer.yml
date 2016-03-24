@@ -7,7 +7,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags=elkstack,log_transformer
+    - include: tasks/verify_credentials.yml
+      tags: always
     - include: tasks/set_up.yml tags=elkstack,log_transformer
 
 - name: "Log Transformer: Install on hosts"

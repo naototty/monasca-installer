@@ -11,7 +11,8 @@
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags=agents,log-agent
+    - include: tasks/verify_credentials.yml
+      tags: always
     - include: tasks/set_up.yml tags=pre_tasks
   roles:
     - {role: pip, tags: [pip, resources]}

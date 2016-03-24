@@ -11,7 +11,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,cli
+    - include: tasks/verify_credentials.yml
+      tags: always
     - include: tasks/set_up.yml tags=pre_tasks
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
@@ -57,7 +58,8 @@
       - keystone_admin_password
       - keystone_admin_agent_password
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags=verify_passwords,pre_tasks,keystone
+    - include: tasks/verify_credentials.yml
+      tags: always
   vars_files:
     - credentials.yml
   roles:

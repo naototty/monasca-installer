@@ -10,7 +10,8 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/verify_credentials.yml tags==kafka
+    - include: tasks/verify_credentials.yml
+      tags: always
     - include: tasks/set_up.yml tags=kafka
 
 - name: "Kafka: Install on hosts"
