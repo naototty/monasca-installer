@@ -76,6 +76,10 @@ keystone-node
 [monasca_group]
 cmm-node
 
+# following code needs to be removed after mariadb is added
+[monasca_group:vars]
+postgresql_max_connections=300
+
 [monasca_api_group]
 monasca-api-node-1
 monasca-api-node-2

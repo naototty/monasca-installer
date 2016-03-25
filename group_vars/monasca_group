@@ -85,6 +85,7 @@ postgresql_conf_default_guc:
   - { regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '{{ database_host | default('127.0.0.1') }}'" }
   - { regexp: "^#?logging_collector = .*$", guc: "logging_collector = on" }
   - { regexp: "^#?log_directory = .*$", guc: "log_directory = '{{ postgresql_log_directory | default('pg_log') }}'" }
+  - { regexp: "^#?max_connections = .*$", guc: "max_connections = {{ postgresql_max_connections | default(100) }}" }
 postgresql_log_directory: "{{ log_dir }}/postgresql"
 postgresql_host: "{{ monasca_host }}"
 
