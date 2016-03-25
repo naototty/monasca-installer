@@ -39,11 +39,6 @@
        influxdb_user: mon_persister,
        influxdb_password: "{{ influxdb_mon_persister_password }}",
        tags: [persister]}
-    - {role: monasca-notification,
-       database_user: notification,
-       database_password: "{{ database_notification_password }}",
-       smtp_host: localhost,
-       tags: [notification]}
     - {role: storm,
        storm_nimbus_enabled: true,
        storm_supervisor_enabled: true,

@@ -58,9 +58,14 @@ memcached-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_s
 memcached-node-3                 ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # monasca-api nodes for cluster
-monasca-api-node-1                 ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
-monasca-api-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
-monasca-api-node-3                 ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+monasca-api-node-1               ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-api-node-2               ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-api-node-3               ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# monasca-notification nodes for cluster
+monasca-notification-node-1      ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-notification-node-2      ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-notification-node-3      ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Load balancer node
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
@@ -84,6 +89,11 @@ postgresql_max_connections=300
 monasca-api-node-1
 monasca-api-node-2
 monasca-api-node-3
+
+[monasca_notification_group]
+monasca-notification-node-1 database_node_for_notification=cmm-node
+monasca-notification-node-2 database_node_for_notification=cmm-node
+monasca-notification-node-3 database_node_for_notification=cmm-node
 
 [memcached_group]
 memcached-node-1
@@ -169,3 +179,4 @@ zookeeper_group
 monasca_log_api_group
 balancer_group
 monasca_api_group
+monasca_notification_group
