@@ -103,14 +103,14 @@ end
 
 ##### Copy boxes
 Copy vagrant boxes from smb://estfile5/projects/CloudWatchManager/vagrant-boxes
-* clear_centos7.box
-* devstack_centos_7.box
+* clear-centos7.box
+* devstack-centos7-liberty.box
 
 ##### Install boxes
 Add box to your local vagrant environment
 ```bash
-vagrant box add monasca-devstack-centos /path/to/the/devstack_centos_7.box
-vagrant box add clear-centos7 /path/to/the/clear_centos7.box
+vagrant box add devstack-centos7-liberty /path/to/the/devstack-centos7-liberty.box
+vagrant box add clear-centos7 /path/to/the/clear-centos7.box
 ```
 
 #### Prepare hosts template file

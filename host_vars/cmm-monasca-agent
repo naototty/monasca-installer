@@ -6,8 +6,6 @@ monasca_agent_user: cmm-agent
 monasca_agent_password: "{{ cmm_monasca_agent_keystone_password }}"
 monasca_agent_project: cmm
 
-monasca_agent_version: 1.1.18.dev1
-
 # Monasca Agent Configuration
 monasca_agent_service: monitoring
 
@@ -39,16 +37,18 @@ monasca_checks:
         url: "{{ kibana_url }}"
         timeout: 1
         dimensions:
-          service: kibana
+          component: kibana
+          service: monitoring
       - name: Monasca Log Api
-        url: "http://{{ monasca_host }}:{{ monsasca_log_api_admin_port }}/healthcheck"
+        url: "http://{{ monasca_host }}:{{ monasca_log_api_port }}/healthcheck"
         timeout: 1
         dimensions:
-          service: monasca-log-api
+          component: monasca-log-api
+          service: monitoring
   postgres:
     init_config:
     instances:
-      - host: localhost
+      - host: "{{ database_host }}"
         port: 5432
         username: "{{ monasca_agent_database_user }}"
         password: "{{ monasca_agent_database_password }}"
@@ -74,3 +74,6 @@ monasca_checks:
         dimensions:
           component: monasca-log-persister
         service: logs-monitoring
+
+pip_extra_depedencies:
+  - { name: psutil, version: 2.2.1 }

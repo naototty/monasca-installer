@@ -93,6 +93,7 @@ postgresql_host: "{{ monasca_host }}"
 # storm
 storm_worker_ports: [6701, 6702]
 storm_log_dir: "{{ log_dir }}/storm"
+storm_version: 0.9.6
 
 # monasca-api
 api_log_dir: "{{ monasca_log_dir }}/api"

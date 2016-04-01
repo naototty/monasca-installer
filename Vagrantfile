@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "openstack" do |openstack|
     openstack.vm.hostname = "openstack"
-    openstack.vm.box = "monasca-devstack-centos"
+    openstack.vm.box = "devstack-centos7-liberty"
     openstack.vm.network :private_network, ip: "192.168.10.5"
     openstack.vm.provider "virtualbox" do |vb|
       vb.memory = 6192

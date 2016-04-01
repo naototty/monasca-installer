@@ -1,8 +1,6 @@
 ---
 # file: group_vars/monasca_agent_group
 
-monsasca_log_api_admin_port: 8071
-
 # directories
 monasca_agent_venv_dir: "{{ venvs_dir }}/monasca-agent"
 # that one deprecated use one above
@@ -13,7 +11,7 @@ monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
 monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
-monasca_agent_version: 1.1.18.dev1
+monasca_agent_version: 1.1.24
 
 monasca_agent_overwrite_config: False
 monasca_agent_check_frequency: 30

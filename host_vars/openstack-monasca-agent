@@ -6,8 +6,6 @@ monasca_agent_user: admin-agent
 monasca_agent_password: "{{ openstack_monasca_agent_keystone_password }}"
 monasca_agent_project: admin
 
-monasca_agent_version: 1.1.18.dev1
-  
 monasca_checks:
   host_alive:
     init_config:
@@ -18,3 +16,6 @@ monasca_checks:
       - name: monasca
         host_name: "{{ monasca_host }}"
         alive_test: ssh
+
+pip_extra_depedencies:
+  - { name: psutil, version: 2.2.1 }
