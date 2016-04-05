@@ -4,3 +4,9 @@
 memcached_pkg_src_url: "{{ world_repo_url }}"
 memcached_listen_ip: "{{ ansible_ssh_host }}"
 memcached_log_verbosity: "-vv"
+
+#to expand the list of new addreses use:
+#     {{list1 | intersect(list2)}}
+#intersect will create new list with unique element from
+#both lists
+memcached_iptables_nodes: "{{ monasca_log_api_nodes | unique }}"
