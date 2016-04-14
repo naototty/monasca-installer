@@ -61,11 +61,13 @@ keystone_host_full: "{{ keystone_host }}:{{ keystone_port }}"
 keystone_auth_method: password
 
 # database
-mysql_schema_enabled: false
-postgres_schema_enabled: true
+mysql_schema_enabled: true
+postgres_schema_enabled: false
+database_backend: mariadb
+orm_enabled: true
 hibernate_support_enabled: true
 database_host: "{{ monasca_host }}"
-database_port: 5432
+database_port: 3306
 database_name: mon
 
 database_users:
@@ -73,22 +75,8 @@ database_users:
   monapi: "{{ database_monapi_password }}"
   thresh: "{{ database_thresh_password }}"
 
-# postgresql
-postgresql_version: 9.1
-postgresql_dir: "{{ opt_dir }}/postgresql/{{ postgresql_version }}"
-postgresql_bin_dir: "{{ postgresql_dir }}/bin"
-postgresql_repo: "{{ world_repo_url }}/postgresql/"
-postgresql_data_dir: "{{ postgresql_dir }}/data"
-postgresql_service_name: "postgresql"
-postgresql_tar_filename: "FJSVpgs91_64.tar.gz"
-postgres_install_from_tar: True
-postgresql_conf_default_guc:
-  - { regexp: "^#?listen_addresses = .*$", guc: "listen_addresses = '{{ database_host | default('127.0.0.1') }}'" }
-  - { regexp: "^#?logging_collector = .*$", guc: "logging_collector = on" }
-  - { regexp: "^#?log_directory = .*$", guc: "log_directory = '{{ postgresql_log_directory | default('pg_log') }}'" }
-  - { regexp: "^#?max_connections = .*$", guc: "max_connections = {{ postgresql_max_connections | default(100) }}" }
-postgresql_log_directory: "{{ log_dir }}/postgresql"
-postgresql_host: "{{ monasca_host }}"
+# mariadb
+mariadb_host: "{{ monasca_host }}"
 
 # storm
 storm_worker_ports: [6701, 6702]

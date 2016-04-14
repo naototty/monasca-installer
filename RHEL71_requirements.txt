@@ -48,7 +48,6 @@ pciutils==1.7.3
 pcp==1.0
 policycoreutils-default-encoding==0.1
 prettytable==0.7.2
-psycopg2==2.6
 pyasn1==0.1.6
 pycrypto==2.6.1
 pycups==1.9.63

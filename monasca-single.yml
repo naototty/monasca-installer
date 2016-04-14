@@ -29,7 +29,7 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: influxdb, tags: [influxdb]}
-    - {role: postgresql-redhat, when: ansible_os_family == 'RedHat', tags: [postgresql]}
+    - {role: mariadb, tags: [mariadb]}
     - {role: monasca-schema,
        kafka_topics_enabled: False,
        tags: [schema]}

@@ -12,8 +12,6 @@
   name: percona
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-agent.git
   name: monasca-agent
-- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-postgresql-debian.git
-  name: postgresql-debian
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-devpi.git
   name: devpi
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-ui.git
@@ -34,8 +32,8 @@
   name: monasca-schema
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-zookeeper.git
   name: zookeeper
-- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-postgresql-redhat.git
-  name: postgresql-redhat
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-mariadb.git
+  name: mariadb
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-elkstack.git
   name: monasca-elkstack
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-resources.git

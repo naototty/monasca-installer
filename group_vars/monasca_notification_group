@@ -11,7 +11,7 @@ notification_log_dir: "{{ monasca_log_dir }}/notification"
 monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
 database_backend: "{% if mysql_schema_enabled -%}
-                    mysql
+                    mariadb
                    {%- elif postgres_schema_enabled -%}
                     postgresql
                    {%- endif %}"

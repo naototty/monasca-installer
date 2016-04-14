@@ -22,9 +22,6 @@
 [submodule "roles/influxdb"]
 	path = roles/influxdb
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb.git
-[submodule "roles/postgresql-redhat"]
-	path = roles/postgresql-redhat
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-postgresql-redhat.git
 [submodule "roles/monasca-schema"]
 	path = roles/monasca-schema
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-schema.git
@@ -88,3 +85,6 @@
 [submodule "roles/horizon-patch"]
 	path = roles/horizon-patch
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-horizon-patch.git
+[submodule "roles/mariadb"]
+	path = roles/mariadb
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-mariadb.git

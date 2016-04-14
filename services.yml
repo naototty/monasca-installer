@@ -4,7 +4,7 @@
         - zookeeper
         - storm-nimbus
         - storm-supervisor
-        - postgresql
+        - mariadb
         - kafka
         - influxdb
         - elasticsearch
