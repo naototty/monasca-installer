@@ -73,6 +73,3 @@ monasca_checks:
         dimensions:
           component: monasca-log-persister
         service: logs-monitoring
-
-pip_extra_depedencies:
-  - { name: psutil, version: 2.2.1 }

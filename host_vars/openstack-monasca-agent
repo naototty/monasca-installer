@@ -16,6 +16,3 @@ monasca_checks:
       - name: monasca
         host_name: "{{ monasca_host }}"
         alive_test: ssh
-
-pip_extra_depedencies:
-  - { name: psutil, version: 2.2.1 }

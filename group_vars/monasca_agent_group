@@ -11,7 +11,7 @@ monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
 monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
-monasca_agent_version: 1.1.24
+monasca_agent_version: 1.1.25.dev45
 
 monasca_agent_overwrite_config: False
 monasca_agent_check_frequency: 30
@@ -26,3 +26,7 @@ uninstall_services:
 
 uninstall_directories:
   - { dir: "{{ monasca_agent_venv_dir }}", force: True }
+
+pip_extra_depedencies:
+  - { name: psutil, version: 2.2.1 }
+  - { name: pymysql, version: 0.7.2 }
