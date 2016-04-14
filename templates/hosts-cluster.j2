@@ -76,6 +76,11 @@ monasca-log-agent-node-1     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_u
 monasca-log-agent-node-2     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 monasca-log-agent-node-3     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# Monasca-agent nodes for cluster
+monasca-agent-node-1         ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-agent-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-agent-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # Load balancer node
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
@@ -97,6 +102,9 @@ openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_s
 [monasca_agent_group]
 cmm-monasca-agent
 openstack-monasca-agent
+monasca-agent-node-1
+monasca-agent-node-2
+monasca-agent-node-3
 
 [monasca_log_agent_group]
 cmm-monasca-log-agent
