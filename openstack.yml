@@ -45,6 +45,7 @@
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: fujitsu-branding, tags: [branding]}
+    - {role: horizon-patch, tags: [horizon-patch]}
 
 - name: Configure Keystone
   hosts: keystone-node

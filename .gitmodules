@@ -85,3 +85,6 @@
 [submodule "roles/load-balancer"]
 	path = roles/load-balancer
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-load-balancer
+[submodule "roles/horizon-patch"]
+	path = roles/horizon-patch
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-horizon-patch.git
