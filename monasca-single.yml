@@ -43,7 +43,6 @@
        thresh_tarball_base_url: "{{ world_repo_url }}",
        tags: [thresh]}
     - {role: logrotate, tags: [logrotate]}
-    # - {role: fujitsu-branding, tags: [branding]} #TODO(trebskit) branding wont work with new kibana
 
 - name: Clean-Up host
   hosts: cmm-node
