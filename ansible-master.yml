@@ -23,7 +23,14 @@
     - name: Import EPEL GPG key
       rpm_key: key="/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7" state=present
     - name: Install Ansible
-      yum: name=ansible state=present
+      yum: name=ansible1.9 state=present
+    - name: Create custom ansible.cfg file
+      template:
+        src="templates/ansible.cfg.j2"
+        dest="/etc/ansible/ansible.cfg"
+        owner=root
+        group=root
+        mode=0644
     - name: Generate SSH key
       user: name=vagrant generate_ssh_key=yes
     - name: Create ansible-hosts file [single]
