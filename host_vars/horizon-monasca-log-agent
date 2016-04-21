@@ -6,5 +6,6 @@ monasca_log_agent_project: admin
 monasca_log_agent_user: admin-agent
 monasca_log_agent_password: "{{ openstack_monasca_log_agent_keystone_password }}"
 domain_id: default
+
 log_files:
-  - { tags: '["openstack"]', type: '"horizon"', path: '"{{ log_dir }}/messages"' }
+  - { tags: '["syslog"]', add_field: '{ "dimensions" => { "service" => "system" }}', path: '"{{ log_dir }}/messages"' }
