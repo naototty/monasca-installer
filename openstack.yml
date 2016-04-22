@@ -41,7 +41,7 @@
   roles:
     - {role: monasca-ui,
        grafana_tarball_url: "{{ balls_repo_url }}/world",
-       grafana_tarball_file: "/fujitsu-mon-grafana-20a75b0.tar.gz",
+       grafana_tarball_file: "/fujitsu-monasca-grafana.tar.gz",
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
     - {role: fujitsu-branding, tags: [branding]}
