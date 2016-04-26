@@ -8,10 +8,6 @@ localhost                        ansible_connection=local
 # Offline Host
 offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
-# Openstack Hosts
-horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-
 # Monasca host
 cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
@@ -50,11 +46,9 @@ monasca-persister-node           ansible_ssh_host={{ monasca_host }} ansible_ssh
 
 # Monasca Agent Hosts
 cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
 cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -65,11 +59,9 @@ openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_s
 
 [monasca_agent_group]
 cmm-monasca-agent
-openstack-monasca-agent
 
 [monasca_log_agent_group]
 cmm-monasca-log-agent
-openstack-monasca-log-agent
 
 ################################################################################
 # Other group definition
@@ -78,10 +70,6 @@ openstack-monasca-log-agent
 [offline_group]
 offline-resources-node
 localhost
-
-[openstack_group]
-horizon-node
-keystone-node
 
 [memcached_group]
 memcached-node
@@ -123,10 +111,6 @@ elasticsearch-node
 [kibana_group]
 kibana-node es_node_for_kibana=elasticsearch-node
 
-[openstack_uninstaller_group]
-horizon-node
-keystone-node
-
 [monasca_uninstaller]
 cmm-node
 
@@ -143,12 +127,8 @@ monasca_log_transformer_group
 
 [all_group:children]
 offline_group
-openstack_group
 monasca_group
 monasca_agent_group
-
-[openstack_group:children]
-openstack_uninstaller_group
 
 [monasca_group:children]
 elkstack_group
