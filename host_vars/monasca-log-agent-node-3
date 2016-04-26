@@ -1,5 +1,5 @@
 ---
-# file: host_vars/cmm-monasca-log-agent
+# file: host_vars/monasca-log-agent-node-3
 
 # logstash monasca user credentials
 monasca_log_agent_project: cmm
@@ -21,9 +21,8 @@ kibana_log_dir: "{{ log_dir }}/kibana"
 elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
 kafka_log_dir: "{{ log_dir }}/kafka"
 zookeeper_log_dir: "{{ log_dir }}/zookeeper"
-influxdb_log_dir: "{{ log_dir }}/influxdb"
 
-global_dims: ["service:monasca"]
+global_dims: ["service:{{ ansible_hostname }}"]
 
 log_files:
   - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "component" => "monasca-api" }}', path: '"{{ api_log_dir }}/*.log"' }
@@ -38,4 +37,3 @@ log_files:
   - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "elasticsearch" }}', path: '"{{ elasticsearch_log_dir }}/*.log"' }
   - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "kafka" }}', path: '"{{ kafka_log_dir }}/*.log"' }
   - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "zookeeper" }}', path: '"{{ zookeeper_log_dir }}/*.log"' }
-  - { tags: '["go"]', add_field: '{ "dimensions" => { "component" => "influxdb" }}', path: '"{{ influxdb_log_dir }}/*.log"' }

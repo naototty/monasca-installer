@@ -71,6 +71,11 @@ monasca-persister-node-1         ansible_ssh_host={{ ex_node_1_host }} ansible_s
 monasca-persister-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 monasca-persister-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# Monasca-log-agent nodes for cluster
+monasca-log-agent-node-1     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-log-agent-node-2     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-log-agent-node-3     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # Load balancer node
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
@@ -96,6 +101,9 @@ openstack-monasca-agent
 [monasca_log_agent_group]
 cmm-monasca-log-agent
 openstack-monasca-log-agent
+monasca-log-agent-node-1
+monasca-log-agent-node-2
+monasca-log-agent-node-3
 
 ################################################################################
 # Other group definition
@@ -150,7 +158,6 @@ zookeeper-node-3
 log-api-node-1
 log-api-node-2
 log-api-node-3
-
 
 [monasca_log_persister_group]
 log-perister-node-1
