@@ -8,6 +8,7 @@
         - kafka
         - influxdb
         - elasticsearch
+        - memcached
         - monasca-notification
         - monasca-thresh
         - monasca-log-transformer

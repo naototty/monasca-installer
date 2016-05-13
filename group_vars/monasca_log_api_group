@@ -6,3 +6,4 @@ api_region: useast
 log_api_wait_timeout: "{{ monasca_wait_for_period }}"
 monasca_log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 monasca_log_api_bind_host: "{{ ansible_ssh_host }}"
+monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
