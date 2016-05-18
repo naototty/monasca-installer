@@ -48,6 +48,9 @@ monasca-notification-node        ansible_ssh_host={{ monasca_host }} ansible_ssh
 # Monasca-persister node
 monasca-persister-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# Monasca-log-metric node
+monasca-log-metrics-node          ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 # Monasca Agent Hosts
 cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
@@ -111,6 +114,9 @@ monasca-persister-node
 [monasca_log_api_group]
 monasca-log-api-node
 
+[monasca_log_metrics_group]
+monasca-log-metrics-node
+
 [monasca_log_persister_group]
 log-persister-node
 
@@ -140,6 +146,7 @@ kibana_group
 monasca_log_agent_group
 monasca_log_persister_group
 monasca_log_transformer_group
+monasca_log_metrics_group
 
 [all_group:children]
 offline_group

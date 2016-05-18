@@ -18,6 +18,7 @@
         - kibana
         - monasca-log-persister
         - monasca-log-agent
+        - monasca-log-metrics
   sudo: yes
   remote_user: vagrant
   tasks:

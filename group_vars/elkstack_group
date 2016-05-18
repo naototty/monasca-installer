@@ -18,3 +18,6 @@ kibana_cluster_nodes: "{{ kibana_hosts.split(',') }}"
 logstash_download: "{{ world_repo_url }}"
 elasticsearch_download: "{{ world_repo_url }}"
 kibana_download: "{{ world_repo_url }}"
+
+# logstash based log level
+logstash_verbosity: "--verbose"

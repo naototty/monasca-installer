@@ -88,3 +88,6 @@
 [submodule "roles/mariadb"]
 	path = roles/mariadb
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-mariadb.git
+[submodule "roles/monasca-log-metrics"]
+	path = roles/monasca-log-metrics
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-metrics.git

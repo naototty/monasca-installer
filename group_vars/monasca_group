@@ -32,6 +32,7 @@ kafka_hosts: "{% for item in groups['kafka_group'] -%}
               {%- endfor %}"
 kafka_replicas: "{{ kafka_hosts.split(',')|length }}"
 kafka_log_topic_replicas: "{{ kafka_replicas }}"
+kafka_log_topic_partitions: 4
 
 # zookeeper
 zookeeper_hosts: "{% for item in groups['zookeeper_group'] -%}

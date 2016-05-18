@@ -1,0 +1,37 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/monasca_log_metricss_group
+
+log_metrics_user: mon-log-metrics
+log_metrics_group: "{{ monasca_group }}"
+
+log_metrics_metric_prefix: log
+log_metrics_consumer_threads: "{{ kafka_log_topic_partitions|int }}"
+log_metrics_source:
+  topic: transformed-log
+  group: log-metric
+log_metrics_target:
+  topic: metrics
+  group: thresh-metric
+
+log_metrics_log_dir: "{{ monasca_log_dir }}/monasca-log-metrics"
+log_metrics_verbosity: "{{ logstash_verbosity }}"
+
+logrotate_scripts:
+  - name: monasca_log_metrics
+    path: "{{ log_metrics_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 {{ log_metrics_user }} {{ log_metrics_group }}
+      - copytruncate
+      - noemail
+
+# detected settings
+log_metrics_detect_log_levels:
+  - warning
+  - error

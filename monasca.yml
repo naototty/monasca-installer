@@ -28,6 +28,7 @@
 - include: monasca-log-api.yml
 - include: monasca-log-transformer.yml
 - include: monasca-log-persister.yml
+- include: monasca-log-metrics.yml
 - include: monasca-single.yml
 - include: monasca-notification.yml
 - include: monasca-persister.yml

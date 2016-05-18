@@ -17,6 +17,7 @@ persister_log_dir: "{{ monasca_log_dir }}/persister"
 logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
 monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
 monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
+monasca_log_metrics_log_dir: "{{ monasca_log_dir }}/monasca-log-metrics"
 kibana_log_dir: "{{ log_dir }}/kibana"
 elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
 kafka_log_dir: "{{ log_dir }}/kafka"
@@ -33,6 +34,7 @@ log_files:
   - { add_field: '{ "dimensions" => { "component" => "monasca-logstash-agent" }}', path: '"{{ logstash_agent_log_dir }}/*.log"' }
   - { add_field: '{ "dimensions" => { "component" => "monasca-log-persister" }}', path: '"{{ monasca_log_persister_log_dir }}/*.log"' }
   - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "component" => "monasca-log-transformer" }}', path: '"{{ monasca_log_transformer_log_dir }}/*.log"' }
+  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "component" => "monasca-log-metrics" }}', path: '"{{ monasca_log_metrics_log_dir }}/*.log"' }
   - { add_field: '{ "dimensions" => { "component" => "kibana" }}', path: '"{{ kibana_log_dir }}/*.log"' }
   - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "elasticsearch" }}', path: '"{{ elasticsearch_log_dir }}/*.log"' }
   - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "kafka" }}', path: '"{{ kafka_log_dir }}/*.log"' }

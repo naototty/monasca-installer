@@ -81,6 +81,11 @@ monasca-agent-node-1         ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_u
 monasca-agent-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 monasca-agent-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# Monasca-log-metrics nodes for cluster
+monasca-log-metrics-node-1       ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-log-metrics-node-2       ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-log-metrics-node-3       ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # Load balancer node
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
@@ -167,6 +172,11 @@ log-api-node-1
 log-api-node-2
 log-api-node-3
 
+[monasca_log_metrics_group]
+monasca-log-metrics-node-1
+monasca-log-metrics-node-2
+monasca-log-metrics-node-3
+
 [monasca_log_persister_group]
 log-perister-node-1
 log-perister-node-2
@@ -208,6 +218,7 @@ kibana_group
 monasca_log_agent_group
 monasca_log_persister_group
 monasca_log_transformer_group
+monasca_log_metrics_group
 balancer_group
 
 [all_group:children]

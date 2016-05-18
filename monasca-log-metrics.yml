@@ -1,0 +1,25 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Monasca Log Metrics: Prepare/Configure hosts"
+  hosts: monasca_log_metrics_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml
+      tags: always
+    - include: tasks/set_up.yml tags=log_metrics
+
+- name: "Monasca Log Metrics: Install on hosts"
+  hosts: monasca_log_metrics_group
+  sudo: yes
+  roles:
+    - {role: monasca-log-metrics, tags: [log_metrics]}
+    - {role: logrotate, tags: [logrotate, log_metrics]}
+
+- name: "Monasca Log Metrics: Clean-Up hosts"
+  hosts: monasca_log_metrics_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=log_metrics
