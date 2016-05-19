@@ -69,6 +69,7 @@ data_dir: /var/data
 # pip configuration
 pip_base_dir: "{{ ansible_env.HOME }}/.pip"
 pip_config_file: "{{ pip_base_dir }}/.cmm_pip.conf"
+pbr_version: 1.8.1
 
 # try to use this variable for each wait_for like task
 monasca_wait_for_period: 180
