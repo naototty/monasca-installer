@@ -45,12 +45,6 @@ monasca_checks:
         dimensions:
           component: monasca-log-api
           service: monitoring
-  mysql:
-    init_config:
-    instances:
-      - defaults_file: /root/.my.cnf
-        server: "{{ monasca_host }}"
-        user: "{{ mariadb_root_name }}"
   # this one's different because concatenated with default file
   process:
     init_config:
