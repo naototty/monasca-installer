@@ -6,6 +6,8 @@ zookeeper_version: 3.4.6
 elasticsearch_version: 2.2.0
 kibana_version: 4.4.0-linux-x64
 logstash_version: 2.2.0
+kafka_version: 0.8.2.2
+scala_version: "2.10"
 
 # configuration files
 monasca_conf_dir: "{{ etc_dir }}/monasca"
@@ -16,6 +18,7 @@ monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
 uninstall_services:
   - { name: "zookeeper", assets: [] }
+  - { name: "kafka", assets: [] }
   - { name: "elasticsearch", assets: [] }
   - { name: "kibana", assets: [] }
   - { name: "monasca-notification", assets: [
@@ -48,6 +51,7 @@ uninstall_services:
 uninstall_packages:
    RedHat:
      - { assets: ["{{ opt_dir }}/elasticsearch-{{ elasticsearch_version }}", "{{ opt_dir }}/elasticsearch"] }
+     - { assets: ["{{ opt_dir }}/kafka_{{scala_version}}-{{ kafka_version }}", "{{ opt_dir }}/kafka"] }
      - { assets: "{% if elasticsearch_data_dir is defined -%}
                     {% if elasticsearch_data_dir is string -%}
                       {{ elasticsearch_data_dir.split(',') }}
@@ -69,6 +73,8 @@ uninstall_directories:
   - { dir: "{{ monasca_conf_dir }}", force: True}
   - { dir: "{{ monasca_download_dir }}", force: True}
   - { dir: "/var/lib/zookeeper", force: True}
+  - { dir: "/etc/kafka", force: True}
+  - { dir: "/var/kafka", force: True}
 
 # post installation directories that should be removed
 clean_up_dirs:
