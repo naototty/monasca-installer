@@ -10,7 +10,9 @@ logstash_version: 2.2.0
 # configuration files
 monasca_conf_dir: "{{ etc_dir }}/monasca"
 monasca_work_dir: "{{ opt_dir }}/monasca"
-kafka_conf_dir: /etc/kafka
+
+monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
+monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
 uninstall_services:
   - { name: "zookeeper", assets: [] }
@@ -30,7 +32,11 @@ uninstall_services:
       "{{ monasca_work_dir }}/monasca-thresh.jar"]}
   - { name: "monasca-log-api", assets: [
       "{{ monasca_conf_dir }}/log-api-config.conf",
-      "{{ monasca_conf_dir }}/log-api-config.ini"]}
+      "{{ monasca_conf_dir }}/log-api-config.ini",
+      "{{ monasca_log_api_virtualenv_dir }}"]}
+  - { name: "monasca-log-metrics", assets: [
+      "{{ monasca_conf_dir }}/log/log-metrics.conf"]}
+  - { name: "memcached", assets: [] }
   - { name: "monasca-api", assets: [
       "{{ monasca_conf_dir }}/api-config.yml",
       "/etc/init/monasca-api.conf",
@@ -53,6 +59,7 @@ uninstall_packages:
                   {%- endif -%}" }
      - { assets: ["{{ opt_dir }}/kibana-{{ kibana_version }}", "{{ opt_dir }}/kibana"] }
      - { assets: ["{{ opt_dir }}/logstash-{{ logstash_version }}", "{{ opt_dir }}/logstash"] }
+     - { rpm: "memcached", assets: ["/etc/sysconfig/memcached.rpmsave"] }
      - { assets: ["{{ opt_dir }}/zookeeper-{{ zookeeper_version }}"] }
      - { pip: "python-monascaclient", assets: [ ] }
 # post uninstallation directories that should be removed
