@@ -10,12 +10,12 @@ domain_id: default
 log_agent_trg: openstack
 log_files:
   - { tags: '["syslog"]', add_field: '{ "dimensions" => { "service" => "system" }}', path: '"{{ log_dir }}/messages"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "keystone" }}', path: '"{{ log_dir }}/keystone"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "glance" }}', path: '"{{ log_dir }}/glance"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder" }}', path: '"{{ log_dir }}/cinder"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer" }}', path: '"{{ log_dir }}/ceilometer"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova" }}', path: '"{{ log_dir }}/nova"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron" }}', path: '"{{ log_dir }}/neutron"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "openvswitch" }}', path: '"{{ log_dir }}/openvswitch"' }
-  - { tags: '["syslog"]', add_field: '{ "dimensions" => { "service" => "swift" }}', path: '"{{ log_dir }}/swift"' }
-  - { add_field: '{ "dimensions" => { "service" => "mongodb" }}', path: '"{{ log_dir }}/mongodb"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "keystone" }}', path: '"{{ log_dir }}/keystone/*"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "glance" }}', path: '"{{ log_dir }}/glance/*"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder" }}', path: '"{{ log_dir }}/cinder/*"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer" }}', path: '"{{ log_dir }}/ceilometer/*"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova" }}', path: '"{{ log_dir }}/nova/*"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron" }}', path: '"{{ log_dir }}/neutron/*"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "openvswitch" }}', path: '"{{ log_dir }}/openvswitch/*"' }
+  - { tags: '["syslog"]', add_field: '{ "dimensions" => { "service" => "swift" }}', path: '"{{ log_dir }}/swift/*"' }
+  - { add_field: '{ "dimensions" => { "service" => "mongodb" }}', path: '"{{ log_dir }}/mongodb/*"' }
