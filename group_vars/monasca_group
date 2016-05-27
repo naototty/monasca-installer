@@ -118,7 +118,6 @@ agentAuthorizedRoles: "cmm-agent"
 
 # kibana
 kibana_log_dir: "{{ log_dir }}/kibana"
-kibana_log_level: "verbose"
 
 # log directories to be monitored
 logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
