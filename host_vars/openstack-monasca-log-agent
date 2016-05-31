@@ -10,12 +10,82 @@ domain_id: default
 log_agent_trg: openstack
 log_files:
   - { tags: '["syslog"]', add_field: '{ "dimensions" => { "service" => "system" }}', path: '"{{ log_dir }}/messages"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "keystone" }}', path: '"{{ log_dir }}/keystone/*"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "glance" }}', path: '"{{ log_dir }}/glance/*"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder" }}', path: '"{{ log_dir }}/cinder/*"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer" }}', path: '"{{ log_dir }}/ceilometer/*"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova" }}', path: '"{{ log_dir }}/nova/*"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron" }}', path: '"{{ log_dir }}/neutron/*"' }
-  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "openvswitch" }}', path: '"{{ log_dir }}/openvswitch/*"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "keystone"
+                                                              "component" => "keystone-admin" }}', path: '"{{ log_dir }}/keystone/admin.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "keystone"
+                                                              "component" => "keystone-main" }}', path: '"{{ log_dir }}/keystone/main.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "keystone" }}', path: '"{{ log_dir }}/keystone/keystone.log"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "glance"
+                                                              "component" => "glance-api" }}', path: '"{{ log_dir }}/glance/api.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "glance"
+                                                              "component" => "glance-registry" }}', path: '"{{ log_dir }}/glance/registry.log"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder"
+                                                              "component" => "cinder-api" }}', path: '"{{ log_dir }}/cinder/api.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder"
+                                                              "component" => "cinder-backup" }}', path: '"{{ log_dir }}/cinder/backup.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder"
+                                                              "component" => "cinder-manager" }}', path: '"{{ log_dir }}/cinder/cinder-manager.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder"
+                                                              "component" => "cinder-scheduler" }}', path: '"{{ log_dir }}/cinder/scheduler.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "cinder"
+                                                              "component" => "cinder-volume" }}', path: '"{{ log_dir }}/cinder/volume.log"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-agent" }}', path: '"{{ log_dir }}/ceilometer/agent-notification.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-alarm-evaluator" }}', path: '"{{ log_dir }}/ceilometer/alarm-evaluator.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-alarm-notifier" }}', path: '"{{ log_dir }}/ceilometer/alarm-notifier.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-api" }}', path: '"{{ log_dir }}/ceilometer/api.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-dbsync" }}', path: '"{{ log_dir }}/ceilometer/ceilometer-dbsync.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-central" }}', path: '"{{ log_dir }}/ceilometer/central.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-collector" }}', path: '"{{ log_dir }}/ceilometer/collector.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "ceilometer"
+                                                              "component" => "ceilometer-compute" }}', path: '"{{ log_dir }}/ceilometer/compute.log"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-api" }}', path: '"{{ log_dir }}/nova/nova-api.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-cert" }}', path: '"{{ log_dir }}/nova/nova-cert.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-compute" }}', path: '"{{ log_dir }}/nova/nova-compute.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-conductor" }}', path: '"{{ log_dir }}/nova/nova-conductor.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-consoleauth" }}', path: '"{{ log_dir }}/nova/nova-consoleauth.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-manage" }}', path: '"{{ log_dir }}/nova/nova-manage.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-novncproxy" }}', path: '"{{ log_dir }}/nova/nova-novncproxy.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "nova"
+                                                              "component" => "nova-scheduler" }}', path: '"{{ log_dir }}/nova/nova-scheduler.log"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
+                                                              "component" => "neutron-server" }}', path: '"{{ log_dir }}/neutron/server.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
+                                                              "component" => "neutron-l3-agent" }}', path: '"{{ log_dir }}/neutron/l3-agent.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
+                                                              "component" => "neutron-metadata-agent" }}', path: '"{{ log_dir }}/neutron/metadata-agent.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
+                                                              "component" => "neutron-openvswitch-agent" }}', path: '"{{ log_dir }}/neutron/openvswitch-agent.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
+                                                              "component" => "neutron-dhcp-agent" }}', path: '"{{ log_dir }}/neutron/dhcp-agent.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
+                                                              "component" => "neutron-ovs-clenup" }}', path: '"{{ log_dir }}/neutron/ovs-cleanup.log"' }
+
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "openvswitch"
+                                                              "component" => "ovsdb-server" }}', path: '"{{ log_dir }}/openvswitch/ovsdb-server.log"' }
+  - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "openvswitch"
+                                                              "component" => "ovs-vswitchd" }}', path: '"{{ log_dir }}/openvswitch/ovs-vswitchd.log"' }
+
   - { tags: '["syslog"]', add_field: '{ "dimensions" => { "service" => "swift" }}', path: '"{{ log_dir }}/swift/*"' }
-  - { add_field: '{ "dimensions" => { "service" => "mongodb" }}', path: '"{{ log_dir }}/mongodb/*"' }
+
+  - { add_field: '{ "dimensions" => { "service" => "mongodb"
+                                      "component" => "mongodb-mongod" }}', path: '"{{ log_dir }}/mongodb/*"' }
