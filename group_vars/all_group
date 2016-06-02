@@ -30,7 +30,7 @@ keystone_url: "http://{{ keystone_host }}:{{ keystone_user_port }}/v{{ keystone_
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
 monasca_api_url: "http://{{ monasca_host }}:{{ monasca_api_client_port|int }}/v2.0"
-monasca_log_api_url: "http://{{ monasca_host }}:{{ monasca_log_api_port|int }}"
+monasca_log_api_url: "http://{{ monasca_host }}:{{ monasca_log_api_port|int }}/v3.0"
 kibana_url: "http://{{ monasca_host }}:{{ kibana_port }}"
 
 # Monasca Api CLI - Credentials
