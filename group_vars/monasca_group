@@ -25,6 +25,7 @@ influxdb_users:
 influxdb_raft_port: 8085
 influxdb_log_dir: "{{ log_dir }}/influxdb"
 influxdb_version: 0.9.1-1
+influxdb_http_log_enabled: False
 
 kafka_log_topic_max_message_bytes: 1048576
 monasca_log_api_max_message_size: "{{ kafka_log_topic_max_message_bytes }}"
