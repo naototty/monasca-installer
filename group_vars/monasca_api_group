@@ -9,3 +9,5 @@ database_user: monapi
 database_password: "{{ database_monapi_password }}"
 influxdb_user: mon_api
 influxdb_password: "{{ influxdb_mon_api_password }}"
+
+monasca_api_requests_log_level: "OFF"
