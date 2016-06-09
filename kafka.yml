@@ -10,6 +10,7 @@
   vars_files:
     - credentials.yml
   pre_tasks:
+    - include: tasks/verify_ansible.yml
     - include: tasks/verify_credentials.yml
       tags: always
     - include: tasks/set_up.yml tags=kafka

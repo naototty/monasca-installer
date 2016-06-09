@@ -4,5 +4,7 @@
 - name: "Load Balancer: Install on host"
   hosts: balancer_group
   sudo: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
   roles:
     - {role: load-balancer, tags: [balancer]}
