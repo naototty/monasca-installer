@@ -9,3 +9,5 @@ monasca_log_api_bind_host: "{{ ansible_ssh_host }}"
 monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
 
 monasca_log_api_version: 0.0.3.dev12
+
+monasca_log_api_max_message_size: 943718
