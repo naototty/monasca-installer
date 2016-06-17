@@ -1,4 +1,5 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
 # file: host_vars/horizon-monasca-agent
 
 # Monasca Agent Configuration

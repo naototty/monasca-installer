@@ -1,5 +1,7 @@
 # This ansible file is only for development usage. It prepares the ansible-master environment to install monasca
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Prepare Ansible Master Environment
   hosts: all
   sudo: yes

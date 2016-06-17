@@ -1,4 +1,6 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Install Offline resources
   hosts: offline-resources-node
   sudo: yes

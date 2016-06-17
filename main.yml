@@ -1,3 +1,6 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
 - include: verify_credentials.yml
 - include: offline.yml
 - include: openstack.yml

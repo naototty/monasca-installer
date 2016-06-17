@@ -1,4 +1,6 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Uninstall Monasca Log Agent
   hosts: monasca_log_agent_group
   sudo: yes

@@ -1,4 +1,6 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
   sudo: yes

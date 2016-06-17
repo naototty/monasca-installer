@@ -1,4 +1,5 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
 # file: host_vars/monasca-log-agent-node-3
 
 # logstash monasca user credentials

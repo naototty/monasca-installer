@@ -1,4 +1,5 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
 # file: group_vars/memcached_group
 
 memcached_pkg_src_url: "{{ world_repo_url }}"

@@ -1,4 +1,5 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
 # file: group_vars/openstack_uninstaller
 
 monasca_conf_dir: /etc/monasca

@@ -1,4 +1,6 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 is_horizon_node: true
 monasca_ui_name: monasca-ui
 

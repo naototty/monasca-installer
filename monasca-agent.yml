@@ -1,4 +1,6 @@
 ---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Prepare/Configure host
   hosts: monasca_agent_group
   sudo: yes

@@ -1,3 +1,6 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
 - name: Uninstall [monasca]
   hosts: cmm-node
   sudo: yes
