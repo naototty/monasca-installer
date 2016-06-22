@@ -1,0 +1,27 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Storm: Prepare/ Configure hosts"
+  hosts: storm_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_credentials.yml
+      tags: always
+    - include: tasks/set_up.yml tags=pre_tasks
+
+- name: "Storm: Install on host"
+  hosts: storm_group
+  sudo: yes
+  roles:
+    - {role: storm,
+       storm_nimbus_enabled: true,
+       storm_supervisor_enabled: true,
+       tags: [storm]}
+
+- name: "Storm: Clean-Up host"
+  hosts: storm_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=post_tasks

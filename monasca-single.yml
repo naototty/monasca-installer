@@ -33,10 +33,6 @@
     - {role: monasca-schema,
        kafka_topics_enabled: False,
        tags: [schema]}
-    - {role: storm,
-       storm_nimbus_enabled: true,
-       storm_supervisor_enabled: true,
-       tags: [storm]}
     - {role: monasca-thresh,
        database_user: thresh,
        database_password: "{{ database_thresh_password }}",
