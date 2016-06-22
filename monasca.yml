@@ -31,6 +31,8 @@
 - include: monasca-log-persister.yml
 - include: monasca-log-metrics.yml
 - include: storm.yml
+- include: mariadb.yml
+- include: haproxy.yml
 - include: monasca-single.yml
 - include: monasca-thresh.yml
 - include: monasca-notification.yml

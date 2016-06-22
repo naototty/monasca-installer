@@ -1,0 +1,29 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "HAProxy: Prepare/Configure host"
+  hosts: haproxy_group
+  become: true
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
+
+- name: "HAProxy: Install on host"
+  hosts: haproxy_group
+  become: true
+  roles:
+    - {role: haproxy, tags: [haproxy], when: number_of_database_hosts | int > 1}
+    - {role: logrotate, tags: [haproxy, logrotate], when: number_of_database_hosts | int > 1}
+
+- name: "HAProxy: Clean-Up host"
+  hosts: haproxy_group
+  become: true
+  post_tasks:
+   - include: tasks/clean_up.yml
+     tags: [always]

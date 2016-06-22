@@ -44,3 +44,7 @@
   name: monasca-log-schema
 - src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-local_packager_repo.git
   name: local_packager_repo
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-galera.git
+  name: galera
+- src: git+git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-haproxy.git
+  name: haproxy

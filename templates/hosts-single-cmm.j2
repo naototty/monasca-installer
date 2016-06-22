@@ -61,6 +61,9 @@ storm-supervisor-node            ansible_ssh_host={{ monasca_host }} ansible_ssh
 # Monasca-thresh host
 monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# MariaDB node
+mariadb-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -95,7 +98,7 @@ zookeeper-node
 cmm-node
 
 [monasca_api_group]
-monasca-api-node
+monasca-api-node database_node_for_api=cmm-node
 
 [monasca_notification_group]
 monasca-notification-node database_node_for_notification=cmm-node
@@ -128,7 +131,10 @@ storm-nimbus-node
 storm-supervisor-node
 
 [monasca_thresh_group]
-monasca-thresh-node
+monasca-thresh-node database_node_for_thresh=cmm-node
+
+[mariadb_group]
+mariadb-node
 
 ################################################################################
 # Group inheritance
@@ -161,3 +167,4 @@ monasca_notification_group
 monasca_persister_group
 storm_group
 monasca_thresh_group
+mariadb_group

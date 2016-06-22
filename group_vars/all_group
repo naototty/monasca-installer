@@ -13,6 +13,7 @@ elasticsearch_port: 9200
 kafka_port: 9092
 zookeeper_port: 2181
 memcached_port: 11211
+mysql_port: 3306
 
 # hosts
 offline_host: 192.168.10.4

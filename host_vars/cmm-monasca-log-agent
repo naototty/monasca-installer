@@ -26,6 +26,8 @@ zookeeper_log_dir: "{{ log_dir }}/zookeeper"
 influxdb_log_dir: "{{ log_dir }}/influxdb"
 storm_log_dir: "{{ log_dir }}/storm"
 thresh_log_dir: "{{ storm_log_dir }}/workers-artifacts/{{ thresh_topology_name }}-*/*"
+mariadb_log_dir: "{{ log_dir }}/mariadb"
+haproxy_log_file: "{{ log_dir }}/haproxy.log"
 
 global_dims: ["service:monasca"]
 
@@ -58,11 +60,13 @@ log_files:
                                                                "component" => "zookeeper" }}', path: '"{{ zookeeper_log_dir }}/*.log"' }
   - { tags: '["go"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                       "component" => "influxdb" }}', path: '"{{ influxdb_log_dir }}/*.log"' }
-
   - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "storm"
                                                                 "component" => "storm-nimbus" }}', path: '"{{ storm_log_dir }}/*nimbus.log"' }
   - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "storm"
                                                                 "component" => "storm-supervisor" }}', path: '"{{ storm_log_dir }}/*supervisor.log"' }
-
   - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                                 "component" => "monasca-thresh" }}', path: '"{{ thresh_log_dir }}/*.log"' }
+  - { tags: '["mariadb"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                           "component" => "mariadb" }}', path: '"{{ mariadb_log_dir }}/*.log"' }
+  - { tags: '["haproxy"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                           "component" => "haproxy" }}', path: '"{{ haproxy_log_file }}"' }

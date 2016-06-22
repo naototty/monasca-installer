@@ -32,9 +32,10 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: influxdb, tags: [influxdb]}
-    - {role: mariadb, tags: [mariadb]}
     - {role: monasca-schema,
        kafka_topics_enabled: False,
+       influxdb_schema_enabled: True,
+       mysql_schema_enabled: False,
        tags: [schema]}
     - {role: logrotate, tags: [logrotate]}
 

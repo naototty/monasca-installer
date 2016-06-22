@@ -1,0 +1,68 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "MariaDB: Prepare/Configure hosts"
+  hosts: mariadb_group
+  become: true
+  vars:
+    credential_keys_list:
+      - database_notification_password
+      - database_thresh_password
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_pip.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
+  roles:
+    - {role: pip, tags: [pip, resources]}
+
+- name: "MariaDB: Install on host"
+  hosts: mariadb_group
+  become: true
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: mariadb, tags: [mariadb], when: number_of_database_hosts | int == 1 }
+    - {role: logrotate, tags: [mariadb, logrotate], when: number_of_database_hosts | int == 1 }
+
+- name: "MariaDB Galera cluster: Install on hosts"
+  hosts: mariadb_group
+  become: true
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: galera, tags: [mariadb], when: number_of_database_hosts | int > 1 }
+    - {role: logrotate, tags: [mariadb, logrotate], when: number_of_database_hosts | int > 1 }
+
+- name: "MariaDB: Create database schema"
+  hosts: mariadb_group[0]
+  become: true
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: monasca-schema,
+      kafka_topics_enabled: False,
+      influxdb_schema_enabled: False,
+      mysql_schema_enabled: True,
+      tags: [schema]}
+
+- name: "MariaDB: Clean-Up hosts"
+  hosts: mariadb_group
+  become: true
+  post_tasks:
+   - include: tasks/clean_up.yml
+     tags: [always]

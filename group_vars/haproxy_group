@@ -1,0 +1,45 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/haproxy_group
+
+clustercheck_port: 9199
+
+mariadb_hosts: "{% for item in groups['mariadb_group'] -%}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ mysql_port | int }}
+                {%- endfor %}"
+mariadb_nodes: "{{ mariadb_hosts.split(',') }}"
+
+load_balancer_host: "{{ ansible_ssh_host }}"
+
+# Add components to balancer configuration
+balancing_components:
+  - {
+      name: "galera_cluster",
+      load_balancing_port: "{{ mysql_port | int }}",
+      balancing_algorithm: "leastconn",
+      nodes: "{{ mariadb_nodes }}",
+      params: [
+        "port {{ clustercheck_port }}",
+      ]
+    }
+
+# Web gui needs to be enabled for Monasca Agent to gather
+# metrics from HAProxy.
+webgui_enable: true
+
+# Logrotate configuration
+logrotate_scripts:
+  - name: haproxy
+    path: "{{ haproxy_log_file }}"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 {{ haproxy_user }} {{ haproxy_group }}
+      - copytruncate
+      - nomail
+    scripts:
+      postrotate: "/bin/kill -HUP `cat /var/run/syslogd.pid 2> /dev/null` 2> /dev/null || true; /bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true"

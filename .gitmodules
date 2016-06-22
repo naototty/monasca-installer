@@ -91,3 +91,9 @@
 [submodule "roles/monasca-log-metrics"]
 	path = roles/monasca-log-metrics
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-metrics.git
+[submodule "roles/galera"]
+	path = roles/galera
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-galera.git
+[submodule "roles/haproxy"]
+	path = roles/haproxy
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-haproxy.git

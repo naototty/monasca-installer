@@ -12,6 +12,7 @@
     ex_node_2_host: 192.168.10.7
     ex_node_3_host: 192.168.10.8
     balancer_host: 192.168.10.4
+    haproxy_host: 192.168.10.4
     ssh_user_monasca: vagrant
     ssh_user_openstack: vagrant
     ssh_user_ex_node_1: vagrant

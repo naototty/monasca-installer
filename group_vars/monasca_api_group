@@ -5,6 +5,7 @@ monasca_api_bind_host: "{{ ansible_ssh_host }}"
 monasca_api_tarball_base_url: "{{ world_repo_url }}"
 api_region: useast
 
+database_host: "{{ hostvars[database_node_for_api]['ansible_ssh_host'] }}"
 database_user: monapi
 database_password: "{{ database_monapi_password }}"
 influxdb_user: mon_api

@@ -34,9 +34,9 @@ zookeeper-node-2                 ansible_ssh_host={{ ex_node_2_host }} ansible_s
 zookeeper-node-3                 ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Log persister nodes for cluster
-log-perister-node-1              ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
-log-perister-node-2              ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
-log-perister-node-3              ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+log-persister-node-1             ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+log-persister-node-2             ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+log-persister-node-3             ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Log transformer nodes for cluster
 log-transformer-node-1           ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
@@ -112,6 +112,14 @@ storm-supervisor-node-3          ansible_ssh_host={{ ex_node_3_host }} ansible_s
 # Monasca-thresh  hosts
 monasca-thresh-node              ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
 
+# MariaDB nodes for Galera cluster
+mariadb-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+mariadb-node-2                   ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+mariadb-node-3                   ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# HAProxy node
+haproxy-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
+
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -154,14 +162,14 @@ monasca-persister-node-2
 monasca-persister-node-3
 
 [monasca_api_group]
-monasca-api-node-1
-monasca-api-node-2
-monasca-api-node-3
+monasca-api-node-1 database_node_for_api=haproxy-node
+monasca-api-node-2 database_node_for_api=haproxy-node
+monasca-api-node-3 database_node_for_api=haproxy-node
 
 [monasca_notification_group]
-monasca-notification-node-1 database_node_for_notification=cmm-node
-monasca-notification-node-2 database_node_for_notification=cmm-node
-monasca-notification-node-3 database_node_for_notification=cmm-node
+monasca-notification-node-1 database_node_for_notification=haproxy-node
+monasca-notification-node-2 database_node_for_notification=haproxy-node
+monasca-notification-node-3 database_node_for_notification=haproxy-node
 
 [memcached_group]
 memcached-node-1
@@ -189,9 +197,9 @@ monasca-log-metrics-node-2
 monasca-log-metrics-node-3
 
 [monasca_log_persister_group]
-log-perister-node-1
-log-perister-node-2
-log-perister-node-3
+log-persister-node-1
+log-persister-node-2
+log-persister-node-3
 
 [monasca_log_transformer_group]
 log-transformer-node-1
@@ -230,7 +238,15 @@ storm-supervisor-node-2
 storm-supervisor-node-3
 
 [monasca_thresh_group]
-monasca-thresh-node
+monasca-thresh-node database_node_for_thresh=haproxy-node
+
+[mariadb_group]
+mariadb-node-1
+mariadb-node-2
+mariadb-node-3
+
+[haproxy_group]
+haproxy-node
 
 ################################################################################
 # Group inheritance
@@ -270,3 +286,5 @@ monasca_notification_group
 monasca_persister_group
 storm_group
 monasca_thresh_group
+mariadb_group
+haproxy_group

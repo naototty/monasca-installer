@@ -1,0 +1,51 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/mariadb_group
+
+mariadb_version: 5.5.50
+mariadb_host: "{{ monasca_host }}"
+clustercheck_port: 9199
+
+# System user settings
+mariadb_user: mysql
+mariadb_group: mysql
+
+log_dir: /var/log
+mariadb_log_dir: "{{ log_dir }}/mariadb"
+
+mariadb_deb_src_url: "{{ world_repo_url }}/mariadb"
+mariadb_galera_deb_src_url: "{{ world_repo_url }}/mariadb"
+
+administrator_user: root
+administrator_password: ""
+socket_path: /var/lib/mysql/mysql.sock
+
+galera_cluster_name: "cmm-cluster"
+galera_starting_node: "{{ groups['mariadb_group'][0] }}"
+
+mariadb_galera_hosts: "{% for item in groups['mariadb_group'] -%}
+                           {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ galera_port | int }}
+                       {%- endfor %}"
+mariadb_galera_nodes: "{{ mariadb_galera_hosts.split(',') }}"
+
+load_balancer_hosts: "{% for item in groups['haproxy_group'] -%}
+                          {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
+                      {%- endfor %}"
+load_balancer_nodes: "{{ load_balancer_hosts.split(',') }}"
+
+# Logrotate configuration
+logrotate_scripts:
+  - name: mysql
+    path: "{{ mariadb_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 {{ mariadb_user }} {{ mariadb_group }}
+      - copytruncate
+      - nomail
+    scripts:
+      postrotate: "if test -x /usr/bin/mysqladmin && /usr/bin/mysqladmin ping &>/dev/null; then /usr/bin/mysqladmin flush-logs; fi"
