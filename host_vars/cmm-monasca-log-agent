@@ -28,17 +28,31 @@ influxdb_log_dir: "{{ log_dir }}/influxdb"
 global_dims: ["service:monasca"]
 
 log_files:
-  - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "component" => "monasca-api" }}', path: '"{{ api_log_dir }}/*.log"' }
-  - { tags: '["monasca_log_api"]', add_field: '{ "dimensions" => { "component" => "monasca-log-api" }}', path: '"{{ monasca_log_api_log_dir }}/monasca-log-api.log"' }
-  - { tags: '["python"]', add_field: '{ "dimensions" => { "component" => "monasca-notification" }}', path: '"{{ notification_log_dir }}/*.log"' }
-  - { tags: '["python"]', add_field: '{ "dimensions" => { "component" => "monasca-agent" }}', path: '"{{ monasca_agent_log_dir }}/*.log"' }
-  - { tags: '["monasca_persister"]', add_field: '{ "dimensions" => { "component" => "monasca-persister" }}', path: '"{{ persister_log_dir }}/*.log"' }
-  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "component" => "monasca-logstash-agent" }}', path: '"{{ logstash_agent_log_dir }}/*.log"' }
-  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "component" => "monasca-log-persister" }}', path: '"{{ monasca_log_persister_log_dir }}/*.log"' }
-  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "component" => "monasca-log-metrics" }}', path: '"{{ monasca_log_metrics_log_dir }}/*.log"' }
-  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "component" => "monasca-log-transformer" }}', path: '"{{ monasca_log_transformer_log_dir }}/*.log"' }
-  - { add_field: '{ "dimensions" => { "component" => "kibana" }}', path: '"{{ kibana_log_dir }}/*.log"' }
-  - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "elasticsearch" }}', path: '"{{ elasticsearch_log_dir }}/*.log"' }
-  - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "kafka" }}', path: '"{{ kafka_log_dir }}/*.log"' }
-  - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "component" => "zookeeper" }}', path: '"{{ zookeeper_log_dir }}/*.log"' }
-  - { tags: '["go"]', add_field: '{ "dimensions" => { "component" => "influxdb" }}', path: '"{{ influxdb_log_dir }}/*.log"' }
+  - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                "component" => "monasca-api" }}', path: '"{{ api_log_dir }}/*.log"' }
+  - { tags: '["monasca_log_api"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                   "component" => "monasca-log-api" }}', path: '"{{ monasca_log_api_log_dir }}/monasca-log-api.log"' }
+  - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                          "component" => "monasca-notification" }}', path: '"{{ notification_log_dir }}/*.log"' }
+  - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                          "component" => "monasca-agent" }}', path: '"{{ monasca_agent_log_dir }}/*.log"' }
+  - { tags: '["monasca_persister"]', add_field: '{ "service" => "monitoring"
+                                                   "dimensions" => { "component" => "monasca-persister" }}', path: '"{{ persister_log_dir }}/*.log"' }
+  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                           "component" => "monasca-logstash-agent" }}', path: '"{{ logstash_agent_log_dir }}/*.log"' }
+  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                           "component" => "monasca-log-persister" }}', path: '"{{ monasca_log_persister_log_dir }}/*.log"' }
+  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                           "component" => "monasca-log-metrics" }}', path: '"{{ monasca_log_metrics_log_dir }}/*.log"' }
+  - { tags: '["monasca_log_transformer"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                           "component" => "monasca-log-transformer" }}', path: '"{{ monasca_log_transformer_log_dir }}/*.log"' }
+  - { add_field: '{ "dimensions" => { "service" => "monitoring"
+                                      "component" => "kibana" }}', path: '"{{ kibana_log_dir }}/*.log"' }
+  - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                               "component" => "elasticsearch" }}', path: '"{{ elasticsearch_log_dir }}/*.log"' }
+  - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                               "component" => "kafka" }}', path: '"{{ kafka_log_dir }}/*.log"' }
+  - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                               "component" => "zookeeper" }}', path: '"{{ zookeeper_log_dir }}/*.log"' }
+  - { tags: '["go"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                      "component" => "influxdb" }}', path: '"{{ influxdb_log_dir }}/*.log"' }

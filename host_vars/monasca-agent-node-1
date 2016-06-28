@@ -26,6 +26,9 @@ monasca_checks:
     init_config:
     instances:
       - url: "{{ elasticsearch_url }}"
+        dimensions:
+          component: elasticsearch
+          service: monitoring
   http_check:
     init_config:
     instances:
@@ -33,16 +36,26 @@ monasca_checks:
         url: "{{ kibana_url }}"
         timeout: 1
         dimensions:
-          service: kibana
+          component: kibana
+          service: monitoring
       - name: Monasca Log Api
-        url: "http://{{ ansible_ssh_host }}:{{ monsasca_log_api_admin_port }}/healthcheck"
+        url: "http://{{ ansible_ssh_host }}:{{ monasca_log_api_port|int }}/healthcheck"
         timeout: 1
         dimensions:
-          service: monasca-log-api
+          component: monasca-log-api
+          service: monitoring
   # this one's different because concatenated with default file
   process:
     init_config:
     instances:
+      - built_by: MonLogMetrics
+        detailed: true
+        name: monasca.log.metrics
+        search_string: ['monasca-log-metrics']
+        exact_match: False
+        dimensions:
+          component: monasca-log-metrics
+          service: monitoring
       - built_by: MonLogAgent
         detailed: true
         name: monasca.log.agent
@@ -50,7 +63,7 @@ monasca_checks:
         exact_match: False
         dimensions:
           component: monasca-log-agent
-          service: logs-monitoring
+          service: monitoring
       - built_by: MonLogTransformer
         detailed: true
         name: monasca.log.transformer
@@ -58,7 +71,7 @@ monasca_checks:
         exact_match: False
         dimensions:
           component: monasca-log-transformer
-          service: logs-monitoring
+          service: monitoring
       - built_by: MonLogPersister
         detailed: true
         name: monasca.log.persister
@@ -66,7 +79,7 @@ monasca_checks:
         exact_match: False
         dimensions:
           component: monasca-log-persister
-          service: logs-monitoring
+          service: monitoring
       - built_by: MonLogApi
         detailed: true
         name: monasca.log.api
@@ -74,4 +87,4 @@ monasca_checks:
         exact_match: False
         dimensions:
           component: monasca-log-api
-          service: logs-monitoring
+          service: monitoring
