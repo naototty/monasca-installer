@@ -74,14 +74,14 @@ monasca-persister-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_s
 monasca-persister-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Monasca-log-agent nodes for cluster
-monasca-log-agent-node-1     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
-monasca-log-agent-node-2     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
-monasca-log-agent-node-3     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+monasca-log-agent-node-1         ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-log-agent-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-log-agent-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Monasca-agent nodes for cluster
-monasca-agent-node-1         ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
-monasca-agent-node-2         ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
-monasca-agent-node-3         ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+monasca-agent-node-1             ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+monasca-agent-node-2             ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+monasca-agent-node-3             ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Monasca-log-metrics nodes for cluster
 monasca-log-metrics-node-1       ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
@@ -98,6 +98,9 @@ openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_s
 # Monasca Log Agent Hosts
 cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+# Storm nodes
+storm-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -206,6 +209,9 @@ keystone-node
 [monasca_uninstaller]
 cmm-node
 
+[storm_group]
+storm-node
+
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -238,3 +244,4 @@ balancer_group
 monasca_api_group
 monasca_notification_group
 monasca_persister_group
+storm_group
