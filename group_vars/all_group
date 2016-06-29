@@ -67,6 +67,15 @@ log_dir: /var/log
 # Data directories
 data_dir: /var/data
 
+# Supported varsions of dependencies
+ansible_version_min:
+  ver: 1.9.1
+  constraint: ">="
+ansible_version_max:
+  ver: 1.9.6
+  constraint: "<="
+pip_version_min: 7.0.3
+
 # pip configuration
 pip_base_dir: "{{ ansible_env.HOME }}/.pip"
 pip_config_file: "{{ pip_base_dir }}/.cmm_pip.conf"

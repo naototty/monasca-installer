@@ -1,0 +1,18 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Check to see if Pip is already installed
+  command: pip --version
+  ignore_errors: true
+  changed_when: pip_is_installed.rc == 0
+  register: pip_is_installed
+
+- name: Get installed Pip version
+  shell: pip --version | awk '{print $2}'
+  register: pip_version
+  when: pip_is_installed is defined and pip_is_installed.rc == 0
+
+- name: Verify if installed Pip version is supported
+  fail: msg="Pip is in the wrong version - {{ pip_version.stdout }}. Supported min pip version {{ pip_version_min }}"
+  when: not ((pip_version is defined and pip_version.stdout != '') and
+    (pip_version.stdout | version_compare(pip_version_min, '>=')))

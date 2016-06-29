@@ -4,6 +4,8 @@
 - name: Uninstall [monasca]
   hosts: cmm-node
   sudo: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
   roles:
     - {role: uninstaller, tags: [uninstaller, uninstaller_monasca]}
 

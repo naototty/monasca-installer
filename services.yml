@@ -25,6 +25,8 @@
         - monasca-log-metrics
   sudo: yes
   remote_user: vagrant
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
   tasks:
     - name: Start services
       service: name="{{item}}" state="started"

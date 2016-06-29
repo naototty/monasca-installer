@@ -7,6 +7,8 @@
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
+    - include: tasks/verify_ansible.yml
+    - include: tasks/verify_pip.yml
     - include: tasks/set_up.yml
   roles:
     - {role: monasca-resources, tags: [storage, resources]}
