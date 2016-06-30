@@ -17,7 +17,7 @@
     - include: tasks/verify_pip.yml
     - include: tasks/verify_credentials.yml
       tags: always
-    - include: tasks/set_up.yml tags=pre_tasks
+    - include: tasks/set_up.yml tags=always
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
