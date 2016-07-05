@@ -1,0 +1,32 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Prepare/Configure host
+  hosts: monasca_thresh_group
+  sudo: yes
+  vars:
+    credential_keys_list:
+      - database_thresh_password
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include:  tasks/set_up.yml
+      tags: [always]
+
+- name: Monasca-thresh Installation
+  hosts: monasca_thresh_group
+  sudo: yes
+  vars_files:
+    - credentials.yml
+  roles:
+    - {role: monasca-thresh, tags: [thresh]}
+
+- name: Clean-Up host
+  hosts: monasca_thresh_group
+  sudo: yes
+  post_tasks:
+    - include: tasks/clean_up.yml
+      tags: [always]

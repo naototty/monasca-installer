@@ -7,23 +7,22 @@
   vars_files:
     - credentials.yml
   pre_tasks:
-    - include: tasks/verify_credentials.yml
+    - include: tasks/verify_ansible.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [pre_tasks]
+      tags: [always]
 
 - name: "Storm: Install on host"
   hosts: storm_group
   sudo: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
   roles:
-    - {role: storm,
-       storm_nimbus_enabled: true,
-       storm_supervisor_enabled: true,
-       tags: [storm]}
+    - {role: storm, tags: [storm] }
 
 - name: "Storm: Clean-Up host"
   hosts: storm_group
   sudo: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [post_tasks]
+      tags: [always]

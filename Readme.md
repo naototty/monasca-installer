@@ -11,6 +11,7 @@ Code-changes may require the adaptation of User-Documentation at [CodeBeamer - I
   * [Run monasca-installer against VMs](#run-monasca-installer-against-vms)
     * [Install CentOS7 and Openstack boxes](#install-centos7-and-openstack-boxes)
     * [Prepare hosts template file](#prepare-hosts-template-file)
+    * [Install Vagrant plugin](#install_vagrant_plugin)
     * [Start VMs](#start-vms)
     * [Prepare Ansible Master](#prepare-ansible-master)
     * [Prepare VMs](#prepare-vms)
@@ -33,6 +34,7 @@ This project contains installation scripts (written in Ansible) to install
 
 ### Requirements
 * Vagrant installed
+* Vagrant plugin vagrant-hosts
 * Virtualbox installed
 * Git installed
 
@@ -111,6 +113,11 @@ Add box to your local vagrant environment
 ```bash
 vagrant box add devstack-centos7-liberty /path/to/the/devstack-centos7-liberty.box
 vagrant box add clear-centos7 /path/to/the/clear-centos7.box
+```
+#### Install Vagrant plugin
+Vagrant plugin vagrant-hosts need to be installed for properly synchornize VMs hosts.
+```bash
+vagrant plugin install vagrant-hosts
 ```
 
 #### Prepare hosts template file

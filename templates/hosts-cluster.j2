@@ -100,7 +100,13 @@ cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Storm nodes
-storm-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+storm-node-master                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+storm-node-1                     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+storm-node-2                     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+storm-node-3                     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# Monasca-thresh  hosts
+monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -210,7 +216,13 @@ keystone-node
 cmm-node
 
 [storm_group]
-storm-node
+storm-node-master
+storm-node-1 storm_master_node=storm-node-master
+storm-node-2 storm_master_node=storm-node-master
+storm-node-3 storm_master_node=storm-node-master
+
+[monasca_thresh_group]
+monasca-thresh-node
 
 ################################################################################
 # Group inheritance
@@ -245,3 +257,4 @@ monasca_api_group
 monasca_notification_group
 monasca_persister_group
 storm_group
+monasca_thresh_group

@@ -55,6 +55,9 @@ cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh
 # Storm node
 storm-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# Monasca-thresh host
+monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -116,7 +119,10 @@ kibana-node es_node_for_kibana=elasticsearch-node
 cmm-node
 
 [storm_group]
-storm-node
+storm-node storm_master_node=storm-node
+
+[monasca_thresh_group]
+monasca-thresh-node
 
 ################################################################################
 # Group inheritance
@@ -144,3 +150,4 @@ monasca_api_group
 monasca_notification_group
 monasca_persister_group
 storm_group
+monasca_thresh_group

@@ -1,4 +1,22 @@
-# storm
-storm_worker_ports: [6701, 6702]
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/storm_group
+
+storm_master_hosts: "{% for item in groups['storm_group'] -%}
+                        {%- set host = hostvars[item]['ansible_ssh_host'] -%}
+                        {% if loop.index > 1 and hostvars[item]['storm_is_master_node']|bool %},{% elif hostvars[item]['storm_is_master_node']|bool %}{{ host|trim|string }}{% endif %}
+                     {%- endfor %}"
+storm_master_nodes: "{{ storm_master_hosts.split(',') }}"
+
 storm_log_dir: "{{ log_dir }}/storm"
 storm_version: 1.0.1
+
+# storm services
+storm_nimbus_enabled: true
+storm_supervisor_enabled: true
+storm_ui_enabled: false
+
+storm_is_master_node: true
+
+# worker settings
+storm_worker_ports: [6701, 6702]
