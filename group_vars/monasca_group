@@ -142,3 +142,6 @@ logrotate_scripts:
       - create 06400 {{ influx_db_user }} {{ influx_db_group }}
       - copytruncate
       - noemail
+
+# monasca-thresh
+thresh_topology_name: "thresh-cluster"
