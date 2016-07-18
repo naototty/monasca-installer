@@ -3,7 +3,7 @@
 
 - name: Prepare/Configure host
   hosts: monasca_agent_group
-  sudo: yes
+  become: yes
   vars:
     credential_keys_list:
       - cmm_monasca_agent_keystone_password
@@ -25,7 +25,7 @@
 
 - name: Install Monasca-Agent on host
   hosts: monasca_agent_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   environment:
@@ -35,7 +35,7 @@
 
 - name: Clean-Up host
   hosts: monasca_agent_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
       tags: [post_tasks]

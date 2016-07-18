@@ -23,6 +23,8 @@ kibana_log_dir: "{{ log_dir }}/kibana"
 elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
 kafka_log_dir: "{{ log_dir }}/kafka"
 zookeeper_log_dir: "{{ log_dir }}/zookeeper"
+storm_log_dir: "{{ log_dir }}/storm"
+thresh_log_dir: "{{ storm_log_dir }}/workers-artifacts/{{ thresh_topology_name }}-*/*"
 
 global_dims: ["service:{{ ansible_hostname }}"]
 
@@ -53,3 +55,11 @@ log_files:
                                                                "component" => "kafka" }}', path: '"{{ kafka_log_dir }}/*.log"' }
   - { tags: '["timestamped"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                                "component" => "zookeeper" }}', path: '"{{ zookeeper_log_dir }}/*.log"' }
+
+  - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "storm"
+                                                                "component" => "storm-supervisor" }}', path: '"{{ storm_log_dir }}/*supervisor.log"' }
+  - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "storm"
+                                                                "component" => "storm-nimbus" }}', path: '"{{ storm_log_dir }}/*nimbus.log"' }
+#Monitor monasca-thresh which runs as a worker of storm-supervisor
+  - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                                "component" => "monasca-thresh" }}', path: '"{{ thresh_log_dir }}/*.log"' }
