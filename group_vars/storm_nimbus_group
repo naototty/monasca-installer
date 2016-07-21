@@ -1,8 +1,5 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
-# file: host_vars/storm-node-master
-
-nimbus_host: "{{ ansible_ssh_host }}"
 
 # storm services
 storm_nimbus_enabled: true

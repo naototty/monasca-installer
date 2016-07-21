@@ -12,13 +12,21 @@
     - include: tasks/set_up.yml
       tags: [always]
 
-- name: "Storm: Install on host"
-  hosts: storm_group
+- name: "Storm: Install Nimbus on host"
+  hosts: storm_nimbus_group
   sudo: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
   roles:
-    - {role: storm, tags: [storm] }
+    - {role: storm, tags: [storm, storm-nimbus] }
+
+- name: "Storm: Install Supervisor on host"
+  hosts: storm_supervisor_group
+  sudo: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+  roles:
+    - {role: storm, tags: [storm, storm-supervisor] }
 
 - name: "Storm: Clean-Up host"
   hosts: storm_group

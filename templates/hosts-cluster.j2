@@ -99,14 +99,18 @@ openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_s
 cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
-# Storm nodes
-storm-node-master                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-storm-node-1                     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
-storm-node-2                     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
-storm-node-3                     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+#Storm Nimbus nodes
+storm-nimbus-node-1              ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+storm-nimbus-node-2              ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+storm-nimbus-node-3              ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# Storm Supervisor nodes
+storm-supervisor-node-1          ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+storm-supervisor-node-2          ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+storm-supervisor-node-3          ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Monasca-thresh  hosts
-monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-thresh-node              ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -215,11 +219,15 @@ keystone-node
 [monasca_uninstaller]
 cmm-node
 
-[storm_group]
-storm-node-master
-storm-node-1 storm_master_node=storm-node-master
-storm-node-2 storm_master_node=storm-node-master
-storm-node-3 storm_master_node=storm-node-master
+[storm_nimbus_group]
+storm-nimbus-node-1
+storm-nimbus-node-2
+storm-nimbus-node-3
+
+[storm_supervisor_group]
+storm-supervisor-node-1
+storm-supervisor-node-2
+storm-supervisor-node-3
 
 [monasca_thresh_group]
 monasca-thresh-node
@@ -236,6 +244,10 @@ monasca_log_persister_group
 monasca_log_transformer_group
 monasca_log_metrics_group
 balancer_group
+
+[storm_group:children]
+storm_nimbus_group
+storm_supervisor_group
 
 [all_group:children]
 offline_group

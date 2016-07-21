@@ -61,8 +61,11 @@ openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_s
 cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
-# Storm node
-storm-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+# Storm Nimbus node
+storm-nimbus-node                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Storm Supervisor node
+storm-supervisor-node            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Monasca-thresh host
 monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
@@ -140,8 +143,11 @@ keystone-node
 [monasca_uninstaller]
 cmm-node
 
-[storm_group]
-storm-node storm_master_node=storm-node
+[storm_nimbus_group]
+storm-nimbus-node
+
+[storm_supervisor_group]
+storm-supervisor-node
 
 [monasca_thresh_group]
 monasca-thresh-node
@@ -157,6 +163,10 @@ monasca_log_agent_group
 monasca_log_persister_group
 monasca_log_transformer_group
 monasca_log_metrics_group
+
+[storm_group:children]
+storm_nimbus_group
+storm_supervisor_group
 
 [all_group:children]
 offline_group
