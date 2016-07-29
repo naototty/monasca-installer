@@ -1,0 +1,168 @@
+# Copyright 2016 FUJITSU LIMITED
+
+################################################################################
+# Host definitions. Replace monasca_host, openstack_host,
+# openstack_host_cent66, ssh_user_monasca, ssh_user_openstack
+# and ssh_user_openstack_cent66 with valid informations
+################################################################################
+
+localhost                        ansible_connection=local
+
+# Offline Host
+offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Openstack Hosts
+horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+# Monasca host
+cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-log-transfomer
+log-transformer-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-log-persister
+log-persister-node               ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Kibana
+kibana-node                      ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Elasticsearch
+elasticsearch-node               ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Memcached
+memcached-node                   ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Kafka
+kafka-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Zookeeper
+zookeeper-node                   ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-api
+monasca-api-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-log-api
+monasca-log-api-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-notification
+monasca-notification-node        ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-persister node
+monasca-persister-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca Agent Hosts
+cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+# Monasca Agent Cent6.6 Hosts
+openstack-monasca-agent-cent66   ansible_ssh_host={{ openstack_host_cent66 }} ansible_ssh_user={{ ssh_user_openstack_cent66 }}
+
+# Monasca Log Agent Hosts
+cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+
+################################################################################
+# Agent and Log-Agent group definition:
+# To install additional agents (metrics and logs) add nodes to
+# monasca_agent_group, monasca_agent_group_cent66 or monasca_log_agent_group.
+# Run ansible-playbook monasca-agent.yml or
+# ansible-playbook monasca-log-agent.yml to install agents.
+################################################################################
+
+[monasca_agent_group]
+cmm-monasca-agent
+openstack-monasca-agent
+
+[monasca_agent_group_cent66]
+openstack-monasca-agent-cent66
+
+[monasca_log_agent_group]
+cmm-monasca-log-agent
+openstack-monasca-log-agent
+
+################################################################################
+# Other group definition
+################################################################################
+
+[offline_group]
+offline-resources-node
+localhost
+
+[openstack_group]
+horizon-node
+keystone-node
+
+[memcached_group]
+memcached-node
+
+[kafka_group]
+kafka-node
+
+[zookeeper_group]
+zookeeper-node
+
+[monasca_group]
+cmm-node
+
+[monasca_api_group]
+monasca-api-node
+
+[monasca_notification_group]
+monasca-notification-node database_node_for_notification=cmm-node
+
+[monasca_persister_group]
+monasca-persister-node
+
+[monasca_log_api_group]
+monasca-log-api-node
+
+[monasca_log_persister_group]
+log-persister-node
+
+[monasca_log_transformer_group]
+log-transformer-node
+
+[elasticsearch_group]
+elasticsearch-node
+
+[kibana_group]
+kibana-node es_node_for_kibana=elasticsearch-node
+
+[openstack_uninstaller_group]
+horizon-node
+keystone-node
+
+[monasca_uninstaller]
+cmm-node
+
+################################################################################
+# Group inheritance
+################################################################################
+
+[elkstack_group:children]
+elasticsearch_group
+kibana_group
+monasca_log_agent_group
+monasca_log_persister_group
+monasca_log_transformer_group
+
+[all_group:children]
+offline_group
+openstack_group
+monasca_group
+monasca_agent_group
+monasca_agent_group_cent66
+
+[openstack_group:children]
+openstack_uninstaller_group
+
+[monasca_group:children]
+elkstack_group
+memcached_group
+kafka_group
+zookeeper_group
+monasca_log_api_group
+monasca_api_group
+monasca_notification_group
+monasca_persister_group

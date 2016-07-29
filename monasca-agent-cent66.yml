@@ -1,0 +1,52 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Prepare/Configure host
+  hosts: monasca_agent_group_cent66
+  become: yes
+  vars:
+    credential_keys_list:
+      - cmm_monasca_agent_keystone_password
+      - openstack_monasca_agent_keystone_password
+      - cmm_monasca_agent_database_password
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include: tasks/set_up.yml tags=pre_tasks
+    - name: Install package for CentOS
+      include: tasks/install_package_cent_env.yml
+      when: "ansible_os_family == 'RedHat'"
+    - name: Check the python version
+      command: "python --version"
+      ignore_errors: true
+      changed_when: false
+      register: python_version
+    - name: Check the python2.7 is installed in temporary directory
+      command: "{{python27_dir}}/bin/python2.7 --version"
+      ignore_errors: true
+      changed_when: false
+      register: python_status
+    - include: tasks/install_python2.7.yml
+      when: python_version.stderr | match("Python 2\.6.*") and python_status.rc != 0
+  roles:
+    - {role: pip, tags: [pip, resources], cent66_specific_process: true}
+
+- name: Install Monasca-Agent on host
+  hosts: monasca_agent_group_cent66
+  become: yes
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: monasca-agent, tags: [metric-agent, agents]}
+
+- name: Clean-Up host
+  hosts: monasca_agent_group_cent66
+  become: yes
+  post_tasks:
+    - include: tasks/clean_up.yml tags=post_tasks

@@ -73,3 +73,7 @@ pbr_version: 1.8.1
 
 # try to use this variable for each wait_for like task
 monasca_wait_for_period: 180
+
+# python2.7
+cmm_python27_file: Python2.7.5
+python27_dir: "{{ opt_dir }}/FJSVsvcmmPy27"

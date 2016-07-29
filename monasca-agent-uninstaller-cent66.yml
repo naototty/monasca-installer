@@ -1,0 +1,45 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Uninstall Monasca Metrics Agent
+  hosts: monasca_agent_group_cent66
+  become: yes
+  roles:
+    - {role: uninstaller,
+      uninstall_skip_pip: True,
+      tags: [uninstaller, uninstaller_monasca_agent]}
+
+- name: Uninstall Monasca Metrics Agent
+  hosts: monasca_agent_group_cent66
+  become: yes
+  tasks:
+    - name: Check if path exists
+      stat: path="{{ monasca_agent_venv_dir }}"
+      register: monasca_agent_dir
+
+    - name: Check the python version
+      command: "python --version"
+      ignore_errors: true
+      changed_when: false
+      register: python_version
+
+    - name: Uninstall monasca-agent for Python2.6 environment
+      pip:
+        name=monasca-agent
+        state=absent
+        virtualenv="{{ monasca_agent_venv_dir }}"
+        virtualenv_command="{{python26_venv}}"
+      ignore_errors: True
+      when: monasca_agent_dir.stat.exists and python_version.stderr | match("Python 2\.6.*")
+
+- name: Uninstall custom Python2.7
+  hosts: monasca_agent_group_cent66
+  become: yes
+  tasks:
+    - name: Check if custom Python2.7 directory exists
+      stat: path="{{python27_dir}}"
+      register: st_python27_dir
+
+    - name: Remove custom Python2.7 (system default is Python2.6)
+      file: path="{{python27_dir}}" state=absent
+      when: st_python27_dir.stat.exists

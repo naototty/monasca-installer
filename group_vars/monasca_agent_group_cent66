@@ -1,0 +1,39 @@
+---
+# file: group_vars/monasca_agent_group_cent66
+
+# Copyright 2016 FUJITSU LIMITED
+
+# directories
+monasca_agent_venv_dir: "{{ venvs_dir }}/monasca-agent"
+# that one deprecated use one above
+monasca_virtualenv_dir: "{{ monasca_agent_venv_dir }}"
+monasca_conf_dir: /etc/monasca
+monasca_agent_conf_dir: "{{ monasca_conf_dir }}/agent"
+monasca_usr_lib_dir: /usr/lib/monasca/agent
+monasca_agent_reconfigure_script: /usr/local/bin/monasca-reconfigure
+
+python26_venv: "{{ python27_dir }}/bin/virtualenv"
+
+monasca_agent_database_user: monapi
+monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
+monasca_agent_version: 1.1.25.dev34
+
+monasca_agent_overwrite_config: False
+monasca_agent_check_frequency: 30
+
+elasticsearch_url: "http://localhost:9200"
+mariadb_root_name: root
+
+uninstall_services:
+  - { name: "monasca-agent", assets: [
+      "{{ monasca_agent_conf_dir }}",
+      "{{ monasca_agent_venv_dir }}",
+      "{{ monasca_usr_lib_dir }}",
+      "{{ monasca_agent_reconfigure_script }}" ]}
+
+uninstall_directories:
+  - { dir: "{{ monasca_agent_venv_dir }}", force: True }
+
+pip_extra_depedencies:
+  - { name: psutil, version: 2.2.1 }
+  - { name: pymysql, version: 0.7.2 }

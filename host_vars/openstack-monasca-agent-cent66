@@ -1,0 +1,20 @@
+---
+# file: host_vars/openstack-monasca-agent-cent66
+
+# Copyright 2016 FUJITSU LIMITED
+
+# Monasca Agent Configuration
+monasca_agent_user: admin-agent
+monasca_agent_password: "{{ openstack_monasca_agent_keystone_password }}"
+monasca_agent_project: admin
+
+monasca_checks:
+  host_alive:
+    init_config:
+      ssh_port: 22
+      ssh_timeout: 0.5
+      ping_timeout: 1
+    instances:
+      - name: monasca
+        host_name: "{{ monasca_host }}"
+        alive_test: ssh

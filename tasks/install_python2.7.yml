@@ -1,0 +1,24 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Fetch Python2.7 tar.gz file
+  get_url:
+    dest="{{ download_tmp_dir }}/{{cmm_python27_file}}.tar.gz"
+    url="{{world_repo_url}}/{{cmm_python27_file}}.tar.gz"
+    timeout=180
+    force=yes
+
+- name: Uncompress the Python2.7 tarball
+  unarchive:
+    copy=no
+    dest="{{opt_dir}}"
+    src="{{download_tmp_dir}}/{{cmm_python27_file}}.tar.gz"
+
+- name: Set proper attributes of Python2.7 directory
+  file:
+    path="{{python27_dir}}"
+    state=directory
+    owner=root
+    group=root
+    mode="u+rwX,g+rX,o+rX"
+    recurse=yes

@@ -1,0 +1,4 @@
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Install package for CentOS
+  yum: name=libselinux-python state=present
