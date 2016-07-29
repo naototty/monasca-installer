@@ -15,9 +15,37 @@ postgresql_version: 9.1
 postgresql_dir: "{{ opt_dir }}/postgresql/{{ postgresql_version }}"
 postgresql_bin_dir: "{{ postgresql_dir }}/bin"
 
+# kafka_check_settings, they are correlated in the monasca-agent check
+# see https://github.com/openstack/monasca-agent/blob/master/monasca_agent/collector/checks_d/kafka_consumer.py#L123
+kafka_consumer_per_partition: False
+kafka_consumer_full_output: "{{ kafka_consumer_per_partition|bool }}"
+
 # Additionally you can specify any number of name:value pairs in 'init_config'
 # which will be available on every run in 'self.init_config'
 monasca_checks:
+  kafka_consumer:
+    init_config:
+    instances:
+    - built_by: Kafka
+      name: "{{ ansible_fqdn }}"
+      kafka_connect_str: "{{ ansible_ssh_host }}:{{ kafka_port|int }}"
+      per_partition: "{{ kafka_consumer_per_partition|bool }}"
+      full_output: "{{ kafka_consumer_full_output|bool }}"
+      consumer_groups:
+        thresh-event:
+          - events
+        log-metric:
+          - transformed-log
+        logstash-persister:
+          - transformed-log
+        1_metrics:
+          - metrics
+        transformer-logstash-consumer:
+          - log
+        1_alarm-state-transitions:
+          - alarm-state-transitions
+        thresh-metric:
+          - metrics
   host_alive:
     init_config:
       ssh_port: 22
@@ -93,3 +121,8 @@ monasca_checks:
         dimensions:
            component: monasca-log-api
            service: monitoring
+
+pip_extra_depedencies:
+ - { name: psutil, version: 2.2.1 }
+ - { name: pymysql, version: 0.7.2 }
+ - { name: kafka-python, version: 0.9.5 }
