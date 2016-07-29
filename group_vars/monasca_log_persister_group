@@ -4,6 +4,7 @@
 log_persister_user: mon-persister
 log_persister_group: "{{ monasca_group }}"
 
+log_persister_consumer_threads: "{{ kafka_transformed_log_partitions|int }}"
 log_persister_flush_size: 200
 log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
 

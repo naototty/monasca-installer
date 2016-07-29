@@ -6,7 +6,7 @@ log_metrics_user: mon-log-metrics
 log_metrics_group: "{{ monasca_group }}"
 
 log_metrics_metric_prefix: log
-log_metrics_consumer_threads: "{{ kafka_log_topic_partitions|int }}"
+log_metrics_consumer_threads: "{{ kafka_transformed_log_partitions|int }}"
 log_metrics_source:
   topic: transformed-log
   group: log-metric

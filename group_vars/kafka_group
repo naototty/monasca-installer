@@ -7,6 +7,4 @@ kafka_host: "{{ ansible_ssh_host }}"
 kafka_listen_address: "{{ kafka_host }}"
 kafka_apache_mirror: "{{ world_repo_url }}"
 
-kafka_events_partitions: 4
-kafka_metrics_partitions: 4
 kafka_id: 0
