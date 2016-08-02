@@ -17,3 +17,8 @@ monasca_checks:
       - name: monasca
         host_name: "{{ monasca_host }}"
         alive_test: ssh
+
+pip_extra_depedencies:
+  - { name: psutil, version: 2.2.1 }
+  - { name: pymysql, version: 0.7.2 }
+  - { name: python-neutronclient, version: 3.1.0 }
