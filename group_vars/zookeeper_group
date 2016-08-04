@@ -2,5 +2,5 @@
 # Copyright 2016 FUJITSU LIMITED
 
 zookeeper_log_dir: "{{ log_dir }}/zookeeper"
-zookeeper_version: 3.4.8
+zookeeper_version: 3.4.6
 zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
