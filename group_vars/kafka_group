@@ -8,3 +8,4 @@ kafka_listen_address: "{{ kafka_host }}"
 kafka_apache_mirror: "{{ world_repo_url }}"
 
 kafka_id: 0
+kafka_version: 0.9.0.0

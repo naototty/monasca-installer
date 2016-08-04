@@ -4,25 +4,28 @@
 - name: "Kafka: Prepare/Configure hosts"
   hosts: kafka_group
   sudo: yes
-  vars:
-    credential_keys_list:
-      - influxdb_mon_api_password
-  vars_files:
-    - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
-    - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [kafka]
+      tags: [always]
 
 - name: "Kafka: Install on hosts"
   hosts: kafka_group
   sudo: yes
-  vars_files:
-    - credentials.yml
   roles:
     - {role: kafka, tags: [kafka]}
+
+- name: "Kafka: Install schema"
+  hosts: kafka_group[0]
+  sudo: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/verify_pip.yml
+      tags: [always]
+  roles:
+    - {role: pip, tags: [pip, kafka, schema, log_schema]}
     - {role: monasca-schema,
        # kafka nodes should take care only of setting up kafka_schema
        # turn off everything else from monasca-schema
@@ -32,13 +35,13 @@
        vertica_schema_enabled: False,
        postgres_schema_enabled: False,
        influxdb_schema_enabled: False,
-       tags: [kafka,schema]}
+       tags: [kafka, schema]}
     - {role: monasca-log-schema,
-       tags: [kafka,schema,log_schema]}
+       tags: [kafka, schema, log_schema]}
 
 - name: "Kafka: Clean-Up hosts"
   hosts: kafka_group
   sudo: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [kafka]
+      tags: [always]
