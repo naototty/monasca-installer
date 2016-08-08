@@ -120,6 +120,11 @@ mariadb-node-3                   ansible_ssh_host={{ ex_node_3_host }} ansible_s
 # HAProxy node
 haproxy-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
+# Elasticsearch Curator
+elasticsearch-curator-node-1    ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+elasticsearch-curator-node-2    ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+elasticsearch-curator-node-3    ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -248,6 +253,11 @@ mariadb-node-3
 [haproxy_group]
 haproxy-node
 
+[elasticsearch_curator_group]
+elasticsearch-curator-node-1
+elasticsearch-curator-node-2
+elasticsearch-curator-node-3
+
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -260,6 +270,7 @@ monasca_log_persister_group
 monasca_log_transformer_group
 monasca_log_metrics_group
 balancer_group
+elasticsearch_curator_group
 
 [storm_group:children]
 storm_nimbus_group

@@ -1,0 +1,35 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Elasticsearch-Curator: Prepare/Configure host"
+  hosts: elasticsearch_curator_group
+  become: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_pip.yml
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
+  roles:
+    - {role: pip, tags: [pip, resources]}
+
+- name: "Elasticsearch-Curator: Install Elasticsearch Curator on host"
+  hosts: elasticsearch_curator_group
+  become: yes
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+    - {role: elasticsearch-curator, tags: [elkstack, elasticsearch, elasticsearch-curator]}
+    - {role: logrotate, tags: [logrotate]}
+
+- name: "Elasticsearch-Curator: Clean-Up host"
+  hosts: elasticsearch_curator_group
+  become: yes
+  post_tasks:
+    - include: tasks/clean_up.yml
+      tags: [always]

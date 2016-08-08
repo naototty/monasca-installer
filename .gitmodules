@@ -97,3 +97,6 @@
 [submodule "roles/haproxy"]
 	path = roles/haproxy
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-haproxy.git
+[submodule "roles/elasticsearch-curator"]
+	path = roles/elasticsearch-curator
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-elasticsearch-curator.git

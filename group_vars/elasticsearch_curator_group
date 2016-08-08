@@ -1,0 +1,48 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+curator_group: "{{ monasca_group }}"
+curator_conf_dir: "{{ monasca_conf_dir }}/elasticsearch-curator"
+curator_log_dir: "{{ monasca_log_dir }}/elasticsearch-curator"
+elasticsearch_nodes: "{{ elasticsearch_cluster_nodes }}"
+curator_venv_dir: "{{ venvs_dir }}/elasticsearch-curator"
+
+curator_actions:
+  - {
+      delete_by: age,
+      description: 'Delete indices older than 7 days',
+      deleted_days: 7,
+      disable: False
+    }
+  - {
+      delete_by: size,
+      description: 'Delete indices >= 1000 MB',
+      deleted_size: 1000,
+      disable: False
+    }
+
+curator_cron_config:
+  - {
+      minute: 0,
+      hour: 0
+    }
+
+curator_excluded_index:
+  - {
+      index_name: .kibana,
+      exclude: True
+    }
+
+logrotate_scripts:
+  - name: elasticsearch_curator
+    path: "{{ curator_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 root root
+      - copytruncate
+      - noemail

@@ -25,6 +25,7 @@
 - include: zookeeper.yml
 - include: kafka.yml
 - include: elasticsearch.yml
+- include: elasticsearch-curator.yml
 - include: kibana.yml
 - include: monasca-log-api.yml
 - include: monasca-log-transformer.yml

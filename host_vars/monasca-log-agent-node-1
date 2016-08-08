@@ -26,6 +26,7 @@ zookeeper_log_dir: "{{ log_dir }}/zookeeper"
 storm_log_dir: "{{ log_dir }}/storm"
 thresh_log_dir: "{{ storm_log_dir }}/workers-artifacts/{{ thresh_topology_name }}-*/*"
 mariadb_log_dir: "{{ log_dir }}/mariadb"
+curator_log_dir: "{{ monasca_log_dir }}/elasticsearch-curator"
 
 global_dims: ["service:{{ ansible_hostname }}"]
 
@@ -65,3 +66,6 @@ log_files:
                                                                 "component" => "monasca-thresh" }}', path: '"{{ thresh_log_dir }}/*.log"' }
   - { tags: '["mariadb"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                           "component" => "mariadb" }}', path: '"{{ mariadb_log_dir }}/*.log"' }
+
+  - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
+                                                          "component" => "elasticsearch-curator" }}', path: '"{{ curator_log_dir }}/*.log"' }

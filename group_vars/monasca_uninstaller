@@ -17,6 +17,10 @@ monasca_work_dir: "{{ opt_dir }}/monasca"
 monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
 monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
+curator_user: curator
+curator_venv_dir: "{{ venvs_dir }}/elasticsearch-curator"
+curator_job: Elasticsearch Curator jobs
+
 uninstall_services:
   - { name: "zookeeper", assets: [] }
   - { name: "kafka", assets: [] }
@@ -66,6 +70,7 @@ uninstall_packages:
      - { assets: ["{{ opt_dir }}/logstash-{{ logstash_version }}", "{{ opt_dir }}/logstash"] }
      - { rpm: "memcached", assets: ["/etc/sysconfig/memcached.rpmsave"] }
      - { assets: ["{{ opt_dir }}/zookeeper-{{ zookeeper_version }}"] }
+     - { assets: ["{{ curator_venv_dir }}","{{ curator_conf_dir }}/curator_config.yml", "{{ curator_config }}/curator_action.yml"]}
      - { pip: "python-monascaclient", assets: [ ] }
 # post uninstallation directories that should be removed
 # force: If True, remove even if folder not empty
@@ -76,6 +81,9 @@ uninstall_directories:
   - { dir: "/var/lib/zookeeper", force: True}
   - { dir: "/etc/kafka", force: True}
   - { dir: "/var/kafka", force: True}
+
+uninstall_cron_jobs:
+  - { user: "{{ curator_user }}", job: "{{ curator_job }}"}
 
 # post installation directories that should be removed
 clean_up_dirs:

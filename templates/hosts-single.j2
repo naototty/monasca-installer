@@ -73,6 +73,9 @@ monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh
 # MariaDB node
 mariadb-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# Elasticsearch Curator
+elasticsearch-curator-node       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -158,6 +161,9 @@ monasca-thresh-node database_node_for_thresh=cmm-node
 [mariadb_group]
 mariadb-node
 
+[elasticsearch_curator_group]
+elasticsearch-curator-node
+
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -169,6 +175,7 @@ monasca_log_agent_group
 monasca_log_persister_group
 monasca_log_transformer_group
 monasca_log_metrics_group
+elasticsearch_curator_group
 
 [storm_group:children]
 storm_nimbus_group
