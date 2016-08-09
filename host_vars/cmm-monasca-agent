@@ -123,6 +123,5 @@ monasca_checks:
            service: monitoring
 
 pip_extra_depedencies:
- - { name: psutil, version: 2.2.1 }
  - { name: pymysql, version: 0.7.2 }
  - { name: kafka-python, version: 0.9.5 }
