@@ -1,0 +1,34 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/influxdb_group
+
+influxdb_raft_port: 8085
+
+influxdb_hostname: "{{ ansible_ssh_host }}"
+influxdb_bind_address: "{{ ansible_ssh_host }}"
+
+# influxdb version
+influxdb_versions:
+  RedHat: 0.10.1-1
+  Debian: 0.10.1-1
+
+influx_db_user: "influxdb"
+influx_db_group: "influxdb"
+
+# This variable is need for monasca-schema
+influxdb_url: "http://{{ influxdb_bind_address }}:{{ influxdb_client_port }}"
+
+influxdb_replication_factor: "{{ groups['influxdb_group']|count }}"
+
+influxdb_users:
+  mon_api: "{{ influxdb_mon_api_password }}"
+  mon_persister: "{{ influxdb_mon_persister_password }}"
+
+influxdb_log_dir: "{{ log_dir }}/influxdb"
+
+# submodule settings for influx-db
+influxdb_http_log_enabled: False
+
+# cluster settings
+influxdb_is_peer_node: "{{ influxdb_master_node_name is defined }}"
+influxdb_master_node: "{% if influxdb_is_peer_node %}{{ hostvars[influxdb_master_node_name]['ansible_ssh_host'] }}{% else %}False{% endif %}"

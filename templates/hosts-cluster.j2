@@ -117,8 +117,16 @@ mariadb-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_s
 mariadb-node-2                   ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 mariadb-node-3                   ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
+# InfluxDB nodes
+influxdb-node-1                  ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+influxdb-node-2                  ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+influxdb-node-3                  ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
 # HAProxy node
-haproxy-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
+haproxy-node                     ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
+
+# Monasca-CLI password
+monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Elasticsearch Curator
 elasticsearch-curator-node-1    ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
@@ -162,14 +170,14 @@ keystone-node
 cmm-node
 
 [monasca_persister_group]
-monasca-persister-node-1
-monasca-persister-node-2
-monasca-persister-node-3
+monasca-persister-node-1 influxdb_node_for_persister=haproxy-node
+monasca-persister-node-2 influxdb_node_for_persister=haproxy-node
+monasca-persister-node-3 influxdb_node_for_persister=haproxy-node
 
 [monasca_api_group]
-monasca-api-node-1 database_node_for_api=haproxy-node
-monasca-api-node-2 database_node_for_api=haproxy-node
-monasca-api-node-3 database_node_for_api=haproxy-node
+monasca-api-node-1 database_node_for_api=haproxy-node influxdb_node_for_api=haproxy-node
+monasca-api-node-2 database_node_for_api=haproxy-node influxdb_node_for_api=haproxy-node
+monasca-api-node-3 database_node_for_api=haproxy-node influxdb_node_for_api=haproxy-node
 
 [monasca_notification_group]
 monasca-notification-node-1 database_node_for_notification=haproxy-node
@@ -250,8 +258,16 @@ mariadb-node-1
 mariadb-node-2
 mariadb-node-3
 
+[influxdb_group]
+influxdb-node-1
+influxdb-node-2 influxdb_master_node_name=influxdb-node-1
+influxdb-node-3 influxdb_master_node_name=influxdb-node-1
+
 [haproxy_group]
 haproxy-node
+
+[monasca_cli_group]
+monasca-cli-node
 
 [elasticsearch_curator_group]
 elasticsearch-curator-node-1
@@ -298,4 +314,6 @@ monasca_persister_group
 storm_group
 monasca_thresh_group
 mariadb_group
+influxdb_group
 haproxy_group
+monasca_cli_group

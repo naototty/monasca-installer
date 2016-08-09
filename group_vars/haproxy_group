@@ -9,6 +9,11 @@ mariadb_hosts: "{% for item in groups['mariadb_group'] -%}
                 {%- endfor %}"
 mariadb_nodes: "{{ mariadb_hosts.split(',') }}"
 
+influxdb_hosts: "{% for item in groups['influxdb_group'] -%}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ influxdb_client_port | int }}
+                 {%- endfor %}"
+influxdb_nodes: "{{ influxdb_hosts.split(',') }}"
+
 load_balancer_host: "{{ ansible_ssh_host }}"
 
 # Add components to balancer configuration
@@ -22,7 +27,15 @@ balancing_components:
         "port {{ clustercheck_port }}",
       ]
     }
-
+  - {
+      name: "influxdb_cluster",
+      load_balancing_port: "{{ influxdb_client_port | int }}",
+      balancing_algorithm: "leastconn",
+      nodes: "{{ influxdb_nodes }}",
+      params: [
+        "port 8083"
+      ]
+    }
 # Web gui needs to be enabled for Monasca Agent to gather
 # metrics from HAProxy.
 webgui_enable: true
