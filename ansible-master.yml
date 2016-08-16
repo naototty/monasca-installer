@@ -4,7 +4,7 @@
 
 - name: Prepare Ansible Master Environment
   hosts: all
-  sudo: yes
+  become: true
   vars:
     monasca_host: 192.168.10.4
     openstack_host: 192.168.10.5
@@ -26,7 +26,7 @@
     - name: Import EPEL GPG key
       rpm_key: key="/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7" state=present
     - name: Install Ansible
-      yum: name=ansible-2.1.0.0 state=present
+      yum: name=ansible-2.1.1.0 state=present
     - name: Create custom ansible.cfg file
       template:
         src="templates/ansible.cfg.j2"
