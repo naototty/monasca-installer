@@ -42,6 +42,7 @@ kafka_replication_factor: 1 # 0 < X <= 1.0
 kafka_partitions_factor: 1 # 1 <= X < K
 
 kafka_log_topic_max_message_bytes: 1048576
+kafka_biggest_topic_size_bytes: "{{ [kafka_log_topic_max_message_bytes]|max }}"
 
 kafka_replicas: "{{ (kafka_nodes|length|int * kafka_replication_factor)|round(0, 'ceil')|int }}"
 kafka_log_topic_replicas: "{{ kafka_replicas|int }}"
