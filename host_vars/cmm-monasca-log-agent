@@ -6,7 +6,8 @@
 monasca_log_agent_project: cmm
 monasca_log_agent_user: cmm-agent
 monasca_log_agent_password: "{{ cmm_monasca_log_agent_keystone_password }}"
-domain_id: default
+user_domain_name: default
+project_domain_name: default
 
 monasca_log_dir: "{{ log_dir }}/monasca"
 
