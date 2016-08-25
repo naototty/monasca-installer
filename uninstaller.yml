@@ -3,20 +3,27 @@
 
 - name: Uninstall [monasca]
   hosts: cmm-node
-  sudo: yes
+  become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
   roles:
     - {role: uninstaller, tags: [uninstaller, uninstaller_monasca]}
 
 - name: Uninstall [openstack][horizon-node]
   hosts: horizon-node
-  sudo: yes
+  become: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
   roles:
     - {role: uninstaller, tags: [uninstaller, uninstaller_openstack, uninstaller_horizon]}
 
 - name: Uninstall [openstack][keystone-node]
   hosts: keystone-node
-  sudo: yes
+  become: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
   roles:
     - {role: uninstaller, tags: [uninstaller, uninstaller_openstack, uninstaller_keystone]}
