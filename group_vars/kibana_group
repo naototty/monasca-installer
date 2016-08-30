@@ -28,7 +28,6 @@ kibana_plugins:
           'fts-keystone.port': "{{ keystone_user_port|int }}"
       }
     }
-kibana_node_options: "--harmony"
 
 logrotate_scripts:
   - name: kibana

@@ -107,8 +107,8 @@ monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"
 
 # apache
 apache_mirror: "{{ world_repo_url }}"
+
 # elasticsearch
-elasticsearch_version: "2.2.0"
 elasticsearch_download: "{{ world_repo_url }}"
 elasticsearch_log_dir: "{{ log_dir }}/elasticsearch"
 elasticsearch_data_dir:
@@ -131,9 +131,6 @@ kibana_log_dir: "{{ log_dir }}/kibana"
 
 # log directories to be monitored
 logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
-
-# logstash
-logstash_version: 2.2.0
 
 # logrotate configuration
 logrotate_scripts:

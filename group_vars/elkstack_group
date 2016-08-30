@@ -21,3 +21,8 @@ kibana_download: "{{ world_repo_url }}"
 
 # logstash based log level
 logstash_verbosity: "--verbose"
+
+# elk version
+logstash_version: 2.3.4
+kibana_version: 4.5.4-linux-x64
+elasticsearch_version: 2.3.5

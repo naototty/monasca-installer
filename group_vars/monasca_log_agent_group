@@ -4,7 +4,7 @@
 
 # logstash agent download url
 logstash_agent_download_url: "{{ balls_repo_url }}/world"
-logstash_agent_version: 2.2.0
+logstash_agent_version: 2.3.4
 
 # directories
 base_dir_agent: /opt/monasca
