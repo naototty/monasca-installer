@@ -3,7 +3,7 @@
 
 - name: "Storm: Prepare/ Configure hosts"
   hosts: storm_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   pre_tasks:
@@ -14,23 +14,25 @@
 
 - name: "Storm: Install Nimbus on host"
   hosts: storm_nimbus_group
-  sudo: yes
+  become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
   roles:
     - {role: storm, tags: [storm, storm-nimbus] }
 
 - name: "Storm: Install Supervisor on host"
   hosts: storm_supervisor_group
-  sudo: yes
+  become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
   roles:
     - {role: storm, tags: [storm, storm-supervisor] }
 
 - name: "Storm: Clean-Up host"
   hosts: storm_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
       tags: [always]

@@ -3,7 +3,7 @@
 
 - name: "monasca-persister: Prepare/Configure hosts"
   hosts: monasca_persister_group
-  sudo: yes
+  become: yes
   vars:
     credential_keys_list:
       - influxdb_mon_persister_password
@@ -11,14 +11,15 @@
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [persister]
+      tags: [always]
 
 - name: "monasca-persister: Install on hosts"
   hosts: monasca_persister_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   roles:
@@ -26,10 +27,10 @@
 
 - name: "monasca-persister: Clean-Up hosts"
   hosts: monasca_persister_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [persister]
+      tags: [always]
 
 # TODO(trebskit) if monasca-persister would be used in python implementation
 # this playbook should install pip as well

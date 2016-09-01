@@ -3,7 +3,7 @@
 
 - name: "Kafka: Prepare/Configure hosts"
   hosts: kafka_group
-  sudo: yes
+  become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
@@ -12,13 +12,13 @@
 
 - name: "Kafka: Install on hosts"
   hosts: kafka_group
-  sudo: yes
+  become: yes
   roles:
     - {role: kafka, tags: [kafka]}
 
 - name: "Kafka: Install schema"
   hosts: kafka_group[0]
-  sudo: yes
+  become: yes
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
@@ -41,7 +41,7 @@
 
 - name: "Kafka: Clean-Up hosts"
   hosts: kafka_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
       tags: [always]

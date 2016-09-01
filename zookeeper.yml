@@ -3,25 +3,26 @@
 
 - name: Prepare/Configure hosts
   hosts: zookeeper_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
-      tags: always
+      tags: [always]
     - include: tasks/set_up.yml
-      tags: [zookeeper]
+      tags: [always]
 
 - name: Install on hosts
   hosts: zookeeper_group
-  sudo: yes
+  become: yes
   roles:
     - {role: zookeeper, tags: [zookeeper]}
 
 - name: Clean-Up hosts
   hosts: zookeeper_group
-  sudo: yes
+  become: yes
   post_tasks:
    - include: tasks/clean_up.yml
-     tags: [zookeeper]
+     tags: [always]

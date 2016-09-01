@@ -3,7 +3,7 @@
 
 - name: "monasca-notification: Prepare/Configure hosts"
   hosts: monasca_notification_group
-  sudo: yes
+  become: yes
   vars:
     credential_keys_list:
       - database_notification_password
@@ -11,17 +11,19 @@
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_pip.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [notification]
+      tags: [always]
   roles:
     - {role: pip, tags: [pip, resources, notification]}
 
 - name: "monasca-notification: Install on hosts"
   hosts: monasca_notification_group
-  sudo: yes
+  become: yes
   vars_files:
   - credentials.yml
   environment:
@@ -31,7 +33,7 @@
 
 - name: "monasca-notification: Clean-Up hosts"
   hosts: monasca_notification_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [notification]
+      tags: [always]

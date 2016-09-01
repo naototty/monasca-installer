@@ -3,9 +3,10 @@
 
 - name: Uninstall Monasca Log Agent
   hosts: monasca_log_agent_group
-  sudo: yes
+  become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
   roles:
     - {role: uninstaller,
       uninstall_skip_pip: True,

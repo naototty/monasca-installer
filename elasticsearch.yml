@@ -3,28 +3,29 @@
 
 - name: "ElasticSearch: Prepare/Configure hosts"
   hosts: elasticsearch_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
-      tags: always
+      tags: [always]
     - include: tasks/set_up.yml
-      tags: [elkstack,elasticsearch]
+      tags: [always]
   tasks:
     - name: Enable broadcasting
       command: "sh -c 'echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts'"
 
 - name: "ElasticSearch: Install on hosts"
   hosts: elasticsearch_group
-  sudo: yes
+  become: yes
   roles:
     - {role: monasca-elasticsearch, tags: [elkstack, elasticsearch]}
 
 - name: "ElasticSearch: Clean-Up hosts"
   hosts: elasticsearch_group
-  sudo: yes
+  become: yes
   post_tasks:
    - include: tasks/clean_up.yml
-     tags: [elkstack,elasticsearch]
+     tags: [always]

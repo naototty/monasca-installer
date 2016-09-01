@@ -3,7 +3,7 @@
 
 - name: "Monasca-api: Prepare/ Configure hosts"
   hosts: monasca_api_group
-  sudo: yes
+  become: yes
   vars:
     credential_keys_list:
       - influxdb_mon_api_password
@@ -14,11 +14,13 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_pip.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [api]
+      tags: [always]
   roles:
     - {role: pip, tags: [pip, resources, api]}
 
@@ -26,7 +28,7 @@
   hosts: monasca_api_group
   vars_files:
     - credentials.yml
-  sudo: yes
+  become: yes
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -35,7 +37,7 @@
 
 - name: "Monasca-api: Clean-Up hosts"
   hosts: monasca_api_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [api]
+      tags: [always]

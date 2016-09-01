@@ -16,7 +16,7 @@
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [pre_tasks]
+      tags: [always]
 
 - name: Install Monasca-Log-Agent
   hosts: monasca_log_agent_group
@@ -32,4 +32,4 @@
   become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [post_tasks]
+      tags: [always]

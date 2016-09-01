@@ -3,7 +3,7 @@
 
 - name: Prepare/Configure Horizon host
   hosts: horizon-node
-  sudo: yes
+  become: yes
   vars:
     credential_keys_list:
       - keystone_cmm_operator_user_password
@@ -14,7 +14,9 @@
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_pip.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
@@ -27,22 +29,23 @@
 
 - name: Prepare/Configure Keystone host
   hosts: keystone-node
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/verify_pip.yml
+      tags: [always]
     - include: tasks/set_up.yml
-      tags: [pre_tasks]
+      tags: [always]
   roles:
     - {role: pip, tags: [pip, resources]}
     - {role: cli-credentials, tags: [cli]}
 
 - name: Install Horizon components
   hosts: horizon-node
-  sudo: yes
+  become: yes
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -54,7 +57,7 @@
 
 - name: Configure Keystone
   hosts: keystone-node
-  sudo: yes
+  become: yes
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   vars:
@@ -65,7 +68,7 @@
       - keystone_admin_agent_password
   pre_tasks:
     - include: tasks/verify_credentials.yml
-      tags: always
+      tags: [always]
   vars_files:
     - credentials.yml
   roles:
@@ -73,14 +76,14 @@
 
 - name: Clean-Up Openstack hosts
   hosts: horizon-node
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [post_tasks]
+      tags: [always]
 
 - name: Clean-Up Openstack hosts
   hosts: keystone-node
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
       tags: [always]

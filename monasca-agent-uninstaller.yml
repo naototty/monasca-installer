@@ -3,9 +3,10 @@
 
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
-  sudo: yes
+  become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
   tasks:
     - name: Check if path exists
       stat: path="{{ monasca_agent_venv_dir }}"
@@ -17,7 +18,7 @@
 
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
-  sudo: yes
+  become: yes
   roles:
     - {role: uninstaller,
       uninstall_skip_pip: True,

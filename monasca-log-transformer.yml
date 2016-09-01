@@ -3,26 +3,27 @@
 
 - name: "Log Transformer: Prepare/Configure hosts"
   hosts: monasca_log_transformer_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [elkstack,log_transformer]
+      tags: [always]
 
 - name: "Log Transformer: Install on hosts"
   hosts: monasca_log_transformer_group
-  sudo: yes
+  become: yes
   roles:
     - {role: monasca-log-transformer, tags: [elkstack, log_transformer]}
     - {role: logrotate, tags: [elkstack, logrotate, log_transformer]}
 
 - name: "Log Transformer: Clean-Up hosts"
   hosts: monasca_log_transformer_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [elkstack,log_transformer]
+      tags: [always]

@@ -3,26 +3,27 @@
 
 - name: "Log Persister: Prepare/Configure hosts"
   hosts: monasca_log_persister_group
-  sudo: yes
+  become: yes
   vars_files:
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
     - include: tasks/set_up.yml
-      tags: [elkstack,log_persister]
+      tags: [always]
 
 - name: "Log Persister: Install on hosts"
   hosts: monasca_log_persister_group
-  sudo: yes
+  become: yes
   roles:
     - {role: monasca-log-persister, tags: [elkstack, log_persister]}
     - {role: logrotate, tags: [elkstack, logrotate, log_persister]}
 
 - name: "Log Persister: Clean-Up hosts"
   hosts: monasca_log_persister_group
-  sudo: yes
+  become: yes
   post_tasks:
     - include: tasks/clean_up.yml
-      tags: [elkstack,log_persister]
+      tags: [always]
