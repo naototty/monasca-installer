@@ -10,6 +10,11 @@ monasca_agent_project: cmm
 # Monasca Agent Configuration
 monasca_agent_service: monitoring
 
+# kafka_check_settings, they are correlated in the monasca-agent check
+# see https://github.com/openstack/monasca-agent/blob/master/monasca_agent/collector/checks_d/kafka_consumer.py#L123
+kafka_consumer_per_partition: False
+kafka_consumer_full_output: "{{ kafka_consumer_per_partition|bool }}"
+
 # Additionally you can specify any number of name:value pairs in 'init_config'
 # which will be available on every run in 'self.init_config'
 monasca_checks:
