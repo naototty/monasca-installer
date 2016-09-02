@@ -76,6 +76,12 @@ mariadb-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh
 # Elasticsearch Curator
 elasticsearch-curator-node       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# InfluxDB node
+influxdb-node                    ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
+# Monasca-CLI password
+monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -116,13 +122,13 @@ zookeeper-node
 cmm-node
 
 [monasca_api_group]
-monasca-api-node database_node_for_api=cmm-node
+monasca-api-node database_node_for_api=cmm-node influxdb_node_for_api=influxdb-node
 
 [monasca_notification_group]
 monasca-notification-node database_node_for_notification=cmm-node
 
 [monasca_persister_group]
-monasca-persister-node
+monasca-persister-node influxdb_node_for_persister=influxdb-node
 
 [monasca_log_api_group]
 monasca-log-api-node
@@ -164,6 +170,12 @@ mariadb-node
 [elasticsearch_curator_group]
 elasticsearch-curator-node
 
+[influxdb_group]
+influxdb-node
+
+[monasca_cli_group]
+monasca-cli-node
+
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -202,3 +214,5 @@ monasca_persister_group
 storm_group
 monasca_thresh_group
 mariadb_group
+influxdb_group
+monasca_cli_group

@@ -1,6 +1,8 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
+influxdb_url: "http://{{ hostvars[influxdb_node_for_persister]['ansible_ssh_host'] }}:{{ influxdb_client_port }}"
+
 # user settings
 influxdb_user: mon_persister
 influxdb_password: "{{ influxdb_mon_persister_password }}"

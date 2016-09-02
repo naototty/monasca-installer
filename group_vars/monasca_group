@@ -9,24 +9,10 @@ influxdb_deb_src_url: "{{ world_repo_url }}"
 get_pip_download_url: "{{ world_repo_url }}"
 # monasca information
 monasca_group: monasca
-# influxDB
-influxdb:
-  raft_port: 8086
-# influxDB
-influx_db_user: "influxdb"
-influx_db_group: "influxdb"
-influxdb_hostname: "{{ monasca_host }}"
-influxdb_bind_address: "{{ influxdb_hostname }}"
-# After clustering monasca-persister this variable can be removed
-# because location of influxdb will be specified from inventory level
-influxdb_url: "http://{{ influxdb_bind_address }}:8086"
-influxdb_users:
-  mon_api: "{{ influxdb_mon_api_password }}"
-  mon_persister: "{{ influxdb_mon_persister_password }}"
-influxdb_raft_port: 8085
-influxdb_log_dir: "{{ log_dir }}/influxdb"
-influxdb_version: 0.9.1-1
-influxdb_http_log_enabled: False
+
+# influxdb
+influxdb_client_port: 8086
+influxdb_version: 0.10.1-1
 
 ############################################### kafka ###############################################
 

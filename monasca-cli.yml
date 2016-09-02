@@ -1,0 +1,42 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Monasca-CLI: Prepare/ Configure hosts"
+  hosts: monasca_cli_group
+  become: yes
+  vars:
+    credential_keys_list:
+      - influxdb_mon_api_password
+      - database_monapi_password
+  vars_files:
+    - credentials.yml
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_pip.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
+  roles:
+    - {role: pip, tags: [pip, resources, cli]}
+
+- name: "Monasca-CLI: Install on hosts"
+  hosts: monasca_cli_group
+  vars_files:
+    - credentials.yml
+  become: yes
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
+  roles:
+  - {role: cli-credentials, tags: [cli]}
+
+- name: "Monasca-CLI: Clean-Up hosts"
+  hosts: monasca_cli_group
+  become: yes
+  post_tasks:
+    - include: tasks/clean_up.yml
+      tags: [always]

@@ -3,7 +3,7 @@
 
 - name: "Monasca Group: Verify credentials"
   hosts: monasca_group
-  sudo: yes
+  become: yes
   vars:
     credential_keys_list:
       - influxdb_mon_api_password
@@ -18,6 +18,7 @@
     - credentials.yml
   pre_tasks:
     - include: tasks/verify_ansible.yml
+      tags: [always]
     - include: tasks/verify_credentials.yml
       tags: [always]
 
@@ -34,8 +35,9 @@
 - include: storm.yml
 - include: mariadb.yml
 - include: haproxy.yml
-- include: monasca-single.yml
+- include: influxdb.yml
 - include: monasca-thresh.yml
 - include: monasca-notification.yml
 - include: monasca-persister.yml
 - include: monasca-api.yml
+- include: monasca-cli.yml

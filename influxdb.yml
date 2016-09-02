@@ -1,0 +1,53 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "InfluxDB: Prepare/Configure host"
+  hosts: influxdb_group
+  become: yes
+  vars:
+    credential_keys_list:
+      - influxdb_mon_api_password
+      - influxdb_mon_persister_password
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include:  tasks/set_up.yml
+      tags: [always]
+
+- name: "InfluxDB: Install on host"
+  hosts: influxdb_group[0]
+  become: yes
+  vars_files:
+    - credentials.yml
+  roles:
+    - {role: influxdb,
+       tags: [influxdb]}
+    - {role: monasca-schema,
+       kafka_topics_enabled: False,
+       influxdb_schema_enabled: True,
+       mysql_schema_enabled: False,
+       tags: [influxdb, schema]}
+    - {role: logrotate,
+       tags: [influxdb, logrotate]}
+
+- name: "InfluxDB: Install on peer hosts"
+  hosts: influxdb_group[1:]
+  become: yes
+  vars_files:
+    - credentials.yml
+  roles:
+    - {role: influxdb,
+       tags: [influxdb]}
+    - {role: logrotate,
+       tags: [influxdb, logrotate]}
+
+- name: "InfluxDB: Clean-Up hosts"
+  hosts: influxdb_group
+  become: yes
+  post_tasks:
+    - include: tasks/clean_up.yml
+      tags: [always]
