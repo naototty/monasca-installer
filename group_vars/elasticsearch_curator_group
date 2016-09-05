@@ -10,14 +10,8 @@ curator_venv_dir: "{{ venvs_dir }}/elasticsearch-curator"
 curator_actions:
   - {
       delete_by: age,
-      description: 'Delete indices older than 7 days',
-      deleted_days: 7,
-      disable: False
-    }
-  - {
-      delete_by: size,
-      description: 'Delete indices >= 1000 MB',
-      deleted_size: 1000,
+      description: 'Delete indices older than 60 days',
+      deleted_days: 60,
       disable: False
     }
 

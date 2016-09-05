@@ -19,6 +19,7 @@ influx_db_group: "influxdb"
 influxdb_url: "http://{{ influxdb_bind_address }}:{{ influxdb_client_port }}"
 
 influxdb_replication_factor: "{{ groups['influxdb_group']|count }}"
+influxdb_retention_policy: "60d"
 
 influxdb_users:
   mon_api: "{{ influxdb_mon_api_password }}"
