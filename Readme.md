@@ -38,6 +38,10 @@ This project contains installation scripts (written in Ansible) to install
 * Virtualbox installed
 * Git installed
 
+### Optional
+
+* Vagrant plugin vagrant-timezone
+
 #### Tested with:
 * Vagrant 1.7.2
 * Virtualbox 4.3.26
@@ -118,6 +122,12 @@ vagrant box add clear-centos7 /path/to/the/clear-centos7.box
 Vagrant plugin vagrant-hosts need to be installed for properly synchornize VMs hosts.
 ```bash
 vagrant plugin install vagrant-hosts
+```
+
+If you want your guests machines to have time set to the same time as your
+host machine install `vagrant-timezone` plugin.
+```bash
+vagrant plugin install vagrant-timezone
 ```
 
 #### Prepare hosts template file
