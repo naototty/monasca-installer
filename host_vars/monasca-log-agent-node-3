@@ -67,8 +67,9 @@ log_files:
   - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                                 "component" => "monasca-thresh" }}', path: '"{{ thresh_log_dir }}/*.log"' }
   - { tags: '["mariadb"]', add_field: '{ "dimensions" => { "service" => "monitoring"
-                                                          "component" => "mariadb" }}', path: '"{{ mariadb_log_dir }}/*.log"' }
-
+                                                           "component" => "mariadb" }}', path: '"{{ mariadb_log_dir }}/mariadb*.log"' }
+  - { add_field: '{ "dimensions" => { "service" => "monitoring"
+                                      "component" => "clustercheck" }}', path: '"{{ mariadb_log_dir }}/clustercheck*.log"' }
   - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                           "component" => "elasticsearch-curator" }}', path: '"{{ curator_log_dir }}/*.log"' }
   - { tags: '["go"]', add_field: '{ "dimensions" => { "service" => "monitoring"
