@@ -29,6 +29,7 @@ influxdb_log_dir: "{{ log_dir }}/influxdb"
 
 # submodule settings for influx-db
 influxdb_http_log_enabled: False
+influxdb_query_log_enabled: False
 
 # cluster settings
 influxdb_is_peer_node: "{{ influxdb_master_node_name is defined }}"
