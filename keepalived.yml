@@ -1,0 +1,19 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: "Keepalived: Prepare/Configure host"
+  hosts: keepalived_group
+  become: true
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+
+- name: "Keepalived: Install on hosts"
+  hosts: keepalived_group
+  become: true
+  roles:
+    - {role: keepalived, tags: [keepalived], when: number_of_database_hosts | int > 1}

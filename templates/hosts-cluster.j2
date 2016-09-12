@@ -122,16 +122,24 @@ influxdb-node-1                  ansible_ssh_host={{ ex_node_1_host }} ansible_s
 influxdb-node-2                  ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 influxdb-node-3                  ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
-# HAProxy node
-haproxy-node                     ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
+# HAProxy nodes
+haproxy-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+haproxy-node-2                   ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+haproxy-node-3                   ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+
+# Keepalived nodes
+keepalived-virtual-node          ansible_ssh_host={{ keepalived_virtual_ip }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+keepalived-node-1                ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+keepalived-node-2                ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+keepalived-node-3                ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 # Monasca-CLI password
 monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # Elasticsearch Curator
-elasticsearch-curator-node-1    ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
-elasticsearch-curator-node-2    ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
-elasticsearch-curator-node-3    ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
+elasticsearch-curator-node-1     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
+elasticsearch-curator-node-2     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
+elasticsearch-curator-node-3     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -170,19 +178,19 @@ keystone-node
 cmm-node
 
 [monasca_persister_group]
-monasca-persister-node-1 influxdb_node_for_persister=haproxy-node
-monasca-persister-node-2 influxdb_node_for_persister=haproxy-node
-monasca-persister-node-3 influxdb_node_for_persister=haproxy-node
+monasca-persister-node-1 influxdb_node_for_persister=keepalived-virtual-node
+monasca-persister-node-2 influxdb_node_for_persister=keepalived-virtual-node
+monasca-persister-node-3 influxdb_node_for_persister=keepalived-virtual-node
 
 [monasca_api_group]
-monasca-api-node-1 database_node_for_api=haproxy-node influxdb_node_for_api=haproxy-node
-monasca-api-node-2 database_node_for_api=haproxy-node influxdb_node_for_api=haproxy-node
-monasca-api-node-3 database_node_for_api=haproxy-node influxdb_node_for_api=haproxy-node
+monasca-api-node-1 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node
+monasca-api-node-2 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node
+monasca-api-node-3 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node
 
 [monasca_notification_group]
-monasca-notification-node-1 database_node_for_notification=haproxy-node
-monasca-notification-node-2 database_node_for_notification=haproxy-node
-monasca-notification-node-3 database_node_for_notification=haproxy-node
+monasca-notification-node-1 database_node_for_notification=keepalived-virtual-node
+monasca-notification-node-2 database_node_for_notification=keepalived-virtual-node
+monasca-notification-node-3 database_node_for_notification=keepalived-virtual-node
 
 [memcached_group]
 memcached-node-1
@@ -251,7 +259,7 @@ storm-supervisor-node-2
 storm-supervisor-node-3
 
 [monasca_thresh_group]
-monasca-thresh-node database_node_for_thresh=haproxy-node
+monasca-thresh-node database_node_for_thresh=keepalived-virtual-node
 
 [mariadb_group]
 mariadb-node-1
@@ -264,7 +272,14 @@ influxdb-node-2 influxdb_master_node_name=influxdb-node-1
 influxdb-node-3 influxdb_master_node_name=influxdb-node-1
 
 [haproxy_group]
-haproxy-node
+haproxy-node-1
+haproxy-node-2
+haproxy-node-3
+
+[keepalived_group]
+keepalived-node-1
+keepalived-node-2
+keepalived-node-3
 
 [monasca_cli_group]
 monasca-cli-node
@@ -313,7 +328,11 @@ monasca_notification_group
 monasca_persister_group
 storm_group
 monasca_thresh_group
+monasca_cli_group
+database_cluster_group
+
+[database_cluster_group:children]
 mariadb_group
 influxdb_group
 haproxy_group
-monasca_cli_group
+keepalived_group

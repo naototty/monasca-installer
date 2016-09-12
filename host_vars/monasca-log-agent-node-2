@@ -29,6 +29,7 @@ storm_log_dir: "{{ log_dir }}/storm"
 thresh_log_dir: "{{ storm_log_dir }}/workers-artifacts/{{ thresh_topology_name }}-*/*"
 mariadb_log_dir: "{{ log_dir }}/mariadb"
 curator_log_dir: "{{ monasca_log_dir }}/elasticsearch-curator"
+keepalived_log_file: "{{ log_dir }}/keepalived.log"
 
 global_dims: ["service:{{ ansible_hostname }}"]
 
@@ -74,3 +75,5 @@ log_files:
                                                           "component" => "elasticsearch-curator" }}', path: '"{{ curator_log_dir }}/*.log"' }
   - { tags: '["go"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                       "component" => "influxdb" }}', path: '"{{ influxdb_log_dir }}/*.log"' }
+  - { add_field: '{ "dimensions" => { "service" => "monitoring"
+                                      "component" => "keepalived" }}', path: '"{{ keepalived_log_file }}"' }

@@ -1,0 +1,6 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/database_cluster_group
+
+mysql_cluster_port: 13306
+influxdb_client_cluster_port: 18086

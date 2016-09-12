@@ -21,6 +21,7 @@ mysql_port: 3306
 offline_host: 192.168.10.4
 monasca_host: 192.168.10.4
 keystone_host: 192.168.10.5
+keepalived_virtual_ip: 192.168.10.69
 
 # monsaca settings
 monasca_conf_dir: "{{ etc_dir }}/monasca"

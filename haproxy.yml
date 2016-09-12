@@ -14,7 +14,7 @@
     - include: tasks/set_up.yml
       tags: [always]
 
-- name: "HAProxy: Install on host"
+- name: "HAProxy: Install on hosts"
   hosts: haproxy_group
   become: true
   roles:

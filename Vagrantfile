@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     config.proxy.http = ENV['http_proxy'] if ENV['http_proxy']
     config.proxy.https = ENV['https_proxy'] if ENV['https_proxy']
     if ENV['no_proxy']
-      local_no_proxy = ',192.168.12.90,192.168.10.4,192.168.10.5,192.168.10.6,192.168.10.7,192.168.10.8'
+      local_no_proxy = ',192.168.12.90,192.168.10.4,192.168.10.5,192.168.10.6,192.168.10.7,192.168.10.8,192.168.10.69'
       config.proxy.no_proxy = ENV['no_proxy'] + local_no_proxy
     end
 

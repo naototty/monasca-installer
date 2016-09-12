@@ -100,3 +100,6 @@
 [submodule "roles/elasticsearch-curator"]
 	path = roles/elasticsearch-curator
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-elasticsearch-curator.git
+[submodule "roles/keepalived"]
+	path = roles/keepalived
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-keepalived.git

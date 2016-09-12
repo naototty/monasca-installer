@@ -1,0 +1,5 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: host_vars/mysql-node-1
+
+mysql_port: "{{ mysql_cluster_port | int }}"

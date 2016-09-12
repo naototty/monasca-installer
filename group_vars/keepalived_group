@@ -1,0 +1,25 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: group_vars/keepalived_group
+
+keepalived_global_router_id: "{{ ansible_hostname }}"
+
+keepalived_iptables_network: "192.168.10.0/24"
+
+keepalived_script_check_process: "haproxy"
+
+keepalived_script_weight: 60
+
+logrotate_scripts:
+  - name: keepalived
+    path: "{{ keepalived_log_file }}"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 root root
+      - copytruncate
+      - nomail

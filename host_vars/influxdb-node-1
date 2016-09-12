@@ -1,0 +1,5 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# file: host_vars/influxdb-node-1
+
+influxdb_client_port: "{{ influxdb_client_cluster_port | int }}"
