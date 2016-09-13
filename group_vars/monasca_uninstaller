@@ -3,16 +3,17 @@
 # file: group_vars/monasca.yml
 
 # versions
-zookeeper_version: 3.4.6
+zookeeper_version: 3.4.8
 elasticsearch_version: 2.3.5
 kibana_version: 4.5.4-linux-x64
 logstash_version: 2.3.4
-kafka_version: 0.8.2.2
+kafka_version: 0.9.0.0
 scala_version: "2.10"
 
 # configuration files
 monasca_conf_dir: "{{ etc_dir }}/monasca"
 monasca_work_dir: "{{ opt_dir }}/monasca"
+curator_conf_dir: "{{ monasca_conf_dir }}/elasticsearch-curator"
 
 monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
 monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
@@ -21,7 +22,12 @@ curator_user: curator
 curator_venv_dir: "{{ venvs_dir }}/elasticsearch-curator"
 curator_job: Elasticsearch Curator jobs
 
+storm_root_dir: "{{ opt_dir }}/storm"
+storm_local_dir: "/var/storm_{{ ansible_ssh_host }}"
+
 uninstall_services:
+  - { name: "storm-nimbus", assets: [] }
+  - { name: "storm-supervisor", assets: [] }
   - { name: "zookeeper", assets: [] }
   - { name: "kafka", assets: [] }
   - { name: "elasticsearch", assets: [] }
@@ -70,8 +76,9 @@ uninstall_packages:
      - { assets: ["{{ opt_dir }}/logstash-{{ logstash_version }}", "{{ opt_dir }}/logstash"] }
      - { rpm: "memcached", assets: ["/etc/sysconfig/memcached.rpmsave"] }
      - { assets: ["{{ opt_dir }}/zookeeper-{{ zookeeper_version }}"] }
-     - { assets: ["{{ curator_venv_dir }}","{{ curator_conf_dir }}/curator_config.yml", "{{ curator_config }}/curator_action.yml"]}
+     - { assets: ["{{ curator_venv_dir }}","{{ curator_conf_dir }}/curator_config.yml", "{{ curator_conf_dir }}/curator_action.yml"]}
      - { pip: "python-monascaclient", assets: [ ] }
+     - { assets: ["{{ storm_root_dir }}", "{{ storm_local_dir }}"] }
 # post uninstallation directories that should be removed
 # force: If True, remove even if folder not empty
 uninstall_directories:

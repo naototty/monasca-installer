@@ -15,6 +15,7 @@ uninstall_packages:
 # force: If True, remove even if folder not empty
 uninstall_directories:
   - { dir: "{{ opt_dir }}/monasca", force: False}
+  - { dir: "{{ monasca_conf_dir }}", force: False}
 
 clean_up_dirs:
   - "{{ download_tmp_dir }}"
