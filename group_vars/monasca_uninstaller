@@ -14,6 +14,7 @@ scala_version: "2.10"
 monasca_conf_dir: "{{ etc_dir }}/monasca"
 monasca_work_dir: "{{ opt_dir }}/monasca"
 curator_conf_dir: "{{ monasca_conf_dir }}/elasticsearch-curator"
+logrotate_conf_dir: "{{ etc_dir }}/logrotate.d"
 
 monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
 monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
@@ -91,6 +92,14 @@ uninstall_directories:
 
 uninstall_cron_jobs:
   - { user: "{{ curator_user }}", job: "{{ curator_job }}"}
+
+logrotate_scripts:
+  - name: elasticsearch_curator
+  - name: kibana
+  - name: monasca_log_transformer
+  - name: monasca_log_persister
+  - name: monasca_log_metrics
+  - name: monasca_log_agent
 
 # post installation directories that should be removed
 clean_up_dirs:

@@ -34,3 +34,18 @@ influxdb_query_log_enabled: False
 # cluster settings
 influxdb_is_peer_node: "{{ influxdb_master_node_name is defined }}"
 influxdb_master_node: "{% if influxdb_is_peer_node %}{{ hostvars[influxdb_master_node_name]['ansible_ssh_host'] }}{% else %}False{% endif %}"
+
+# logrotate configuration
+logrotate_scripts:
+  - name: influxdb
+    path: "{{ influxdb_log_dir }}/*.log"
+    options:
+      - daily
+      - missingok
+      - rotate 10
+      - compress
+      - delaycompress
+      - notifempty
+      - create 06400 {{ influx_db_user }} {{ influx_db_group }}
+      - copytruncate
+      - noemail
