@@ -9,7 +9,7 @@ storm_master_hosts: "{% for item in groups['storm_group'] -%}
 storm_master_nodes: "{{ storm_master_hosts.split(',') }}"
 
 storm_log_dir: "{{ log_dir }}/storm"
-storm_version: 1.0.1
+storm_version: 1.0.2
 
 # storm services
 storm_nimbus_enabled: true
