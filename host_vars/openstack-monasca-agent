@@ -20,4 +20,4 @@ monasca_checks:
 
 pip_extra_depedencies:
   - { name: pymysql, version: 0.7.2 }
-  - { name: python-neutronclient, version: 3.1.0 }
+  - { name: python-neutronclient, version: 4.1.1 }

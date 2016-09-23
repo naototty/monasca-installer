@@ -12,7 +12,7 @@ monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
 monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
-monasca_agent_version: 1.2.1.dev95
+monasca_agent_version: 1.2.1.dev133
 
 monasca_agent_overwrite_config: False
 monasca_agent_check_frequency: 30
