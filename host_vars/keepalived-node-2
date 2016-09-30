@@ -7,7 +7,7 @@
 keepalived_binding_interface: "enp0s8"
 
 keepalived_node_role: "BACKUP"
-keepalived_priority: 100
+keepalived_node_priority: 100
 
 # Optional, monitor this interfaces as well.
 # Keepalived will enter FAILED state if any of this go down.
