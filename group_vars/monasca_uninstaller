@@ -4,7 +4,6 @@
 
 # versions
 zookeeper_version: 3.4.8
-elasticsearch_version: 2.3.5
 kibana_version: 4.5.4-linux-x64
 logstash_version: 2.3.4
 kafka_version: 0.9.0.0
@@ -31,7 +30,6 @@ uninstall_services:
   - { name: "storm-supervisor", assets: [] }
   - { name: "zookeeper", assets: [] }
   - { name: "kafka", assets: [] }
-  - { name: "elasticsearch", assets: [] }
   - { name: "kibana", assets: [] }
   - { name: "monasca-notification", assets: [
       "{{ monasca_conf_dir }}/notification.yaml",
@@ -62,17 +60,7 @@ uninstall_services:
       "/etc/systemd/system/static_httpd.service"]}
 uninstall_packages:
    RedHat:
-     - { assets: ["{{ opt_dir }}/elasticsearch-{{ elasticsearch_version }}", "{{ opt_dir }}/elasticsearch"] }
      - { assets: ["{{ opt_dir }}/kafka_{{scala_version}}-{{ kafka_version }}", "{{ opt_dir }}/kafka"] }
-     - { assets: "{% if elasticsearch_data_dir is defined -%}
-                    {% if elasticsearch_data_dir is string -%}
-                      {{ elasticsearch_data_dir.split(',') }}
-                    {%- elif elasticsearch_data_dir is iterable -%}
-                      {{ elasticsearch_data_dir }}
-                    {%- endif %}
-                  {% else -%}
-                    []
-                  {%- endif -%}" }
      - { assets: ["{{ opt_dir }}/kibana-{{ kibana_version }}", "{{ opt_dir }}/kibana"] }
      - { assets: ["{{ opt_dir }}/logstash-{{ logstash_version }}", "{{ opt_dir }}/logstash"] }
      - { rpm: "memcached", assets: ["/etc/sysconfig/memcached.rpmsave"] }
