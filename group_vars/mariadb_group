@@ -2,13 +2,15 @@
 # Copyright 2016 FUJITSU LIMITED
 # file: group_vars/mariadb_group
 
-mariadb_version: 5.5.50
+mariadb_version: 10.1.18
 mariadb_host: "{{ monasca_host }}"
 clustercheck_port: 9199
 
 # System user settings
 mariadb_user: mysql
 mariadb_group: mysql
+
+mariadb_update_selinux: False
 
 mysql_users:
   - username: "{{ grafana_database_user }}"
