@@ -30,6 +30,7 @@ thresh_log_dir: "{{ storm_log_dir }}/workers-artifacts/{{ thresh_topology_name }
 mariadb_log_dir: "{{ log_dir }}/mariadb"
 haproxy_log_file: "{{ log_dir }}/haproxy.log"
 curator_log_dir: "{{ monasca_log_dir }}/elasticsearch-curator"
+grafana_log_dir: "{{ log_dir }}/grafana"
 
 global_dims: ["service:monasca"]
 
@@ -74,3 +75,6 @@ log_files:
                                                            "component" => "haproxy" }}', path: '"{{ haproxy_log_file }}"' }
   - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                             "component" => "elasticsearch-curator" }}', path: '"{{ curator_log_dir }}/*.log"' }
+
+  - { tags: '["go"]', add_field: '{ "dimensions" => { "service" => "grafana"
+                                                      "component" => "grafana-server" }}', path: '"{{ grafana_log_dir }}/*.log"' }

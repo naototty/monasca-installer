@@ -10,6 +10,20 @@ clustercheck_port: 9199
 mariadb_user: mysql
 mariadb_group: mysql
 
+mysql_users:
+  - username: "{{ grafana_database_user }}"
+    password: "{{ grafana_database_password }}"
+    database: "{{ grafana_database_name }}"
+  - username: monapi
+    password: "{{ database_monapi_password }}"
+    database: mon
+  - username: thresh
+    password: "{{ database_thresh_password }}"
+    database: mon
+  - username: notification
+    password: "{{ database_notification_password }}"
+    database: mon
+
 log_dir: /var/log
 mariadb_log_dir: "{{ log_dir }}/mariadb"
 
