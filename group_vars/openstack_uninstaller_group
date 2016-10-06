@@ -5,9 +5,6 @@
 monasca_conf_dir: "{{ etc_dir }}/monasca"
 logrotate_conf_dir: "{{ etc_dir }}/logrotate.d"
 
-uninstall_services:
-  - { name: "monasca-agent", assets: ["{{ monasca_conf_dir }}/agent"] }
-  - { name: "monasca-log-agent", assets: ["{{ monasca_conf_dir }}/monasca-log-agent"] }
 uninstall_packages:
   RedHat:
    - { assets: [ "{{ keystone_virtualenv_dir }}", "{{ keystone_service_script }}" ]}
@@ -17,9 +14,6 @@ uninstall_packages:
 uninstall_directories:
   - { dir: "{{ opt_dir }}/monasca", force: False}
   - { dir: "{{ monasca_conf_dir }}", force: False}
-
-logrotate_scripts:
-  - name: monasca_log_agent
 
 clean_up_dirs:
   - "{{ download_tmp_dir }}"
