@@ -103,3 +103,6 @@
 [submodule "roles/keepalived"]
 	path = roles/keepalived
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-keepalived.git
+[submodule "templates/encoder"]
+	path = templates/encoder
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/config-encoder-macros.git
