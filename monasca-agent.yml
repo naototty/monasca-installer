@@ -8,7 +8,6 @@
     credential_keys_list:
       - cmm_monasca_agent_keystone_password
       - openstack_monasca_agent_keystone_password
-      - cmm_monasca_agent_database_password
   vars_files:
     - credentials.yml
   environment:

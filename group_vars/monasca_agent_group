@@ -11,7 +11,6 @@ monasca_agent_conf_dir: "{{ monasca_conf_dir }}/agent"
 monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
-monasca_agent_database_password: "{{ cmm_monasca_agent_database_password }}"
 monasca_agent_version: 1.2.1.dev133
 
 monasca_agent_system_user: mon-agent
