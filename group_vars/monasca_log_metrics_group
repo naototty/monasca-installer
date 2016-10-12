@@ -36,3 +36,5 @@ logrotate_scripts:
 log_metrics_detect_log_levels:
   - warning
   - error
+  - fatal
+  - critical
