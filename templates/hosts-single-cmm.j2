@@ -46,6 +46,9 @@ monasca-notification-node        ansible_ssh_host={{ monasca_host }} ansible_ssh
 # Monasca-persister node
 monasca-persister-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
+# Monasca-log-metric node
+monasca-log-metrics-node          ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+
 # Monasca Agent Hosts
 cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
@@ -121,6 +124,9 @@ monasca-persister-node influxdb_node_for_persister=influxdb-node
 [monasca_log_api_group]
 monasca-log-api-node
 
+[monasca_log_metrics_group]
+monasca-log-metrics-node
+
 [monasca_log_persister_group]
 log-persister-node
 
@@ -158,7 +164,7 @@ influxdb-node
 monasca-cli-node
 
 [grafana_group]
-grafana-node  database_node_for_grafana=cmm-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
+grafana-node database_node_for_grafana=cmm-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
 
 ################################################################################
 # Group inheritance
@@ -170,6 +176,7 @@ kibana_group
 monasca_log_agent_group
 monasca_log_persister_group
 monasca_log_transformer_group
+monasca_log_metrics_group
 elasticsearch_curator_group
 
 [storm_group:children]
