@@ -1,0 +1,53 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+# paths
+grafana_paths_logs: "{{ log_dir }}/grafana"
+grafana_paths_config: "{{ etc_dir }}/grafana"
+grafana_paths_home: "{{ opt_dir }}/grafana"
+
+# auth settings
+## basic
+grafana_auth_basic_enabled: False
+## keystone
+grafana_auth_keystone_enabled: True
+grafana_auth_keystone_auth_url: "http://{{ keystone_host }}:{{ keystone_port|int }}"
+### permissions
+grafana_auth_keystone_viewer_roles:
+  - _member
+  - cmm_user
+  - admin
+grafana_auth_keystone_editor_roles:
+  - cmm_user
+  - admin
+grafana_auth_keystone_global_admin_roles:
+  - admin
+
+# installation
+grafana_install_mode: rpm
+grafana_install_package_name: grafana
+grafana_install_version: 3.1.0
+grafana_install_rpm_download_url: "{{ world_repo_url }}/grafana/{{ grafana_install_package_name }}_{{ grafana_install_version }}.rpm"
+
+# database
+grafana_database_type: mysql
+grafana_database_host: "{{ hostvars[database_node_for_grafana]['ansible_ssh_host'] }}:{{ mysql_port }}"
+
+# server
+grafana_server_domain: "{{ ansible_ssh_host }}"
+
+# event publisher
+# TIP: rabbitmq_host_for_grafana is pure IP address, no need to get from hostvars
+grafana_event_publisher_rabbitmq_url: "amqp://{{ rabbitmq_host_for_grafana }}/"
+grafana_event_publisher_enabled: True
+
+# plugins
+grafana_plugins:
+  - name: monasca-grafana-datasource
+    url: "{{ world_repo_url }}/grafana/monasca-datasource-grafana_8423bf7.tar.gz"
+
+# timeouts
+grafana_wait_for_port_time: "{{ monasca_wait_for_period|int }}"
+
+# app settings
+grafana_app_mode: production

@@ -42,3 +42,4 @@
 - include: monasca-persister.yml
 - include: monasca-api.yml
 - include: monasca-cli.yml
+- include: grafana.yml

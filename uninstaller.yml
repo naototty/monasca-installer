@@ -1,6 +1,18 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
+# Experimental approach to remove components
+- name: "Uninstall Grafana"
+  hosts: grafana_group
+  become: yes
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+  roles:
+    - {role: grafana,
+       run_mode: 'purge',
+       tags: [uninstaller, uninstaller_grafana]}
+
 - name: Uninstall [monasca]
   hosts: cmm-node
   become: yes
