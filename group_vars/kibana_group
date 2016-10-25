@@ -21,7 +21,7 @@ elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 kibana_plugins:
   - {
       name: 'fts-keystone',
-      url: '{{ world_repo_url }}/fts-keystone-0.0.3.tar.gz',
+      url: '{{ world_repo_url }}/fts-keystone-0.0.4.tar.gz',
       configuration: {
           'fts-keystone.enabled': true,
           'fts-keystone.url': 'http://{{ keystone_host }}',
