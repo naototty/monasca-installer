@@ -10,7 +10,6 @@
       - influxdb_mon_persister_password
       - database_notification_password
       - database_monapi_password
-      - database_logapi_password
       - database_thresh_password
       - keystone_cmm_operator_user_password
       - keystone_admin_password
