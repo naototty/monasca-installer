@@ -6,8 +6,8 @@
   become: yes
   vars:
     credential_keys_list:
-      - cmm_monasca_agent_keystone_password
-      - openstack_monasca_agent_keystone_password
+      - keystone_cmm_agent_password
+      - keystone_admin_agent_password
   vars_files:
     - credentials.yml
   environment:

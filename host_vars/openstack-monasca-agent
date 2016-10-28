@@ -4,7 +4,7 @@
 
 # Monasca Agent Configuration
 monasca_agent_user: admin-agent
-monasca_agent_password: "{{ openstack_monasca_agent_keystone_password }}"
+monasca_agent_password: "{{ keystone_admin_agent_password }}"
 monasca_agent_project: admin
 
 monasca_checks:
