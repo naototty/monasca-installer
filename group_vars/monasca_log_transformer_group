@@ -5,7 +5,8 @@ log_transformer_user: mon-transformer
 log_transformer_group: "{{ monasca_group }}"
 
 log_transformer_fetch_msg_max_bytes: "{{ kafka_log_topic_max_message_bytes|int }}"
-log_transformer_consumer_threads: "{{ kafka_log_topic_partitions|int }}"
+# log_transformer_consumer_threads: "{{ kafka_log_topic_partitions|int }}"
+log_transformer_consumer_threads: 1
 log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
 
 logrotate_scripts:
