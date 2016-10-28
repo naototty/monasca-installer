@@ -5,7 +5,7 @@
 # logstash monasca user credentials
 monasca_log_agent_project: admin
 monasca_log_agent_user: admin-agent
-monasca_log_agent_password: "{{ openstack_monasca_log_agent_keystone_password }}"
+monasca_log_agent_password: "{{ keystone_admin_agent_password }}"
 user_domain_name: default
 project_domain_name: default
 
