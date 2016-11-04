@@ -10,8 +10,6 @@ clustercheck_port: 9199
 mariadb_user: mysql
 mariadb_group: mysql
 
-mariadb_update_selinux: False
-
 mysql_users:
   - username: "{{ grafana_database_user }}"
     password: "{{ grafana_database_password }}"
