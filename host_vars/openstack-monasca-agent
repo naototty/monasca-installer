@@ -18,6 +18,8 @@ monasca_checks:
         host_name: "{{ monasca_host }}"
         alive_test: ssh
 
+monasca_agent_statsd_port: 8126
+
 pip_extra_depedencies:
   - { name: pymysql, version: 0.7.2 }
   - { name: python-neutronclient, version: 4.1.1 }
