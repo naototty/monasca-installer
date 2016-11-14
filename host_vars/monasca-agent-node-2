@@ -4,7 +4,7 @@
 
 # Monasca Agent user credentials
 monasca_agent_user: cmm-agent
-monasca_agent_password: "{{ cmm_monasca_agent_keystone_password }}"
+monasca_agent_password: "{{ keystone_cmm_agent_password }}"
 monasca_agent_project: cmm
 
 # Monasca Agent Configuration
