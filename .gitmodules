@@ -106,6 +106,3 @@
 [submodule "templates/encoder"]
 	path = templates/encoder
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/config-encoder-macros.git
-[submodule "roles/grafana"]
-	path = roles/grafana
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-grafana.git

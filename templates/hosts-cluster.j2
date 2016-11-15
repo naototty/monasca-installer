@@ -141,9 +141,6 @@ elasticsearch-curator-node-1     ansible_ssh_host={{ ex_node_1_host }} ansible_s
 elasticsearch-curator-node-2     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 elasticsearch-curator-node-3     ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
-# Grafana node
-grafana-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -292,9 +289,6 @@ elasticsearch-curator-node-1
 elasticsearch-curator-node-2
 elasticsearch-curator-node-3
 
-[grafana_group]
-grafana-node database_node_for_grafana=keepalived-virtual-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
-
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -336,7 +330,6 @@ storm_group
 monasca_thresh_group
 monasca_cli_group
 database_cluster_group
-grafana_group
 
 [database_cluster_group:children]
 mariadb_group

@@ -84,6 +84,11 @@ database_host: "{{ monasca_host }}"
 database_port: 3306
 database_name: mon
 
+database_users:
+  notification: "{{ database_notification_password }}"
+  monapi: "{{ database_monapi_password }}"
+  thresh: "{{ database_thresh_password }}"
+
 number_of_database_hosts: "{{ groups['mariadb_group'] | count }}"
 
 # Database user used by clustercheck script when installing Galera cluster.
@@ -129,8 +134,3 @@ logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
 
 # monasca-thresh
 thresh_topology_name: "thresh-cluster"
-
-# grafana
-grafana_database_user: grafana
-grafana_database_password: "{{ database_grafana_password }}"
-grafana_database_name: grafana

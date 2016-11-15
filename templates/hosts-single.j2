@@ -82,9 +82,6 @@ influxdb-node                    ansible_ssh_host={{ monasca_host }} ansible_ssh
 # Monasca-CLI password
 monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
-# Grafana node
-grafana-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -179,9 +176,6 @@ influxdb-node
 [monasca_cli_group]
 monasca-cli-node
 
-[grafana_group]
-grafana-node database_node_for_grafana=cmm-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
-
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -222,4 +216,3 @@ monasca_thresh_group
 mariadb_group
 influxdb_group
 monasca_cli_group
-grafana_group
