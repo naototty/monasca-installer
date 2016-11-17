@@ -80,7 +80,6 @@ postgres_schema_enabled: false
 database_backend: mariadb
 orm_enabled: true
 hibernate_support_enabled: true
-database_host: "{{ monasca_host }}"
 database_port: 3306
 database_name: mon
 

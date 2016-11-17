@@ -2,21 +2,23 @@
 
 ################################################################################
 # Host definitions. Replace monasca_host, openstack_host, ex_node_[1-3]_host,
-# ssh_user_monasca, ssh_user_openstack and ssh_user_ex_node_[1-3] with valid
-# information.
+# offline_resources_host, ssh_user_monasca, ssh_user_openstack, ssh_user_offline_host
+# and ssh_user_ex_node_[1-3] with valid information.
 ################################################################################
 
 localhost                        ansible_connection=local
 
 # Offline Host
-offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+offline-resources-node           ansible_ssh_host={{ offline_resources_host }} ansible_ssh_user={{ ssh_user_offline_host }}
 
 # Openstack Hosts
 horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
-# Monasca host
-cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+# Load balancer hosts
+monasca-log-api-balancer-node    ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-api-balancer-node        ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+kibana-balancer-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
 # ElasticSearch nodes for cluster
 elastic-node-1                   ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
@@ -92,11 +94,9 @@ monasca-log-metrics-node-3       ansible_ssh_host={{ ex_node_3_host }} ansible_s
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
 # Monasca Agent Hosts
-cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
-cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 #Storm Nimbus nodes
@@ -149,14 +149,12 @@ elasticsearch-curator-node-3     ansible_ssh_host={{ ex_node_3_host }} ansible_s
 ################################################################################
 
 [monasca_agent_group]
-cmm-monasca-agent
 openstack-monasca-agent
 monasca-agent-node-1
 monasca-agent-node-2
 monasca-agent-node-3
 
 [monasca_log_agent_group]
-cmm-monasca-log-agent
 openstack-monasca-log-agent
 monasca-log-agent-node-1
 monasca-log-agent-node-2
@@ -175,7 +173,7 @@ horizon-node
 keystone-node
 
 [monasca_group]
-cmm-node
+balancer-node
 
 [monasca_persister_group]
 monasca-persister-node-1 influxdb_node_for_persister=keepalived-virtual-node
@@ -246,7 +244,7 @@ horizon-node
 keystone-node
 
 [monasca_uninstaller]
-cmm-node
+balancer-node
 
 [storm_nimbus_group]
 storm-nimbus-node-1

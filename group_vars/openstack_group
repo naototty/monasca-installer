@@ -5,7 +5,7 @@
 is_openstack: true
 
 # urls
-kibana_url: "http://{{ monasca_host }}:5601/"
+kibana_url: "http://{{ kibana_ip|trim|safe }}:5601/"
 
 grafana_tarball_url: "{{ balls_repo_url }}/world"
 grafana_tarball_file: "/fujitsu-monasca-grafana.tar.gz"
@@ -43,7 +43,7 @@ keystone_users:
     roles:
         - cmm-agent
 
-kibana_host: "http://{{ monasca_host }}:5601/"
+kibana_host: "http://{{ kibana_ip|trim|safe }}:5601/"
 
 # keystone endpoint for monasca-keystone
 keystone_service_endpoints:
