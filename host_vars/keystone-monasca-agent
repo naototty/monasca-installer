@@ -15,5 +15,8 @@ monasca_checks:
       ping_timeout: 1
     instances:
       - name: monasca
-        host_name: "{{ monasca_host }}"
+        host_name: "{{ monasca_api_ip|trim|safe }}"
+        alive_test: ssh
+      - name: monasca-log-api-host
+        host_name: "{{ monasca_log_api_ip|trim|safe }}"
         alive_test: ssh

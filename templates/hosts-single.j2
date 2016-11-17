@@ -1,14 +1,15 @@
 # Copyright 2016 FUJITSU LIMITED
 
 ################################################################################
-# Host definitions. Replace monasca_host, openstack_host, ssh_user_monasca and
-# ssh_user_openstack with valid informations
+# Host definitions. Replace monasca_host, openstack_host, offline_resources_host,
+# ssh_user_monasca, ssh_user_openstack and ssh_user_offline_host with
+# valid informations.
 ################################################################################
 
 localhost                        ansible_connection=local
 
 # Offline Host
-offline-resources-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+offline-resources-node           ansible_ssh_host={{ offline_resources_host }} ansible_ssh_user={{ ssh_user_offline_host }}
 
 # Openstack Hosts
 horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}

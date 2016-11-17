@@ -3,7 +3,7 @@
 # file: group_vars/mariadb_group
 
 mariadb_version: 10.1.18
-mariadb_host: "{{ monasca_host }}"
+mariadb_host: "{{ hostvars['mariadb-node']['ansible_ssh_host'] }}"
 clustercheck_port: 9199
 
 # System user settings
