@@ -14,7 +14,7 @@
        tags: [uninstaller, uninstaller_grafana]}
 
 - name: Uninstall [monasca]
-  hosts: cmm-node
+  hosts: monasca_uninstaller
   become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml
@@ -23,7 +23,7 @@
     - {role: uninstaller, tags: [uninstaller, uninstaller_monasca]}
 
 - name: Uninstall [openstack][horizon-node]
-  hosts: horizon-node
+  hosts: openstack_uninstaller_group
   become: yes
   pre_tasks:
     - include: tasks/verify_ansible.yml

@@ -18,10 +18,27 @@ memcached_port: 11211
 mysql_port: 3306
 
 # hosts
-offline_host: 192.168.10.4
-monasca_host: 192.168.10.4
-keystone_host: 192.168.10.5
-keepalived_virtual_ip: 192.168.10.69
+offline_host: "{{ hostvars['offline-resources-node']['ansible_ssh_host'] }}"
+monasca_api_ip: "{% if groups['monasca_api_group']|length > 1 %}
+                    {{ hostvars['monasca-api-balancer-node']['ansible_ssh_host'] }}
+                 {% else %}
+                    {{ hostvars['monasca-api-node']['ansible_ssh_host'] }}
+                 {% endif %}
+                "
+monasca_log_api_ip: "{% if groups['monasca_log_api_group']|length > 1 %}
+                        {{ hostvars['monasca-log-api-balancer-node']['ansible_ssh_host'] }}
+                     {% else %}
+                        {{ hostvars['monasca-log-api-node']['ansible_ssh_host'] }}
+                     {% endif %}
+                    "
+kibana_ip: "{% if groups['kibana_group']|length > 1 %}
+                {{ hostvars['kibana-balancer-node']['ansible_ssh_host'] }}
+            {% else %}
+                {{ hostvars['kibana-node']['ansible_ssh_host'] }}
+            {% endif %}
+           "
+keystone_host: "{{ hostvars['keystone-node']['ansible_ssh_host'] }}"
+keepalived_virtual_ip: "{{ hostvars['keepalived-virtual-node']['ansible_ssh_host'] }}"
 
 # monsaca settings
 monasca_conf_dir: "{{ etc_dir }}/monasca"
@@ -34,9 +51,9 @@ keystone_url: "http://{{ keystone_host }}:{{ keystone_user_port }}/v{{ keystone_
 # URL service definition
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
-monasca_api_url: "http://{{ monasca_host }}:{{ monasca_api_client_port|int }}/v2.0"
-monasca_log_api_url: "http://{{ monasca_host }}:{{ monasca_log_api_port|int }}/v3.0"
-kibana_url: "http://{{ monasca_host }}:{{ kibana_port }}"
+monasca_api_url: "http://{{ monasca_api_ip|trim|safe }}:{{ monasca_api_client_port|int }}/v2.0"
+monasca_log_api_url: "http://{{ monasca_log_api_ip|trim|safe }}:{{ monasca_log_api_port|int }}/v3.0"
+kibana_url: "http://{{ kibana_ip|trim|safe }}:{{ kibana_port }}"
 
 # Monasca Api CLI - Credentials
 monasca_user:

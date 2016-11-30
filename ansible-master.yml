@@ -7,6 +7,7 @@
   become: true
   vars:
     monasca_host: 192.168.10.4
+    offline_resources_host: 192.168.10.4
     openstack_host: 192.168.10.5
     rabbitmq_host: 192.168.10.5
     ex_node_1_host: 192.168.10.6
@@ -16,6 +17,7 @@
     haproxy_host: 192.168.10.4
     keepalived_virtual_ip: 192.168.10.69
     ssh_user_monasca: vagrant
+    ssh_user_offline_host: vagrant
     ssh_user_openstack: vagrant
     ssh_user_ex_node_1: vagrant
     ssh_user_ex_node_2: vagrant
