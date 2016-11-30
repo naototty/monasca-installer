@@ -42,9 +42,11 @@ mariadb_galera_hosts: "{% for item in groups['mariadb_group'] -%}
                        {%- endfor %}"
 mariadb_galera_nodes: "{{ mariadb_galera_hosts.split(',') }}"
 
-load_balancer_hosts: "{% for item in groups['haproxy_group'] -%}
-                          {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
-                      {%- endfor %}"
+load_balancer_hosts: "{% if groups['haproxy_group'] is defined -%}
+                          {% for item in groups['haproxy_group'] -%}
+                              {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
+                          {%- endfor %}
+                      {%- endif %}"
 load_balancer_nodes: "{{ load_balancer_hosts.split(',') }}"
 
 # Logrotate configuration
