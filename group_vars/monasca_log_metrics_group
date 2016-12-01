@@ -31,7 +31,7 @@ logrotate_scripts:
       - notifempty
       - create 06400 {{ log_metrics_user }} {{ log_metrics_group }}
       - copytruncate
-      - noemail
+      - nomail
 
 # detected settings
 log_metrics_detect_log_levels:
