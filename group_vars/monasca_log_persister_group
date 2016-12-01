@@ -22,4 +22,4 @@ logrotate_scripts:
       - notifempty
       - create 06400 {{ log_persister_user }} {{ log_persister_group }}
       - copytruncate
-      - noemail
+      - nomail

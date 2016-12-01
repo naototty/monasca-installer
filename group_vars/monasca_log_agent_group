@@ -43,4 +43,4 @@ logrotate_scripts:
       - notifempty
       - create 06400 root root
       - copytruncate
-      - noemail
+      - nomail

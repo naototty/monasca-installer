@@ -42,4 +42,4 @@ logrotate_scripts:
       - notifempty
       - create 06400 {{ kibana_user }} {{ kibana_group }}
       - copytruncate
-      - noemail
+      - nomail
