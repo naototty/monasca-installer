@@ -50,6 +50,7 @@ Vagrant.configure(2) do |config|
     master.vm.provision 'ansible' do |ansible|
       ansible.playbook = 'ansible-master.yml'
     end
+    master.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
   end
 
   config.vm.define 'openstack' do |openstack|
@@ -69,6 +70,7 @@ Vagrant.configure(2) do |config|
       vb.memory = 6192
       vb.cpus = 2
     end
+    openstack.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
   end
 
   config.vm.define 'monasca' do |monasca|
@@ -94,6 +96,7 @@ Vagrant.configure(2) do |config|
         vb.cpus = 2
       end
     end
+    monasca.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
   end
 
   if enable_cluster == '1'
@@ -114,6 +117,7 @@ Vagrant.configure(2) do |config|
         vb.memory = 4096
         vb.cpus = 2
       end
+      ds.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
     end
 
     config.vm.define 'ex_node_2' do |ds|
@@ -132,6 +136,7 @@ Vagrant.configure(2) do |config|
         vb.memory = 4096
         vb.cpus = 2
       end
+      ds.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
     end
 
     config.vm.define 'ex_node_3' do |ds|
@@ -150,6 +155,7 @@ Vagrant.configure(2) do |config|
         vb.memory = 4096
         vb.cpus = 2
       end
+      ds.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
     end
   end
 end
