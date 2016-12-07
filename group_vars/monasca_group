@@ -98,6 +98,10 @@ monasca_log_api_bind_host: 0.0.0.0
 
 # monasca-agent
 monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"
+monasca_agent_statsd_port: 8125
+
+# monasca-notification
+monasca_notification_statsd_port: "{{ monasca_agent_statsd_port|int }}"
 
 # apache
 apache_mirror: "{{ world_repo_url }}"
@@ -128,6 +132,7 @@ logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
 
 # monasca-thresh
 thresh_topology_name: "thresh-cluster"
+thresh_statsd_port: "{{ monasca_agent_statsd_port|int }}"
 
 # grafana
 grafana_database_user: grafana
