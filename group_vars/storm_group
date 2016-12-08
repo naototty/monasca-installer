@@ -17,6 +17,10 @@ storm_supervisor_enabled: true
 storm_ui_enabled: false
 storm_ui_host: "{{ ansible_ssh_host }}"
 
+# Change default port to not colide with InfluxDB raft port 8088
+# that is hard-coded into InfluxDB data restoration client.
+storm_ui_port: 8085
+
 storm_is_master_node: true
 
 # worker settings
