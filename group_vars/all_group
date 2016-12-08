@@ -90,7 +90,7 @@ data_dir: /var/data
 
 # Supported varsions of dependencies
 ansible_version_min:
-  ver: "2.0.0.0"
+  ver: "2.0.1.0"
   constraint: ">="
 ansible_version_max:
   ver: "2.2.0.0"
