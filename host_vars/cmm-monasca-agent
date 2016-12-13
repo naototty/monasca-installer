@@ -17,8 +17,9 @@ postgresql_bin_dir: "{{ postgresql_dir }}/bin"
 
 # Additionally you can specify any number of name:value pairs in 'init_config'
 # which will be available on every run in 'self.init_config'
+# Designate unique name into each instances section
 monasca_checks:
-  host_alive:
+  - plugin: host_alive
     init_config:
       ssh_port: 22
       ssh_timeout: 0.5
@@ -27,14 +28,15 @@ monasca_checks:
       - name: openstack
         host_name: "{{ keystone_host }}"
         alive_test: ssh
-  elastic:
+  - plugin: elastic
     init_config:
     instances:
-      - url: "{{ elasticsearch_url }}"
+      - name: elasticsearch
+        url: "{{ elasticsearch_url }}"
         dimensions:
           component: elasticsearch
           service: monitoring
-  http_check:
+  - plugin: http_check
     init_config:
     instances:
       - name: Kibana
@@ -50,7 +52,7 @@ monasca_checks:
           component: monasca-log-api
           service: monitoring
   # this one's different because concatenated with default file
-  process:
+  - plugin: process
     init_config:
     instances:
       - built_by: MonLogMetrics

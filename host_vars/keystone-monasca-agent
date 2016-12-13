@@ -7,8 +7,9 @@ monasca_agent_user: admin-agent
 monasca_agent_password: "{{ keystone_admin_agent_password }}"
 monasca_agent_project: admin
 
+# Designate unique name into each instances section
 monasca_checks:
-  host_alive:
+  - plugin: host_alive
     init_config:
       ssh_port: 22
       ssh_timeout: 0.5
