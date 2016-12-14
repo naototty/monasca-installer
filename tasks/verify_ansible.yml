@@ -6,6 +6,7 @@
   register: ansible_installed_version
   run_once: true
   delegate_to: 127.0.0.1
+  become: no
 
 - name: Verify if installed Ansible version is supported
   fail: msg="Ansible is in the wrong version - {{ ansible_installed_version.stdout_lines[0] }}. Supported version should be {{ ansible_version_min.constraint }} {{ ansible_version_min.ver }} and {{ ansible_version_max.constraint }} {{ ansible_version_max.ver }}"
