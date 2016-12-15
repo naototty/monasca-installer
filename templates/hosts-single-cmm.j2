@@ -77,9 +77,6 @@ elasticsearch-curator-node       ansible_ssh_host={{ monasca_host }} ansible_ssh
 # InfluxDB node
 influxdb-node                    ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
-# Monasca-CLI password
-monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-
 # Grafana node
 grafana-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
@@ -167,9 +164,6 @@ elasticsearch-curator-node
 [influxdb_group]
 influxdb-node
 
-[monasca_cli_group]
-monasca-cli-node
-
 [grafana_group]
 grafana-node database_node_for_grafana=cmm-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
 
@@ -209,5 +203,4 @@ storm_group
 monasca_thresh_group
 mariadb_group
 influxdb_group
-monasca_cli_group
 grafana_group

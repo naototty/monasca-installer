@@ -25,7 +25,6 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: pip, tags: [pip, resources]}
-    - {role: cli-credentials, tags: [cli]}
 
 - name: Prepare/Configure Keystone host
   hosts: keystone-node
@@ -41,7 +40,6 @@
       tags: [always]
   roles:
     - {role: pip, tags: [pip, resources]}
-    - {role: cli-credentials, tags: [cli]}
 
 - name: Install Horizon components
   hosts: horizon-node
