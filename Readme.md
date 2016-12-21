@@ -107,10 +107,10 @@ end
 
 #### Install CentOS7 and Openstack boxes
 
-##### Copy boxes
-Copy vagrant boxes from smb://estfile5/projects/CloudWatchManager/vagrant-boxes
-* clear-centos7.box
-* devstack-centos7-liberty.box
+##### Download and copy boxes
+Download vagrant boxes from EST Artifactory:
+* [clear-centos7.box](https://artifactory.intern.est.fujitsu.com/artifactory/CMM-vagrant/centos/7/centos7.2.box)
+* [devstack-centos7-liberty.box](https://artifactory.intern.est.fujitsu.com/artifactory/CMM-vagrant/openstack/liberty/devstack-centos7-liberty.box)
 
 ##### Install boxes
 Add box to your local vagrant environment
