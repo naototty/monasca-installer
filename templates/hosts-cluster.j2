@@ -133,9 +133,6 @@ keepalived-node-1                ansible_ssh_host={{ ex_node_1_host }} ansible_s
 keepalived-node-2                ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
 keepalived-node-3                ansible_ssh_host={{ ex_node_3_host }} ansible_ssh_user={{ ssh_user_ex_node_3 }}
 
-# Monasca-CLI password
-monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-
 # Elasticsearch Curator
 elasticsearch-curator-node-1     ansible_ssh_host={{ ex_node_1_host }} ansible_ssh_user={{ ssh_user_ex_node_1 }}
 elasticsearch-curator-node-2     ansible_ssh_host={{ ex_node_2_host }} ansible_ssh_user={{ ssh_user_ex_node_2 }}
@@ -282,9 +279,6 @@ keepalived-node-1
 keepalived-node-2
 keepalived-node-3
 
-[monasca_cli_group]
-monasca-cli-node
-
 [elasticsearch_curator_group]
 elasticsearch-curator-node-1
 elasticsearch-curator-node-2
@@ -332,7 +326,6 @@ monasca_notification_group
 monasca_persister_group
 storm_group
 monasca_thresh_group
-monasca_cli_group
 database_cluster_group
 grafana_group
 
