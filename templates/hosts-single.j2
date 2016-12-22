@@ -80,9 +80,6 @@ elasticsearch-curator-node       ansible_ssh_host={{ monasca_host }} ansible_ssh
 # InfluxDB node
 influxdb-node                    ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
 
-# Monasca-CLI password
-monasca-cli-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
-
 ################################################################################
 # Agent and Log-Agent group definition:
 # To install additional agents (metrics and logs) add nodes to
@@ -174,9 +171,6 @@ elasticsearch-curator-node
 [influxdb_group]
 influxdb-node
 
-[monasca_cli_group]
-monasca-cli-node
-
 ################################################################################
 # Group inheritance
 ################################################################################
@@ -216,4 +210,3 @@ storm_group
 monasca_thresh_group
 mariadb_group
 influxdb_group
-monasca_cli_group
