@@ -7,8 +7,7 @@ influxdb_bind_address: "{{ ansible_ssh_host }}"
 
 # influxdb version
 influxdb_versions:
-  RedHat: 0.10.1-1
-  Debian: 0.10.1-1
+  RedHat: 1.1.1
 
 influx_db_user: "influxdb"
 influx_db_group: "influxdb"
@@ -28,10 +27,6 @@ influxdb_log_dir: "{{ log_dir }}/influxdb"
 # submodule settings for influx-db
 influxdb_http_log_enabled: False
 influxdb_query_log_enabled: False
-
-# cluster settings
-influxdb_is_peer_node: "{{ influxdb_master_node_name is defined }}"
-influxdb_master_node: "{% if influxdb_is_peer_node %}{{ hostvars[influxdb_master_node_name]['ansible_ssh_host'] }}{% else %}False{% endif %}"
 
 # logrotate configuration
 logrotate_scripts:

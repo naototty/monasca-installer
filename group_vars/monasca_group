@@ -14,7 +14,7 @@ get_pip_download_url: "{{ world_repo_url }}"
 
 # influxdb
 influxdb_client_port: 8086
-influxdb_version: 0.10.1-1
+influxdb_version: 1.1.1
 
 ############################################### kafka ###############################################
 
