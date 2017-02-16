@@ -239,13 +239,6 @@ kibana-node-3 es_node_for_kibana=elastic-node-3
 [balancer_group]
 balancer-node
 
-[openstack_uninstaller_group]
-horizon-node
-keystone-node
-
-[monasca_uninstaller]
-balancer-node
-
 [storm_nimbus_group]
 storm-nimbus-node-1
 storm-nimbus-node-2
@@ -312,7 +305,6 @@ monasca_group
 monasca_agent_group
 
 [openstack_group:children]
-openstack_uninstaller_group
 
 [monasca_group:children]
 elkstack_group
