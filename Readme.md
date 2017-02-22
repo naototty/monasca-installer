@@ -380,3 +380,11 @@ Running ansible-master for cluster setup
 ```sh
 ENABLE_CLUSTER=1 ansible-playbook -i hosts ansible-master.yml -vvvv
 ```
+
+## License
+
+Apache License, Version 2.0
+
+## Author Information
+
+FUJITSU LIMITED
