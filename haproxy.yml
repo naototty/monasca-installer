@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "HAProxy: Prepare/Configure host"
   hosts: haproxy_group
@@ -17,6 +17,8 @@
 - name: "HAProxy: Install on hosts"
   hosts: haproxy_group
   become: true
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
     - {role: haproxy, tags: [haproxy], when: number_of_database_hosts | int > 1}
     - {role: logrotate, tags: [haproxy, logrotate], when: number_of_database_hosts | int > 1}

@@ -1,9 +1,11 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Elasticsearch-Curator: Prepare/Configure host"
   hosts: elasticsearch_curator_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
@@ -21,6 +23,7 @@
   become: yes
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:

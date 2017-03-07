@@ -15,3 +15,5 @@ influxdb_url: "http://{{ hostvars[influxdb_node_for_api]['ansible_ssh_host'] }}:
 monasca_api_requests_log_level: "OFF"
 
 server_timezone: "{{ ansible_date_time.tz }}"
+
+monasca_api_group: "{{ monasca_group }}"

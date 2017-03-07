@@ -15,8 +15,8 @@ monasca_work_dir: "{{ opt_dir }}/monasca"
 curator_conf_dir: "{{ monasca_conf_dir }}/elasticsearch-curator"
 logrotate_conf_dir: "{{ etc_dir }}/logrotate.d"
 
-monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
-monasca_notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
+log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
+notification_virtualenv_dir: "{{ venvs_dir }}/monasca-notification"
 
 curator_user: curator
 curator_venv_dir: "{{ venvs_dir }}/elasticsearch-curator"
@@ -33,7 +33,7 @@ uninstall_services:
   - { name: "kibana", assets: [] }
   - { name: "monasca-notification", assets: [
       "{{ monasca_conf_dir }}/notification.yaml",
-      "{{ monasca_notification_virtualenv_dir }}"
+      "{{ notification_virtualenv_dir }}"
       ]}
   - { name: "monasca-log-transformer", assets: ["{{ monasca_conf_dir }}/log/transformer.conf"] }
   - { name: "monasca-log-persister", assets: ["{{ monasca_conf_dir }}/log/persister.conf"] }
@@ -46,7 +46,7 @@ uninstall_services:
   - { name: "monasca-log-api", assets: [
       "{{ monasca_conf_dir }}/log-api-config.conf",
       "{{ monasca_conf_dir }}/log-api-config.ini",
-      "{{ monasca_log_api_virtualenv_dir }}"]}
+      "{{ log_api_virtualenv_dir }}"]}
   - { name: "monasca-log-metrics", assets: [
       "{{ monasca_conf_dir }}/log/log-metrics.conf"]}
   - { name: "memcached", assets: [] }

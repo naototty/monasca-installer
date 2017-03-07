@@ -1,5 +1,8 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
+
+- name: Include system specific variables
+  include_vars: "os_{{ ansible_os_family }}.yml"
 
 - name: Get installed Ansible version
   shell: ansible --version | head -1 | awk '{print $2}'

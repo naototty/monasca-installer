@@ -3,15 +3,19 @@
 
 api_region: useast
 
+log_api_log_dir: "{{ monasca_log_dir }}/log-api"
+log_api_conf_dir: "{{ monasca_conf_dir }}"
+
+log_api_bind_host: "{{ ansible_ssh_host }}"
 log_api_wait_timeout: "{{ monasca_wait_for_period }}"
-monasca_log_api_log_dir: "{{ monasca_log_dir }}/log-api"
-monasca_log_api_bind_host: "{{ ansible_ssh_host }}"
-monasca_log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
 
-monasca_log_api_version: 1.1.1.dev1
+log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
+log_api_version: 1.1.1.dev1
 
-monasca_log_api_max_message_size: 943718
+log_api_max_message_size: 943718
 
 pip_extra_depedencies:
   - { name: pbr, version: "{{ pbr_version }}" }
   - { name: gunicorn }
+
+log_api_group: "{{ monasca_group }}"

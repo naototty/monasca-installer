@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: Prepare/Configure host
   hosts: monasca_log_agent_group
@@ -23,9 +23,10 @@
   become: yes
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
-    - {role: logrotate, tags: [logrotate]}
     - {role: monasca-log-agent, tags: [log-agent, agents]}
+    - {role: logrotate, when: ansible_os_family != 'Suse', tags: [logrotate]}
 
 - name: Clean-Up host
   hosts: monasca_log_agent_group

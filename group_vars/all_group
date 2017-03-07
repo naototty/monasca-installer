@@ -7,7 +7,7 @@ monasca_api_client_port: 8070
 monasca_api_admin_port: 8081
 persister_app_connector_port: 8190
 persister_admin_connector_port: 8191
-monasca_log_api_port: 5607
+log_api_port: 5607
 keystone_port: 5000
 keystone_user_port: 35357
 kibana_port: 5601
@@ -25,7 +25,7 @@ monasca_api_ip: "{% if groups['monasca_api_group']|length > 1 %}
                     {{ hostvars['monasca-api-node']['ansible_ssh_host'] }}
                  {% endif %}
                 "
-monasca_log_api_ip: "{% if groups['monasca_log_api_group']|length > 1 %}
+log_api_ip: "{% if groups['monasca_log_api_group']|length > 1 %}
                         {{ hostvars['monasca-log-api-balancer-node']['ansible_ssh_host'] }}
                      {% else %}
                         {{ hostvars['monasca-log-api-node']['ansible_ssh_host'] }}
@@ -52,7 +52,7 @@ keystone_url: "http://{{ keystone_host }}:{{ keystone_user_port }}/v{{ keystone_
 balls_repo_url: "http://{{ offline_host }}:8888"
 world_repo_url: "{{ balls_repo_url }}/world"
 monasca_api_url: "http://{{ monasca_api_ip|trim|safe }}:{{ monasca_api_client_port|int }}/v2.0"
-monasca_log_api_url: "http://{{ monasca_log_api_ip|trim|safe }}:{{ monasca_log_api_port|int }}/v3.0"
+monasca_log_api_url: "http://{{ log_api_ip|trim|safe }}:{{ log_api_port|int }}/v3.0"
 kibana_url: "http://{{ kibana_ip|trim|safe }}:{{ kibana_port }}"
 
 # Monasca Api CLI - Credentials
@@ -90,7 +90,7 @@ data_dir: /var/data
 
 # Supported varsions of dependencies
 ansible_version_min:
-  ver: "2.0.1.0"
+  ver: "2.2.0.0"
   constraint: ">="
 ansible_version_max:
   ver: "2.2.1.0"

@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Keepalived: Prepare/Configure host"
   hosts: keepalived_group
@@ -15,5 +15,7 @@
 - name: "Keepalived: Install on hosts"
   hosts: keepalived_group
   become: true
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
     - {role: keepalived, tags: [keepalived], when: number_of_database_hosts | int > 1}

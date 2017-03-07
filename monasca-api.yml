@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Monasca-api: Prepare/ Configure hosts"
   hosts: monasca_api_group
@@ -22,9 +22,14 @@
   hosts: monasca_api_group
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   become: yes
   roles:
-    - {role: monasca-api, tags: [api]}
+    - {
+        role: monasca-api,
+        monasca_api_configure_network: "{{ configure_network|bool }}",
+        tags: [api]
+      }
 
 - name: "Monasca-api: Clean-Up hosts"
   hosts: monasca_api_group

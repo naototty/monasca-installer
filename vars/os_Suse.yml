@@ -1,0 +1,6 @@
+---
+# Copyright 2017 FUJITSU LIMITED
+
+use_pip: False
+use_download_tmp_dir: False
+configure_network: False

@@ -1,9 +1,11 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Load Balancer: Install on host"
   hosts: balancer_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]

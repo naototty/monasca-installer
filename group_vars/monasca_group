@@ -4,11 +4,13 @@
 
 is_openstack: false
 
+# monasca global settings
+monasca_log_level: WARN
+monasca_group: monasca
+
 # urls
 influxdb_deb_src_url: "{{ world_repo_url }}"
 get_pip_download_url: "{{ world_repo_url }}"
-# monasca information
-monasca_group: monasca
 
 # influxdb
 influxdb_client_port: 8086
@@ -93,8 +95,8 @@ clustercheck_db_password: clustercheck
 api_log_dir: "{{ monasca_log_dir }}/api"
 
 # monasca-log-api
-monasca_log_api_log_dir: "{{ monasca_log_dir }}/log-api"
-monasca_log_api_bind_host: 0.0.0.0
+log_api_log_dir: "{{ monasca_log_dir }}/log-api"
+log_api_bind_host: 0.0.0.0
 
 # monasca-agent
 monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"
@@ -128,7 +130,7 @@ agentAuthorizedRoles: "cmm-agent"
 kibana_log_dir: "{{ log_dir }}/kibana"
 
 # log directories to be monitored
-logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
+log_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
 
 # monasca-thresh
 thresh_topology_name: "thresh-cluster"

@@ -10,17 +10,17 @@ logstash_agent_version: 2.3.4
 base_dir_agent: /opt/monasca
 log_dir: /var/log
 logstash_agent_dest: "{{ base_dir_agent }}/monasca-log-agent"
-logstash_agent_conf_dir: /etc/monasca/monasca-log-agent
-logstash_agent_log_dir: /var/log/monasca/monasca-log-agent
+log_agent_conf_dir: /etc/monasca/monasca-log-agent
+log_agent_log_dir: /var/log/monasca/monasca-log-agent
 log_files:
-  - "{{ logstash_agent_log_dir }}"
+  - "{{ log_agent_log_dir }}"
   - "{{ log_dir }}/messages"
   - "{{ log_dir }}/yum.log"
   - "{{ log_dir }}/boot.log"
 
 # services
 uninstall_services:
-  - { name: "monasca-log-agent", assets: [ "{{ logstash_agent_conf_dir }}" ]}
+  - { name: "monasca-log-agent", assets: [ "{{ log_agent_conf_dir }}" ]}
 uninstall_packages:
    RedHat:
      - { assets: [
@@ -33,7 +33,7 @@ uninstall_directories:
 
 logrotate_scripts:
   - name: monasca_log_agent
-    path: "{{ logstash_agent_log_dir }}/*.log"
+    path: "{{ log_agent_log_dir }}/*.log"
     options:
       - daily
       - missingok

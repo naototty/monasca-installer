@@ -1,10 +1,12 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 # Experimental approach to remove components
 - name: "Uninstall Grafana"
   hosts: grafana_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
@@ -16,6 +18,8 @@
 - name: Uninstall [monasca]
   hosts: monasca_uninstaller
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
@@ -25,6 +29,8 @@
 - name: Uninstall [openstack][horizon-node]
   hosts: openstack_uninstaller_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
@@ -34,6 +40,8 @@
 - name: Uninstall [openstack][keystone-node]
   hosts: keystone-node
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]

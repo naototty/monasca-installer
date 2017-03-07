@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "monasca-notification: Prepare/Configure hosts"
   hosts: monasca_notification_group
@@ -9,6 +9,7 @@
       - database_notification_password
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
@@ -25,7 +26,8 @@
   hosts: monasca_notification_group
   become: yes
   vars_files:
-  - credentials.yml
+    - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:

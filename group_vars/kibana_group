@@ -19,16 +19,13 @@ elasticsearch_url: "http://{{ hostvars[es_node_for_kibana]['ansible_ssh_host'] }
 elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 
 kibana_plugins:
-  - {
-      name: 'fts-keystone',
-      url: '{{ world_repo_url }}/fts-keystone-0.0.5.tar.gz',
-      configuration: {
-          'fts-keystone.enabled': true,
-          'fts-keystone.url': 'http://{{ keystone_host }}',
-          'fts-keystone.port': "{{ keystone_user_port|int }}",
-          'fts-keystone.cookie.isSecure': false
-      }
-    }
+  'monasca-kibana-plugin':
+    url: '{{ world_repo_url }}/monasca-kibana-plugin-0.0.5.tar.gz'
+    configuration:
+      'monasca-kibana-plugin.enabled': true
+      'monasca-kibana-plugin.url': 'http://{{ keystone_host }}'
+      'monasca-kibana-plugin.port': "{{ keystone_user_port|int }}"
+      'monasca-kibana-plugin.cookie.isSecure': false
 
 logrotate_scripts:
   - name: kibana

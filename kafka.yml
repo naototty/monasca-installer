@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Kafka: Prepare/Configure hosts"
   hosts: kafka_group
@@ -13,12 +13,16 @@
 - name: "Kafka: Install on hosts"
   hosts: kafka_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
     - {role: kafka, tags: [kafka]}
 
 - name: "Kafka: Install schema"
   hosts: kafka_group[0]
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:

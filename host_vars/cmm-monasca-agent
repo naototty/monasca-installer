@@ -46,7 +46,7 @@ monasca_checks:
           component: kibana
           service: monitoring
       - name: Monasca Log Api
-        url: "http://{{ monasca_log_api_ip|trim|safe }}:{{ monasca_log_api_port }}/healthcheck"
+        url: "http://{{ log_api_ip|trim|safe }}:{{ log_api_port }}/healthcheck"
         timeout: 1
         dimensions:
           component: monasca-log-api

@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
@@ -19,6 +19,8 @@
 - name: Uninstall Monasca Metrics Agent
   hosts: monasca_agent_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
     - {role: uninstaller,
       uninstall_skip_pip: True,

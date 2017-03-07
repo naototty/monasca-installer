@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: Prepare/Configure Horizon host
   hosts: horizon-node
@@ -12,6 +12,7 @@
       - keystone_admin_agent_password
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
@@ -31,6 +32,7 @@
   become: yes
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
@@ -44,6 +46,8 @@
 - name: Install Horizon components
   hosts: horizon-node
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -56,6 +60,9 @@
 - name: Configure Keystone
   hosts: keystone-node
   become: yes
+  vars_files:
+    - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   vars:
@@ -67,8 +74,6 @@
   pre_tasks:
     - include: tasks/verify_credentials.yml
       tags: [always]
-  vars_files:
-    - credentials.yml
   roles:
     - {role: monasca-keystone, tags: [keystone]}
 

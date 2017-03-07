@@ -5,3 +5,7 @@ database_host: "{{ hostvars[database_node_for_thresh]['ansible_ssh_host'] }}"
 database_user: thresh
 database_password: "{{ database_thresh_password }}"
 thresh_tarball_base_url: "{{ world_repo_url }}"
+
+# bind group
+thresh_group: "{{ monasca_group }}"
+

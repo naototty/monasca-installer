@@ -12,11 +12,11 @@ project_domain_name: default
 monasca_log_dir: "{{ log_dir }}/monasca"
 
 api_log_dir: "{{ monasca_log_dir }}/api"
-monasca_log_api_log_dir: "{{ monasca_log_dir }}/log-api"
+log_api_log_dir: "{{ monasca_log_dir }}/log-api"
 notification_log_dir: "{{ monasca_log_dir }}/notification"
 monasca_agent_log_dir: "{{ monasca_log_dir }}/agent"
 persister_log_dir: "{{ monasca_log_dir }}/persister"
-logstash_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
+log_agent_log_dir: "{{ monasca_log_dir }}/monasca-log-agent"
 monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
 monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
 monasca_log_metrics_log_dir: "{{ monasca_log_dir }}/monasca-log-metrics"
@@ -37,7 +37,7 @@ log_files:
   - { tags: '["monasca_java"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                                 "component" => "monasca-api" }}', path: '"{{ api_log_dir }}/*.log"' }
   - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
-                                                          "component" => "monasca-log-api" }}', path: '"{{ monasca_log_api_log_dir }}/monasca-log-api.log"' }
+                                                          "component" => "monasca-log-api" }}', path: '"{{ log_api_log_dir }}/monasca-log-api.log"' }
   - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
                                                           "component" => "monasca-notification" }}', path: '"{{ notification_log_dir }}/*.log"' }
   - { tags: '["python"]', add_field: '{ "dimensions" => { "service" => "monitoring"
@@ -45,7 +45,7 @@ log_files:
   - { tags: '["monasca_persister"]', add_field: '{ "service" => "monitoring"
                                                    "dimensions" => { "component" => "monasca-persister" }}', path: '"{{ persister_log_dir }}/*.log"' }
   - { add_field: '{ "dimensions" => { "service" => "monitoring"
-                                      "component" => "monasca-logstash-agent" }}', path: '"{{ logstash_agent_log_dir }}/*.log"' }
+                                      "component" => "monasca-logstash-agent" }}', path: '"{{ log_agent_log_dir }}/*.log"' }
   - { add_field: '{ "dimensions" => { "service" => "monitoring"
                                       "component" => "monasca-log-persister" }}', path: '"{{ monasca_log_persister_log_dir }}/*.log"' }
   - { tags: '["monasca_log_transformer"]', add_field: '{ "service" => "monitoring"

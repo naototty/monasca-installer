@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "MariaDB: Prepare/Configure hosts"
   hosts: mariadb_group
@@ -10,6 +10,7 @@
       - database_thresh_password
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
@@ -29,6 +30,7 @@
   become: true
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -40,6 +42,7 @@
   become: true
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
@@ -51,6 +54,7 @@
   become: true
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:

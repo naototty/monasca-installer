@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Kibana: Prepare/Configure hosts"
   hosts: kibana_group
@@ -19,9 +19,18 @@
   become: yes
   vars_files:
     - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
-    - {role: monasca-kibana, tags: [elkstack, kibana]}
-    - {role: logrotate, tags: [elkstack, kibana, logrotate]}
+    - {
+        role: monasca-kibana,
+        kibana_configure_network: "{{ configure_network|bool }}",
+        tags: [elkstack, kibana]
+      }
+    - {
+        role: logrotate,
+        when: ansible_os_family != 'Suse',
+        tags: [elkstack, kibana, logrotate]
+      }
     - {role: fujitsu-branding, tags: [branding]}
 
 - name: "Kibana: Clean-Up hosts"

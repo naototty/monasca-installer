@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "ElasticSearch: Prepare/Configure hosts"
   hosts: elasticsearch_group
@@ -20,6 +20,8 @@
 - name: "ElasticSearch: Install on hosts"
   hosts: elasticsearch_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
     - {role: monasca-elasticsearch, tags: [elkstack, elasticsearch]}
 

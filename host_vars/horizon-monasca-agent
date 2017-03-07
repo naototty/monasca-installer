@@ -19,5 +19,5 @@ monasca_checks:
         host_name: "{{ monasca_api_ip|trim|safe }}"
         alive_test: ssh
       - name: monasca-log-api-host
-        host_name: "{{ monasca_log_api_ip|trim|safe }}"
+        host_name: "{{ log_api_ip|trim|safe }}"
         alive_test: ssh

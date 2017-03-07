@@ -1,10 +1,14 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
+
+- name: Include system specific variables
+  include_vars: "os_{{ ansible_os_family }}.yml"
 
 - name: Check if temporary directory already exists
   stat: path={{ download_tmp_dir }}
+  when: use_download_tmp_dir
   register: st
 
 - name: Create download temporary directory
   file: path="{{ download_tmp_dir }}" state=directory force=true
-  when: download_tmp_dir is defined and not st.stat.exists
+  when: use_download_tmp_dir and (download_tmp_dir is defined and not st.stat.exists)

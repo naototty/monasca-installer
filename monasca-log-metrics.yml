@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 - name: "Monasca Log Metrics: Prepare/Configure hosts"
   hosts: monasca_log_metrics_group
@@ -17,9 +17,15 @@
 - name: "Monasca Log Metrics: Install on hosts"
   hosts: monasca_log_metrics_group
   become: yes
+  vars_files:
+    - "vars/os_{{ ansible_os_family }}.yml"
   roles:
     - {role: monasca-log-metrics, tags: [log_metrics]}
-    - {role: logrotate, tags: [logrotate, log_metrics]}
+    - {
+        role: logrotate,
+        when: ansible_os_family != 'Suse',
+        tags: [elkstack, logrotate, log_metrics]
+      }
 
 - name: "Monasca Log Metrics: Clean-Up hosts"
   hosts: monasca_log_metrics_group

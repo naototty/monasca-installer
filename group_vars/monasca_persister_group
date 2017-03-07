@@ -1,5 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 influxdb_url: "http://{{ hostvars[influxdb_node_for_persister]['ansible_ssh_host'] }}:{{ influxdb_client_port }}"
 
@@ -12,3 +12,6 @@ persister_log_dir: "{{ monasca_log_dir }}/persister"
 
 # download settings
 persister_tarball_base_url: "{{ world_repo_url }}"
+
+# user bits
+persister_group: "{{ monasca_group }}"

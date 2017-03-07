@@ -1,11 +1,15 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2017 FUJITSU LIMITED
+
+- name: Include system specific variables
+  include_vars: "os_{{ ansible_os_family }}.yml"
 
 - name: Check to see if Pip is already installed
   command: pip --version
   ignore_errors: true
   changed_when: pip_is_installed.rc == 0
   register: pip_is_installed
+  when: use_pip
 
 - name: Get installed Pip version
   shell: pip --version | awk '{print $2}'
