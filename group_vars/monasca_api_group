@@ -10,10 +10,14 @@ database_user: monapi
 database_password: "{{ database_monapi_password }}"
 influxdb_user: mon_api
 influxdb_password: "{{ influxdb_mon_api_password }}"
-influxdb_url: "http://{{ hostvars[influxdb_node_for_api]['ansible_ssh_host'] }}:{{ influxdb_client_port }}"
+
+influxdb_host: "{{ hostvars[influxdb_node_for_api]['ansible_ssh_host'] }}"
+influxdb_url: "http://{{ influxdb_host }}:{{ influxdb_client_port }}"
 
 monasca_api_requests_log_level: "OFF"
 
 server_timezone: "{{ ansible_date_time.tz }}"
 
+monasca_api_conf_dir: "{{ monasca_conf_dir }}"
+monasca_api_log_dir: "{{ monasca_log_dir }}/api"
 monasca_api_group: "{{ monasca_group }}"
