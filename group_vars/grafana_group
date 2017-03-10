@@ -39,7 +39,7 @@ grafana_server_domain: "{{ ansible_ssh_host }}"
 # event publisher
 # TIP: rabbitmq_host_for_grafana is pure IP address, no need to get from hostvars
 grafana_event_publisher_rabbitmq_url: "amqp://{{ rabbitmq_host_for_grafana }}/"
-grafana_event_publisher_enabled: True
+grafana_event_publisher_enabled: False
 
 # plugins
 grafana_plugins:
