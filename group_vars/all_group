@@ -14,9 +14,9 @@ zookeeper_port: 2181
 memcached_port: 11211
 
 # hosts
-offline_host: 192.168.10.4
-monasca_host: 192.168.10.4
-keystone_host: 192.168.10.5
+offline_host: "{{ hostvars['offline-resources-node']['ansible_ssh_host'] }}"
+monasca_host: "{{ hostvars['cmm-node']['ansible_ssh_host'] }}"
+keystone_host: "{{ hostvars['keystone-node']['ansible_ssh_host'] }}"
 
 # monsaca settings
 monasca_conf_dir: "{{ etc_dir }}/monasca"
