@@ -1,0 +1,5 @@
+---
+# Copyright 2017 FUJITSU LIMITED
+
+influxdb_relay_download_url: "{{ world_repo_url }}"
+influxdb_relay_write_hosts: "{{ groups['influxdb_group'] }}"

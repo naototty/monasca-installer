@@ -34,6 +34,7 @@
 - include: storm.yml
 - include: mariadb.yml
 - include: influxdb.yml
+- include: influxdb-relay.yml
 - include: keepalived.yml
 - include: haproxy.yml
 - include: monasca-thresh.yml

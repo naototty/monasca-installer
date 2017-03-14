@@ -1,0 +1,31 @@
+---
+# Copyright 2017 FUJITSU LIMITED
+
+- name: "InfluxDB-Relay: Prepare/Configure host"
+  hosts: influxdb_relay_group
+  become: yes
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
+
+- name: "InfluxDB-Relay: Install on hosts"
+  hosts: influxdb_relay_group
+  become: yes
+  vars_files:
+    - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
+  roles:
+    - {role: influxdb-relay, tags: [influxdb-relay], when: number_of_influxdb_hosts | int > 1}
+
+- name: "InfluxDB-Relay: Clean-Up hosts"
+  hosts: influxdb_relay_group
+  become: yes
+  post_tasks:
+    - include: tasks/clean_up.yml
+      tags: [always]

@@ -14,6 +14,7 @@ get_pip_download_url: "{{ world_repo_url }}"
 
 # influxdb
 influxdb_client_port: 8086
+influxdb_relay_http_port: 9096
 influxdb_version: 1.1.1
 
 ############################################### kafka ###############################################
@@ -86,6 +87,7 @@ database_port: 3306
 database_name: mon
 
 number_of_database_hosts: "{{ groups['mariadb_group'] | count }}"
+number_of_influxdb_hosts: "{{ groups['influxdb_group'] | count }}"
 
 # Database user used by clustercheck script when installing Galera cluster.
 clustercheck_db_user: clustercheck

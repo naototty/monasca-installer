@@ -122,6 +122,11 @@ influxdb-node-1                  ansible_ssh_host={{ node_2 }} ansible_ssh_user=
 influxdb-node-2                  ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
 influxdb-node-3                  ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
 
+# InfluxDB Relay nodes
+influxdb-relay-node-1            ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
+influxdb-relay-node-2            ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
+influxdb-relay-node-3            ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+
 # HAProxy nodes
 haproxy-node-1                   ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
 haproxy-node-2                   ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
@@ -259,8 +264,13 @@ mariadb-node-3
 
 [influxdb_group]
 influxdb-node-1
-influxdb-node-2 influxdb_master_node_name=influxdb-node-1
-influxdb-node-3 influxdb_master_node_name=influxdb-node-1
+influxdb-node-2
+influxdb-node-3
+
+[influxdb_relay_group]
+influxdb-relay-node-1
+influxdb-relay-node-2
+influxdb-relay-node-3
 
 [haproxy_group]
 haproxy-node-1
@@ -324,5 +334,6 @@ grafana_group
 [database_cluster_group:children]
 mariadb_group
 influxdb_group
+influxdb_relay_group
 haproxy_group
 keepalived_group

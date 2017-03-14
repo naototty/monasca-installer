@@ -19,7 +19,7 @@
       tags: [always]
 
 - name: "InfluxDB: Install on host"
-  hosts: influxdb_group[0]
+  hosts: influxdb_group
   become: yes
   vars_files:
     - credentials.yml
@@ -32,18 +32,6 @@
        influxdb_schema_enabled: True,
        mysql_schema_enabled: False,
        tags: [influxdb, schema]}
-    - {role: logrotate,
-       tags: [influxdb, logrotate]}
-
-- name: "InfluxDB: Install on peer hosts"
-  hosts: influxdb_group[1:]
-  become: yes
-  vars_files:
-    - credentials.yml
-    - "vars/os_{{ ansible_os_family }}.yml"
-  roles:
-    - {role: influxdb,
-       tags: [influxdb]}
     - {role: logrotate,
        tags: [influxdb, logrotate]}
 

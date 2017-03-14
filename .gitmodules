@@ -22,6 +22,9 @@
 [submodule "roles/influxdb"]
 	path = roles/influxdb
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb.git
+[submodule "roles/influxdb-relay"]
+	path = roles/influxdb-relay
+	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb-relay.git
 [submodule "roles/monasca-schema"]
 	path = roles/monasca-schema
 	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-schema.git
