@@ -5,6 +5,7 @@
 mariadb_version: 10.1.18
 mariadb_host: "{{ hostvars['mariadb-node']['ansible_ssh_host'] }}"
 clustercheck_port: 9199
+mariadb_bind_address: "{{ ansible_ssh_host }}"
 
 # System user settings
 mariadb_user: mysql
