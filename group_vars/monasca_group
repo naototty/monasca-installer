@@ -123,8 +123,8 @@ monasca_log_dir: "{{ log_dir }}/monasca"
 monasca_log_persister_log_dir: "{{ monasca_log_dir }}/monasca-log-persister"
 monasca_log_transformer_log_dir: "{{ monasca_log_dir }}/monasca-log-transformer"
 
-defaultAuthorizedRoles: "user,domainuser,domainadmin,cmm-user"
-agentAuthorizedRoles: "cmm-agent"
+default_authorized_roles: "user,domainuser,domainadmin,cmm-user"
+agent_authorized_roles: "cmm-agent"
 
 # kibana
 kibana_log_dir: "{{ log_dir }}/kibana"
