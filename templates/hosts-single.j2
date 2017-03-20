@@ -1,8 +1,8 @@
 # Copyright 2016 FUJITSU LIMITED
 
 ################################################################################
-# Host definitions. Replace monasca_host, openstack_host, offline_resources_host,
-# ssh_user_monasca, ssh_user_openstack and ssh_user_offline_host with
+# Host definitions. Replace node_1, openstack_host, offline_resources_host,
+# ssh_user_node_1, ssh_user_openstack and ssh_user_offline_host with
 # valid informations.
 ################################################################################
 
@@ -16,72 +16,72 @@ horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_s
 keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca host
-cmm-node                         ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-node                         ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-log-transformer
-log-transformer-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+log-transformer-node             ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-log-persister
-log-persister-node               ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+log-persister-node               ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Kibana
-kibana-node                      ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+kibana-node                      ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Elasticsearch
-elasticsearch-node               ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+elasticsearch-node               ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Memcached
-memcached-node                   ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+memcached-node                   ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Kafka
-kafka-node                       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+kafka-node                       ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Zookeeper
-zookeeper-node                   ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+zookeeper-node                   ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-api
-monasca-api-node                 ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-api-node                 ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-log-api
-monasca-log-api-node             ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-log-api-node             ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-notification
-monasca-notification-node        ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-notification-node        ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-persister node
-monasca-persister-node           ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-persister-node           ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-log-metric node
-monasca-log-metrics-node          ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-log-metrics-node          ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca Agent Hosts
-cmm-monasca-agent                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-monasca-agent                ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
-cmm-monasca-log-agent            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+cmm-monasca-log-agent            ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Storm Nimbus node
-storm-nimbus-node                ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+storm-nimbus-node                ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Storm Supervisor node
-storm-supervisor-node            ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+storm-supervisor-node            ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-thresh host
-monasca-thresh-node              ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+monasca-thresh-node              ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # MariaDB node
-mariadb-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+mariadb-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Elasticsearch Curator
-elasticsearch-curator-node       ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+elasticsearch-curator-node       ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # InfluxDB node
-influxdb-node                    ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+influxdb-node                    ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Grafana node
-grafana-node                     ansible_ssh_host={{ monasca_host }} ansible_ssh_user={{ ssh_user_monasca }}
+grafana-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 ################################################################################
 # Agent and Log-Agent group definition:

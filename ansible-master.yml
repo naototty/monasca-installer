@@ -6,22 +6,22 @@
   hosts: all
   become: true
   vars:
-    monasca_host: 192.168.10.4
+    node_1: 192.168.10.4
+    node_2: 192.168.10.6
+    node_3: 192.168.10.7
+    node_4: 192.168.10.8
+    ssh_user_node_1: vagrant
+    ssh_user_node_2: vagrant
+    ssh_user_node_3: vagrant
+    ssh_user_node_4: vagrant
     offline_resources_host: 192.168.10.4
+    balancer_host: 192.168.10.4
     openstack_host: 192.168.10.5
     rabbitmq_host: 192.168.10.5
-    ex_node_1_host: 192.168.10.6
-    ex_node_2_host: 192.168.10.7
-    ex_node_3_host: 192.168.10.8
-    balancer_host: 192.168.10.4
     haproxy_host: 192.168.10.4
     keepalived_virtual_ip: 192.168.10.69
-    ssh_user_monasca: vagrant
     ssh_user_offline_host: vagrant
     ssh_user_openstack: vagrant
-    ssh_user_ex_node_1: vagrant
-    ssh_user_ex_node_2: vagrant
-    ssh_user_ex_node_3: vagrant
     ssh_user_balancer: vagrant
     cluster_enabled: "{{ lookup('env', 'ENABLE_CLUSTER') == '1' }}"
   tasks:

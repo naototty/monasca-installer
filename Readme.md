@@ -142,10 +142,10 @@ vim ansible-master.yml
 
 ```bash
 vars:
-    monasca_host: 192.168.10.4
+    node_1: 192.168.10.4
     openstack_host: 192.168.10.5
     rabbitmq_host: 192.168.10.5
-    ssh_user_monasca: vagrant
+    ssh_user_node_1: vagrant
     ssh_user_openstack: vagrant
 ```
 
@@ -158,7 +158,7 @@ vim group_vars/all_group
 ```bash
 # hosts
 offline_host: 192.168.10.4
-monasca_host: 192.168.10.4
+node_1: 192.168.10.4
 keystone_host: 192.168.10.5
 ```
 
