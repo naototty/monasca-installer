@@ -59,6 +59,15 @@ Run this command to install all submodules before:
 git submodule update --init
 ```
 
+#### Download roles (optional)
+If you cannot work with submodules you can download all the roles with the following commands:
+
+```bash
+rmdir roles/*
+ansible-galaxy install -r requirements.yml -p ./roles -f -n
+git clone https://gitlab.com/monasca-installer/config-encoder-macros.git ./templates/encoder
+```
+
 ### Proxy settings
 If you are behind a proxy, you will need to install the vagrant proxy plugin. Run this command:
 ```bash

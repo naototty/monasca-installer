@@ -31,7 +31,8 @@
         when: ansible_os_family != 'Suse',
         tags: [elkstack, kibana, logrotate]
       }
-    - {role: fujitsu-branding, tags: [branding]}
+  # Branding is not open source
+  #- {role: fujitsu-branding, tags: [branding]}
 
 - name: "Kibana: Clean-Up hosts"
   hosts: kibana_group
