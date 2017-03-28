@@ -1,10 +1,10 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 # file: group_vars/keepalived_group
 
-keepalived_global_router_id: "{{ ansible_hostname }}"
+keepalived_global_router_id: "{{ hostvars[keepalived_router_id]['ansible_ssh_host'] }}"
 
-keepalived_iptables_network: "192.168.10.0/24"
+keepalived_iptables_network: "{{ hostvars['keepalived-virtual-node']['ansible_ssh_host'].split('.')[:3] | join('.') }}.0/24"
 
 keepalived_script_check_process: "haproxy"
 

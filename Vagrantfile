@@ -4,52 +4,52 @@ Vagrant.configure(2) do |config|
   enable_cluster = ENV["ENABLE_CLUSTER"]
 
   vms = {
-    "master" => {
-      "normal_network" => "192.168.10.90",
-      "admin_network" => "192.168.124.90",
-      "public_network" => "192.168.126.90",
-    },
-    "monasca" => {
-      "normal_network" => {
-        "ip" => "192.168.10.4",
-        "fqdns" => ["monasca.monasca", "monasca"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.4",
-        "fqdns" => ["admin.monasca.monasca", "admin.monasca"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.4",
-        "fqdns" => ["public.monasca.monasca", "public.monasca"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.4",
-        "fqdns" => ["internal.monasca.monasca", "internal.monasca"],
-      },
-    },
-    "openstack" => {
-      "normal_network" => {
-        "ip" => "192.168.10.5",
-        "fqdns" => ["openstack.monasca", "openstack"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.5",
-        "fqdns" => ["admin.openstack.monasca", "admin.openstack"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.5",
-        "fqdns" => ["public.public.openstack.monasca", "public.openstack"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.5",
-        "fqdns" => ["internal.openstack.monasca", "internal.openstack"],
-      },
-    },
-    "ex_node_1" => {
-      "normal_network" => {
-        "ip" => "192.168.10.6",
-        "fqdns" => ["exNode1.monasca", "exNode1", "ex_node_1"],
-      },
+    'master' =>
+      { 'ip' => {
+        'normal_network' => '192.168.10.90',
+        'admin_network' => '192.168.124.90',
+        'public_network' => '192.168.126.90'
+        } },
+    'monasca' =>
+      { 'ip' => {
+        'normal_network' => '192.168.10.4',
+        'admin_network' => '192.168.124.4',
+        'public_network' => '192.168.126.4',
+        'internal_network' => '192.168.127.4'
+        },
+        'fqdns' => ['monasca.monasca ', 'monasca'] },
+    'openstack' =>
+      { 'ip' => {
+        'normal_network' => '192.168.10.5',
+        'admin_network' => '192.168.124.5',
+        'public_network' => '192.168.126.5',
+        'internal_network' => '192.168.127.5'
+        },
+        'fqdns' => ['openstack.monasca', 'openstack'] },
+    'ex_node_1' =>
+      { 'ip' => {
+        'normal_network' => '192.168.10.6',
+        'admin_network' => '192.168.124.6',
+        'public_network' => '192.168.126.6',
+        'internal_network' => '192.168.127.6'
+        },
+        'fqdns' => ['exNode1.monasca', 'exNode1', 'ex_node_1'] },
+    'ex_node_2' =>
+      { 'ip' => {
+        'normal_network' => '192.168.10.7',
+        'admin_network' => '192.168.124.7',
+        'public_network' => '192.168.126.7',
+        'internal_network' => '192.168.127.7'
+        },
+        'fqdns' => ['exNode2.monasca', 'exNode2', 'ex_node_2'] },
+    'ex_node_3' =>
+      { 'ip' => {
+        'normal_network' => '192.168.10.8',
+        'admin_network' => '192.168.124.8',
+        'public_network' => '192.168.126.8',
+        'internal_network' => '192.168.127.8'
+        },
+        'fqdns' => ['exNode3.monasca', 'exNode3', 'ex_node_3'] },
       "admin_network" => {
         "ip" => "192.168.124.6",
         "fqdns" => ["admin.exNode1.monasca", "admin.exNode1", "admin.ex_node_1"],
@@ -101,12 +101,12 @@ Vagrant.configure(2) do |config|
     },
   }
 
-  virtual_ip = "192.168.126.69"
+  virtual_ip = '192.168.126.69'
 
   ips_list = []
   for node in vms.keys
-    for network in vms[node].keys
-      ips_list << vms[node][network]["ip"]
+    for network in vms[node]['ip'].keys
+      ips_list << vms[node]['ip'][network]
     end
   end
   ips_string = ips_list.join(",") + ",#{virtual_ip}"
@@ -130,7 +130,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "master" do |master|
     master.vm.hostname = "master"
     master.vm.box = "clear-centos7"
-    vms["master"].each do |key, value|
+    vms['master']['ip'].each do |key, value|
       master.vm.network :private_network, ip: value
     end
     master.vm.provider "virtualbox" do |vb|
@@ -148,14 +148,24 @@ Vagrant.configure(2) do |config|
     openstack.vm.box = "devstack-centos7-liberty"
     openstack.vm.provision :hosts do |provision|
       provision.add_localhost_hostnames = false
-      vms["monasca"].each do |mon_network, value|
-        provision.add_host value["ip"], value["fqdns"]
+      vms['monasca']['ip'].each do |key, value|
+        provision.add_host value, vms['monasca']['fqdns']
       end
-      if enable_cluster == "1"
-        vms["ex_node_1"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
+      #provision.add_host vms[:monasca][:ip], vms[:monasca][:fqdns]
+        vms['ex_node_1']['ip'].each do |key, value|
+          provision.add_host value, vms['ex_node_1']['fqdns']
         end
-        vms["ex_node_2"].each do |key, value|
+        vms['ex_node_2']['ip'].each do |key, value|
+          provision.add_host value, vms['ex_node_2']['fqdns']
+        end
+        vms['ex_node_3']['ip'].each do |key, value|
+          provision.add_host value, vms['ex_node_3']['fqdns']
+        end
+      end
+    end
+    vms['openstack']['ip'].each do |key, value|
+      openstack.vm.network :private_network, ip: value
+        end
           provision.add_host value["ip"], value["fqdns"]
         end
         vms["ex_node_3"].each do |key, value|
@@ -178,13 +188,26 @@ Vagrant.configure(2) do |config|
     monasca.vm.box = "clear-centos7"
     monasca.vm.provision :hosts do |provision|
       provision.add_localhost_hostnames = false
-      vms["monasca"].each do |key, value|
-        provision.add_host value["ip"], value["fqdns"]
+      vms['monasca']['ip'].each do |key, value|
+        provision.add_host value, vms['monasca']['fqdns']
       end
-      vms["openstack"].each do |key, value|
-        provision.add_host value["ip"], value["fqdns"]
+      vms['openstack']['ip'].each do |key, value|
+        provision.add_host value, vms['openstack']['fqdns']
       end
-      if enable_cluster == "1"
+        vms['ex_node_1']['ip'].each do |key, value|
+          provision.add_host value, vms['ex_node_1']['fqdns']
+        end
+        vms['ex_node_2']['ip'].each do |key, value|
+          provision.add_host value, vms['ex_node_2']['fqdns']
+        end
+        vms['ex_node_3']['ip'].each do |key, value|
+          provision.add_host value, vms['ex_node_3']['fqdns']
+        end
+      end
+    end
+    vms['monasca']['ip'].each do |key, value|
+      monasca.vm.network :private_network, ip: value
+      end
         vms["ex_node_1"].each do |key, value|
           provision.add_host value["ip"], value["fqdns"]
         end
@@ -219,13 +242,18 @@ Vagrant.configure(2) do |config|
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
         vms.each do |key, value|
-          if key != "master"
-            value.each do |key2, value2|
-              provision.add_host value2["ip"], value2["fqdns"]
+          if key != 'master'
+            value['ip'].each do |key2, value2|
+              provision.add_host value2, vms[key]['fqdns']
             end
           end
         end
       end
+      vms['ex_node_1']['ip'].each do |key, value|
+        ds.vm.network :private_network, ip: value
+            end
+        end
+        vb.memory = 6096
       vms["ex_node_1"].each do |key, value|
         ds.vm.network :private_network, ip: value["ip"]
       end
@@ -242,13 +270,18 @@ Vagrant.configure(2) do |config|
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
         vms.each do |key, value|
-          if key != "master"
-            value.each do |key2, value2|
-              provision.add_host value2["ip"], value2["fqdns"]
+          if key != 'master'
+            value['ip'].each do |key2, value2|
+              provision.add_host value2, vms[key]['fqdns']
             end
           end
         end
       end
+      vms['ex_node_2']['ip'].each do |key, value|
+        ds.vm.network :private_network, ip: value
+            end
+        end
+        vb.memory = 6096
       vms["ex_node_2"].each do |key, value|
         ds.vm.network :private_network, ip: value["ip"]
       end
@@ -265,13 +298,18 @@ Vagrant.configure(2) do |config|
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
         vms.each do |key, value|
-          if key != "master"
-            value.each do |key2, value2|
-              provision.add_host value2["ip"], value2["fqdns"]
+          if key != 'master'
+            value['ip'].each do |key2, value2|
+              provision.add_host value2, vms[key]['fqdns']
             end
           end
         end
       end
+      vms['ex_node_3']['ip'].each do |key, value|
+        ds.vm.network :private_network, ip: value
+            end
+        end
+        vb.memory = 6096
       vms["ex_node_3"].each do |key, value|
         ds.vm.network :private_network, ip: value["ip"]
       end

@@ -4,7 +4,7 @@
 
 # Set to which ethernet interface on host Keepalived should bind virtual IP.
 # This interface need to be accessible from other nodes in the cluster.
-keepalived_binding_interface: "enp0s8"
+keepalived_binding_interface: "enp0s10"
 
 keepalived_node_role: "BACKUP"
 keepalived_node_priority: 100
@@ -12,4 +12,4 @@ keepalived_node_priority: 100
 # Optional, monitor this interfaces as well.
 # Keepalived will enter FAILED state if any of this go down.
 keepalived_tracked_interfaces:
-  - "enp0s8"
+  - "enp0s10"

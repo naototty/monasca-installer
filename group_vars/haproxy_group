@@ -7,12 +7,12 @@ clustercheck_port: 9199
 load_balancer_host: "{{ keepalived_virtual_ip }}"
 
 mariadb_hosts: "{% for item in groups['mariadb_group'] -%}
-                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ mysql_cluster_port | int }}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['mariadb_listen_ip']]['ansible_ssh_host'] }}:{{ mysql_cluster_port | int }}
                 {%- endfor %}"
 mariadb_nodes: "{{ mariadb_hosts.split(',') }}"
 
 influxdb_hosts: "{% for item in groups['influxdb_group'] -%}
-                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ influxdb_client_cluster_port | int }}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['influxdb_listen_ip']]['ansible_ssh_host'] }}:{{ influxdb_client_cluster_port | int }}
                  {%- endfor %}"
 influxdb_nodes: "{{ influxdb_hosts.split(',') }}"
 

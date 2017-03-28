@@ -1,4 +1,4 @@
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 
 ################################################################################
 # Host definitions. Replace node_[1-4], openstack_host,
@@ -13,85 +13,90 @@ offline-resources-node           ansible_ssh_host={{ offline_resources_host }} a
 
 # Openstack Hosts
 horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+keystone-node                    ansible_ssh_host={{ openstack_host_public_ip }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Load balancer hosts
-monasca-log-api-balancer-node    ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
-monasca-api-balancer-node        ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
-kibana-balancer-node             ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
+monasca-log-api-balancer-node    ansible_ssh_host={{ node_1_public_ip }} ansible_ssh_user={{ ssh_user_node_1 }}
+monasca-api-balancer-node        ansible_ssh_host={{ node_1_public_ip }} ansible_ssh_user={{ ssh_user_node_1 }}
+kibana-balancer-node             ansible_ssh_host={{ node_1_public_ip }} ansible_ssh_user={{ ssh_user_node_1 }}
+
+# networks
+internal-node-1                   ansible_ssh_host={{ node_2_internal_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+internal-node-2                   ansible_ssh_host={{ node_3_internal_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+internal-node-3                   ansible_ssh_host={{ node_4_internal_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # ElasticSearch nodes for cluster
-elastic-node-1                   ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-elastic-node-2                   ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-elastic-node-3                   ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+elastic-node-1                   ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+elastic-node-2                   ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+elastic-node-3                   ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Kafka nodes for cluster
-kafka-node-1                     ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-kafka-node-2                     ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-kafka-node-3                     ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+kafka-node-1                     ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+kafka-node-2                     ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+kafka-node-3                     ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Zookeeper nodes for cluster
-zookeeper-node-1                 ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-zookeeper-node-2                 ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-zookeeper-node-3                 ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+zookeeper-node-1                 ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+zookeeper-node-2                 ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+zookeeper-node-3                 ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Log persister nodes for cluster
-log-persister-node-1             ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-log-persister-node-2             ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-log-persister-node-3             ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+log-persister-node-1             ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+log-persister-node-2             ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+log-persister-node-3             ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Log transformer nodes for cluster
-log-transformer-node-1           ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-log-transformer-node-2           ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-log-transformer-node-3           ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+log-transformer-node-1           ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+log-transformer-node-2           ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+log-transformer-node-3           ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Kibana nodes for cluster
-kibana-node-1                    ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-kibana-node-2                    ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-kibana-node-3                    ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+kibana-node-1                    ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+kibana-node-2                    ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+kibana-node-3                    ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Log api nodes for cluster
-log-api-node-1                   ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-log-api-node-2                   ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-log-api-node-3                   ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+log-api-node-1                   ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+log-api-node-2                   ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+log-api-node-3                   ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Memcached nodes for cluster
-memcached-node-1                 ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-memcached-node-2                 ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-memcached-node-3                 ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+memcached-node-1                 ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+memcached-node-2                 ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+memcached-node-3                 ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-api nodes for cluster
-monasca-api-node-1               ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-monasca-api-node-2               ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-monasca-api-node-3               ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+monasca-api-node-1               ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-api-node-2               ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+monasca-api-node-3               ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-notification nodes for cluster
-monasca-notification-node-1      ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-monasca-notification-node-2      ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-monasca-notification-node-3      ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+monasca-notification-node-1      ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-notification-node-2      ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+monasca-notification-node-3      ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-persister nodes
-monasca-persister-node-1         ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-monasca-persister-node-2         ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-monasca-persister-node-3         ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+monasca-persister-node-1         ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-persister-node-2         ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+monasca-persister-node-3         ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-log-agent nodes for cluster
-monasca-log-agent-node-1         ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-monasca-log-agent-node-2         ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-monasca-log-agent-node-3         ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+monasca-log-agent-node-1         ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-log-agent-node-2         ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+monasca-log-agent-node-3         ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-agent nodes for cluster
-monasca-agent-node-1             ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-monasca-agent-node-2             ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-monasca-agent-node-3             ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+monasca-agent-node-1             ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-agent-node-2             ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+monasca-agent-node-3             ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-log-metrics nodes for cluster
-monasca-log-metrics-node-1       ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-monasca-log-metrics-node-2       ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-monasca-log-metrics-node-3       ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+monasca-log-metrics-node-1       ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-log-metrics-node-2       ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+monasca-log-metrics-node-3       ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Load balancer node
-balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
+balancer-node                    ansible_ssh_host={{ balancer_host_public_ip }} ansible_ssh_user={{ ssh_user_balancer }}
 
 # Monasca Agent Hosts
 openstack-monasca-agent-node     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
@@ -100,51 +105,51 @@ openstack-monasca-agent-node     ansible_ssh_host={{ openstack_host }} ansible_s
 openstack-monasca-log-agent-node ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 #Storm Nimbus nodes
-storm-nimbus-node-1              ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-storm-nimbus-node-2              ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-storm-nimbus-node-3              ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+storm-nimbus-node-1              ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+storm-nimbus-node-2              ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+storm-nimbus-node-3              ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Storm Supervisor nodes
-storm-supervisor-node-1          ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-storm-supervisor-node-2          ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-storm-supervisor-node-3          ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+storm-supervisor-node-1          ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+storm-supervisor-node-2          ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+storm-supervisor-node-3          ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Monasca-thresh  hosts
-monasca-thresh-node              ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
+monasca-thresh-node              ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
 
 # MariaDB nodes for Galera cluster
-mariadb-node-1                   ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-mariadb-node-2                   ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-mariadb-node-3                   ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+mariadb-node-1                   ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+mariadb-node-2                   ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+mariadb-node-3                   ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # InfluxDB nodes
-influxdb-node-1                  ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-influxdb-node-2                  ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-influxdb-node-3                  ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+influxdb-node-1                  ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+influxdb-node-2                  ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+influxdb-node-3                  ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # InfluxDB Relay nodes
-influxdb-relay-node-1            ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-influxdb-relay-node-2            ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-influxdb-relay-node-3            ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+influxdb-relay-node-1            ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+influxdb-relay-node-2            ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+influxdb-relay-node-3            ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # HAProxy nodes
-haproxy-node-1                   ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-haproxy-node-2                   ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-haproxy-node-3                   ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+haproxy-node-1                   ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+haproxy-node-2                   ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+haproxy-node-3                   ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Keepalived nodes
-keepalived-virtual-node          ansible_ssh_host={{ keepalived_virtual_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
-keepalived-node-1                ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-keepalived-node-2                ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-keepalived-node-3                ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+keepalived-virtual-node          ansible_ssh_host={{ public_network_virtual_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+keepalived-node-1                ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+keepalived-node-2                ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+keepalived-node-3                ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Elasticsearch Curator
-elasticsearch-curator-node-1     ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
-elasticsearch-curator-node-2     ansible_ssh_host={{ node_3 }} ansible_ssh_user={{ ssh_user_node_3 }}
-elasticsearch-curator-node-3     ansible_ssh_host={{ node_4 }} ansible_ssh_user={{ ssh_user_node_4 }}
+elasticsearch-curator-node-1     ansible_ssh_host={{ node_2_admin_ip }} ansible_ssh_user={{ ssh_user_node_2 }}
+elasticsearch-curator-node-2     ansible_ssh_host={{ node_3_admin_ip }} ansible_ssh_user={{ ssh_user_node_3 }}
+elasticsearch-curator-node-3     ansible_ssh_host={{ node_4_admin_ip }} ansible_ssh_user={{ ssh_user_node_4 }}
 
 # Grafana node
-grafana-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
+grafana-node                     ansible_ssh_host={{ node_1_public_ip }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -155,9 +160,9 @@ grafana-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user=
 
 [monasca_agent_group]
 openstack-monasca-agent-node
-monasca-agent-node-1
-monasca-agent-node-2
-monasca-agent-node-3
+monasca-agent-node-1 log_api_listen_ip=internal-node-1
+monasca-agent-node-2 log_api_listen_ip=internal-node-2
+monasca-agent-node-3 log_api_listen_ip=internal-node-3
 
 [monasca_log_agent_group]
 openstack-monasca-log-agent-node
@@ -186,9 +191,9 @@ monasca-persister-node-2 influxdb_node_for_persister=keepalived-virtual-node
 monasca-persister-node-3 influxdb_node_for_persister=keepalived-virtual-node
 
 [monasca_api_group]
-monasca-api-node-1 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node
-monasca-api-node-2 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node
-monasca-api-node-3 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node
+monasca-api-node-1 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node monasca_api_listen_ip=internal-node-1
+monasca-api-node-2 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node monasca_api_listen_ip=internal-node-2
+monasca-api-node-3 database_node_for_api=keepalived-virtual-node influxdb_node_for_api=keepalived-virtual-node monasca_api_listen_ip=internal-node-3
 
 [monasca_notification_group]
 monasca-notification-node-1 database_node_for_notification=keepalived-virtual-node
@@ -196,24 +201,24 @@ monasca-notification-node-2 database_node_for_notification=keepalived-virtual-no
 monasca-notification-node-3 database_node_for_notification=keepalived-virtual-node
 
 [memcached_group]
-memcached-node-1
-memcached-node-2
-memcached-node-3
+memcached-node-1 memcached_listen_node_ip=internal-node-1
+memcached-node-2 memcached_listen_node_ip=internal-node-2
+memcached-node-3 memcached_listen_node_ip=internal-node-3
 
 [kafka_group]
-kafka-node-1
-kafka-node-2
-kafka-node-3
+kafka-node-1 kafka_listen_ip=internal-node-1
+kafka-node-2 kafka_listen_ip=internal-node-2
+kafka-node-3 kafka_listen_ip=internal-node-3
 
 [zookeeper_group]
-zookeeper-node-1
-zookeeper-node-2
-zookeeper-node-3
+zookeeper-node-1 zookeeper_listen_ip=internal-node-1
+zookeeper-node-2 zookeeper_listen_ip=internal-node-2
+zookeeper-node-3 zookeeper_listen_ip=internal-node-3
 
 [monasca_log_api_group]
-log-api-node-1
-log-api-node-2
-log-api-node-3
+log-api-node-1 log_api_listen_ip=internal-node-1
+log-api-node-2 log_api_listen_ip=internal-node-2
+log-api-node-3 log_api_listen_ip=internal-node-3
 
 [monasca_log_metrics_group]
 monasca-log-metrics-node-1
@@ -231,56 +236,56 @@ log-transformer-node-2
 log-transformer-node-3
 
 [elasticsearch_group]
-elastic-node-1
-elastic-node-2
-elastic-node-3
+elastic-node-1 elastic_listen_ip=internal-node-1
+elastic-node-2 elastic_listen_ip=internal-node-2
+elastic-node-3 elastic_listen_ip=internal-node-3
 
 # specify host which kibana should use to connect to elasticsearch
 [kibana_group]
-kibana-node-1 es_node_for_kibana=elastic-node-1
-kibana-node-2 es_node_for_kibana=elastic-node-2
-kibana-node-3 es_node_for_kibana=elastic-node-3
+kibana-node-1 es_node_for_kibana=elastic-node-1 kibana_listen_ip=internal-node-1
+kibana-node-2 es_node_for_kibana=elastic-node-2 kibana_listen_ip=internal-node-2
+kibana-node-3 es_node_for_kibana=elastic-node-3 kibana_listen_ip=internal-node-3
 
 [balancer_group]
 balancer-node
 
 [storm_nimbus_group]
-storm-nimbus-node-1
-storm-nimbus-node-2
-storm-nimbus-node-3
+storm-nimbus-node-1 storm_listen_ip=internal-node-1
+storm-nimbus-node-2 storm_listen_ip=internal-node-2
+storm-nimbus-node-3 storm_listen_ip=internal-node-3
 
 [storm_supervisor_group]
-storm-supervisor-node-1
-storm-supervisor-node-2
-storm-supervisor-node-3
+storm-supervisor-node-1 storm_listen_ip=internal-node-1
+storm-supervisor-node-2 storm_listen_ip=internal-node-2
+storm-supervisor-node-3 storm_listen_ip=internal-node-3
 
 [monasca_thresh_group]
-monasca-thresh-node database_node_for_thresh=keepalived-virtual-node
+monasca-thresh-node database_node_for_thresh=keepalived-virtual-node monasca_thresh_listen_ip=internal-node-1
 
 [mariadb_group]
-mariadb-node-1
-mariadb-node-2
-mariadb-node-3
+mariadb-node-1 mariadb_listen_ip=internal-node-1
+mariadb-node-2 mariadb_listen_ip=internal-node-2
+mariadb-node-3 mariadb_listen_ip=internal-node-3
 
 [influxdb_group]
-influxdb-node-1
-influxdb-node-2
-influxdb-node-3
+influxdb-node-1 influxdb_listen_ip=internal-node-1
+influxdb-node-2 influxdb_listen_ip=internal-node-2
+influxdb-node-3 influxdb_listen_ip=internal-node-3
 
 [influxdb_relay_group]
-influxdb-relay-node-1
-influxdb-relay-node-2
-influxdb-relay-node-3
+influxdb-relay-node-1 influxdb_relay_listen_ip=internal-node-1
+influxdb-relay-node-2 influxdb_relay_listen_ip=internal-node-2
+influxdb-relay-node-3 influxdb_relay_listen_ip=internal-node-3
 
 [haproxy_group]
-haproxy-node-1
-haproxy-node-2
-haproxy-node-3
+haproxy-node-1 haproxy_listen_ip=internal-node-1
+haproxy-node-2 haproxy_listen_ip=internal-node-2
+haproxy-node-3 haproxy_listen_ip=internal-node-3
 
 [keepalived_group]
-keepalived-node-1
-keepalived-node-2
-keepalived-node-3
+keepalived-node-1 keepalived_router_id=internal-node-1
+keepalived-node-2 keepalived_router_id=internal-node-2
+keepalived-node-3 keepalived_router_id=internal-node-3
 
 [elasticsearch_curator_group]
 elasticsearch-curator-node-1
