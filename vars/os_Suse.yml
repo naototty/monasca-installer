@@ -4,3 +4,4 @@
 use_pip: False
 use_download_tmp_dir: False
 configure_network: False
+kibana_plugins_repo_url: ""

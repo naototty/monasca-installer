@@ -4,3 +4,4 @@
 use_pip: True
 use_download_tmp_dir: True
 configure_network: True
+kibana_plugins_repo_url: "{{ world_repo_url }}"

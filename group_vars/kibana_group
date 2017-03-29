@@ -20,7 +20,7 @@ elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 
 kibana_plugins:
   'monasca-kibana-plugin':
-    url: '{{ world_repo_url }}/monasca-kibana-plugin-0.0.5.tar.gz'
+    url: '{{ kibana_plugins_repo_url }}/monasca-kibana-plugin-0.0.5.tar.gz'
     configuration:
       'monasca-kibana-plugin.enabled': true
       'monasca-kibana-plugin.url': 'http://{{ keystone_host }}'
