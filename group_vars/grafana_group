@@ -15,10 +15,10 @@ grafana_auth_keystone_auth_url: "http://{{ keystone_host }}:{{ keystone_port|int
 ### permissions
 grafana_auth_keystone_viewer_roles:
   - _member
-  - cmm_user
+  - monasca_user
   - admin
 grafana_auth_keystone_editor_roles:
-  - cmm_user
+  - monasca_user
   - admin
 grafana_auth_keystone_global_admin_roles:
   - admin

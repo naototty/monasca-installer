@@ -6,8 +6,8 @@
   become: yes
   vars:
     credential_keys_list:
-      - keystone_cmm_operator_user_password
-      - keystone_cmm_agent_password
+      - keystone_monasca_operator_password
+      - keystone_monasca_agent_password
       - keystone_admin_password
       - keystone_admin_agent_password
   vars_files:
@@ -67,8 +67,8 @@
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
   vars:
     credential_keys_list:
-      - keystone_cmm_operator_user_password
-      - keystone_cmm_agent_password
+      - keystone_monasca_operator_password
+      - keystone_monasca_agent_password
       - keystone_admin_password
       - keystone_admin_agent_password
   pre_tasks:

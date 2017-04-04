@@ -16,10 +16,10 @@ horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_s
 keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Agent Hosts
-openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+openstack-monasca-agent-node     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
-openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+openstack-monasca-log-agent-node ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -29,10 +29,10 @@ openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_s
 ################################################################################
 
 [monasca_agent_group]
-openstack-monasca-agent
+openstack-monasca-agent-node
 
 [monasca_log_agent_group]
-openstack-monasca-log-agent
+openstack-monasca-log-agent-node
 
 ################################################################################
 # Other group definition

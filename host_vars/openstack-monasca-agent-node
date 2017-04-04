@@ -1,6 +1,6 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
-# file: host_vars/openstack-monasca-agent
+# file: host_vars/openstack-monasca-agent-node
 
 # Monasca Agent Configuration
 monasca_agent_user: admin-agent

@@ -1,7 +1,7 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
-- hosts: cmm-node
+- hosts: monasca-node
   vars:
       services:
         - zookeeper

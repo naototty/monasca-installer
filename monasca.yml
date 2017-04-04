@@ -11,7 +11,7 @@
       - database_notification_password
       - database_monapi_password
       - database_thresh_password
-      - keystone_cmm_operator_user_password
+      - keystone_monasca_operator_password
       - keystone_admin_password
   vars_files:
     - credentials.yml

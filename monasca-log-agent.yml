@@ -6,7 +6,7 @@
   become: yes
   vars:
     credential_keys_list:
-      - keystone_cmm_agent_password
+      - keystone_monasca_agent_password
       - keystone_admin_agent_password
   vars_files:
     - credentials.yml

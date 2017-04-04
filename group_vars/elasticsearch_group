@@ -6,6 +6,6 @@ elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 elasticsearch_dest: "{{ elk_base_dir }}/elasticsearch"
 elasticsearch_uncompress_dest: "{{ elk_base_dir }}"
 
-elasticsearch_cluster_name: cmm_elastic
+elasticsearch_cluster_name: monasca_elastic
 elasticsearch_bind_host: "0.0.0.0"
 elasticsearch_publish_host: "{{ ansible_ssh_host }}"

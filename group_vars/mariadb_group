@@ -35,7 +35,7 @@ administrator_user: root
 administrator_password: ""
 socket_path: /var/lib/mysql/mysql.sock
 
-galera_cluster_name: "cmm-cluster"
+galera_cluster_name: "monasca-cluster"
 galera_starting_node: "{{ groups['mariadb_group'][0] }}"
 
 mariadb_galera_hosts: "{% for item in groups['mariadb_group'] -%}

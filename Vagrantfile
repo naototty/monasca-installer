@@ -7,15 +7,15 @@ Vagrant.configure(2) do |config|
     master:
       { ip: '192.168.12.90' },
     monasca:
-      { ip: '192.168.10.4', fqdns: ['monasca.cmm', 'monasca'] },
+      { ip: '192.168.10.4', fqdns: ['monasca.monasca', 'monasca'] },
     openstack:
-      { ip: '192.168.10.5', fqdns: ['openstack.cmm', 'openstack'] },
+      { ip: '192.168.10.5', fqdns: ['openstack.monasca', 'openstack'] },
     ex_node_1:
-      { ip: '192.168.10.6', fqdns: ['exNode1.cmm', 'exNode1', 'ex_node_1'] },
+      { ip: '192.168.10.6', fqdns: ['exNode1.monasca', 'exNode1', 'ex_node_1'] },
     ex_node_2:
-      { ip: '192.168.10.7', fqdns: ['exNode2.cmm', 'exNode2', 'ex_node_2'] },
+      { ip: '192.168.10.7', fqdns: ['exNode2.monasca', 'exNode2', 'ex_node_2'] },
     ex_node_3:
-      { ip: '192.168.10.8', fqdns: ['exNode3.cmm', 'exNode3', 'ex_node_3'] },
+      { ip: '192.168.10.8', fqdns: ['exNode3.monasca', 'exNode3', 'ex_node_3'] },
   }
 
   virtual_ip = '192.168.10.69'
@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define 'openstack' do |openstack|
-    openstack.vm.hostname = 'openstack.cmm'
+    openstack.vm.hostname = 'openstack.monasca'
     openstack.vm.box = 'devstack-centos7-liberty'
     openstack.vm.provision :hosts do |provision|
       provision.add_localhost_hostnames = false
@@ -74,7 +74,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define 'monasca' do |monasca|
-    monasca.vm.hostname = 'monasca.cmm'
+    monasca.vm.hostname = 'monasca.monasca'
     monasca.vm.box = 'clear-centos7'
     monasca.vm.provision :hosts do |provision|
       provision.add_localhost_hostnames = false
@@ -102,7 +102,7 @@ Vagrant.configure(2) do |config|
   if enable_cluster == '1'
     # extra nodes for cluster configuration
     config.vm.define 'ex_node_1' do |ds|
-      ds.vm.hostname = 'exNode1.cmm'
+      ds.vm.hostname = 'exNode1.monasca'
       ds.vm.box = 'clear-centos7'
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
@@ -121,7 +121,7 @@ Vagrant.configure(2) do |config|
     end
 
     config.vm.define 'ex_node_2' do |ds|
-      ds.vm.hostname = 'exNode2.cmm'
+      ds.vm.hostname = 'exNode2.monasca'
       ds.vm.box = 'clear-centos7'
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
@@ -140,7 +140,7 @@ Vagrant.configure(2) do |config|
     end
 
     config.vm.define 'ex_node_3' do |ds|
-      ds.vm.hostname = 'exNode3.cmm'
+      ds.vm.hostname = 'exNode3.monasca'
       ds.vm.box = 'clear-centos7'
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false

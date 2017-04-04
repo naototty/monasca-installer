@@ -12,7 +12,7 @@ localhost                        ansible_connection=local
 offline-resources-node           ansible_ssh_host={{ offline_resources_host }} ansible_ssh_user={{ ssh_user_offline_host }}
 
 # Monasca host
-cmm-node                         ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
+monasca-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Openstack hosts
 keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
@@ -51,13 +51,13 @@ monasca-notification-node        ansible_ssh_host={{ node_1 }} ansible_ssh_user=
 monasca-persister-node           ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca-log-metric node
-monasca-log-metrics-node          ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
+monasca-log-metrics-node         ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca Agent Hosts
-cmm-monasca-agent                ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
+monasca-agent-node               ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Monasca Log Agent Hosts
-cmm-monasca-log-agent            ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
+monasca-log-agent-node           ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
 
 # Storm Nimbus node
 storm-nimbus-node                ansible_ssh_host={{ node_1 }} ansible_ssh_user={{ ssh_user_node_1 }}
@@ -88,10 +88,10 @@ grafana-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user=
 ################################################################################
 
 [monasca_agent_group]
-cmm-monasca-agent
+monasca-agent-node
 
 [monasca_log_agent_group]
-cmm-monasca-log-agent
+monasca-log-agent-node
 
 ################################################################################
 # Other group definition
@@ -114,13 +114,13 @@ kafka-node
 zookeeper-node
 
 [monasca_group]
-cmm-node
+monasca-node
 
 [monasca_api_group]
-monasca-api-node database_node_for_api=cmm-node influxdb_node_for_api=influxdb-node
+monasca-api-node database_node_for_api=monasca-node influxdb_node_for_api=influxdb-node
 
 [monasca_notification_group]
-monasca-notification-node database_node_for_notification=cmm-node
+monasca-notification-node database_node_for_notification=monasca-node
 
 [monasca_persister_group]
 monasca-persister-node influxdb_node_for_persister=influxdb-node
@@ -144,7 +144,7 @@ elasticsearch-node
 kibana-node es_node_for_kibana=elasticsearch-node
 
 [monasca_uninstaller]
-cmm-node
+monasca-node
 
 [storm_nimbus_group]
 storm-nimbus-node
@@ -153,7 +153,7 @@ storm-nimbus-node
 storm-supervisor-node
 
 [monasca_thresh_group]
-monasca-thresh-node database_node_for_thresh=cmm-node
+monasca-thresh-node database_node_for_thresh=monasca-node
 
 [mariadb_group]
 mariadb-node
@@ -165,7 +165,7 @@ elasticsearch-curator-node
 influxdb-node
 
 [grafana_group]
-grafana-node database_node_for_grafana=cmm-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
+grafana-node database_node_for_grafana=monasca-node rabbitmq_host_for_grafana={{ rabbitmq_host }}
 
 ################################################################################
 # Group inheritance

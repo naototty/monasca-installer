@@ -94,10 +94,10 @@ monasca-log-metrics-node-3       ansible_ssh_host={{ node_4 }} ansible_ssh_user=
 balancer-node                    ansible_ssh_host={{ balancer_host }} ansible_ssh_user={{ ssh_user_balancer }}
 
 # Monasca Agent Hosts
-openstack-monasca-agent          ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+openstack-monasca-agent-node     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 # Monasca Log Agent Hosts
-openstack-monasca-log-agent      ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+openstack-monasca-log-agent-node ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
 
 #Storm Nimbus nodes
 storm-nimbus-node-1              ansible_ssh_host={{ node_2 }} ansible_ssh_user={{ ssh_user_node_2 }}
@@ -149,13 +149,13 @@ grafana-node                     ansible_ssh_host={{ node_1 }} ansible_ssh_user=
 ################################################################################
 
 [monasca_agent_group]
-openstack-monasca-agent
+openstack-monasca-agent-node
 monasca-agent-node-1
 monasca-agent-node-2
 monasca-agent-node-3
 
 [monasca_log_agent_group]
-openstack-monasca-log-agent
+openstack-monasca-log-agent-node
 monasca-log-agent-node-1
 monasca-log-agent-node-2
 monasca-log-agent-node-3

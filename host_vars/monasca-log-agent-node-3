@@ -3,9 +3,9 @@
 # file: host_vars/monasca-log-agent-node-3
 
 # logstash monasca user credentials
-monasca_log_agent_project: cmm
-monasca_log_agent_user: cmm-agent
-monasca_log_agent_password: "{{ keystone_cmm_agent_password }}"
+monasca_log_agent_project: monasca
+monasca_log_agent_user: monasca-agent
+monasca_log_agent_password: "{{ keystone_monasca_agent_password }}"
 user_domain_name: default
 project_domain_name: default
 

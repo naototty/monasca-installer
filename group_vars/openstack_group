@@ -20,28 +20,28 @@ remove_network_manager: False
 keystone_service_script: "/usr/local/bin/create_monasca_service.py"
 keystone_virtualenv_dir: "{{ venvs_dir }}/monasca-keystone"
 keystone_users:
-  - username: cmm-operator
-    project: cmm
+  - username: monasca-operator
+    project: monasca
     project_description: 'Fujitsu Cloud Monitoring Manager Tenant'
-    password: "{{ keystone_cmm_operator_user_password }}"
+    password: "{{ keystone_monasca_operator_password }}"
     roles:
-        - cmm-user
+        - monasca-user
         - admin
-  - username: cmm-agent
-    project: cmm
-    password: "{{ keystone_cmm_agent_password }}"
+  - username: monasca-agent
+    project: monasca
+    password: "{{ keystone_monasca_agent_password }}"
     roles:
-        - cmm-agent
+        - monasca-agent
   - username: admin
     project: admin
     password: "{{ keystone_admin_password }}"
     roles:
-        - cmm-user
+        - monasca-user
   - username: admin-agent
     project: admin
     password: "{{ keystone_admin_agent_password }}"
     roles:
-        - cmm-agent
+        - monasca-agent
 
 kibana_host: "http://{{ kibana_ip|trim|safe }}:5601/"
 

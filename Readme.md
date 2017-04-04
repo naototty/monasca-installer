@@ -276,7 +276,7 @@ Login credentials are:
 | user | password |
 | -------- | -------- |
 | admin | admin |
-| cmm-operator | password |
+| monasca-operator | password |
 
 ### Work with vagrant-sandbox
 Sahara allows vagrant to operate in sandbox mode

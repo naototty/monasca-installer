@@ -1,6 +1,6 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
-# file: host_vars/openstack-monasca-log-agent
+# file: host_vars/openstack-monasca-log-agent-node
 
 # logstash monasca user credentials
 monasca_log_agent_project: admin
