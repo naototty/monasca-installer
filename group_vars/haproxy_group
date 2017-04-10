@@ -22,6 +22,7 @@ balancing_components:
       name: "galera_cluster",
       load_balancing_port: "{{ mysql_port | int }}",
       balancing_algorithm: "leastconn",
+      option_check: "httpchk",
       nodes: "{{ mariadb_nodes }}",
       params: [
         "port {{ clustercheck_port }}",
@@ -31,6 +32,7 @@ balancing_components:
       name: "influxdb_cluster",
       load_balancing_port: "{{ influxdb_client_port | int }}",
       balancing_algorithm: "leastconn",
+      option_check: "httpchk",
       nodes: "{{ influxdb_nodes }}",
       params: [
         "port 8083"
