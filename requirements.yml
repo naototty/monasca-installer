@@ -10,6 +10,10 @@
   scm: git
   version: master
   name: influxdb
+- src: https://gitlab.com/monasca-installer/ansible-influxdb-relay.git
+  scm: git
+  version: master
+  name: influxdb-relay
 - src: https://gitlab.com/monasca-installer/ansible-galera.git
   scm: git
   version: master
