@@ -23,4 +23,4 @@ database_password: "{{ database_notification_password }}"
 database_host: "{{ hostvars[database_node_for_notification]['ansible_ssh_host'] }}"
 
 smtp_host: "localhost"
-smpt_from_address: monasca@fujitsu.ts.com
+smtp_from_address: monasca@fujitsu.ts.com
