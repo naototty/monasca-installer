@@ -6,6 +6,7 @@ is_openstack: false
 
 # monasca global settings
 monasca_log_level: WARN
+monasca_api_log_level: WARNING
 monasca_group: monasca
 
 # urls
