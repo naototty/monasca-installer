@@ -4,7 +4,7 @@
 
 memcached_pkg_src_url: "{{ world_repo_url }}"
 memcached_listen_ip: "{{ ansible_ssh_host }}"
-memcached_log_verbosity: "-vv"
+memcached_log_verbosity: "-v"
 
 #to expand the list of new addreses use:
 #     {{list1 | intersect(list2)}}
