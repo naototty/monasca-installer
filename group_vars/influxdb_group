@@ -2,7 +2,8 @@
 # Copyright 2016 FUJITSU LIMITED
 # file: group_vars/influxdb_group
 
-influxdb_bind_address: "{{ ansible_ssh_host }}"
+influxdb_hostname: "{{ hostvars[influxdb_listen_ip]['ansible_ssh_host'] }}"
+influxdb_bind_address: "{{ hostvars[influxdb_listen_ip]['ansible_ssh_host'] }}"
 
 # influxdb version
 influxdb_versions:

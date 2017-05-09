@@ -1,7 +1,7 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
 
-monasca_api_bind_host: "{{ ansible_ssh_host }}"
+monasca_api_bind_host: "{{ hostvars[monasca_api_listen_ip]['ansible_ssh_host'] }}"
 monasca_api_tarball_base_url: "{{ world_repo_url }}"
 api_region: useast
 

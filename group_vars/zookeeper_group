@@ -4,4 +4,4 @@
 zookeeper_log_dir: "{{ log_dir }}/zookeeper"
 zookeeper_version: 3.4.8
 zookeeper_url: "{{ world_repo_url }}/zookeeper-{{ zookeeper_version }}.tar.gz"
-
+zookeeper_clientPortAddress: "{{ hostvars[zookeeper_listen_ip]['ansible_ssh_host'] }}"

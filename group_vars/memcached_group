@@ -3,7 +3,7 @@
 # file: group_vars/memcached_group
 
 memcached_pkg_src_url: "{{ world_repo_url }}"
-memcached_listen_ip: "{{ ansible_ssh_host }}"
+memcached_listen_ip: "{{ hostvars[memcached_listen_node_ip]['ansible_ssh_host'] }}"
 memcached_log_verbosity: "-v"
 
 #to expand the list of new addreses use:
