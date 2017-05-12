@@ -3,7 +3,7 @@
 # file: group_vars/storm_group
 
 storm_master_hosts: "{% for item in groups['storm_group'] -%}
-                        {%- set host = hostvars[hostvars[item]['storm_listen_ip']]['ansible_ssh_host'] -%}
+                        {%- set host = hostvars[item]['ansible_ssh_host'] -%}
                         {% if loop.index > 1 and hostvars[item]['storm_is_master_node']|bool %},{% elif hostvars[item]['storm_is_master_node']|bool %}{{ host|trim|string }}{% endif %}
                      {%- endfor %}"
 storm_master_nodes: "{{ storm_master_hosts.split(',') }}"
@@ -15,7 +15,7 @@ storm_version: 1.0.2
 storm_nimbus_enabled: true
 storm_supervisor_enabled: true
 storm_ui_enabled: false
-storm_ui_host: "{{ hostvars[storm_listen_ip]['ansible_ssh_host'] }}"
+storm_ui_host: "{{ ansible_ssh_host }}"
 
 # Change default port to not colide with InfluxDB raft port 8088
 # that is hard-coded into InfluxDB data restoration client.

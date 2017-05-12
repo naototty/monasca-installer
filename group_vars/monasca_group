@@ -1,5 +1,5 @@
 ---
-# Copyright 2016-2017 FUJITSU LIMITED
+# Copyright 2016 FUJITSU LIMITED
 # file: group_vars/monasca_group
 
 is_openstack: false
@@ -24,7 +24,7 @@ influxdb_version: 1.1.1
 # components to specify their settings
 
 kafka_hosts: "{% for item in groups['kafka_group'] -%}
-                {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['kafka_listen_ip']]['ansible_ssh_host'] }}:{{ kafka_port|int }}
+                {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ kafka_port|int }}
               {%- endfor %}"
 kafka_nodes: "{{ kafka_hosts.split(',') }}"
 
@@ -48,29 +48,29 @@ kafka_notifications_partitions: "{{ (groups['monasca_notification_group']|length
 
 # zookeeper
 zookeeper_hosts: "{% for item in groups['zookeeper_group'] -%}
-                    {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['zookeeper_listen_ip']]['ansible_ssh_host'] }}:{{ zookeeper_port|int }}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ zookeeper_port|int }}
                   {%- endfor %}"
 
 # monasca-log-api
 monasca_log_api_hosts: "{% for item in groups['monasca_log_api_group'] -%}
-                          {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['log_api_listen_ip']]['ansible_ssh_host'] }}
+                          {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
                         {%- endfor %}"
 monasca_log_api_nodes: "{{ monasca_log_api_hosts.split(',') }}"
 
 # memcached
 memcached_hosts: "{% for item in groups['memcached_group'] -%}
-                    {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['memcached_listen_node_ip']]['ansible_ssh_host'] }}:{{ memcached_port|int }}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ memcached_port|int }}
                   {%- endfor %}"
 memcached_nodes: "{{ memcached_hosts.split(',') }}"
 
 # monasca-api
 monasca_api_hosts: "{% for item in groups['monasca_api_group'] -%}
-                          {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['monasca_api_listen_ip']]['ansible_ssh_host'] }}
+                          {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
                         {%- endfor %}"
 monasca_api_nodes: "{{ monasca_api_hosts.split(',') }}"
 
 storm_hosts: "{% for item in groups['storm_group'] -%}
-                {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['storm_listen_ip']]['ansible_ssh_host'] }}
+                {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
               {%- endfor %}"
 storm_nodes: "{{ storm_hosts.split(',') }}"
 

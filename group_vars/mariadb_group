@@ -3,8 +3,9 @@
 # file: group_vars/mariadb_group
 
 mariadb_version: 10.1.18
+mariadb_host: "{{ hostvars['mariadb-node']['ansible_ssh_host'] }}"
 clustercheck_port: 9199
-mariadb_bind_address: "{{ hostvars[mariadb_listen_ip]['ansible_ssh_host'] }}"
+mariadb_bind_address: "{{ ansible_ssh_host }}"
 
 # System user settings
 mariadb_user: mysql
@@ -38,13 +39,13 @@ galera_cluster_name: "monasca-cluster"
 galera_starting_node: "{{ groups['mariadb_group'][0] }}"
 
 mariadb_galera_hosts: "{% for item in groups['mariadb_group'] -%}
-                           {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['mariadb_listen_ip']]['ansible_ssh_host'] }}:{{ galera_port | int }}
+                           {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}:{{ galera_port | int }}
                        {%- endfor %}"
 mariadb_galera_nodes: "{{ mariadb_galera_hosts.split(',') }}"
 
 load_balancer_hosts: "{% if groups['haproxy_group'] is defined -%}
                           {% for item in groups['haproxy_group'] -%}
-                              {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['haproxy_listen_ip']]['ansible_ssh_host'] }}
+                              {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
                           {%- endfor %}
                       {%- endif %}"
 load_balancer_nodes: "{{ load_balancer_hosts.split(',') }}"

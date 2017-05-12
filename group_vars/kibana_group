@@ -6,7 +6,7 @@ kibana_user: kibana
 kibana_group: kibana
 
 # host and port
-kibana_host: "{{ hostvars[kibana_listen_ip]['ansible_ssh_host'] }}"
+kibana_host: "{{ ansible_ssh_host }}"
 kibana_port: 5601
 
 kibana_dest: "{{ elk_base_dir }}/kibana"
@@ -15,7 +15,7 @@ kibana_server_base_path: "/dashboard/monitoring/logs_proxy"
 
 # es_node_for_kibana is defined in inventory and points
 # to node where elasticsearch lies
-elasticsearch_url: "http://{{ hostvars[hostvars[es_node_for_kibana]['elastic_listen_ip']]['ansible_ssh_host'] }}:{{ elasticsearch_port }}"
+elasticsearch_url: "http://{{ hostvars[es_node_for_kibana]['ansible_ssh_host'] }}:{{ elasticsearch_port }}"
 elasticsearch_wait_for_timeout: "{{ monasca_wait_for_period }}"
 
 kibana_plugins:

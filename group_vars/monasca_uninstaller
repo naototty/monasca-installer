@@ -23,7 +23,7 @@ curator_venv_dir: "{{ venvs_dir }}/elasticsearch-curator"
 curator_job: Elasticsearch Curator jobs
 
 storm_root_dir: "{{ opt_dir }}/storm"
-storm_local_dir: "/var/storm_{{ hostvars[storm_listen_ip]['ansible_ssh_host'] }}"
+storm_local_dir: "/var/storm_{{ ansible_ssh_host }}"
 
 uninstall_services:
   - { name: "storm-nimbus", assets: [] }

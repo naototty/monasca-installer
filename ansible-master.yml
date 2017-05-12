@@ -7,31 +7,18 @@
   become: true
   vars:
     node_1: 192.168.10.4
-    node_1_admin_ip: 192.168.124.4
-    node_1_public_ip: 192.168.126.4
-    node_1_internal_ip: 192.168.127.4
     node_2: 192.168.10.6
-    node_2_admin_ip: 192.168.124.6
-    node_2_internal_ip: 192.168.127.6
     node_3: 192.168.10.7
-    node_3_admin_ip: 192.168.124.7
-    node_3_internal_ip: 192.168.127.7
     node_4: 192.168.10.8
-    node_4_admin_ip: 192.168.124.8
-    node_4_internal_ip: 192.168.127.8
     ssh_user_node_1: vagrant
     ssh_user_node_2: vagrant
     ssh_user_node_3: vagrant
     ssh_user_node_4: vagrant
-    offline_resources_host: 192.168.124.4
+    offline_resources_host: 192.168.10.4
     balancer_host: 192.168.10.4
-    balancer_host_public_ip: 192.168.126.4
     openstack_host: 192.168.10.5
-    openstack_host_admin_ip: 192.168.124.5
-    openstack_host_public_ip: 192.168.126.5
     rabbitmq_host: 192.168.10.5
     haproxy_host: 192.168.10.4
-    public_network_virtual_ip: 192.168.126.69
     keepalived_virtual_ip: 192.168.10.69
     ssh_user_offline_host: vagrant
     ssh_user_openstack: vagrant
