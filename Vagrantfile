@@ -1,206 +1,94 @@
-require "vagrant.rb"
+require 'vagrant.rb'
 
 Vagrant.configure(2) do |config|
-  enable_cluster = ENV["ENABLE_CLUSTER"]
+  enable_cluster = ENV['ENABLE_CLUSTER']
 
   vms = {
-    "master" => {
-      "normal_network" => "192.168.10.90",
-      "admin_network" => "192.168.124.90",
-      "public_network" => "192.168.126.90",
-    },
-    "monasca" => {
-      "normal_network" => {
-        "ip" => "192.168.10.4",
-        "fqdns" => ["monasca.monasca", "monasca"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.4",
-        "fqdns" => ["admin.monasca.monasca", "admin.monasca"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.4",
-        "fqdns" => ["public.monasca.monasca", "public.monasca"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.4",
-        "fqdns" => ["internal.monasca.monasca", "internal.monasca"],
-      },
-    },
-    "openstack" => {
-      "normal_network" => {
-        "ip" => "192.168.10.5",
-        "fqdns" => ["openstack.monasca", "openstack"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.5",
-        "fqdns" => ["admin.openstack.monasca", "admin.openstack"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.5",
-        "fqdns" => ["public.public.openstack.monasca", "public.openstack"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.5",
-        "fqdns" => ["internal.openstack.monasca", "internal.openstack"],
-      },
-    },
-    "ex_node_1" => {
-      "normal_network" => {
-        "ip" => "192.168.10.6",
-        "fqdns" => ["exNode1.monasca", "exNode1", "ex_node_1"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.6",
-        "fqdns" => ["admin.exNode1.monasca", "admin.exNode1", "admin.ex_node_1"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.6",
-        "fqdns" => ["public.exNode1.monasca", "public.exNode1", "public.ex_node_1"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.6",
-        "fqdns" => ["internal.exNode1.monasca", "internal.exNode1", "internal.ex_node_1"],
-      },
-    },
-    "ex_node_2" => {
-      "normal_network" => {
-        "ip" => "192.168.10.7",
-        "fqdns" => ["exNode2.monasca", "exNode2", "ex_node_2"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.7",
-        "fqdns" => ["admin.exNode2.monasca", "admin.exNode2", "admin.ex_node_2"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.7",
-        "fqdns" => ["public.exNode2.monasca", "public.exNode2", "public.ex_node_2"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.7",
-        "fqdns" => ["internal.exNode2.monasca", "internal.exNode2", "internal.ex_node_2"],
-      },
-    },
-    "ex_node_3" => {
-      "normal_network" => {
-        "ip" => "192.168.10.8",
-        "fqdns" => ["exNode3.monasca", "exNode3", "ex_node_3"],
-      },
-      "admin_network" => {
-        "ip" => "192.168.124.8",
-        "fqdns" => ["admin.exNode3.monasca", "admin.exNode3", "admin.ex_node_3"],
-      },
-      "public_network" => {
-        "ip" => "192.168.126.8",
-        "fqdns" => ["public.exNode3.monasca", "public.exNode3", "public.ex_node_3"],
-      },
-      "internal_network" => {
-        "ip" => "192.168.127.8",
-        "fqdns" => ["internal.exNode3.monasca", "internal.exNode3", "internal.ex_node_3"],
-      },
-    },
+    master:
+      { ip: '192.168.12.90' },
+    monasca:
+      { ip: '192.168.10.4', fqdns: ['monasca.monasca', 'monasca'] },
+    openstack:
+      { ip: '192.168.10.5', fqdns: ['openstack.monasca', 'openstack'] },
+    ex_node_1:
+      { ip: '192.168.10.6', fqdns: ['exNode1.monasca', 'exNode1', 'ex_node_1'] },
+    ex_node_2:
+      { ip: '192.168.10.7', fqdns: ['exNode2.monasca', 'exNode2', 'ex_node_2'] },
+    ex_node_3:
+      { ip: '192.168.10.8', fqdns: ['exNode3.monasca', 'exNode3', 'ex_node_3'] },
   }
 
-  virtual_ip = "192.168.126.69"
+  virtual_ip = '192.168.10.69'
 
-  ips_list = []
-  for node in vms.keys
-    for network in vms[node].keys
-      ips_list << vms[node][network]["ip"]
-    end
-  end
-  ips_string = ips_list.join(",") + ",#{virtual_ip}"
+  ips_list = vms.keys.collect { |k| vms[k][:ip] }
+  ips_string = ips_list.join(',') + ",#{virtual_ip}"
 
   # Handle local proxy settings
-  if Vagrant.has_plugin?("vagrant-proxyconf")
-    config.proxy.http = ENV["http_proxy"] if ENV["http_proxy"]
-    config.proxy.https = ENV["https_proxy"] if ENV["https_proxy"]
-    if ENV["no_proxy"]
+  if Vagrant.has_plugin?('vagrant-proxyconf')
+    config.proxy.http = ENV['http_proxy'] if ENV['http_proxy']
+    config.proxy.https = ENV['https_proxy'] if ENV['https_proxy']
+    if ENV['no_proxy']
       local_no_proxy = ",#{ips_string}"
-      config.proxy.no_proxy = ENV["no_proxy"] + local_no_proxy
+      config.proxy.no_proxy = ENV['no_proxy'] + local_no_proxy
     end
 
-    # config.proxy.http = "http://proxy.intern.est.fujitsu.com:8080"
-    # config.proxy.https = "https://proxy.intern.est.fujitsu.com:8080"
+    # config.proxy.http = 'http://proxy.intern.est.fujitsu.com:8080'
+    # config.proxy.https = 'https://proxy.intern.est.fujitsu.com:8080'
     # config.proxy.no_proxy = "127.0.0.1,localhost,#{ips_string}"
   end
 
-  config.timezone.value = :host if Vagrant.has_plugin?("vagrant-timezone")
+  config.timezone.value = :host if Vagrant.has_plugin?('vagrant-timezone')
 
-  config.vm.define "master" do |master|
-    master.vm.hostname = "master"
-    master.vm.box = "clear-centos7"
-    vms["master"].each do |key, value|
-      master.vm.network :private_network, ip: value
-    end
-    master.vm.provider "virtualbox" do |vb|
+  config.vm.define 'master' do |master|
+    master.vm.hostname = 'master'
+    master.vm.box = 'clear-centos7'
+    master.vm.network :private_network, ip: vms[:master][:ip]
+    master.vm.provider 'virtualbox' do |vb|
       vb.memory = 2048
       vb.cpus = 2
     end
-    master.vm.provision "ansible" do |ansible|
-      ansible.playbook = "ansible-master.yml"
+    master.vm.provision 'ansible' do |ansible|
+      ansible.playbook = 'ansible-master.yml'
     end
-    master.vbguest.no_install = true if Vagrant.has_plugin?("vagrant-vbguest")
+    master.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
   end
 
-  config.vm.define "openstack" do |openstack|
-    openstack.vm.hostname = "openstack.monasca"
-    openstack.vm.box = "devstack-centos7-liberty"
+  config.vm.define 'openstack' do |openstack|
+    openstack.vm.hostname = 'openstack.monasca'
+    openstack.vm.box = 'devstack-centos7-liberty'
     openstack.vm.provision :hosts do |provision|
       provision.add_localhost_hostnames = false
-      vms["monasca"].each do |mon_network, value|
-        provision.add_host value["ip"], value["fqdns"]
-      end
-      if enable_cluster == "1"
-        vms["ex_node_1"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
-        end
-        vms["ex_node_2"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
-        end
-        vms["ex_node_3"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
-        end
+      provision.add_host vms[:monasca][:ip], vms[:monasca][:fqdns]
+      if enable_cluster == '1'
+        provision.add_host vms[:ex_node_1][:ip], vms[:ex_node_1][:fqdns]
+        provision.add_host vms[:ex_node_2][:ip], vms[:ex_node_2][:fqdns]
+        provision.add_host vms[:ex_node_3][:ip], vms[:ex_node_3][:fqdns]
       end
     end
-    vms["openstack"].each do |key, value|
-      openstack.vm.network :private_network, ip: value["ip"]
-    end
-    openstack.vm.provider "virtualbox" do |vb|
+    openstack.vm.network :private_network, ip: vms[:openstack][:ip]
+    openstack.vm.provider 'virtualbox' do |vb|
       vb.memory = 6192
       vb.cpus = 2
     end
-    openstack.vbguest.no_install = true if Vagrant.has_plugin?("vagrant-vbguest")
+    openstack.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
   end
 
-  config.vm.define "monasca" do |monasca|
-    monasca.vm.hostname = "monasca.monasca"
-    monasca.vm.box = "clear-centos7"
+  config.vm.define 'monasca' do |monasca|
+    monasca.vm.hostname = 'monasca.monasca'
+    monasca.vm.box = 'clear-centos7'
     monasca.vm.provision :hosts do |provision|
       provision.add_localhost_hostnames = false
-      vms["monasca"].each do |key, value|
-        provision.add_host value["ip"], value["fqdns"]
-      end
-      vms["openstack"].each do |key, value|
-        provision.add_host value["ip"], value["fqdns"]
-      end
-      if enable_cluster == "1"
-        vms["ex_node_1"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
-        end
-        vms["ex_node_2"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
-        end
-        vms["ex_node_3"].each do |key, value|
-          provision.add_host value["ip"], value["fqdns"]
-        end
+      provision.add_host vms[:monasca][:ip], vms[:monasca][:fqdns]
+      provision.add_host vms[:openstack][:ip], vms[:openstack][:fqdns]
+      if enable_cluster == '1'
+        provision.add_host vms[:ex_node_1][:ip], vms[:ex_node_1][:fqdns]
+        provision.add_host vms[:ex_node_2][:ip], vms[:ex_node_2][:fqdns]
+        provision.add_host vms[:ex_node_3][:ip], vms[:ex_node_3][:fqdns]
       end
     end
-    vms["monasca"].each do |key, value|
-      monasca.vm.network :private_network, ip: value["ip"]
-    end
-    monasca.vm.provider "virtualbox" do |vb|
-      if enable_cluster == "1"
+    monasca.vm.network :private_network, ip: vms[:monasca][:ip]
+    monasca.vm.provider 'virtualbox' do |vb|
+      if enable_cluster == '1'
         vb.memory = 2048
         vb.cpus = 2
       else
@@ -208,78 +96,66 @@ Vagrant.configure(2) do |config|
         vb.cpus = 2
       end
     end
-    monasca.vbguest.no_install = true if Vagrant.has_plugin?("vagrant-vbguest")
+    monasca.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
   end
 
-  if enable_cluster == "1"
+  if enable_cluster == '1'
     # extra nodes for cluster configuration
-    config.vm.define "ex_node_1" do |ds|
-      ds.vm.hostname = "exNode1.monasca"
-      ds.vm.box = "clear-centos7"
+    config.vm.define 'ex_node_1' do |ds|
+      ds.vm.hostname = 'exNode1.monasca'
+      ds.vm.box = 'clear-centos7'
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
-        vms.each do |key, value|
-          if key != "master"
-            value.each do |key2, value2|
-              provision.add_host value2["ip"], value2["fqdns"]
-            end
-          end
-        end
+        provision.add_host vms[:monasca][:ip], vms[:monasca][:fqdns]
+        provision.add_host vms[:openstack][:ip], vms[:openstack][:fqdns]
+        provision.add_host vms[:ex_node_1][:ip], vms[:ex_node_1][:fqdns]
+        provision.add_host vms[:ex_node_2][:ip], vms[:ex_node_2][:fqdns]
+        provision.add_host vms[:ex_node_3][:ip], vms[:ex_node_3][:fqdns]
       end
-      vms["ex_node_1"].each do |key, value|
-        ds.vm.network :private_network, ip: value["ip"]
-      end
-      ds.vm.provider "virtualbox" do |vb|
-        vb.memory = 6096
+      ds.vm.network :private_network, ip: vms[:ex_node_1][:ip]
+      ds.vm.provider 'virtualbox' do |vb|
+        vb.memory = 4096
         vb.cpus = 2
       end
-      ds.vbguest.no_install = true if Vagrant.has_plugin?("vagrant-vbguest")
+      ds.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
     end
 
-    config.vm.define "ex_node_2" do |ds|
-      ds.vm.hostname = "exNode2.monasca"
-      ds.vm.box = "clear-centos7"
+    config.vm.define 'ex_node_2' do |ds|
+      ds.vm.hostname = 'exNode2.monasca'
+      ds.vm.box = 'clear-centos7'
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
-        vms.each do |key, value|
-          if key != "master"
-            value.each do |key2, value2|
-              provision.add_host value2["ip"], value2["fqdns"]
-            end
-          end
-        end
+        provision.add_host vms[:monasca][:ip], vms[:monasca][:fqdns]
+        provision.add_host vms[:openstack][:ip], vms[:openstack][:fqdns]
+        provision.add_host vms[:ex_node_1][:ip], vms[:ex_node_1][:fqdns]
+        provision.add_host vms[:ex_node_2][:ip], vms[:ex_node_2][:fqdns]
+        provision.add_host vms[:ex_node_3][:ip], vms[:ex_node_3][:fqdns]
       end
-      vms["ex_node_2"].each do |key, value|
-        ds.vm.network :private_network, ip: value["ip"]
-      end
-      ds.vm.provider "virtualbox" do |vb|
-        vb.memory = 6096
+      ds.vm.network :private_network, ip: vms[:ex_node_2][:ip]
+      ds.vm.provider 'virtualbox' do |vb|
+        vb.memory = 4096
         vb.cpus = 2
       end
-      ds.vbguest.no_install = true if Vagrant.has_plugin?("vagrant-vbguest")
+      ds.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
     end
 
-    config.vm.define "ex_node_3" do |ds|
-      ds.vm.hostname = "exNode3.monasca"
-      ds.vm.box = "clear-centos7"
+    config.vm.define 'ex_node_3' do |ds|
+      ds.vm.hostname = 'exNode3.monasca'
+      ds.vm.box = 'clear-centos7'
       ds.vm.provision :hosts do |provision|
         provision.add_localhost_hostnames = false
-        vms.each do |key, value|
-          if key != "master"
-            value.each do |key2, value2|
-              provision.add_host value2["ip"], value2["fqdns"]
-            end
-          end
-        end
+        provision.add_host vms[:monasca][:ip], vms[:monasca][:fqdns]
+        provision.add_host vms[:openstack][:ip], vms[:openstack][:fqdns]
+        provision.add_host vms[:ex_node_1][:ip], vms[:ex_node_1][:fqdns]
+        provision.add_host vms[:ex_node_2][:ip], vms[:ex_node_2][:fqdns]
+        provision.add_host vms[:ex_node_3][:ip], vms[:ex_node_3][:fqdns]
       end
-      vms["ex_node_3"].each do |key, value|
-        ds.vm.network :private_network, ip: value["ip"]
-      end
-      ds.vm.provider "virtualbox" do |vb|
-        vb.memory = 6096
+      ds.vm.network :private_network, ip: vms[:ex_node_3][:ip]
+      ds.vm.provider 'virtualbox' do |vb|
+        vb.memory = 4096
         vb.cpus = 2
       end
-      ds.vbguest.no_install = true if Vagrant.has_plugin?("vagrant-vbguest")
+      ds.vbguest.no_install = true if Vagrant.has_plugin?('vagrant-vbguest')
     end
   end
 end

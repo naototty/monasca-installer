@@ -5,6 +5,6 @@
 storm_nimbus_enabled: true
 storm_supervisor_enabled: false
 storm_ui_enabled: false
-storm_ui_host: "{{ hostvars[storm_listen_ip]['ansible_ssh_host'] }}"
+storm_ui_host: "{{ ansible_ssh_host }}"
 
 storm_is_master_node: true
