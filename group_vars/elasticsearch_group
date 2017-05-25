@@ -7,5 +7,6 @@ elasticsearch_dest: "{{ elk_base_dir }}/elasticsearch"
 elasticsearch_uncompress_dest: "{{ elk_base_dir }}"
 
 elasticsearch_cluster_name: monasca_elastic
-elasticsearch_bind_host: "0.0.0.0"
-elasticsearch_publish_host: "{{ ansible_ssh_host }}"
+elasticsearch_host: "{{ hostvars[elastic_listen_ip]['ansible_ssh_host'] }}"
+elasticsearch_bind_host: "{{ hostvars[elastic_listen_ip]['ansible_ssh_host'] }}"
+elasticsearch_publish_host: "{{ hostvars[elastic_listen_ip]['ansible_ssh_host'] }}"

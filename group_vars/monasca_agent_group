@@ -18,7 +18,7 @@ monasca_agent_system_user: mon-agent
 monasca_agent_overwrite_config: False
 monasca_agent_check_frequency: 30
 
-elasticsearch_url: "http://localhost:9200"
+elasticsearch_url: "http://{{ hostvars[elastic_listen_ip]['ansible_ssh_host'] }}:9200"
 mariadb_root_name: root
 
 uninstall_services:

@@ -3,7 +3,7 @@
 
 kafka_log_dir: "{{ log_dir }}/kafka"
 
-kafka_host: "{{ ansible_ssh_host }}"
+kafka_host: "{{ hostvars[kafka_listen_ip]['ansible_ssh_host'] }}"
 kafka_listen_address: "{{ kafka_host }}"
 kafka_apache_mirror: "{{ world_repo_url }}"
 

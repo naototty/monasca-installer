@@ -22,19 +22,19 @@ offline_host: "{{ hostvars['offline-resources-node']['ansible_ssh_host'] }}"
 monasca_api_ip: "{% if groups['monasca_api_group']|length > 1 %}
                     {{ hostvars['monasca-api-balancer-node']['ansible_ssh_host'] }}
                  {% else %}
-                    {{ hostvars['monasca-api-node']['ansible_ssh_host'] }}
+                    {{ hostvars[hostvars['monasca-api-node']['monasca_api_listen_ip']]['ansible_ssh_host'] }}
                  {% endif %}
                 "
 log_api_ip: "{% if groups['monasca_log_api_group']|length > 1 %}
                         {{ hostvars['monasca-log-api-balancer-node']['ansible_ssh_host'] }}
                      {% else %}
-                        {{ hostvars['monasca-log-api-node']['ansible_ssh_host'] }}
+                        {{ hostvars[hostvars['monasca-log-api-node']['log_api_listen_ip']]['ansible_ssh_host'] }}
                      {% endif %}
                     "
 kibana_ip: "{% if groups['kibana_group']|length > 1 %}
                 {{ hostvars['kibana-balancer-node']['ansible_ssh_host'] }}
             {% else %}
-                {{ hostvars['kibana-node']['ansible_ssh_host'] }}
+                {{ hostvars[hostvars['kibana-node']['kibana_listen_ip']]['ansible_ssh_host'] }}
             {% endif %}
            "
 keystone_host: "{{ hostvars['keystone-node']['ansible_ssh_host'] }}"

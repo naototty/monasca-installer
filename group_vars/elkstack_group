@@ -3,15 +3,15 @@
 
 # cluster nodes for elasticsearch
 elasticsearch_hosts: "{% for item in groups['elasticsearch_group'] -%}
-                        {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
+                        {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['elastic_listen_ip']]['ansible_ssh_host'] }}
                       {%- endfor %}"
 
 elasticsearch_cluster_nodes: "{{ elasticsearch_hosts.split(',') }}"
 
 # cluster nodes for kibana
 kibana_hosts: "{% for item in groups['kibana_group'] -%}
-                        {% if loop.index > 1 %},{% endif %}{{ hostvars[item]['ansible_ssh_host'] }}
-                      {%- endfor %}"
+                 {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['kibana_listen_ip']]['ansible_ssh_host'] }}
+               {%- endfor %}"
 kibana_cluster_nodes: "{{ kibana_hosts.split(',') }}"
 
 # information about from where to get elkstack components
