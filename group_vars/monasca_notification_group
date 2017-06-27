@@ -6,6 +6,18 @@ notification_group: "{{ monasca_group }}"
 notification_enable_email: true
 notification_enable_webhook: false
 notification_enable_pagerduty: false
+notification_enable_jira: false
+jira_user: ""
+jira_password: ""
+jira_proxy_enabled: false
+notification_enable_slack: false
+slack_proxy_enabled: false
+slack_ca_insecure_enabled: true
+notification_enable_hipchat: false
+hipchat_proxy_enabled: false
+hipchat_ca_insecure_enabled: true
+proxy_url: ""
+ca_file: ""
 
 notification_log_level: "{{ monasca_log_level }}"
 
