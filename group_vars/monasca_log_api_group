@@ -12,8 +12,6 @@ log_api_wait_timeout: "{{ monasca_wait_for_period }}"
 log_api_virtualenv_dir: "{{ venvs_dir }}/monasca-log-api"
 log_api_version: 1.1.1.dev1
 
-log_api_max_message_size: 943718
-
 pip_extra_depedencies:
   - { name: pbr, version: "{{ pbr_version }}" }
   - { name: gunicorn }
