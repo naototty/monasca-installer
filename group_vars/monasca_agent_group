@@ -11,7 +11,7 @@ monasca_agent_conf_dir: "{{ monasca_conf_dir }}/agent"
 monasca_usr_lib_dir: /usr/lib/monasca/agent
 
 monasca_agent_database_user: monapi
-monasca_agent_version: 1.3.1.dev46
+monasca_agent_version: 1.9.1
 
 monasca_agent_system_user: mon-agent
 
@@ -30,3 +30,5 @@ uninstall_packages:
      - { assets: ["/etc/sudoers.d/{{ monasca_agent_system_user }}"] }
 uninstall_directories:
   - { dir: "{{ monasca_agent_venv_dir }}", force: True }
+
+offline_mode: False

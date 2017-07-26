@@ -33,13 +33,13 @@
   vars_files:
     - credentials.yml
     - "vars/os_{{ ansible_os_family }}.yml"
-  environment:
-    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   pre_tasks:
     - include: tasks/verify_pip.yml
       tags: [always]
     - include: tasks/set_up.yml
       tags: [always]
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: pip, tags: [pip, resources]}
 
@@ -63,8 +63,6 @@
   vars_files:
     - credentials.yml
     - "vars/os_{{ ansible_os_family }}.yml"
-  environment:
-    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   vars:
     credential_keys_list:
       - keystone_monasca_operator_password
@@ -74,6 +72,8 @@
   pre_tasks:
     - include: tasks/verify_credentials.yml
       tags: [always]
+  environment:
+    PIP_CONFIG_FILE: "{{ pip_config_file }}"
   roles:
     - {role: monasca-keystone, tags: [keystone]}
 

@@ -1,6 +1,9 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
+# Copyright 2016-2017 FUJITSU LIMITED
 # file: group_vars/all_group
+
+# proxy
+https_proxy: ""
 
 # ports
 monasca_api_client_port: 8070
