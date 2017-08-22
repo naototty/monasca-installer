@@ -3,7 +3,7 @@
 # file: group_vars/monasca_log_agent_group
 
 # logstash agent download url
-logstash_agent_download_url: "{{ balls_repo_url }}/world"
+logstash_agent_download_url: "http://download.elastic.co/logstash/logstash"
 logstash_agent_version: 2.3.4
 
 # directories

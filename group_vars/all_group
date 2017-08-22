@@ -3,7 +3,9 @@
 # file: group_vars/all_group
 
 # proxy
-https_proxy: ""
+http_proxy: ""
+# Configure if https proxy is different with http proxy
+https_proxy: "{{ http_proxy }}"
 
 # ports
 monasca_api_client_port: 8070
@@ -76,9 +78,6 @@ clean_up_dirs:
 
 # Installation mode
 offline_mode: True
-
-# Download urls
-logstash_agent_download_url: "{{ world_repo_url }}"
 
 # Keystone Admin credentials
 keystone_admin_token: ADMIN
