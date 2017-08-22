@@ -1,25 +1,46 @@
 # Copyright 2016 FUJITSU LIMITED
 
 ################################################################################
-# Host definitions. Replace node_1, openstack_host, offline_resources_host,
-# ssh_user_node_1, ssh_user_offline_host and ssh_user_openstack with valid
-# informations
+# Host definitions. Replace node_1, openstack_host, ssh_user_node_1, and
+# ssh_user_openstack with valid informations
 ################################################################################
 
 localhost                        ansible_connection=local
 
-# Offline Host
-offline-resources-node           ansible_ssh_host={{ offline_resources_host }} ansible_ssh_user={{ ssh_user_offline_host }}
-
 # Openstack Hosts
-horizon-node                     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
-keystone-node                    ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+horizon-node                     ansible_ssh_host="{{ openstack_host }}" ansible_ssh_user="{{ ssh_user_openstack }}"
+keystone-node                    ansible_ssh_host="{{ openstack_host }}" ansible_ssh_user="{{ ssh_user_openstack }}"
 
 # Monasca Agent Hosts
-openstack-monasca-agent-node     ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+openstack-monasca-agent-node     ansible_ssh_host="{{ openstack_host }}" ansible_ssh_user="{{ ssh_user_openstack }}"
 
 # Monasca Log Agent Hosts
-openstack-monasca-log-agent-node ansible_ssh_host={{ openstack_host }} ansible_ssh_user={{ ssh_user_openstack }}
+openstack-monasca-log-agent-node ansible_ssh_host="{{ openstack_host }}" ansible_ssh_user="{{ ssh_user_openstack }}"
+
+# Monasca host
+monasca-node                     ansible_ssh_host="{{ node_1_admin_ip }}"
+
+# Kibana
+kibana-node                      ansible_ssh_host="{{ node_1_admin_ip }}"
+
+# Elasticsearch
+elasticsearch-node               ansible_ssh_host="{{ node_1_admin_ip }}"
+
+# networks
+internal-node-1                  ansible_ssh_host="{{ node_1_internal_ip }}"
+public-node-1                    ansible_ssh_host="{{ node_1_public_ip }}"
+
+# Monasca-api
+monasca-api-node                 ansible_ssh_host="{{ node_1_admin_ip }}"
+
+# Monasca-log-api
+monasca-log-api-node             ansible_ssh_host="{{ node_1_admin_ip }}"
+
+# Grafana node
+grafana-node                     ansible_ssh_host="{{ node_1_admin_ip }}"
+
+# Offline Host
+offline-resources-node           ansible_ssh_host="{{ offline_resources_host | default('') }}"
 
 ################################################################################
 # Agent and Log-Agent group definition:
@@ -38,10 +59,6 @@ openstack-monasca-log-agent-node
 # Other group definition
 ################################################################################
 
-[offline_group]
-offline-resources-node
-localhost
-
 [openstack_group]
 horizon-node
 keystone-node
@@ -49,6 +66,18 @@ keystone-node
 [openstack_uninstaller_group]
 horizon-node
 keystone-node
+
+[kibana_group]
+kibana-node es_node_for_kibana=elasticsearch-node kibana_listen_ip=internal-node-1
+
+[monasca_api_group]
+monasca-api-node database_node_for_api=internal-node-1 influxdb_node_for_api=internal-node-1 monasca_api_listen_ip=public-node-1
+
+[monasca_log_api_group]
+monasca-log-api-node log_api_listen_ip=public-node-1
+
+[monasca_group]
+monasca-node
 
 ################################################################################
 # Group inheritance
@@ -58,7 +87,6 @@ keystone-node
 monasca_log_agent_group
 
 [all_group:children]
-offline_group
 openstack_group
 monasca_agent_group
 monasca_log_agent_group
