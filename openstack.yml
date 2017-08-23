@@ -54,8 +54,8 @@
     - {role: monasca-ui,
        monasca_ui_name: "monasca-ui",
        tags: [ui]}
-    - {role: fujitsu-branding, tags: [branding]}
-    - {role: horizon-patch, tags: [horizon-patch]}
+# fujitsu-branding is not implemented to grafana docker
+#   - {role: fujitsu-branding, tags: [branding]}
 
 - name: Configure Keystone
   hosts: keystone-node
