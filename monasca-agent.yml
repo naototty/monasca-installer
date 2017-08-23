@@ -13,6 +13,7 @@
     - "vars/os_{{ ansible_os_family }}.yml"
   environment:
     PIP_CONFIG_FILE: "{{ pip_config_file }}"
+    https_proxy: "{{ https_proxy }}"
   pre_tasks:
     - include: tasks/verify_ansible.yml
       tags: [always]
