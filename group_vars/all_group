@@ -42,6 +42,7 @@ kibana_ip: "{% if groups['kibana_group']|length > 1 %}
            "
 keystone_host: "{{ hostvars['keystone-node']['ansible_ssh_host'] }}"
 keepalived_virtual_ip: "{{ hostvars['keepalived-virtual-node']['ansible_ssh_host'] }}"
+grafana_host: "{{ hostvars['grafana-node']['ansible_ssh_host'] }}"
 
 # monsaca settings
 monasca_conf_dir: "{{ etc_dir }}/monasca"

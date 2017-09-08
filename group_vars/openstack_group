@@ -7,10 +7,6 @@ is_openstack: true
 # urls
 kibana_url: "http://{{ kibana_ip|trim|safe }}:5601/"
 
-grafana_tarball_url: "{{ balls_repo_url }}/world"
-grafana_tarball_file: "/fujitsu-monasca-grafana.tar.gz"
-
-
 # offline mode information
 epel_download_url: "{{ world_repo_url }}"
 install_epel: False
@@ -42,8 +38,10 @@ keystone_users:
     password: "{{ keystone_admin_agent_password }}"
     roles:
         - monasca-agent
+keystone_region: RegionOne
 
 kibana_host: "http://{{ kibana_ip|trim|safe }}:5601/"
+grafana_url: "http://{{ grafana_host }}:3000/"
 
 # keystone endpoint for monasca-keystone
 keystone_service_endpoints:

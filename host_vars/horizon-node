@@ -13,7 +13,4 @@ dashboard_path: "{{ horizon_path }}openstack_dashboard/"
 ui_dest_path: "{{ dashboard_path }}local/enabled/"
 ui_py_file: _50_admin_add_monitoring_panel.py
 
-grafana_base_dir: /usr/share
-grafana_dest: "{{ apache_document_root }}grafana"
-
 offline_mode: False
