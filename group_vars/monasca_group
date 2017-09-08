@@ -118,8 +118,6 @@ elasticsearch_data_dir:
   - "{{ data_dir }}/elasticsearch"
 elasticsearch_repo_dir: []
 
-logstash_agent_download_url: "{{ world_repo_url }}"
-
 # log persister
 log_persister_host: 127.0.0.1
 monasca_log_dir: "{{ log_dir }}/monasca"
