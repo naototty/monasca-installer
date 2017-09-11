@@ -25,6 +25,7 @@
     - credentials.yml
     - "vars/os_{{ ansible_os_family }}.yml"
   environment:
+    http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ https_proxy }}"
   roles:
     - {role: monasca-log-agent, tags: [log-agent, agents]}
