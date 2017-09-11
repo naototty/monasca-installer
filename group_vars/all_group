@@ -96,7 +96,7 @@ ansible_version_min:
   ver: "2.2.0.0"
   constraint: ">="
 ansible_version_max:
-  ver: "2.2.1.0"
+  ver: "2.3.1.0"
   constraint: "<="
 pip_version_min: 8.1.1
 
