@@ -1,114 +1,108 @@
-[submodule "roles/monasca-resources"]
-	path = roles/monasca-resources
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-resources.git
 [submodule "roles/static-http"]
-	path = roles/static-http
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-static_http.git
+        path = roles/static-http
+        url = https://gitlab.com/monasca-installer/ansible-static_http.git
 [submodule "roles/monasca-ui"]
-	path = roles/monasca-ui
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-ui.git
+        path = roles/monasca-ui
+        url = https://gitlab.com/monasca-installer/ansible-monasca-ui.git
 [submodule "roles/monasca-keystone"]
-	path = roles/monasca-keystone
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-keystone.git
+        path = roles/monasca-keystone
+        url = https://gitlab.com/monasca-installer/ansible-monasca-keystone.git
 [submodule "roles/monasca-agent"]
-	path = roles/monasca-agent
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-agent.git
+        path = roles/monasca-agent
+        url = https://gitlab.com/monasca-installer/ansible-monasca-agent.git
 [submodule "roles/zookeeper"]
-	path = roles/zookeeper
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-zookeeper.git
+        path = roles/zookeeper
+        url = https://gitlab.com/monasca-installer/ansible-zookeeper.git
 [submodule "roles/kafka"]
-	path = roles/kafka
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-kafka.git
+        path = roles/kafka
+        url = https://gitlab.com/monasca-installer/ansible-kafka.git
 [submodule "roles/influxdb"]
-	path = roles/influxdb
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb.git
+        path = roles/influxdb
+        url = https://gitlab.com/monasca-installer/ansible-influxdb.git
 [submodule "roles/influxdb-relay"]
-	path = roles/influxdb-relay
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-influxdb-relay.git
+        path = roles/influxdb-relay
+        url = https://gitlab.com/monasca-installer/ansible-influxdb-relay.git
 [submodule "roles/monasca-schema"]
-	path = roles/monasca-schema
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-schema.git
+        path = roles/monasca-schema
+        url = https://gitlab.com/monasca-installer/ansible-monasca-schema.git
 [submodule "roles/monasca-log-schema"]
-	path = roles/monasca-log-schema
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-schema.git
+        path = roles/monasca-log-schema
+        url = https://gitlab.com/monasca-installer/ansible-monasca-log-schema.git
 [submodule "roles/monasca-api"]
-	path = roles/monasca-api
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-api.git
+        path = roles/monasca-api
+        url = https://gitlab.com/monasca-installer/ansible-monasca-api.git
 [submodule "roles/monasca-log-api"]
-	path = roles/monasca-log-api
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-api.git
+        path = roles/monasca-log-api
+        url = https://gitlab.com/monasca-installer/ansible-monasca-log-api.git
 [submodule "roles/monasca-persister"]
-	path = roles/monasca-persister
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-persister.git
+        path = roles/monasca-persister
+        url = https://gitlab.com/monasca-installer/ansible-monasca-persister.git
 [submodule "roles/monasca-notification"]
-	path = roles/monasca-notification
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-notification.git
+        path = roles/monasca-notification
+        url = https://gitlab.com/monasca-installer/ansible-monasca-notification.git
 [submodule "roles/storm"]
-	path = roles/storm
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-storm.git
+        path = roles/storm
+        url = https://gitlab.com/monasca-installer/ansible-storm.git
 [submodule "roles/monasca-thresh"]
-	path = roles/monasca-thresh
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-thresh.git
+        path = roles/monasca-thresh
+        url = https://gitlab.com/monasca-installer/ansible-monasca-thresh.git
 [submodule "roles/monasca-log-agent"]
-	path = roles/monasca-log-agent
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-agent.git
+        path = roles/monasca-log-agent
+        url = https://gitlab.com/monasca-installer/ansible-monasca-log-agent.git
 [submodule "roles/pip"]
-	path = roles/pip
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-pip.git
+        path = roles/pip
+        url = https://gitlab.com/monasca-installer/ansible-pip.git
 [submodule "roles/cli-credentials"]
-	path = roles/cli-credentials
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-cli-credentials.git
-[submodule "roles/fujitsu-branding"]
-	path = roles/fujitsu-branding
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-fujitsu-branding.git
+        path = roles/cli-credentials
+        url = https://gitlab.com/monasca-installer/ansible-cli-credentials.git
 [submodule "roles/logrotate"]
-	path = roles/logrotate
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-logrotate.git
+        path = roles/logrotate
+        url = https://gitlab.com/monasca-installer/ansible-logrotate.git
 [submodule "roles/uninstaller"]
-	path = roles/uninstaller
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-uninstaller.git
+        path = roles/uninstaller
+        url = https://gitlab.com/monasca-installer/ansible-uninstaller.git
 [submodule "roles/monasca-log-persister"]
-	path = roles/monasca-log-persister
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-persister.git
+        path = roles/monasca-log-persister
+        url = https://gitlab.com/monasca-installer/ansible-monasca-log-persister.git
 [submodule "roles/monasca-log-transformer"]
-	path = roles/monasca-log-transformer
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-transformer.git
+        path = roles/monasca-log-transformer
+        url = https://gitlab.com/monasca-installer/ansible-monasca-log-transformer.git
 [submodule "roles/monasca-elasticsearch"]
-	path = roles/monasca-elasticsearch
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-elasticsearch.git
+        path = roles/monasca-elasticsearch
+        url = https://gitlab.com/monasca-installer/ansible-monasca-elasticsearch.git
 [submodule "roles/monasca-kibana"]
-	path = roles/monasca-kibana
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-kibana.git
+        path = roles/monasca-kibana
+        url = https://gitlab.com/monasca-installer/ansible-monasca-kibana.git
 [submodule "roles/memcached"]
-	path = roles/memcached
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-memcached.git
+        path = roles/memcached
+        url = https://gitlab.com/monasca-installer/ansible-memcached.git
 [submodule "roles/load-balancer"]
-	path = roles/load-balancer
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-load-balancer
+        path = roles/load-balancer
+        url = https://gitlab.com/monasca-installer/ansible-load-balancer.git
 [submodule "roles/horizon-patch"]
-	path = roles/horizon-patch
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-horizon-patch.git
+        path = roles/horizon-patch
+        url = https://gitlab.com/monasca-installer/ansible-horizon-patch.git
 [submodule "roles/mariadb"]
-	path = roles/mariadb
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-mariadb.git
+        path = roles/mariadb
+        url = https://gitlab.com/monasca-installer/ansible-mariadb.git
 [submodule "roles/monasca-log-metrics"]
-	path = roles/monasca-log-metrics
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-monasca-log-metrics.git
+        path = roles/monasca-log-metrics
+        url = https://gitlab.com/monasca-installer/ansible-monasca-log-metrics.git
 [submodule "roles/galera"]
-	path = roles/galera
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-galera.git
+        path = roles/galera
+        url = https://gitlab.com/monasca-installer/ansible-galera.git
 [submodule "roles/haproxy"]
-	path = roles/haproxy
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-haproxy.git
+        path = roles/haproxy
+        url = https://gitlab.com/monasca-installer/ansible-haproxy.git
 [submodule "roles/elasticsearch-curator"]
-	path = roles/elasticsearch-curator
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-elasticsearch-curator.git
+        path = roles/elasticsearch-curator
+        url = https://gitlab.com/monasca-installer/ansible-elasticsearch-curator.git
 [submodule "roles/keepalived"]
-	path = roles/keepalived
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-keepalived.git
+        path = roles/keepalived
+        url = https://gitlab.com/monasca-installer/ansible-keepalived.git
 [submodule "templates/encoder"]
-	path = templates/encoder
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/config-encoder-macros.git
+        path = templates/encoder
+        url = https://gitlab.com/monasca-installer/config-encoder-macros.git
 [submodule "roles/grafana"]
-	path = roles/grafana
-	url = git@estscm1.intern.est.fujitsu.com:csi-installer/ansible-grafana.git
+        path = roles/grafana
+        url = https://gitlab.com/monasca-installer/ansible-grafana.git
