@@ -1,0 +1,7 @@
+before_script:
+  - apt-get update -qq
+
+
+commit_sha:
+  script:
+    - echo "CI/CD for ${CI_COMMIT_REF_NAME}"
