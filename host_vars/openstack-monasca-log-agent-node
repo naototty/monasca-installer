@@ -80,7 +80,7 @@ log_files:
   - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
                                                               "component" => "neutron-dhcp-agent" }}', path: '"{{ log_dir }}/neutron/dhcp-agent.log"' }
   - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "neutron"
-                                                              "component" => "neutron-ovs-clenup" }}', path: '"{{ log_dir }}/neutron/ovs-cleanup.log"' }
+                                                              "component" => "neutron-ovs-cleanup" }}', path: '"{{ log_dir }}/neutron/ovs-cleanup.log"' }
 
   - { tags: '["openstack"]', add_field: '{ "dimensions" => { "service" => "openvswitch"
                                                               "component" => "ovsdb-server" }}', path: '"{{ log_dir }}/openvswitch/ovsdb-server.log"' }
