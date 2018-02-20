@@ -1,0 +1,1 @@
+cassandra_host: "{{ hostvars[cassandra_listen_ip]['ansible_ssh_host'] }}"

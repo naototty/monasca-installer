@@ -1,5 +1,6 @@
 ---
 # Copyright 2016-2017 FUJITSU LIMITED
+# Copyright 2018 SUSE Linux GmbH
 # file: group_vars/all_group
 
 # proxy
@@ -8,6 +9,7 @@ http_proxy: ""
 https_proxy: "{{ http_proxy }}"
 
 # ports
+cassandra_port: 9042
 monasca_api_client_port: 8070
 monasca_api_admin_port: 8081
 persister_app_connector_port: 8190
@@ -21,6 +23,10 @@ kafka_port: 9092
 zookeeper_port: 2181
 memcached_port: 11211
 mysql_port: 3306
+
+# Cassandra roles
+cassandra_mon_api_role: monapi
+cassandra_mon_persister_role: mon_persister
 
 # hosts
 offline_host: "{{ hostvars['offline-resources-node']['ansible_ssh_host'] }}"
