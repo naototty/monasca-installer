@@ -1,0 +1,45 @@
+---
+# Copyright 2018 SUSE Linux GmbH
+
+- name: "Cassandra: Prepare/Configure host"
+  hosts: cassandra_group
+  become: yes
+  vars:
+    credential_keys_list:
+      - cassandra_admin_password
+      - cassandra_mon_api_password
+      - cassandra_mon_persister_password
+  vars_files:
+    - credentials.yml
+  pre_tasks:
+    - include: tasks/verify_ansible.yml
+      tags: [always]
+    - include: tasks/verify_credentials.yml
+      tags: [always]
+    - include: tasks/set_up.yml
+      tags: [always]
+
+- name: "Cassandra: Install on host"
+  hosts: cassandra_group
+  become: yes
+  vars_files:
+    - credentials.yml
+    - "vars/os_{{ ansible_os_family }}.yml"
+  roles:
+    - {role: cassandra,
+       tags: [cassandra]}
+    - {role: monasca-schema,
+       kafka_topics_enabled: False,
+       cassandra_schema_enabled: True,
+       influxdb_schema_enabled: False,
+       mysql_schema_enabled: False,
+       tags: [cassandra_schema]}
+    - {role: logrotate,
+       tags: [cassandra, logrotate]}
+
+- name: "Cassandra: Clean-Up hosts"
+  hosts: cassandra_group
+  become: yes
+  post_tasks:
+    - include: tasks/clean_up.yml
+      tags: [always]

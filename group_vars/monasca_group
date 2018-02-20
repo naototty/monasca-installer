@@ -51,6 +51,11 @@ zookeeper_hosts: "{% for item in groups['zookeeper_group'] -%}
                     {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['zookeeper_listen_ip']]['ansible_ssh_host'] }}:{{ zookeeper_port|int }}
                   {%- endfor %}"
 
+cassandra_hosts: "{% for item in groups['cassandra_group'] -%}
+                    {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['cassandra_listen_ip']]['ansible_ssh_host'] }}
+                  {%- endfor %}"
+
+
 # monasca-log-api
 monasca_log_api_hosts: "{% for item in groups['monasca_log_api_group'] -%}
                           {% if loop.index > 1 %},{% endif %}{{ hostvars[hostvars[item]['log_api_listen_ip']]['ansible_ssh_host'] }}

@@ -1,5 +1,6 @@
 ---
 # Copyright 2016-2017 FUJITSU LIMITED
+# Copyright 2018 SUSE Linux GmbH
 
 - name: "monasca-persister: Prepare/Configure hosts"
   hosts: monasca_persister_group
@@ -7,6 +8,7 @@
   vars:
     credential_keys_list:
       - influxdb_mon_persister_password
+      - cassandra_mon_persister_password
   vars_files:
     - credentials.yml
   pre_tasks:

@@ -1,11 +1,15 @@
 ---
 # Copyright 2016 FUJITSU LIMITED
+# Copyright 2018 SUSE Linux GmbH
 
 - name: "Monasca Group: Verify credentials"
   hosts: monasca_group
   become: yes
   vars:
     credential_keys_list:
+      - cassandra_admin_password
+      - cassandra_mon_api_password
+      - cassandra_mon_persister_password
       - influxdb_mon_api_password
       - influxdb_mon_persister_password
       - database_notification_password
@@ -33,6 +37,7 @@
 - include: monasca-log-metrics.yml
 - include: storm.yml
 - include: mariadb.yml
+- include: cassandra.yml
 - include: influxdb.yml
 - include: influxdb-relay.yml
 - include: keepalived.yml

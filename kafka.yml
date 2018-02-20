@@ -29,6 +29,7 @@
        # turn off everything else from monasca-schema
        kafka_topics_enabled: True,
        mysql_schema_enabled: False,
+       cassandra_schema_enabled: False,
        winchester_schema_enabled: False,
        vertica_schema_enabled: False,
        postgres_schema_enabled: False,
