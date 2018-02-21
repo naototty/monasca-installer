@@ -1,0 +1,19 @@
+variables:
+  GIT_DEPTH: 10
+  GIT_SUBMODULE_STRATEGY: normal
+  MON_PIKE_BASE_TAG: "2.0.0"
+
+validate_sync:
+  stage: test
+  script:
+    - echo "Validating sync at ${CI_COMMIT_REF_NAME}"
+    - bash ${CI_PROJECT_DIR}/scripts/verify_sync.sh stable/pike
+
+tag_stable:
+  stage: deploy
+  only:
+    - stable/pike
+  when: on_success
+  script:
+    - echo "Tagging stable/pike using ${CI_COMMIT_REF_NAME}"
+    - bash ${CI_PROJECT_DIR}/scripts/tag_stable.sh stable/pike "${MON_PIKE_BASE_TAG}"
