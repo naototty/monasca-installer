@@ -29,6 +29,7 @@
        tags: [influxdb]}
     - {role: monasca-schema,
        kafka_topics_enabled: False,
+       cassandra_schema_enabled: False,
        influxdb_schema_enabled: True,
        mysql_schema_enabled: False,
        tags: [influxdb, schema]}

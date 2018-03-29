@@ -1,11 +1,13 @@
 ---
 # Copyright 2016-2017 FUJITSU LIMITED
+# Copyright 2018 SUSE Linux GmbH
 
 - name: "Monasca-api: Prepare/ Configure hosts"
   hosts: monasca_api_group
   become: yes
   vars:
     credential_keys_list:
+      - cassandra_mon_api_password
       - influxdb_mon_api_password
       - database_monapi_password
   vars_files:
