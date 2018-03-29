@@ -106,3 +106,6 @@
 [submodule "roles/grafana"]
         path = roles/grafana
         url = https://gitlab.com/monasca-installer/ansible-grafana.git
+[submodule "roles/cassandra"]
+	path = roles/cassandra
+	url = https://gitlab.com/monasca-installer/ansible-cassandra
