@@ -3,13 +3,17 @@
 
 
 1. [概要](#1)
-    * [文書の概要](#2)
-      * [目的](#3)
-      * [範囲](#4)
-      * [参考資料](#5)
-2. [Pre-Requisite（前提条件）](#6)
+    * [文書の概要](#1.1)
+      * [目的](#1.1.1)
+      * [範囲](#1.1.2)
+      * [参考資料](#1.1.3)
 
-3. [MariaDBのインストールとデータベースの設定](#7)
+2. [Pre-Requisite（前提条件）](#2)
+    * [インストールプログラムリストとのバージョンを参照](#2.1)
+    * [インストール前の事前にインストールされているプログラム](#2.2)
+
+3. [MariaDBのインストールとデータベースの設定](#3)
+    * [MariaDB repository public keyを取得する](#3.1)
 
 4. [Apache Zookeeperインストール](#8)
 
@@ -44,25 +48,26 @@
 
 <br /><br /><br />
 
-## 1.1. 文書の概要 <div id='2' />
+## 1.1. 文書の概要 <div id='1.1' />
 
 <br /><br />
 
-### 1.1.1. 目的 <div id='3' />
+### 1.1.1. 目的 <div id='1.1.1' />
 
 この記事（インストールガイド）は、IaaS（Infrastructure as a Service）のいずれかであるOpenstackベースのCloudサービスの状態およびリソース情報、そしてVM Instanceのシステム情報を収集し、管理し、事前に定義されたAlarmルールに基づいて、リアルタイムで監視して管理者に関連する情報を提供するためのサーバーをインストールすることにその目的がある。
 
 <br /><br />
 
-### 1.1.2. 範囲 <div id='4' />
+### 1.1.2. 範囲 <div id='1.1.2' />
 
 > この文書の範囲は、Openstack監視のためのオープンソースのMonascaスイートのインストールと
 関連software（Kafka、Storm、Zookeeper、InfluxDB、MariaDB）をインストールするための内容に限定されている。
 
-<br /><br />
 **InfluxDBはscale outできないため、容量のことを考えてそこを変更することは、別途検証する**
 
-### 1.1.3. 参考資料 <div id='5' />
+<br /><br />
+
+### 1.1.3. 参考資料 <div id='1.1.3' />
 - https://wiki.openstack.org/wiki/Monasca
 - http://kafka.apache.org/quickstart（version：2.9.2）
 - http://storm.apache.org/releases/current/Setting-up-a-Storm-cluster.html（version 1.0.0）
@@ -76,7 +81,7 @@
 <br /><br /><br /><br />
 
 
-# 2). Pre-Requisite（前提条件） <div id='6' />
+# 2). Pre-Requisite（前提条件） <div id='2' />
 * Monasca Serverをインストールするためには、Bare MetalサーバまたはOpenstackで生成されたInstance（Ubuntuあたり、Flavor - x1.large以上）が用意されてなければならない。
 
 * Openstack Cross-tenant設定がされていなければならない。
@@ -88,7 +93,8 @@
 
 
 
->> インストールプログラムリストとのバージョンを参照[シーケンス]
+<br /><br />
+>> インストールプログラムリストとのバージョンを参照[シーケンス]  <div id='2.1' />
 
 * MariaDB（10.2.x）（https://mariadb.org/）：Alarm設定および関連情報の管理
 * Apache Zookeeper（3.3.2）（https://zookeeper.apache.org/）：分散コーディネーター
@@ -105,10 +111,11 @@
 * Monasca API（2.0.0）（https://github.com/openstack/monasca-api）
 * Monasca Agentを介して収集されたシステムメトリックス情報を送信受信して処理するAPIサーバー
 
->> インストール前の事前にインストールされているプログラム
+<br /><br />
+>> インストール前の事前にインストールされているプログラム  <div id='2.2' />
 
 
-#### 1. install git
+#### 1. install git  <div id='2.2.1' />
 
 Ubuntu 14.04
 ```bash:file
@@ -120,7 +127,8 @@ centos7.4
  yum install git
 ```
 
-#### 2. install jdk＆python
+<br /><br />
+#### 2. install jdk＆python  <div id='2.2.2' />
 
 Ubuntu 14.04
 ```bash:file
@@ -140,7 +148,8 @@ centos 7.4
 
 これで結構入る
 
-#### 3.install Maven
+<br /><br />
+#### 3.install Maven  <div id='2.2.3' />
 
 Ubuntu 14.04
 ```
@@ -153,11 +162,11 @@ centos 7.4
 ```
 
 
-<br />
+<br /><br />
 
-# 3). MariaDBのインストールとデータベースの設定 <div id='7' />
+# 3). MariaDBのインストールとデータベースの設定 <div id='3' />
 
-### 1. MariaDB public keyを取得する
+### 1. MariaDB public keyを取得する <div id='3.1' />
 
 Ubuntu 14.04
 ```bash:file
